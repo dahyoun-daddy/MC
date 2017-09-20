@@ -1,2 +1,2 @@
 # MC
-| This project is totaly perfect
+-- This project is totaly perfect

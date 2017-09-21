@@ -7,14 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="wrapper">
-		<jsp:include page="../layoutForm/header.jsp"></jsp:include>
-		
-		<div id="content">
-			content
-		</div>
-		
-		<jsp:include page="../layoutForm/side-bar.jsp"></jsp:include>
-	</div>
+<div>
+	<form name="login_frm" method="post" action="do_login.do">
+	id: <input type="text" name="id"  value=""/>
+	password: <input type="text" name="password"  value=""/>
+	</form>
+</div>
 </body>
 </html>

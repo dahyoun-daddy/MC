@@ -2,12 +2,18 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>:::My Career - main:::</title>
 </head>
 <body>
 <h1>
-	Hello world!  
+	Welcome!
 </h1>
+
+
+<div>
+
+</div>
+
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>

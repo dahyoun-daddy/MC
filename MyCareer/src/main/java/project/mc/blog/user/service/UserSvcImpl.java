@@ -26,8 +26,8 @@ public class UserSvcImpl implements UserSvc {
 	@Autowired 
 	private UserDao userDao;
 	
-	@Autowired
-	private Validator validator;
+//	@Autowired
+//	private Validator validator;
 
 	@Override
 	public int do_save(DTO dto) throws DataAccessException {
@@ -40,14 +40,11 @@ public class UserSvcImpl implements UserSvc {
 
 	@Override
 	public int id_check(DTO dto) throws DataAccessException {
-		
+		log.debug("UserSvcImpl - id_check");
 		int flag = userDao.id_check(dto);
+		log.debug("UserSvcImpl - id_check: flag: "+flag);
 		
-		if(flag == 0) {
-			
-		}
-			
-		return userDao.id_check(dto);
+		return flag;
 		
 	}
 

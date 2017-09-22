@@ -6,14 +6,14 @@
 <mapper namespace="com.sist.user.repository.mappers.user">
 
 <!-- 중복 아이디 체크  -->
-<select id="do_idCheck.do" parameterType="project.mc.blog.user.controller.UserVO">
+<select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO">
 SELECT COUNT(USER_ID) AS CNT
   FROM MC_USER
- WHERE USER_ID = ?
+ WHERE USER_ID = #{user_id}
 </select>
 
 <!-- 회원가입   -->
-<insert id="do_save.do" parameterType="project.mc.blog.user.controller.UserVO" >
+<insert id="do_save" parameterType="project.mc.blog.user.domain.UserVO" >
 INSERT
 INTO MC_USER
   (
@@ -32,16 +32,16 @@ INTO MC_USER
   VALUES
   (
     SEQ_USER_NO.NEXTVAL,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?,
-    ?
+    #{user_id},
+    #{user_password},
+    #{user_div},
+    #{user_name},
+    #{gender},
+    #{age},
+    #{email},
+    #{address},
+    #{phone},
+    1
   )
 </insert>	
     <!-- <select id="do_searchOne" 

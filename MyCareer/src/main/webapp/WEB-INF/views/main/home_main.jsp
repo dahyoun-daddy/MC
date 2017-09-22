@@ -23,12 +23,12 @@
 
 	<div id="wrapper">
 		<div id="userUtil">
-			로그인/로그아웃<br>
-			블로그로(로그인 되어 있을 경우에만)
+			<a ref="">로그인</a>/로그아웃//블로그로(로그인 되어 있을 경우에만)
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="blog_search.do">
 			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value=""/>
+			<input type="submit" value="검색">
 			</form>
 		</div>
 	</div>

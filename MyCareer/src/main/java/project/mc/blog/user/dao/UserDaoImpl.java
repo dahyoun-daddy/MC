@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 	private SqlSessionTemplate sqlSession;
 	
 	private final String namespace
-	= "project.mc.blog.user.repository.mappers.user";
+	= "project.mc.user.repository.mappers.user";
 	
 	
 	

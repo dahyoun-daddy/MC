@@ -3,11 +3,11 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sist.user.repository.mappers.user">
+<mapper namespace="project.mc.user.repository.mappers.user">
 
 <!-- 중복 아이디 체크  -->
 <select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO">
-SELECT COUNT(USER_ID) AS CNT
+SELECT COUNT(USER_ID) AS totalNo
   FROM MC_USER
  WHERE USER_ID = #{user_id}
 </select>

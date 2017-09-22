@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- VO Name 간략정의 -->
-    <!-- <typeAliases>
-        <typeAlias type="com.sist.user.domain.UserVO" 
+   <typeAliases>
+        <typeAlias type="project.mc.blog.user.domain.UserVO" 
         alias="UserVO"/>
-    </typeAliases> -->
+    </typeAliases>
 </configuration>

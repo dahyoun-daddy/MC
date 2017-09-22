@@ -55,10 +55,6 @@
         <property name="dataSource" ref="dataSource" />
     </bean>    
     
-        
-       
-
-     
     
     <!-- SqlSessionFactoryBean 생성 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

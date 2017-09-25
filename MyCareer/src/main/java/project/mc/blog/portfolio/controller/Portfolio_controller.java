@@ -16,5 +16,3 @@ public class Portfolio_controller {
 	public String portfolio_edit() {
 		return "blog/portfolio/portfolio_edit";
 	}
-	
-}

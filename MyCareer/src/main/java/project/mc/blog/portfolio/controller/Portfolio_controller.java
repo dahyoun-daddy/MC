@@ -1,15 +1,17 @@
 package project.mc.blog.portfolio.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Portfolio_controller {
-
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@RequestMapping(value="blog/portfolio.do", method = RequestMethod.GET)
 	public String portfolio_view() {
-		System.out.println("비교용 출력 1111111");
 		return "blog/portfolio/portfolio";
 	}
 	

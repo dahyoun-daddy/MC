@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Portfolio_controller {
-	
-	
-	
+
 	@RequestMapping(value="blog/portfolio.do", method = RequestMethod.GET)
 	public String portfolio_view() {
-		System.out.println("test용 출력기");
+		System.out.println("비교용 출력 1111111");
 		return "blog/portfolio/portfolio";
 	}
 	

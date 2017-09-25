@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base-definition">
+	</definition>
+		
+	<!-- 일괄 적용(서블릿의 blog/*/*에 해당하는 주소에 대해 body를 {1}/{2} 형식인 jsp에 대응 시킴)  -->
+	<definition name="blog/*/*" extends="base-definition" template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/template/header.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/blog/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- 메인 쪽 템플릿 설정 -->
+	<definition name="main/blog_list" extends="base-definition" template="/WEB-INF/views/tiles/layouts/mainLayout.jsp">
+		<put-attribute name="header_main" value="/WEB-INF/views/tiles/template/header_main.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/blog_list.jsp"/>
+	</definition>
+	
+</tiles-definitions>

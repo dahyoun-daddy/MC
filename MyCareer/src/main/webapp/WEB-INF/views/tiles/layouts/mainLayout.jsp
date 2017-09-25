@@ -7,26 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-	#wrapper{
-		position:relative;
-	}
-	
 	#header{
 		margin:2%;
 	}
 
-	#menu{
-		float:left;
-		position:fixed;
-	}
-	
 	#body{
-		margin:3%;
-		width:70%;
-		border-width: 1px;
-		border-color: #7f7f7f;
-		border-style: dashed;
-		border-radius: 5px;
+		margin:10%;
+		width:80%;
 	}
 
 </style>
@@ -36,12 +23,8 @@
 	
 	<div id="wrapper">
 		<div id="header" align="center">
-			<tiles:insertAttribute name="header"/>
+			<tiles:insertAttribute name="header_main"/>
 		</div>
-		
-		<div id="menu">
-            <tiles:insertAttribute name="menu" />
-        </div>
 		
 		<div id="container" align="center">
             <div id="body">

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Post_controller {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="blog/post/post.do", method=RequestMethod.GET)
+	@RequestMapping(value="blog/post.do", method=RequestMethod.GET)
 	public String postStart() {
 		log.debug("blog start");
 		

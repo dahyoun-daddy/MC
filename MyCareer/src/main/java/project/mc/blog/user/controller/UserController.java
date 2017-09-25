@@ -29,6 +29,25 @@ public class UserController {
 	@Autowired 
 	UserSvc userSvc;
 	
+	@RequestMapping(value="user/user_login.do", method=RequestMethod.GET)
+	public String to_login() {
+		
+		return "blog/user/user_login";
+	}
+	
+	@RequestMapping(value="user/user_modify.do", method=RequestMethod.GET)
+	public String to_modify() {
+		
+		return "blog/user/user_modify";
+	}
+	
+	@RequestMapping(value="user/user_register.do", method=RequestMethod.GET)
+	public String user_register() {
+		
+		return "blog/user/user_register";
+	}
+	
+	
 	@RequestMapping(value="user/do_save.do", method=RequestMethod.GET)
 	public String do_save(HttpServletRequest req) throws IOException{
 		

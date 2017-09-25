@@ -42,10 +42,19 @@ public class Main_controller {
 		System.out.println("flag: "+flag);
 		
 		
-		return "main/home_main";
+		return "main/blog_list";
 	}
 	
 	
+	@RequestMapping(value="main/blog_list.do", method=RequestMethod.GET)
+	public String blog_list() {
+		log.debug("blog_list");
+		
+		
+		
+		
+		return "main/blog_list";
+	}
 	
 	
 }

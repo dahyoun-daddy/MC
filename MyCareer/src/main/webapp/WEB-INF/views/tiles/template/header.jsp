@@ -78,7 +78,8 @@
 		            <ul class="hide">
 		                <li><a href="<%=contextPath%>/user/user_login.do">로그인/로그아웃</a></li>
 		                <li><a href="<%=contextPath%>/user/user_modify.do">회원 정보 수정</a></li>
-		                <li><a href="<%=contextPath%>/user/user_register.do">즐겨찾기 메뉴</a></li>
+		                <li><a href="<%=contextPath%>/user/user_register.do">회원 가입</a></li>
+		                <li><a href="<%=contextPath%>/user/favorite.do">즐겨찾기 메뉴</a></li>
 		            </ul>
 		        </li>
 			</ul>	

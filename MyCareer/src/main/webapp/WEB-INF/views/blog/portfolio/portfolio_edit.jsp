@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
- mimi
+	
+	<div align="center">
+		<form action="portfolio_save.do" method="post">
+			user_no: <input type="text" name="user_no">
+			tmp_no: <input type="text" name="tmp_no">
+			<input type="submit" value="제출">
+		</form>
+	</div>
+	
+	
 </body>
 </html>

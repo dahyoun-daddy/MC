@@ -26,7 +26,7 @@
 			<td><a href="<%=contextPath%>/media.do">동영상</a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/recruit.do">즐겨찾기</a></td>
+			<td><a href="<%=contextPath%>/recruit.do">공채목록</a></td>
 		</tr>
 		<tr>
 			<td><a href="<%=contextPath%>/calander.do">공채달력</a></td>

@@ -47,6 +47,12 @@ public class UserController {
 		return "blog/user/user_register";
 	}
 	
+	@RequestMapping(value="user/favorite.do", method=RequestMethod.GET)
+	public String favorite() {
+		
+		return "blog/user/favorite";
+	}
+	
 	
 	@RequestMapping(value="user/do_save.do", method=RequestMethod.GET)
 	public String do_save(HttpServletRequest req) throws IOException{

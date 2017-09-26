@@ -105,11 +105,11 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	@Override
 	public int do_deleteAll(DTO dto) {
 		int flag = 0;
-		String statement = namespace +".do_delete";
+		String statement = namespace +".do_deleteAll";
 		flag = sqlSession.delete(statement);
-		log.debug("======PortfolioDaoImpl: do_delete======");
+		log.debug("======PortfolioDaoImpl: do_deleteAll======");
 		log.debug("flag: "+flag);
-		log.debug("======PortfolioDaoImpl: do_delete======");
+		log.debug("======PortfolioDaoImpl: do_deleteAll======");
 		
 		return flag;
 	}

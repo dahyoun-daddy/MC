@@ -77,7 +77,7 @@ public class Portfolio_controller {
 		PortfolioVO inVO = new PortfolioVO();
 		
 		int flag = -1;
-		flag = pfSvc.do_delete(inVO);
+		flag = pfSvc.do_deleteAll(inVO);
 		
 		log.debug("flag: "+flag);
 		log.debug("=====Portfolio_controller: portfolio_deleteAll=end==========");
@@ -114,7 +114,7 @@ public class Portfolio_controller {
 		PortfolioVO inVO = new PortfolioVO();
 						
 		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
-		list = (List<PortfolioVO>) pfSvc.do_searchByPf_id(inVO);
+		list = (List<PortfolioVO>) pfSvc.do_search(inVO);
 		
 		log.debug("list: "+list.toString());
 		log.debug("=====Portfolio_controller: portfolio_do_search=end==========");

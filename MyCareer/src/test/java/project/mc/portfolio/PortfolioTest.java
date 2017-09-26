@@ -9,8 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 	,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PortfolioTest {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -49,15 +53,79 @@ public class PortfolioTest {
 	}
 	
 	@Test
+	@Ignore
 	public void test() {
 		
 	}
 	
 	@Test
-	public void portfolio_save() throws Exception{
+	public void portfolio_01_deleteAll() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_deleteAll.do");
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
+	public void portfolio_02_save() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_save.do")
 				.param("user_no", "86")
 				.param("tmp_no", "3")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
+	public void portfolio_03_update() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_update.do")
+				.param("pf_id", "27")
+				.param("user_no", "86")
+				.param("tmp_no", "5")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
+	public void portfolio_04_search() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_search.do");
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
+	public void portfolio_05_do_searchByPf_id() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_searchByPf_id.do")
+				.param("pf_id", "39")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
+	public void portfolio_06_do_searchByUser_no() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_searchByUser_no.do")
+				.param("user_no", "86")
 				;
 
 		mockMvc.perform(createMessage)

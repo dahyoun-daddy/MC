@@ -63,7 +63,7 @@
 			<li class="menu">
             <a><img src="" alt="PortfolioMenu"/></a>
 	            <ul class="hide">
-	                <li><a href="<%=contextPath%>/blog/portfolio.do">포트폴리오 화면</a></li>
+	                <li><form action="portfolio.do" method="get">포트폴리오 화면</form></li>
 	                <li><a href="<%=contextPath%>/blog/portfolio_edit.do">포트폴리오 편집</a></li>
 	                <li><a href="<%=contextPath%>/blog/portfolio_save.do">포트폴리오 저장</a></li>
 	                <li><a href="<%=contextPath%>/blog/portfolio_delete.do">포트폴리오 삭제</a></li>

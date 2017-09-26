@@ -50,7 +50,7 @@ public class UserController {
 	@RequestMapping(value="user/favorite.do", method=RequestMethod.GET)
 	public String favorite() {
 		
-		return "blog/user/favorite";
+		return "blog/recruit/favorite";
 	}
 	
 	

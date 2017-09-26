@@ -1,0 +1,89 @@
+package project.mc.portfolio;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({
+	"file:src/main/webapp/WEB-INF/spring/root-context.xml"
+	,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
+})
+@WebAppConfiguration
+public class PortfolioTest {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private WebApplicationContext ctx;
+	
+	private MockMvc mockMvc;
+	
+	@Before
+	public void setUp() {
+		log.debug("=====================");
+		log.debug("ctx: "+ctx.toString());
+		log.debug("=====================");
+		
+		mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+		log.debug("=====================");
+		log.debug("mockMvc: "+mockMvc.toString());
+		log.debug("=====================");
+	}
+	
+	@Test
+	public void test() {
+		
+	}
+	
+	@Test
+	public void portfolio_save() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_save.do")
+				.param("user_no", "86")
+				.param("tmp_no", "3")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	
+//	@Test
+//	public void do_selectOne() throws Exception {
+//		//param
+//				MockHttpServletRequestBuilder createMessage = post("/user/userForm.do")
+//						.param("id", "SpMockMvc8")
+//						;
+//				mockMvc.perform(createMessage)
+//						.andDo(print())
+//						.andExpect(status().isOk())
+//						.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+//						.andExpect(jsonPath("$.login", is(18)))
+//						.andExpect(jsonPath("$.id", is("SpMockMvc8"))
+//						);
+//				
+//	}
+	
+	
+	
+}

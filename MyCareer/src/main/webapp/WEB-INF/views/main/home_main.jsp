@@ -26,7 +26,21 @@
 	<h1>
 		My Career
 	</h1>
-
+	<div id="user_menu" align="right">
+		<ul>
+			<li class="menu">
+            <a><img src="" alt="유저 메뉴"/></a>
+	            <ul class="hide">
+	                <li><a href="<%=contextPath%>/user/user_login.do">로그인/로그아웃</a></li>
+	                <li><a href="<%=contextPath%>/user/user_modify.do">회원 정보 수정</a></li>
+	                <li><a href="<%=contextPath%>/user/user_register.do">회원 가입</a></li>
+	                <li><a href="<%=contextPath%>/user/favorite.do">즐겨찾기 메뉴</a></li>
+	            </ul>
+	        </li>
+		</ul>	
+	</div>
+	
+	
 	<div id="wrapper">
 		<div id="user_menu">
 			<a href="<%=contextPath%>/user/user_login.do">로그인/로그아웃</a>//<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
@@ -38,6 +52,8 @@
 			</form>
 		</div>
 	</div>
+	
+	
 
 </body>
 </html>

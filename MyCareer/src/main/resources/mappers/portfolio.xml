@@ -20,93 +20,72 @@
 	    ,#{user_no}
 	    ,#{tmp_no}
 	)
+</insert>
 
-</insert>	
-    <!-- <select id="do_searchOne" 
-      parameterType="com.sist.user.domain.UserVO"
-      resultType="com.sist.user.domain.UserVO">
-        SELECT ID,    
-			  NAME,       
-			  PASSWORD,   
-			  U_LEVEL,
-			  U_LEVEL as levelIntValue,      
-			  LOGIN,      
-			  RECOMMEND,  
-			  MAIL,       
-			  REG_DT,     
-			  1 no,       
-			  1 total_cnt 
-		FROM USERS   
-		where id = #{id}  
-    </select>   -->
+<!-- 포트폴리오 지정 삭제 -->
+<delete id="do_delete"  
+	parameterType="project.mc.blog.portfolio.domain.PortfolioVO">
 	
-	<!-- <update id="do_update" parameterType="com.sist.user.domain.UserVO"  >
-		UPDATE USERS
-		   SET NAME      = #{name, jdbcType=VARCHAR}
-		      ,PASSWORD  = #{password, jdbcType=VARCHAR}
-		      ,U_LEVEL   = #{u_level}
-		      ,LOGIN     = #{login, jdbcType=VARCHAR}
-		      ,RECOMMEND = #{recommend, jdbcType=VARCHAR}
-		      ,MAIL      = #{mail, jdbcType=VARCHAR}
-		      ,REG_DT    = sysdate
-		 WHERE ID        = #{id, jdbcType=VARCHAR}
-	</update> -->
+	DELETE FROM mc_portfolio 
+	WHERE pf_id =#{pf_id}  
+
+</delete>
+
+<!-- 포트폴리오 모두 삭제 -->
+<delete id="do_deleteAll">
 	
+	DELETE FROM mc_portfolio 
+
+</delete>
+
+<!-- 포트폴리오 수정 -->
+<update id="do_update" parameterType="project.mc.blog.portfolio.domain.PortfolioVO"  >
+	UPDATE mc_portfolio
+    SET user_no =#{user_no, jdbcType=NUMBER}
+        ,tmp_no =#{tmp_no, jdbcType=NUMBER}
+	WHERE pf_id =#{pf_id, jdbcType=NUMBER}
 	
-	<!-- <delete id="do_delete"  
-	parameterType="UserVO">
-	   DELETE FROM USERS
-        WHERE ID = #{id}   
-	</delete> -->
+</update>
+
+<!-- 포트폴리오 select by pf_id -->
+<select id="do_searchByPf_id" 
+      parameterType="project.mc.blog.portfolio.domain.PortfolioVO"
+      resultType="project.mc.blog.portfolio.domain.PortfolioVO">
+	SELECT
+	    pf_id,
+	    user_no,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	WHERE pf_id=#{pf_id}
 	
-	<!-- <update id="do_save"  
-	   parameterType="com.sist.user.domain.UserVO">
-	   INSERT INTO USERS(ID,NAME,PASSWORD,U_LEVEL,LOGIN,RECOMMEND,MAIL,REG_DT) 
-             VALUES (#{id},#{name},#{password},#{u_level},#{login},#{recommend},#{mail},SYSDATE)
-    </update>     --> 
-    
-    <!-- <sql id="BaseConditionForFilter">    
-       <where>   
-        <choose>
-            <when test="SEARCH_DIV == '10'">
-                 A.ID LIKE  #{SEARCH_WORD} || '%'         
-            </when>
-            <when test="SEARCH_DIV == '20'">
-                AND A.name LIKE  #{SEARCH_WORD} || '%'     
-            </when>
-            <when test="SEARCH_DIV == '30'">
-                AND A.u_Level LIKE   #{SEARCH_WORD} || '%'     
-            </when>
-                        
-            <otherwise></otherwise>
-        </choose>
-        </where>       
-    </sql> -->
-        
-	<!-- <select id="do_search" 
-	      parameterType="String"
-	      resultType="com.sist.user.domain.UserVO">
-	     
-		 select T1.id                                                
-		       ,T1.name                                              
-		       ,T1.password                                          
-		       ,T1.u_Level                                           
-		       ,T1.login                                             
-		       ,T1.recommend                                         
-		       ,T1.mail                                              
-		       ,TO_CHAR(T1.reg_dt,'YYYY-MM-DD') AS reg_dt            
-		       ,T1.total_cnt  as totalNo                                       
-		       ,T1.RNUM as no                                        
-		   from(                                                     
-		   select A.*                                                
-		          ,ROW_NUMBER() OVER(ORDER BY A.reg_dt DESC) as RNUM 
-		          ,COUNT(*) OVER () AS TOTAL_CNT                     
-		     from USERS A
-		    <include refid="BaseConditionForFilter" />
-       <![CDATA[     
-		 order by reg_dt desc                            
-		   )T1                                              
-		WHERE RNUM BETWEEN (#{PAGE_SIZE} * (#{PAGE_NUM}-1)+1) AND (#{PAGE_SIZE} * (#{PAGE_NUM}-1)+#{PAGE_SIZE})    
-		]]>   
-	</select>    -->   
+</select>
+
+<!-- 포트폴리오 select by user_no -->
+<select id="do_searchByUser_no" 
+	      parameterType="project.mc.blog.portfolio.domain.PortfolioVO"
+	      resultType="project.mc.blog.portfolio.domain.PortfolioVO">
+	SELECT
+	    pf_id,
+	    user_no,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	WHERE user_no=#{user_no}
+	
+</select>
+
+<!-- 포트폴리오 전부 검색 -->
+<select id="do_search" >
+	SELECT
+	    pf_id,
+	    user_no,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	
+</select>
+
+
+
 </mapper>

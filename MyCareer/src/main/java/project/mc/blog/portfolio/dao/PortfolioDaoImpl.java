@@ -25,15 +25,46 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	
 	
 	
+	/**
+	 * 포트폴리오 전체 검색
+	 */
 	@Override
 	public List<?> do_search(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = namespace +".do_search";
+		List<PortfolioVO> list = sqlSession.selectList(statement);
+		log.debug("======PortfolioDaoImpl: do_search======");
+		log.debug("list: "+list.toString());
+		log.debug("======PortfolioDaoImpl: do_search======");
+		
+		return list;
 	}
 	
+	@Override
+	public DTO do_searchByPf_id(DTO dto) {
+		String statement = namespace +".do_searchByPf_id";
+		PortfolioVO inPfVo = (PortfolioVO)dto;
+		PortfolioVO outPfVo = sqlSession.selectOne(statement, inPfVo);
+		log.debug("======PortfolioDaoImpl: do_searchByPf_id======");
+		log.debug("list: "+outPfVo.toString());
+		log.debug("======PortfolioDaoImpl: do_searchByPf_id======");
+		
+		return outPfVo;
+	}
+	
+	@Override
+	public List<?> do_searchByUser_no(DTO dto) {
+		String statement = namespace +".do_searchByUser_no";
+		PortfolioVO inPfVo = (PortfolioVO)dto;
+		List<PortfolioVO> list = sqlSession.selectList(statement, inPfVo);
+		log.debug("======PortfolioDaoImpl: do_searchByUser_no======");
+		log.debug("list: "+list.toString());
+		log.debug("======PortfolioDaoImpl: do_searchByUser_no======");
+		
+		return list;
+	}
 	
 	/**
-	 * 회원가입 저장
+	 * 포트폴리오 저장
 	 * (0:실패, 1:성공)
 	 */
 	@Override
@@ -56,23 +87,47 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	}
 
 	/**
-	 * 회원탈퇴
-	 * (0:탈퇴, 1:존재)
+	 * 포트폴리오 삭제
 	 */
 	@Override
 	public int do_delete(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		String statement = namespace +".do_delete";
+		PortfolioVO inPfVo = (PortfolioVO)dto;
+		flag = sqlSession.delete(statement, inPfVo);
+		log.debug("======PortfolioDaoImpl: do_delete======");
+		log.debug("flag: "+flag);
+		log.debug("======PortfolioDaoImpl: do_delete======");
+		
+		return flag;
 	}
-
+	
+	@Override
+	public int do_deleteAll(DTO dto) {
+		int flag = 0;
+		String statement = namespace +".do_delete";
+		flag = sqlSession.delete(statement);
+		log.debug("======PortfolioDaoImpl: do_delete======");
+		log.debug("flag: "+flag);
+		log.debug("======PortfolioDaoImpl: do_delete======");
+		
+		return flag;
+	}
+	
 	/**
-	 * 회원가입 수정
-	 * (0:수정안됨, 1:수정됨)
+	 * 포트폴리오 수정
 	 */
 	@Override
 	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		String statement = namespace +".do_update";
+		UserVO inUserVo = (UserVO)dto;
+		flag = sqlSession.update(statement, inUserVo);
+		log.debug("======PortfolioDaoImpl: do_update======");
+		log.debug("flag: "+flag);
+		log.debug("======PortfolioDaoImpl: do_update======");
+		
+		return flag;
 	}
 
 

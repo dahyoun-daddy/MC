@@ -26,7 +26,11 @@ ALTER TABLE 포트폴리오 테이블
 			pf_id
 		);
 
-
+CREATE SEQUENCE seq_pf_id
+start with 0
+increment by 1
+MAXVALUE 99999999
+MINVALUE 0;
 
 --select 
 SELECT
@@ -81,7 +85,7 @@ INSERT INTO mc_portfolio
 ) 
 VALUES 
 (
-    :pf_id
+    seq_pf_id.NEXTVAL
     ,:user_no
     ,:tmp_no
 );

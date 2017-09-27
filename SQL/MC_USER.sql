@@ -1,4 +1,6 @@
 
+
+
 /* MC_USER */
 CREATE TABLE MC_USER (
 	user_no NUMBER(16) NOT NULL, /* 회원 번호 */
@@ -48,6 +50,14 @@ ALTER TABLE MC_USER
 		CONSTRAINT PK_MC_USER
 		PRIMARY KEY (
 			user_no
+		);
+        
+
+ALTER TABLE MC_USER
+	ADD
+		CONSTRAINT UNIQUE_MC_USER_ID
+		UNIQUE (
+			user_id
 		);
 
 --SEQUENCE 생성
@@ -106,16 +116,21 @@ SELECT count(user_id) cnt
 --update(회원 수정)
 
 UPDATE mc_user
-    SET user_password =:v2
-        ,user_div =:v3
-        ,user_name =:v4
-        ,gender =:v5
-        ,age =:v6
-        ,email =:v7
-        ,address =:v8
-        ,phone =:v9
-        ,withdraw_flag =:v10
-WHERE user_no =:user_no;
+    SET user_password =:user_password
+        ,user_div =:user_div
+        ,user_name =:user_name
+        ,gender =:gender
+        ,age =:age
+        ,email =:email
+        ,address =:address
+        ,phone =:phone
+        ,withdraw_flag =:withdraw_flag
+WHERE user_id =:user_id;
+
+
+UPDATE mc_user
+    SET user_password =:user_password;
+
 
 --insert(회원가입)
 

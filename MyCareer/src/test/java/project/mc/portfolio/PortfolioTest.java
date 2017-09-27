@@ -59,6 +59,7 @@ public class PortfolioTest {
 	}
 	
 	@Test
+	@Ignore
 	public void portfolio_01_deleteAll() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_deleteAll.do");
 
@@ -70,9 +71,22 @@ public class PortfolioTest {
 	}
 	
 	@Test
+	public void portfolio_01_delete() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_delete.do")
+				.param("pf_id", "59")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	@Test
 	public void portfolio_02_save() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_save.do")
-				.param("user_no", "86")
+				.param("user_id", "111")
 				.param("tmp_no", "3")
 				;
 
@@ -86,8 +100,8 @@ public class PortfolioTest {
 	@Test
 	public void portfolio_03_update() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_update.do")
-				.param("pf_id", "27")
-				.param("user_no", "86")
+				.param("pf_id", "59")
+				.param("user_id", "111")
 				.param("tmp_no", "5")
 				;
 
@@ -112,7 +126,7 @@ public class PortfolioTest {
 	@Test
 	public void portfolio_05_do_searchByPf_id() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_searchByPf_id.do")
-				.param("pf_id", "39")
+				.param("pf_id", "59")
 				;
 
 		mockMvc.perform(createMessage)
@@ -123,9 +137,9 @@ public class PortfolioTest {
 	}
 	
 	@Test
-	public void portfolio_06_do_searchByUser_no() throws Exception{
-		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_searchByUser_no.do")
-				.param("user_no", "86")
+	public void portfolio_06_do_searchByUser_id() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_do_searchByUser_id.do")
+				.param("user_id", "111")
 				;
 
 		mockMvc.perform(createMessage)

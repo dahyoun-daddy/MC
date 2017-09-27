@@ -38,8 +38,8 @@ public class Portfolio_controller {
 		log.debug("=====Portfolio_controller: portfolio_save=start==========");
 		PortfolioVO inVO = new PortfolioVO();
 		
-		int user_no = Integer.parseInt(req.getParameter("user_no").toString());
-		inVO.setUser_no(user_no);
+		String user_id = req.getParameter("user_id").toString();
+		inVO.setUser_id(user_id);
 		int tmp_no = Integer.parseInt(req.getParameter("tmp_no").toString());
 		inVO.setTmp_no(tmp_no);
 				
@@ -93,13 +93,13 @@ public class Portfolio_controller {
 		
 		int pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
 		inVO.setPf_id(pf_id);
-		int user_no = Integer.parseInt(req.getParameter("user_no").toString());
-		inVO.setUser_no(user_no);
+		String user_id = req.getParameter("user_id").toString();
+		inVO.setUser_id(user_id);
 		int tmp_no = Integer.parseInt(req.getParameter("tmp_no").toString());
 		inVO.setTmp_no(tmp_no);
 				
 		int flag = -1;
-		flag = pfSvc.do_delete(inVO);
+		flag = pfSvc.do_update(inVO);
 		
 		log.debug("flag: "+flag);
 		log.debug("=====Portfolio_controller: portfolio_update=end==========");
@@ -140,20 +140,20 @@ public class Portfolio_controller {
 		return "";
 	}
 	
-	@RequestMapping(value="blog/portfolio_do_searchByUser_no.do", method = RequestMethod.POST)
-	public String portfolio_do_searchByUser_no(HttpServletRequest req) {
+	@RequestMapping(value="blog/portfolio_do_searchByUser_id.do", method = RequestMethod.POST)
+	public String portfolio_do_searchByUser_id(HttpServletRequest req) {
 		
-		log.debug("=====Portfolio_controller: portfolio_do_searchByUser_no=start==========");
+		log.debug("=====Portfolio_controller: portfolio_do_searchByUser_id=start==========");
 		PortfolioVO inVO = new PortfolioVO();
 		
-		int user_no = Integer.parseInt(req.getParameter("user_no").toString());
-		inVO.setUser_no(user_no);
+		String user_id = req.getParameter("user_id").toString();
+		inVO.setUser_id(user_id);
 				
 		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
-		list = (List<PortfolioVO>) pfSvc.do_searchByUser_no(inVO);
+		list = (List<PortfolioVO>) pfSvc.do_searchByUser_id(inVO);
 		
 		log.debug("list: "+list.toString());
-		log.debug("=====Portfolio_controller: portfolio_do_searchByUser_no=end==========");
+		log.debug("=====Portfolio_controller: portfolio_do_searchByUser_id=end==========");
 		
 		return "";
 	}

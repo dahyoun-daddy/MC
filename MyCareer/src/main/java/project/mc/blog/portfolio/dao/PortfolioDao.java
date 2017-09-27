@@ -19,7 +19,7 @@ public interface PortfolioDao extends WorkDiv {
 	 * @param dto
 	 * @return
 	 */
-	List<?> do_searchByUser_no(DTO dto);
+	List<?> do_searchByUser_id(DTO dto);
 	
 	/**
 	 * 포트폴리오 전체 삭제(디버그용)
@@ -27,6 +27,8 @@ public interface PortfolioDao extends WorkDiv {
 	 * @return
 	 */
 	int do_deleteAll(DTO dto);
+
+	
 
 	
 	

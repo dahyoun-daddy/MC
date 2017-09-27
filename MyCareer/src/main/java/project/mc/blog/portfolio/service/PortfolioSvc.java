@@ -16,7 +16,7 @@ public interface PortfolioSvc {
 	 */
 	int do_save(DTO dto) throws DataAccessException;
 
-	List<?> do_searchByUser_no(DTO dto);
+	List<?> do_searchByUser_id(DTO dto);
 
 	DTO do_searchByPf_id(DTO dto);
 
@@ -27,5 +27,7 @@ public interface PortfolioSvc {
 	int do_deleteAll(DTO dto);
 
 	int do_delete(DTO dto);
+
+	
 
 }

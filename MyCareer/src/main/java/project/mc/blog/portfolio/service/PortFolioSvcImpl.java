@@ -108,11 +108,11 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * @return PortfolioVO
 	 */
 	@Override
-	public List<?> do_searchByUser_no(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_searchByUser_no=================");
+	public List<?> do_searchByUser_id(DTO dto) {
+		log.debug("======PortfolioDaoImpl: do_searchByUser_id=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_searchByUser_no=================");	
-		return pfDao.do_searchByUser_no(dto);
+		log.debug("======PortfolioDaoImpl: do_searchByUser_id=================");	
+		return pfDao.do_searchByUser_id(dto);
 	}
 	
 	

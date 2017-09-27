@@ -52,13 +52,13 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	}
 	
 	@Override
-	public List<?> do_searchByUser_no(DTO dto) {
-		String statement = namespace +".do_searchByUser_no";
+	public List<?> do_searchByUser_id(DTO dto) {
+		String statement = namespace +".do_searchByUser_id";
 		PortfolioVO inPfVo = (PortfolioVO)dto;
 		List<PortfolioVO> list = sqlSession.selectList(statement, inPfVo);
-		log.debug("======PortfolioDaoImpl: do_searchByUser_no======");
+		log.debug("======PortfolioDaoImpl: do_searchByUser_id======");
 		log.debug("list: "+list.toString());
-		log.debug("======PortfolioDaoImpl: do_searchByUser_no======");
+		log.debug("======PortfolioDaoImpl: do_searchByUser_id======");
 		
 		return list;
 	}
@@ -121,8 +121,8 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	public int do_update(DTO dto) {
 		int flag = 0;
 		String statement = namespace +".do_update";
-		UserVO inUserVo = (UserVO)dto;
-		flag = sqlSession.update(statement, inUserVo);
+		PortfolioVO inPfVo = (PortfolioVO)dto;
+		flag = sqlSession.update(statement, inPfVo);
 		log.debug("======PortfolioDaoImpl: do_update======");
 		log.debug("flag: "+flag);
 		log.debug("======PortfolioDaoImpl: do_update======");

@@ -40,10 +40,12 @@
 		width: 1248px;
 	}
 	
+	
 </style>
 <title>:::포트폴리오 편집 1:::</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		//적용 버튼 누를 시 다른 템플릿으로 이동
 	    $("#tmp_apply").click(function(){
 	    	var selected = $("#pf_tmp option:selected").val();
@@ -53,42 +55,43 @@
 	    });
 		
 		$(".pf_img").click(function(e){
-			alert("pf_img");
 			e.preventDefault();
-			$("#file1").click();
+			var img = $(this).attr("id");
+			var i = img.substring(img.length-2);
+			var getfile = "getfile_"+i;
+			alert("getfile_"+getfile);
+			
+			$("#"+getfile).click();
+			
+			
+			$('#'+getfile).change(function(e){
+			    var file = document.querySelector('input[type=file]').files[0];
+				//var file = $('#getfile1');
+			    alert("file:"+file.name);
+			    // 읽기
+			    var reader = new FileReader();
+			  //파일정보 수집        
+		        reader.onload = (function(theFile) 
+		        {
+		            return function(e) 
+		            {
+		                //이미지 뷰
+		                document.getElementById(img).src = e.target.result;
+		                
+		            };
+		 
+		        })(file);
+		            
+		        reader.readAsDataURL(file);
+			});
 		});
+		
+
+		
 		
 		
 	});
-
-	function changeValue(obj){
-        alert(obj.value);
-        var file2 = document.all.file1.value;
-		alert("file2: "+file2);
-		$("#file2").val(file2);
-		
-		e.preventDefault();
-
-		  var file = upload.files[0],
-		      reader = new FileReader();
-		  reader.onload = function (event) {
-		    var img = new Image();
-		    img.src = event.target.result;
-		    // note: no onload required since we've got the dataurl...I think! :)
-		    if (img.width > 560) { // holder width
-		      img.width = 560;
-		    }
-		    holder.innerHTML = '';
-		    holder.appendChild(img);
-		  };
-		  reader.readAsDataURL(file);
-
-		  return false;
-		
-		
-    }
-
-
+	
 	
 </script>
 </head>
@@ -109,23 +112,31 @@
 			<a href="<%=contextPath%>/blog/portfolio_view_tmp1.do">포트폴리오 저장</a>
 		</div>
 		<div id=contents align="center">
+			<form method="post" action="">
 			<img class="pf_img" src="" alt="tmp1_02" id="tmp1_02">
 			<img class="pf_img" src="" alt="tmp1_03" id="tmp1_03">
 			<img class="pf_img" src="" alt="tmp1_04" id="tmp1_04">
 			<img class="pf_img clearfix" src="" alt="tmp1_05" id="tmp1_05">
 			
 			<img class="pf_img clearfix" src="" alt="tmp1_01" id="tmp1_01">
-			<input type=file name='file1' id="file1" style='display: none;'  onchange="changeValue(this)">
-			<input type='text' name='file2' id='file2'> 
 			
 			<img class="pf_img" src="" alt="tmp1_06" id="tmp1_06">
 			<img class="pf_img" src="" alt="tmp1_07" id="tmp1_07">
 			<img class="pf_img" src="" alt="tmp1_08" id="tmp1_08">
 			<img class="pf_img clearfix" src="" alt="tmp1_09" id="tmp1_09">
 			
-			
+			<input type=file class="getfile" id="getfile_01" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_02" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_03" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_04" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_05" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_06" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_07" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_08" style='display: none;' accept="image/*">
+			<input type=file class="getfile" id="getfile_09" style='display: none;' accept="image/*">
 			
 			<div id="clearfix"></div>
+			</form>
 		</div>
 	</div>
 	

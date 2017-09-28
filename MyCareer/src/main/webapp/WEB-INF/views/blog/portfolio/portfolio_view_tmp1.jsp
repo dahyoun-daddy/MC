@@ -43,6 +43,11 @@
 	
 </style>
 <title>:::포트폴리오 뷰 1:::</title>
+<script>
+	$(document).ready(function(){
+		
+	});
+</script>
 </head>
 <body>
 	<div id=wrapper align="center">
@@ -65,9 +70,9 @@
 			<img class="pf_img" src="" alt="tmp1_08" id="tmp1_08">
 			<img class="pf_img clearfix" src="" alt="tmp1_09" id="tmp1_09">
 			
-			
 			<div id="clearfix"></div>
 		</div>
+		
 		
 	</div>
 </body>

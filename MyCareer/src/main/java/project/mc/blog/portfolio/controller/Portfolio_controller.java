@@ -22,14 +22,24 @@ public class Portfolio_controller {
 	@Autowired
 	PortfolioSvc pfSvc;
 	
-	@RequestMapping(value="blog/portfolio.do", method = RequestMethod.GET)
-	public String portfolio_view() {
-		return "blog/portfolio/portfolio";
+	@RequestMapping(value="blog/portfolio_view_tmp1.do", method = RequestMethod.GET)
+	public String portfolio_view_tmp1() {
+		return "blog/portfolio/portfolio_view_tmp1";
 	}
 	
-	@RequestMapping(value="blog/portfolio_edit.do", method = RequestMethod.GET)
-	public String portfolio_edit() {
-		return "blog/portfolio/portfolio_edit";
+	@RequestMapping(value="blog/portfolio_view_tmp2.do", method = RequestMethod.GET)
+	public String portfolio_view_tmp2() {
+		return "blog/portfolio/portfolio_view_tmp2";
+	}
+	
+	@RequestMapping(value="blog/portfolio_edit_tmp1.do", method = RequestMethod.GET)
+	public String portfolio_edit_tmp1() {
+		return "blog/portfolio/portfolio_edit_tmp1";
+	}
+	
+	@RequestMapping(value="blog/portfolio_edit_tmp2.do", method = RequestMethod.GET)
+	public String portfolio_edit_tmp2() {
+		return "blog/portfolio/portfolio_edit_tmp2";
 	}
 	
 	@RequestMapping(value="blog/portfolio_save.do", method = RequestMethod.POST)

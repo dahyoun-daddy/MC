@@ -17,7 +17,7 @@
 			<td><a href="<%=contextPath%>/post.do">포스팅</a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/blog/portfolio.do">포트폴리오 템플릿**</a></td>
+			<td><a href="<%=contextPath%>/blog/portfolio_view_tmp1.do">포트폴리오 템플릿**</a></td>
 		</tr>
 		<tr>
 			<td><a href="<%=contextPath%>/resume.do">이력서</a></td>

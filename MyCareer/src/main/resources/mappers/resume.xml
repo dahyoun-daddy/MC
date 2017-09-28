@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="project.mc.user.repository.mappers.resume">
+ 	<!-- resume(이력서) 저장 -->
+ 	<insert id="do_save" 
+ 			parameterType="ResumeVO">
+ 		INSERT INTO mc_file
+ 		(
+ 			file_id,
+ 			table_div,
+ 			table_id,
+ 			seq,
+ 			file_path,
+ 			file_size,
+ 			org_file_name,
+ 			save_file_name,
+ 			file_ext,
+ 			reg_id,
+ 			reg_dt
+ 		)
+ 		VALUES
+ 		(
+ 			SEQ_MC_FILE.NEXTVAL,
+ 			0,
+ 			0,
+ 			0,
+ 			?,
+ 			?,
+ 			?,
+ 			?,
+ 			?,
+ 			?,
+ 			SYSDATE
+ 		)
+ 	</insert>
+ 	
+ 	<!-- resume(이력서) 선택 삭제 -->
+ 	<delete id="do_delete">
+ 		DELETE FROM mc_file WHERE reg_id=? AND file_id=?
+ 	</delete>
+ 	<!-- resume(이력서) 전체 삭제 -->
+ 	<delete id="do_deleteAll">
+ 		DELETE FROM mc_file WHERE reg_id=? 
+ 	</delete>
+ 	
+ 	<!-- resume(이력서) 검색 -->
+ 	<select id="do_search" resultType="project.mc.blog.resume.domain.ResumeVO">
+ 		SELECT 
+ 			file_id,
+ 			table_div,
+ 			table_id,
+ 			seq,
+ 			file_path,
+ 			file_size,
+ 			org_file_name,
+ 			save_file_name,
+ 			file_ext,
+ 			reg_id,
+ 			reg_dt
+ 		FROM
+ 			mc_file
+ 		WHERE
+ 			reg_id = ? AND table_div=0 
+ 	</select>
+ </mapper>

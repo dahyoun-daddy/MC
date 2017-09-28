@@ -54,20 +54,27 @@
 	        
 	    });
 		
+		$("#do_save_tmp").click(function(){
+			var frm = document.frm;
+			alert("do_save")
+			
+			
+			
+			frm.submit();
+		});
+		
+		
 		$(".pf_img").click(function(e){
 			e.preventDefault();
 			var img = $(this).attr("id");
 			var i = img.substring(img.length-2);
 			var getfile = "getfile_"+i;
-			alert("getfile_"+getfile);
 			
 			$("#"+getfile).click();
 			
 			
 			$('#'+getfile).change(function(e){
-			    var file = document.querySelector('input[type=file]').files[0];
-				//var file = $('#getfile1');
-			    alert("file:"+file.name);
+			    var file = document.querySelector('input[id='+getfile+']').files[0];
 			    // 읽기
 			    var reader = new FileReader();
 			  //파일정보 수집        
@@ -87,9 +94,6 @@
 		});
 		
 
-		
-		
-		
 	});
 	
 	
@@ -108,11 +112,14 @@
 			    <option value="tmp2">템플릿 2</option>
 			</select>
 			<button type="button" id="tmp_apply">적용</button>
-			<br>
-			<a href="<%=contextPath%>/blog/portfolio_view_tmp1.do">포트폴리오 저장</a>
+			<br> 
+			<button type="button" id="do_save_tmp" >포트폴리오 저장</button>
 		</div>
 		<div id=contents align="center">
-			<form method="post" action="">
+			<form name="frm" method="post" action="portfolio_save.do">
+			<input type="hidden" name="tmp_no" id="tmp_no" value="01">
+			<input type="hidden" name="user_id" id="user_id" value="111">
+			
 			<img class="pf_img" src="" alt="tmp1_02" id="tmp1_02">
 			<img class="pf_img" src="" alt="tmp1_03" id="tmp1_03">
 			<img class="pf_img" src="" alt="tmp1_04" id="tmp1_04">

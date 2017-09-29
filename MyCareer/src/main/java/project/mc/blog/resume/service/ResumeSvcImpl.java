@@ -38,7 +38,7 @@ public class ResumeSvcImpl implements ResumeSvc {
 	@Override
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException {
 		
-		String uploadPath = "/MyCareer/src/main/webapp/resources/resume";
+		String uploadPath = "c:\\test\\resume\\";
 		
 		File fileDir = new File(uploadPath);
 		if(fileDir.isDirectory()==false) {
@@ -69,6 +69,20 @@ public class ResumeSvcImpl implements ResumeSvc {
 			
 			if(org_file_name != null && !org_file_name.equals("")) {
 					try {
+//TO-DO 나중에 지울것
+//						private int file_id; //파일id
+//						private int table_div; //소속 테이블
+//						private int table_id; //소속 id
+//						private int seq; //파일 순서
+//						private String file_path; //파일 저장 경로**
+//						private	String file_size; //파일 사이즈**
+//						private String org_file_name; //원본파일명**
+//						private String save_file_name; //저장 파일명**
+//						private String file_ext; //파일 확장자**
+//						private String reg_id; //작성자 id**
+//						private String reg_dt; //작성일자 (기본값은 SYSDATE)
+					
+						resumeVO.setFile_path(uploadPath);
 						resumeVO.setFile_size(file_size+"");
 						resumeVO.setOrg_file_name(org_file_name);
 						resumeVO.setSave_file_name(save_file_name);

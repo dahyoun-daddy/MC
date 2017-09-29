@@ -9,7 +9,7 @@ import project.mc.commons.DTO;
  */
 public class ResumeVO extends DTO {
 
-	private String file_id; //파일id
+	private int file_id; //파일id
 	private int table_div; //소속 테이블
 	private int table_id; //소속 id
 	private int seq; //파일 순서
@@ -36,7 +36,7 @@ public class ResumeVO extends DTO {
 	}
 
 
-	public ResumeVO(String file_id, int table_div, int table_id, int seq, String file_path, String file_size,
+	public ResumeVO(int file_id, int table_div, int table_id, int seq, String file_path, String file_size,
 			String org_file_name, String save_file_name, String file_ext, String reg_id, String reg_dt) {
 		super();
 		this.file_id = file_id;
@@ -51,10 +51,10 @@ public class ResumeVO extends DTO {
 		this.reg_id = reg_id;
 		this.reg_dt = reg_dt;
 	}
-	public String getFile_id() {
+	public int getFile_id() {
 		return file_id;
 	}
-	public void setFile_id(String file_id) {
+	public void setFile_id(int file_id) {
 		this.file_id = file_id;
 	}
 	public int getTable_div() {

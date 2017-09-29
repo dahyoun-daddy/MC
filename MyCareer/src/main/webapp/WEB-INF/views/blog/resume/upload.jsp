@@ -52,23 +52,7 @@
                 <div class="col-lg-8">
                    <input type="file" name="file" id="file"
                    class="form-control input-lg" />   
-                </div>
-                <label class="col-lg-4 control-label">File</label>
-               <div class="col-lg-8">
-                   <input type="file" name="file1" id="file1"
-                   class="form-control input-lg" />   
-                </div>
-                <label class="col-lg-4 control-label">File</label>
-               <div class="col-lg-8">
-                   <input type="file" name="file3" id="file3"
-                   class="form-control input-lg" />   
-                </div>
-               <label class="col-lg-4 control-label">업무구분</label>       
-               <div class="col-lg-8">
-                   <input type="text" name="workDiv" id="file3"
-                   class="form-control input-lg" />   
-                </div>
-                                                                
+                </div>                                                               
                 <button class="btn btn-success" 
                 onclick="do_fileSave()">업로드
                 </button>
@@ -84,17 +68,16 @@
              <label class="col-lg-4 control-label">Upload경로</label>
              <div class="col-lg-8">
              
-               <c:forEach var="fileVO" items="${file_list}">
+               <c:forEach var="resumeVO" items="${resume_list}">
 <a href="<c:url value='/download.do?path=c:/file/
-&fileName=${fileVO.save_file_nm}
-&orgFileName=${fileVO.org_file_nm}'/>">
-${fileVO.org_file_nm}
+&fileName=${resumeVO.save_file_name}
+&orgFileName=${resumeVO.org_file_name}'/>">
+${resumeVO.org_file_name}
 </a>               
-		                   원본파일:${fileVO.org_file_nm}<br/>
-		                   저장파일:${fileVO.save_file_nm}<br/>		                   
-		                   파일사이즈:${fileVO.file_size}<br/>
-		                   업무구분:${fileVO.work_div}<br/>
-               </c:forEach>    
+		                   원본파일:${resumeVO.org_file_name}<br/>
+		                   저장파일:${resumeVO.save_file_name}<br/>		                   
+		                   파일사이즈:${resumeVO.file_size}<br/>		                   
+               </c:forEach>    	
              </div>
          </div>        
     </div>

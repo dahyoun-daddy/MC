@@ -14,6 +14,8 @@ import project.mc.commons.DTO;
  * 작성일 : 2017년 9월 27일
  */
 public interface ResumeSvc {
-
+	
+	public int do_save(DTO dto) throws DataAccessException;
+	
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
 }

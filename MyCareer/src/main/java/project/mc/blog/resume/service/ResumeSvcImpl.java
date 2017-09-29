@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import project.mc.commons.DTO;
  */
 @Service
 public class ResumeSvcImpl implements ResumeSvc {
-	
+		
 	@Autowired
 	ResumeDao resumeDao;
 	
@@ -36,8 +37,8 @@ public class ResumeSvcImpl implements ResumeSvc {
 
 	@Override
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException {
-
-		String uploadPath = "c:\\file\\resume\\";
+		
+		String uploadPath = "/MyCareer/src/main/webapp/resources/resume";
 		
 		File fileDir = new File(uploadPath);
 		if(fileDir.isDirectory()==false) {
@@ -75,15 +76,18 @@ public class ResumeSvcImpl implements ResumeSvc {
 						//TO-DO: 세션에서 가져올 것
 						//resumeVO.setReg_id(reg_id);
 						//resumeVO.setReg_dt(reg_dt);
-					
-						list.add(resumeVO);
+						//나중에 지우자
+						resumeVO.setReg_id("joon");
+						//나중에 지우자
+						list.add(resumeVO);						
+						resumeDao.do_save(resumeVO);
 						mFile.transferTo(new File(uploadPath+save_file_name));
 					}catch(IllegalStateException ie) {
 						throw ie;
-				}
-			}	
+				}//end try/catch
+			}//end if	
 			//fileNo++;
-		}
+		}//end while
 		
 		return list;
 	}
@@ -96,6 +100,14 @@ public class ResumeSvcImpl implements ResumeSvc {
 	
 	public String getUUid() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
+	@Override
+	public int do_save(DTO dto) throws DataAccessException {
+		log.debug("ResumeSvcImpl do_save입니다");
+		log.debug("DTO의 값은 : " + dto.toString());
+		log.debug("ResumeSvcImpl do_save입니다");
+		return resumeDao.do_save(dto);
 	}
 	
 }

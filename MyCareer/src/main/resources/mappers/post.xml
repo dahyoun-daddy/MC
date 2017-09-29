@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sist.repository.mappers.post">
+
+
+    <select id="do_searchOne" 
+      parameterType= "project.mc.blog.post.common.PostDTO"
+      resultType= "project.mc.blog.post.common.PostDTO">
+      SELECT POST_ID,
+		  BLOG_ID,
+		  SUP_POST_ID,
+		  POST_TITLE,
+		  POST_CONTENT,
+		  REG_ID,
+		  to_char(REG_DT,'YYYY-MM-DD') as REG_DT,
+		  MOD_ID,
+		  to_char(REG_DT,'YYYY-MM-DD') as MOD_DT,
+		  DEL_FLAG
+		FROM MC_POST
+		where POST_ID=#{POST_ID}
+    </select>  
+	
+	<update id="do_update" parameterType="project.mc.blog.post.common.PostDTO">
+	
+	UPDATE MC_POST
+	SET
+	      BLOG_ID      = #{BLOG_ID , jdbcType=INTEGER},
+	      SUP_POST_ID  = #{SUP_POST_ID , jdbcType=INTEGER},
+	      POST_TITLE   = #{POST_TITLE , jdbcType=VARCHAR},
+	      POST_CONTENT = #{POST_CONTENT , jdbcType=CLOB},
+	      REG_ID       = #{REG_ID , jdbcType=VARCHAR},
+	      REG_DT       = SYSDATE,
+	      MOD_ID       = #{MOD_ID , jdbcType=VARCHAR},
+	      MOD_DT       = SYSDATE,
+	      DEL_FLAG     = #{DEL_FLAG , jdbcType=INTEGER}
+	WHERE POST_ID      = #{POST_ID , jdbcType=INTEGER}
+	</update>
+	
+	<delete id="do_delete"  
+	parameterType="project.mc.blog.post.common.PostDTO">
+	   DELETE FROM MC_POST
+        WHERE POST_ID = #{POST_ID}   
+	</delete>
+	
+	<update id="do_save"  
+	   parameterType="project.mc.blog.post.common.PostDTO">
+	   INSERT
+		INTO MC_POST
+		  (
+		    POST_ID,
+		    BLOG_ID,
+		    POST_TITLE,
+		    POST_CONTENT,
+		    REG_ID
+		  )
+	  VALUES
+	  (#{POST_ID}, #{BLOG_ID}, #{POST_TITLE}, #{POST_CONTENT}, #{REG_ID})
+	   				
+	</update>     
+    
+    <sql id="userSearchCondition">    
+       <where>   
+        <choose>
+            <when test="SEARCH_DIV == '10'">
+                 A.POST_TITLE LIKE  #{SEARCH_WORD} || '%'         
+            </when>
+            <when test="SEARCH_DIV == '20'">
+                AND A.POST_CONTENT LIKE  #{SEARCH_WORD} || '%'     
+            </when>
+                        
+            <otherwise></otherwise>
+        </choose>
+        </where>       
+    </sql>
+        
+	<select id="do_search" 
+	      parameterType="project.mc.blog.post.common.PostDTO"
+	      resultType="project.mc.blog.post.common.PostDTO">
+	      
+	SELECT  T1.POST_ID,
+	        T1.BLOG_ID,
+	        T1.SUP_POST_ID,
+	        T1.POST_TITLE,
+	        T1.POST_CONTENT,
+	        T1.REG_ID,
+	        TO_CHAR(T1.REG_DT, 'YYYY-MM-DD') AS REG_DT,
+	        T1.MOD_ID,
+	        TO_CHAR(T1.MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
+	        T1.DEL_FLAG
+	FROM (select A.*                                               
+		           ,ROW_NUMBER() OVER(ORDER BY A.REG_DT DESC) as RNUM
+		           ,COUNT(*) OVER () AS TOTAL_CNT                     
+		      from MC_POST A 
+		      <include refid="userSearchCondition" />  
+    	<![CDATA[         
+			 order by REG_DT desc  
+	      )T1
+	 WHERE RNUM BETWEEN (#{PAGE_SIZE} * (#{PAGE_NUM}-1)+1) AND (#{PAGE_SIZE} * (#{PAGE_NUM}-1)+#{PAGE_SIZE})      
+	 ]]>	
+	 
+	</select>      
+</mapper>

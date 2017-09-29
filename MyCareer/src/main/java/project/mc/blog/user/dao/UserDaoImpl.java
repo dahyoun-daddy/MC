@@ -62,8 +62,16 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public int do_delete(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		try {
+			String statement = namespace +".do_delete";
+			UserVO inUserVo = (UserVO)dto;
+			flag = sqlSession.delete(statement, inUserVo);
+		}catch(DataAccessException e) {
+			throw e;
+		}	
+		
+		return flag;
 	}
 
 	/**
@@ -72,14 +80,23 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		try {
+			String statement = namespace +".do_update";
+			UserVO inUserVo = (UserVO)dto;
+			flag = sqlSession.update(statement, inUserVo);
+			log.debug("11111111111flag::::::::::::::::::::"+flag);
+		}catch(DataAccessException e) {
+			throw e;
+		}	
+		
+		return flag;
 	}
 
 	/**
 	 * 아이디 중복 체크
 	 */
-	public int id_check(DTO dto) {
+	public int do_idCheck(DTO dto) {
 		int flag = 0;
 		try {
 			log.debug("UserDaoImpl - id_check");
@@ -117,6 +134,9 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	
 
 	
 	

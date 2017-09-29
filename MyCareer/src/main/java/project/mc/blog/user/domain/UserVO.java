@@ -105,8 +105,8 @@ public class UserVO extends DTO{
 	
 	@Override
 	public String toString() {
-		return "UserVO [user_no=" + user_no + ", user_id=" + user_id + ", user_password=" + user_password
+		return "UserVO [user_id=" + user_id + ", user_password=" + user_password
 				+ ", user_name=" + user_name + ", gender=" + gender + ", age=" + age + ", email=" + email + ", address="
-				+ address + ", phone=" + phone + "]";
+				+ address + ", phone=" + phone + ", withdraw_flag=" + withdraw_flag +"]";
 	}
 }

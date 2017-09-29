@@ -29,25 +29,25 @@ public class UserController {
 	@Autowired 
 	UserSvc userSvc;
 	
-	@RequestMapping(value="user/user_login.do", method=RequestMethod.GET)
+	@RequestMapping(value="user/user_login.do", method={RequestMethod.GET ,RequestMethod.POST})
 	public String to_login() {
 		
 		return "blog/user/user_login";
 	}
 	
-	@RequestMapping(value="user/user_modify.do", method=RequestMethod.GET)
+	@RequestMapping(value="user/user_modify.do", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String to_modify() {
 		
 		return "blog/user/user_modify";
 	}
 	
-	@RequestMapping(value="user/user_register.do", method=RequestMethod.GET)
+	@RequestMapping(value="user/user_register.do", method={RequestMethod.GET ,RequestMethod.POST})
 	public String user_register() {
 		
 		return "blog/user/user_register";
 	}
 	
-	@RequestMapping(value="user/favorite.do", method=RequestMethod.GET)
+	@RequestMapping(value="user/favorite.do", method={RequestMethod.GET ,RequestMethod.POST})
 	public String favorite() {
 		
 		return "blog/recruit/favorite";
@@ -60,7 +60,7 @@ public class UserController {
 		UserVO inVO = new UserVO();
 		
 		
-		int user_no = Integer.parseInt(req.getParameter("user_no").toString());
+		int user_no = 1;
 		inVO.setNo(user_no);
 		inVO.setUser_id(req.getParameter("user_id"));
 		inVO.setUser_password(req.getParameter("user_password"));
@@ -74,7 +74,7 @@ public class UserController {
 		inVO.setEmail(req.getParameter("email"));
 		inVO.setAddress(req.getParameter("address"));
 		inVO.setPhone(req.getParameter("phone"));
-		int withdraw_flag = Integer.parseInt(req.getParameter("withdraw_flag").toString());
+		int withdraw_flag = 1;//Integer.parseInt(req.getParameter("withdraw_flag").toString());
 		inVO.setWithdraw_flag(withdraw_flag);
 		
 		int flag = 0;
@@ -82,27 +82,25 @@ public class UserController {
 		
 		log.debug("flag: "+flag);
 		
-		return "user/do_save.do";
+		return "redirect:user_login.do";
 	}
 	
-	@RequestMapping(value="user/do_look.do",
-    		method=RequestMethod.GET)
-	public String do_look() {
-		log.debug("===================");
-		log.debug("//do_look==========");
-		log.debug("===================");
+	@RequestMapping(value="user/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	public String do_delete(HttpServletRequest req) throws IOException {
 		
-		return "user/user_register";
+		UserVO inVO=new UserVO();
+		
+		inVO.setUser_id(req.getParameter("user_id"));
+		int withdraw_flag = 0;
+		inVO.setWithdraw_flag(withdraw_flag);
+		log.debug("inVO : "+inVO.getUser_id()); 
+		
+		
+		int flag = userSvc.do_delete(inVO);
+		log.debug("flag : "+flag);
+		
+		return "redirect:user_login.do";
 	}
-
-//	@RequestMapping(value="user/do_idCheck.do")
-//	public String id_check(HttpServletRequest req) throws DataAccessException{
-//		UserVO inVO = new UserVO();
-//		
-//		
-//	}
-	
-	
 	
 	
 	

@@ -37,7 +37,7 @@ public class Main_controller {
 		UserVO userVO = new UserVO();
 		userVO.setUser_id("sist");
 		
-		int flag = userSvc.id_check(userVO);
+		int flag = userSvc.do_idCheck(userVO);
 		log.debug("flag: "+flag);
 		System.out.println("flag: "+flag);
 		

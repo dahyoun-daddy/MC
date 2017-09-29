@@ -5,6 +5,26 @@
 
 <mapper namespace="project.mc.user.repository.mappers.user">
 
+<!-- 회원  탈퇴 -->
+<delete id="do_delete" parameterType="project.mc.blog.user.domain.UserVO" >
+update mc_user
+set WITHDRAW_FLAG = #{withdraw_flag}
+where user_id = #{user_id}
+</delete>
+
+<!--  회원 수정   -->
+<update id="do_update" parameterType="project.mc.blog.user.domain.UserVO">
+UPDATE MC_USER
+SET 
+USER_PASSWORD = #{user_password},
+USER_NAME     = #{user_name},
+AGE           = #{age},
+EMAIL         = #{email},
+ADDRESS       = #{address},
+PHONE         = #{phone}
+WHERE USER_ID     = #{user_id}
+</update>
+
 <!-- 중복 아이디 체크  -->
 <select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
 SELECT COUNT(USER_ID) AS totalNo

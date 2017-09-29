@@ -11,7 +11,11 @@ import project.mc.commons.DTO;
  */
 @Transactional
 public interface UserSvc {
-
+	
+	public int do_delete(DTO dto) throws DataAccessException;
+	
+	public int do_update(DTO dto) throws DataAccessException;
+	
 	/**
 	 * 1이면 성공 그렇치 않으면 실패
 	 * @param dto
@@ -26,5 +30,5 @@ public interface UserSvc {
 	 * @return
 	 * @throws DataAccessException
 	 */
-	public int id_check(DTO dto) throws DataAccessException;
+	public int do_idCheck(DTO dto) throws DataAccessException;
 }

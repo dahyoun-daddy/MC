@@ -51,6 +51,12 @@ public class PostSvcImpl implements PostSvc {
 		return postDao.do_delete(dto);
 	}
 
-
+	@Override
+	public int do_update(DTO dto) {
+		log.debug("2=======================");
+		log.debug(dto.toString());
+		log.debug("2=======================");
+		return postDao.do_update(dto);
+	}
 
 }

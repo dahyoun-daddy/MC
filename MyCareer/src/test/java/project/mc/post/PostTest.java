@@ -1,6 +1,7 @@
 package project.mc.post;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -32,7 +33,6 @@ import org.springframework.web.context.WebApplicationContext;
 	,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PostTest {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -59,7 +59,16 @@ public class PostTest {
 		
 	}
 	
-
+//	int post_id        ; //포스트 id
+//	int blog_id        ; //소속 블로그 id
+//	int sup_post_id    ; //상위 게시글 id
+//	String post_title  ; //제목
+//	String post_content; //내용
+//	String reg_id      ; //작성자 id
+//	String reg_dt      ; //작성일자
+//	String mod_id      ; //수정자 id
+//	String mod_dt      ; //수정일자
+//	int del_flag       ; //삭제 플래그
 	
 	
 	
@@ -79,14 +88,43 @@ public class PostTest {
 	
 	
 	@Test
-	@Ignore
-	public void doSave() throws Exception{
-		MockHttpServletRequestBuilder createMessage = post("/blog/post/post_doSave.do")
-				.param("post_id", "111")
+	public void do_Save() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/post_doSave.do")
 				.param("blog_id", "3")
-				.param("post_title", "����1")
-				.param("post_content", "����1")
-				.param("reg_id", "�����")			
+				.param("post_title", "포스트 제목1")
+				.param("post_content", "포스트 내용1")
+				.param("reg_id", "등록자")
+				.param("workDiv", "do_save")
+				;
+
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
+	}
+	
+	
+//	int post_id        ; //포스트 id
+//	int blog_id        ; //소속 블로그 id
+//	int sup_post_id    ; //상위 게시글 id
+//	String post_title  ; //제목
+//	String post_content; //내용
+//	String reg_id      ; //작성자 id
+//	String reg_dt      ; //작성일자
+//	String mod_id      ; //수정자 id
+//	String mod_dt      ; //수정일자
+//	int del_flag       ; //삭제 플래그
+	
+	@Test
+	@Ignore
+	public void do_Update() throws Exception{
+		MockHttpServletRequestBuilder createMessage = post("/blog/post/post_do_Update.do")
+				.param("post_id", "99")
+				.param("blog_id", "111")
+				.param("post_title", "수정된 제목111")
+				.param("post_content", "수정된 내용111")
+				.param("mod_id", "수정자")
 				;
 
 		mockMvc.perform(createMessage)
@@ -98,23 +136,8 @@ public class PostTest {
 	
 	@Test
 	@Ignore
-	public void portfolio_03_update() throws Exception{
-		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_update.do")
-				.param("pf_id", "59")
-				.param("user_id", "111")
-				.param("tmp_no", "5")
-				;
-
-		mockMvc.perform(createMessage)
-				.andExpect(status().isOk())
-				.andExpect(status().is2xxSuccessful())
-				.andDo(print()
-				);
-	}
-	
-	@Test
 	public void do_search() throws Exception{
-		MockHttpServletRequestBuilder createMessage = post("blog/post/post_doSearch.do")
+		MockHttpServletRequestBuilder createMessage = get("/blog/post/post_doSearch.do")
 				.param("page_size", "10")
 				.param("page_num", "1")
 				.param("searchDiv", "")
@@ -134,23 +157,14 @@ public class PostTest {
 	@Ignore
 	public void do_selectOne() throws Exception {
 		//param
-				MockHttpServletRequestBuilder createMessage = post("blog/post/post_doSelectOne.do")
-						.param("post_id", "11")
-						.param("blog_id", "333")
-						.param("sup_post_id", "22")
-						.param("post_title", "����2")
-						.param("post_content", "����2")
-						.param("reg_id", "bbbb")
-						.param("reg_dt", "2017-09-29")
-						.param("mod_id", "")
-						.param("mod_dt", "")
-						.param("del_flag", "1")
-						;
-				mockMvc.perform(createMessage)
-						.andExpect(status().isOk())
-						.andExpect(status().is2xxSuccessful())
-						.andDo(print()
-						);
+		MockHttpServletRequestBuilder createMessage = post("/blog/post/post_doSelectOne.do")
+				.param("post_id", "99")
+				;
+		mockMvc.perform(createMessage)
+				.andExpect(status().isOk())
+				.andExpect(status().is2xxSuccessful())
+				.andDo(print()
+				);
 				
 	}
 	

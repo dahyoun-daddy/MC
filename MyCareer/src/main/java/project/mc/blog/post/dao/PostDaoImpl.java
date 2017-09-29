@@ -87,14 +87,23 @@ public class PostDaoImpl implements PostDao {
 		searchParam.put("PAGE_SIZE", page_size+"");
 		searchParam.put("PAGE_NUM", page_num+"");
 		
+		String searchWord="";
+		String searchDiv="";
 		
-		String searchWord  = searchParam.get("searchWord").toString();
-		String searchDiv   = searchParam.get("searchDiv").toString();
+		if(searchParam.get("searchWord") != null)
+			searchWord  = searchParam.get("searchWord").toString();
+		if(searchParam.get("searchDiv") != null)
+			searchDiv   = searchParam.get("searchDiv").toString();
 		
 		searchParam.put("SEARCH_DIV", searchDiv);
 		searchParam.put("SEARCH_WORD", searchWord);
 		
 		log.debug("===================pageSize : "+page_size);
+		
+		log.debug("searchDiv:"+searchDiv);
+		log.debug("searchWord:"+searchWord);
+		log.debug("page_size:"+page_size);
+		log.debug("page_num:"+page_num);
 		
 		return sqlSession.selectList(statement, searchParam);
 
@@ -108,8 +117,16 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		try {
+			String statement = namespace +".do_update";
+			PostDTO inVo = (PostDTO)dto;
+			flag = sqlSession.update(statement, inVo);
+		}catch(DataAccessException e) {
+			throw e;
+		}	
+		
+		return flag;
 	}
 
 	@Override

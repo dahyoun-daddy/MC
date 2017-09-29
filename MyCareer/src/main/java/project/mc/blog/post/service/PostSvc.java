@@ -20,6 +20,8 @@ public interface PostSvc {
 	 * @return int
 	 */
 	public int do_delete(DTO dto);
+
+	int do_update(DTO dto);
 	
 	
 	/**

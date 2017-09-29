@@ -41,19 +41,10 @@ public class PostController {
 //	int del_flag       ; //삭제 플래그
 	
 	
-	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = RequestMethod.GET)
+	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = RequestMethod.POST)
 	public ModelAndView doSelectoOne (HttpServletRequest req, ServletRequest request) {
 		PostDTO inVO = new PostDTO();
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
-		inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
-		inVO.setSup_post_id(Integer.parseInt(request.getParameter("sup_post_id")));
-		inVO.setPost_title(request.getParameter("post_title"));
-		inVO.setPost_content(request.getParameter("post_content"));
-		inVO.setReg_id(request.getParameter("reg_id"));
-		inVO.setReg_dt(request.getParameter("reg_dt"));
-		inVO.setMod_id(request.getParameter("mod_id"));
-		inVO.setMod_dt(request.getParameter("mod_dt"));
-		inVO.setDel_flag(Integer.parseInt(request.getParameter("del_flag")));
 		
 		log.debug("1=========================");
 		log.debug(inVO.toString());
@@ -63,47 +54,57 @@ public class PostController {
 		modelAndView.setViewName("blog/post_form");
 		
 		PostDTO  vo = (PostDTO)postSvc.do_searchOne(inVO);
-		log.debug("vo"+vo);
+		log.debug("vo"+vo.toString());
 		log.debug("=========================");
 		
 		modelAndView.addObject("PostDTO",vo);
 		
 		return modelAndView;
 	}
-	@RequestMapping(value = "blog/post/post_doSave.do")
-	public String doSave_View (HttpServletRequest req, ServletRequest request) throws IOException{
+	@RequestMapping(value = "blog/post/post_doSave.do", method = RequestMethod.GET)
+	public String doSave_View (HttpServletRequest req) throws IOException{
 		
 		return "blog/post/post_form";
 	}
 	
 	@RequestMapping(value = "blog/post_doSave.do",method = RequestMethod.POST)
-	public String doSave (HttpServletRequest req, ServletRequest request) throws IOException{
+	public ModelAndView doSave (HttpServletRequest req) throws IOException{
+		log.debug("do_save!start");
+		ModelAndView modelAndView =new ModelAndView();
 		PostDTO inVO = new PostDTO();
 		
-		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
-		inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
-		inVO.setPost_title(request.getParameter("post_title"));
-		inVO.setPost_content(request.getParameter("post_content"));
-		inVO.setReg_id(request.getParameter("reg_id"));
+		inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
+		inVO.setPost_title(req.getParameter("post_title"));
+		inVO.setPost_content(req.getParameter("post_content"));
+		inVO.setReg_id(req.getParameter("reg_id"));
 		
-		String workDiv = req.getParameter("workdDiv");
+		String workDiv = req.getParameter("workDiv");
 		
+		log.debug("inVO:"+inVO);
+		log.debug("workDiv:"+workDiv);
 		int flag = 0;
-		if(workDiv ==null||workDiv.trim().equals("")) {
+		if(workDiv !=null && !workDiv.trim().equals("")) {
+			log.debug("do_save!go");
 			flag =postSvc.do_save(inVO);
 		}else {
 			
 		}
 		log.debug("flag : "+flag);
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", postSvc.do_save(inVO));
+		//List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
+   	    int totalCnt   = 0;
+   	   // if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
+   	    
+		//TO_DO: pageing
+		//modelAndView.addObject("list",list );
+		//total count
+		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.setViewName("blog/post/post_list");
 		
-		return "redirect:post_list.do";
+		return null;
 	}
 
-	@RequestMapping(value="blog/post/post_doSearch.do")
+	@RequestMapping(value="blog/post/post_doSearch.do", method = RequestMethod.GET)
 	public ModelAndView do_search(HttpServletRequest req) {
 		
 		PostDTO inVO = new PostDTO();
@@ -146,10 +147,9 @@ public class PostController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="blog/post/post_do_Delete.do")
+	@RequestMapping(value="blog/post/post_do_Delete.do", method = RequestMethod.POST)
 	public ModelAndView do_Delete(HttpServletRequest request) {
 		PostDTO inVO = new PostDTO();
-		String id = request.getParameter("id");
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
 		postSvc.do_delete(inVO);
 		
@@ -159,6 +159,26 @@ public class PostController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="blog/post/post_do_Update.do", method = RequestMethod.POST)
+	public ModelAndView do_Update(HttpServletRequest request) {
+		PostDTO inVO = new PostDTO();
+		
+		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
+		inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
+		inVO.setPost_title(request.getParameter("post_title"));
+		inVO.setPost_content(request.getParameter("post_content"));
+		inVO.setMod_id(request.getParameter("mod_id"));
+		
+		postSvc.do_update(inVO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", postSvc.do_search(inVO));
+		modelAndView.setViewName("blog/post/post_list");
+		
+		return modelAndView;
+	}
+	
 
 	
 	

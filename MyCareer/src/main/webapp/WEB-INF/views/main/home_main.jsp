@@ -78,7 +78,7 @@
 	
 	<div id="wrapper">
 		<div id="user_menu">
-			<a href="<%=contextPath%>/user/user_login.do">로그인/로그아웃</a>//<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
+			<a href="<%=contextPath%>/user/login_page.do">로그인/로그아웃</a>//<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="blog_search.do">

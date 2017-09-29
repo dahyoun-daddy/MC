@@ -81,7 +81,7 @@
 	            },
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	            	alert("회원가입완료");
-	            	location.href="user_login.do";
+	            	location.href="login_page.do";
 	            },
 	            complete: function(data){//무조건 수행
 	            	
@@ -156,7 +156,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	</div>
 	<div id="footer" align="center">
 		<input type="button" value="확인" id="do_save" name="do_save">
-		<a href="user_login.do">취소</a>
+		<a href="login_page.do">취소</a>
 	</div>
 	</form>
 	

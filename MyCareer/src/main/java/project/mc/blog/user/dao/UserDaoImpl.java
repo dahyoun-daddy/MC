@@ -1,5 +1,6 @@
 package project.mc.blog.user.dao;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,12 +31,17 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	@Override
-	public List<?> do_login(DTO dto) throws DataAccessException {
-		
+	public int do_login(DTO dto) throws DataAccessException {
+		log.debug("========debug!!!!!!!!======");
 		String statement = namespace +".do_login";
 		UserVO inUserVo = (UserVO)dto;
-			
-		return sqlSession.selectOne(statement, inUserVo);
+		int flag = 0;
+		UserVO outUserVo = sqlSession.selectOne(statement, inUserVo);
+		log.debug("***********************");
+		log.debug("*do_login******************"+dto.toString());
+		log.debug("***********************");
+		flag = outUserVo.getDo_login();
+		return flag;
 	}
 	
 	
@@ -99,18 +105,14 @@ public class UserDaoImpl implements UserDao {
 	 * 아이디 중복 체크
 	 */
 	public int do_idCheck(DTO dto) {
-		int flag = 0;
-		try {
+			int flag = 0;
 			log.debug("UserDaoImpl - id_check");
 			String statement = namespace +".do_idCheck";
 			UserVO inUserVo = (UserVO)dto;
 			UserVO outUserVO = sqlSession.selectOne(statement, inUserVo);
-			flag = outUserVO.getTotalNo();
+			flag = outUserVO.getDo_idCheck();
 			
 			log.debug("flag: "+ flag);
-		}catch(DataAccessException e) {
-			throw e;
-		}	
 		
 		return flag;
 	}

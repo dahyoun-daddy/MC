@@ -34,42 +34,47 @@ public class UserController {
 	UserSvc userSvc;
 	
 	
+	@RequestMapping(value="user/login_page.do", method={RequestMethod.GET ,RequestMethod.POST})
+	public String login_page(HttpServletRequest req) throws IOException {
+		
+		return "blog/user/user_login";
+	}
 	@RequestMapping(value="user/user_login.do", method={RequestMethod.GET ,RequestMethod.POST})
-	public ModelAndView to_login(HttpServletRequest req) throws IOException {
+	public String to_login(HttpServletRequest req) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
-		int user_no = Integer.parseInt(req.getParameter("user_no").toString());
-		inVO.setUser_no(user_no);
 		inVO.setUser_id(req.getParameter("user_id"));
 		inVO.setUser_password(req.getParameter("user_password"));
-		int user_div = Integer.parseInt(req.getParameter("user_div").toString());
-		inVO.setUser_div(user_div);
+		
+		int flag = 0;
+		flag = userSvc.do_login(inVO);
+		log.debug("***********************");
+		log.debug("flag: "+flag);
+		log.debug("***********************");
+		
+		
+		return "mc/main/home_main.do";
+	}
+	
+	@RequestMapping(value="user/user_modify.do", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String to_modify(HttpServletRequest req) {
+		
+		UserVO inVO = new UserVO();
+		
+		inVO.setUser_id(req.getParameter("user_id"));
+		inVO.setUser_password(req.getParameter("user_password"));
 		inVO.setUser_name(req.getParameter("user_name"));
-		int gender = Integer.parseInt(req.getParameter("gender").toString());
-		inVO.setGender(gender);
 		int age = Integer.parseInt(req.getParameter("age").toString());
 		inVO.setAge(age);
 		inVO.setEmail(req.getParameter("email"));
 		inVO.setAddress(req.getParameter("address"));
 		inVO.setPhone(req.getParameter("phone"));
-		int withdraw_flag = Integer.parseInt(req.getParameter("withdraw_flag").toString());
-		inVO.setWithdraw_flag(withdraw_flag);
 		
-		List<UserVO> list = (List<UserVO>)userSvc.do_login(inVO);
+		int flag = 0;
+		flag = userSvc.do_update(inVO);
 		
-		log.debug("list: "+list);
-		
-		
-		ModelAndView modelAndView =new ModelAndView();
-				
-		modelAndView.addObject("list",list );
-		modelAndView.setViewName("blog/user/user_login");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="user/user_modify.do", method= {RequestMethod.GET ,RequestMethod.POST})
-	public String to_modify() {
+		log.debug("flag: "+flag);
 		
 		return "blog/user/user_modify";
 	}
@@ -124,10 +129,9 @@ public class UserController {
 		UserVO inVO=new UserVO();
 		
 		inVO.setUser_id(req.getParameter("user_id"));
-		int withdraw_flag = 0;
+		int withdraw_flag = Integer.parseInt(req.getParameter("withdraw_flag").toString());
 		inVO.setWithdraw_flag(withdraw_flag);
 		log.debug("inVO : "+inVO.getUser_id()); 
-		
 		
 		int flag = userSvc.do_delete(inVO);
 		log.debug("flag : "+flag);
@@ -135,27 +139,27 @@ public class UserController {
 		return "redirect:user_login.do";
 	}
 	
-	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET} , produces="application/json;charset=utf8")
-	@ResponseBody
-	public boolean do_idcheck(DTO dto, HttpServletResponse res) throws DataAccessException, IOException{
-		
-		int selectUserIdCheck = userSvc.do_idCheck(dto);
-		
-		log.debug("===========================================");
-		log.debug("updatePersonData : " + selectUserIdCheck);
-		log.debug("===========================================");
-		
-		PrintWriter out = res.getWriter();
-		if (selectUserIdCheck == 0) {
-			return false;
-			//out.println("true");
-		} else {
-			return true;
-			//out.println("false");
-		}
-		
-		//return "redirect:do_idCheck.do";
-	}
+//	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET} , produces="application/json;charset=utf8")
+//	@ResponseBody
+//	public boolean do_idcheck(DTO dto, HttpServletResponse res) throws DataAccessException, IOException{
+//		
+//		int selectUserIdCheck = userSvc.do_idCheck(dto);
+//		
+//		log.debug("===========================================");
+//		log.debug("updatePersonData : " + selectUserIdCheck);
+//		log.debug("===========================================");
+//		
+//		PrintWriter out = res.getWriter();
+//		if (selectUserIdCheck == 0) {
+//			return false;
+//			//out.println("true");
+//		} else {
+//			return true;
+//			//out.println("false");
+//		}
+//		
+//		//return "redirect:do_idCheck.do";
+//	}
 	
 	
 	

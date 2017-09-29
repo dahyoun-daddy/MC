@@ -11,5 +11,5 @@ public interface UserDao extends WorkDiv {
 	
 	public int do_idCheck(DTO dto) throws DataAccessException;
 	
-	public List<?> do_login(DTO dto) throws DataAccessException;
+	public int do_login(DTO dto) throws DataAccessException;
 }

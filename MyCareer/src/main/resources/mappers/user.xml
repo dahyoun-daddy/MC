@@ -6,8 +6,8 @@
 <mapper namespace="project.mc.user.repository.mappers.user">
 
 <!-- 로그인 -->
-<select id="do_login" parameterType="project.mc.blog.user.domain.UserVO">
-select *
+<select id="do_login" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
+select count(*) as do_login
 from mc_user
 where user_id = #{user_id}
 and user_password = #{user_password}
@@ -35,7 +35,7 @@ WHERE USER_ID     = #{user_id}
 
 <!-- 중복 아이디 체크  -->
 <select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
-SELECT COUNT(USER_ID) AS totalNo
+SELECT COUNT(USER_ID) AS do_idCheck
   FROM MC_USER
  WHERE USER_ID = #{user_id}
 </select>

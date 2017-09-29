@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import project.mc.blog.user.dao.UserDao;
+import project.mc.blog.user.domain.UserVO;
 import project.mc.commons.DTO;
 /**
  * UserSvcImpl.java
@@ -30,12 +31,13 @@ public class UserSvcImpl implements UserSvc {
 //	private Validator validator;
 
 	
-	public int do_save(DTO dto){
+	public int do_save(DTO dto){ 
 		log.debug("2=======================");
 		log.debug(dto.toString());
 		log.debug("2=======================");
+		int flag = userDao.do_save(dto);
 		
-		return userDao.do_save(dto);
+		return flag;
 	}
 
 	
@@ -56,7 +58,7 @@ public class UserSvcImpl implements UserSvc {
 		log.debug("flag do_update:::::::::::"+flag);
 		log.debug("do_update=======================");
 		
-		return userDao.do_update(dto);
+		return flag;
 	}
 
 	
@@ -66,17 +68,18 @@ public class UserSvcImpl implements UserSvc {
 		int flag = userDao.do_delete(dto);
 		log.debug("22222222222222222flag======================="+flag);	
 		log.debug("do_delete=======================");	
-		return userDao.do_delete(dto);		
+		return flag;
 	}
 
 
 	
-	public List<?> do_login(DTO dto) throws DataAccessException {
+	public int do_login(DTO dto) throws DataAccessException {
 		log.debug("2=======================");
 		log.debug(dto.toString());
 		log.debug("2=======================");
+		int flag = userDao.do_login(dto);
 		
-		return userDao.do_login(dto);
+		return flag;
 	}
 
 	

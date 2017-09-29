@@ -15,7 +15,25 @@ public class UserVO extends DTO{
 	private String address      ;   //주소
 	private String phone        ;   //연락처
 	private int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
+	private int do_login;
+	private int do_idCheck;
 	
+	public int getDo_idCheck() {
+		return do_idCheck;
+	}
+
+	public void setDo_idCheck(int do_idCheck) {
+		this.do_idCheck = do_idCheck;
+	}
+
+	public int getDo_login() {
+		return do_login;
+	}
+
+	public void setDo_login(int do_login) {
+		this.do_login = do_login;
+	}
+
 	public UserVO() {
 		
 	}

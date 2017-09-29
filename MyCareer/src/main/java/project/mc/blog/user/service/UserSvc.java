@@ -14,7 +14,7 @@ import project.mc.commons.DTO;
 @Transactional
 public interface UserSvc {
 	
-	public List<?> do_login(DTO dto) throws DataAccessException;
+	public int do_login(DTO dto) throws DataAccessException;
 	
 	public int do_delete(DTO dto) throws DataAccessException;
 	

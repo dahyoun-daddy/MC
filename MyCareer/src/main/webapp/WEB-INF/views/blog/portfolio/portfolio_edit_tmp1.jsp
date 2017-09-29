@@ -119,6 +119,9 @@
 			<form name="frm" method="post" action="portfolio_save.do" enctype="multipart/form-data">
 			<input type="hidden" name="tmp_no" id="tmp_no" value="01">
 			<input type="hidden" name="user_id" id="user_id" value="111">
+			<input type="hidden" name="workDiv" id="workDiv" value="pf_save">
+			<input type="hidden" name="table_div" id="table_div" value="31">
+			<input type="hidden" name="table_id" id="table_id" value="63">
 			
 			<img class="pf_img" src="" alt="tmp1_02" id="tmp1_02">
 			<img class="pf_img" src="" alt="tmp1_03" id="tmp1_03">
@@ -132,15 +135,15 @@
 			<img class="pf_img" src="" alt="tmp1_08" id="tmp1_08">
 			<img class="pf_img clearfix" src="" alt="tmp1_09" id="tmp1_09">
 			
-			<input type=file class="getfile" id="getfile_01" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_02" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_03" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_04" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_05" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_06" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_07" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_08" style='display: none;' accept="image/*">
-			<input type=file class="getfile" id="getfile_09" style='display: none;' accept="image/*">
+			<input type=file name="getfile_01" id="getfile_01" style='display: none;' accept="image/*">
+			<input type=file name="getfile_02" id="getfile_02" style='display: none;' accept="image/*">
+			<input type=file name="getfile_03" id="getfile_03" style='display: none;' accept="image/*">
+			<input type=file name="getfile_04" id="getfile_04" style='display: none;' accept="image/*">
+			<input type=file name="getfile_05" id="getfile_05" style='display: none;' accept="image/*">
+			<input type=file name="getfile_06" id="getfile_06" style='display: none;' accept="image/*">
+			<input type=file name="getfile_07" id="getfile_07" style='display: none;' accept="image/*">
+			<input type=file name="getfile_08" id="getfile_08" style='display: none;' accept="image/*">
+			<input type=file name="getfile_09" id="getfile_09" style='display: none;' accept="image/*">
 			
 			<div id="clearfix"></div>
 			</form>

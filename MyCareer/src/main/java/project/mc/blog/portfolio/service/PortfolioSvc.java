@@ -31,7 +31,8 @@ public interface PortfolioSvc {
 
 	int do_delete(DTO dto);
 
-	List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
+
+	List<DTO> do_saveImages(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
 
 
 }

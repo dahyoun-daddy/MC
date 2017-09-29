@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -20,6 +21,7 @@ import project.mc.blog.resume.domain.ResumeVO;
 import project.mc.blog.resume.service.ResumeSvc;
 import project.mc.commons.DTO;
 
+@Controller
 public class Resume_controller {
 	private Logger log = LoggerFactory.getLogger(Resume_controller.class);
 	

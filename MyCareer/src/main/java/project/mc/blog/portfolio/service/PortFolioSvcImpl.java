@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.sist.file.domain.FileVO;
 
 import project.mc.blog.portfolio.dao.PortfolioDao;
 import project.mc.blog.portfolio.domain.PortfolioVO;
+import project.mc.blog.resume.dao.ResumeDao;
 import project.mc.blog.resume.domain.ResumeVO;
 import project.mc.blog.user.dao.UserDao;
 import project.mc.commons.DTO;
@@ -32,6 +32,8 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired 
 	private PortfolioDao pfDao;
+	@Autowired
+	private ResumeDao rsDao;
 	
 //	@Autowired
 //	private Validator validator;
@@ -44,7 +46,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public int do_save(MultipartHttpServletRequest mReq) throws DataAccessException, IOException {
-		log.debug("======PortfolioDaoImpl: do_save=start================");
+		log.debug("======PortfolioSvcImpl: do_save=start================");
 		PortfolioVO inVO = new PortfolioVO();
 		
 		String user_id = mReq.getParameter("user_id").toString();
@@ -54,12 +56,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		int flag = pfDao.do_save(inVO);
 		
-		this.do_saveMulti(mReq);
+		this.do_saveImages(mReq);
 		
-		
-		
-		
-		log.debug("======PortfolioDaoImpl: do_save=end================");
+		log.debug("======PortfolioSvcImpl: do_save=end================");
 		
 		return flag;
 	}
@@ -68,13 +67,16 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * 파일 멀티 upload;
 	 */
 	@Override
-	public List<DTO> do_saveMulti(
+	public List<DTO> do_saveImages(
 			MultipartHttpServletRequest mReq) 
 	   throws IOException, DataAccessException {
-		
-		String uploadPath = "c:\\file\\";
+		String root_path = mReq.getSession().getServletContext().getRealPath("/");  
+		String attach_path = "resources\\uploadimages\\";
+		String uploadPath = root_path+attach_path;
 		String workDiv    = mReq.getParameter("workDiv");
-		
+		if(workDiv != null && workDiv.equals("pf_save")) {
+			log.debug("pf_multisave ongoing");
+		}
 		
 		File fileDir=new File(uploadPath);
 		if(fileDir.isDirectory()==false) {
@@ -85,12 +87,13 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		List<DTO> list =new ArrayList<DTO>();
 		int fileNo = 1;
 		while(iter.hasNext()) {
-			FileVO fileVO=new FileVO();
+			ResumeVO resumeVO=new ResumeVO();
 			String uploadFileName = iter.next();
 			String orgFileName = "";//원본파일명
 			String saveFileName= "";//저장파일명
 			String ext         = "";//확장자
 			long   fileSize    = 0 ;//파일사이즈
+			
 			
 			log.debug("1==================");
 			log.debug("uploadFileName:"+uploadFileName);
@@ -115,28 +118,35 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			log.debug("4==================");
 			log.debug("fileSize:"+fileSize);
 			log.debug("4==================");	
-			  
+			
 			if(null != orgFileName && !orgFileName.equals(""))
 			{
 				try {
-					fileVO.setFile_size(fileSize+"");
-					fileVO.setNo(fileNo);
-					fileVO.setOrg_file_nm(orgFileName);
-					fileVO.setSave_file_nm(saveFileName);
-					//TO-DO:세션에서 기자고 올것
-					//fileVO.setReg_id(reg_id);//session
-					//fileVO.setMod_id(mod_id);//session
-					fileVO.setWork_div(workDiv);
-					  
-					list.add(fileVO);
 					
+					resumeVO.setTable_div(Integer.parseInt(mReq.getParameter("table_div").toString()));
+					resumeVO.setTable_id(Integer.parseInt(mReq.getParameter("table_id").toString()));
+					resumeVO.setSeq(fileNo);
+					resumeVO.setFile_path(uploadPath);
+					resumeVO.setFile_size(fileSize+"");
+					resumeVO.setOrg_file_name(orgFileName);
+					resumeVO.setSave_file_name(saveFileName);
+					resumeVO.setFile_ext(ext);
+					resumeVO.setReg_id(mReq.getParameter("user_id").toString());
+					//파일 DB 저장
+					int flag = rsDao.do_save(resumeVO);
+					resumeVO.setFlag(flag);
+					
+					list.add(resumeVO);
+					
+					//이미지 서버에 업로드
 					mFile.transferTo(new File(uploadPath+saveFileName));
 					
 					
-
 					
 				}catch(IllegalStateException ie) {
 					throw ie;
+				}catch(Exception e) {
+					e.getCause();
 				}
 			}
 			
@@ -156,9 +166,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public int do_delete(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_delete=================");
+		log.debug("======PortfolioSvcImpl: do_delete=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_delete=================");
+		log.debug("======PortfolioSvcImpl: do_delete=================");
 		return pfDao.do_delete(dto);		
 	}
 	
@@ -169,9 +179,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public int do_deleteAll(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_deleteAll=================");
+		log.debug("======PortfolioSvcImpl: do_deleteAll=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_deleteAll=================");
+		log.debug("======PortfolioSvcImpl: do_deleteAll=================");
 		return pfDao.do_deleteAll(dto);		
 	}
 	
@@ -182,9 +192,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public int do_update(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_update=================");
+		log.debug("======PortfolioSvcImpl: do_update=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_update=================");	
+		log.debug("======PortfolioSvcImpl: do_update=================");	
 		return pfDao.do_update(dto);		
 	}
 	
@@ -195,9 +205,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public List<?> do_search(DTO dto){
-		log.debug("======PortfolioDaoImpl: do_search=================");
+		log.debug("======PortfolioSvcImpl: do_search=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_search=================");	
+		log.debug("======PortfolioSvcImpl: do_search=================");	
 		return pfDao.do_search(dto);
 	}
 	
@@ -208,9 +218,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public DTO do_searchByPf_id(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_searchByPf_id=================");
+		log.debug("======PortfolioSvcImpl: do_searchByPf_id=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_searchByPf_id=================");	
+		log.debug("======PortfolioSvcImpl: do_searchByPf_id=================");	
 		return pfDao.do_searchByPf_id(dto);
 	}
 	
@@ -221,9 +231,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 */
 	@Override
 	public List<?> do_searchByUser_id(DTO dto) {
-		log.debug("======PortfolioDaoImpl: do_searchByUser_id=================");
+		log.debug("======PortfolioSvcImpl: do_searchByUser_id=================");
 		log.debug(dto.toString());
-		log.debug("======PortfolioDaoImpl: do_searchByUser_id=================");	
+		log.debug("======PortfolioSvcImpl: do_searchByUser_id=================");	
 		return pfDao.do_searchByUser_id(dto);
 	}
 	

@@ -1,5 +1,6 @@
 package project.mc.blog.portfolio.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +49,7 @@ public class Portfolio_controller {
 	}
 	
 	@RequestMapping(value="blog/portfolio_save.do", method = RequestMethod.POST)
-	public String portfolio_save(MultipartHttpServletRequest mreq) {
+	public String portfolio_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
 		log.debug("=====Portfolio_controller: portfolio_save=start==========");
 		
 		int flag = -1;

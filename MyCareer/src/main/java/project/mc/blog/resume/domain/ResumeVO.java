@@ -9,18 +9,18 @@ import project.mc.commons.DTO;
  */
 public class ResumeVO extends DTO {
 
-	private int file_id; //파일id
-	private int table_div; //소속 테이블
-	private int table_id; //소속 id
-	private int seq; //파일 순서
-	private String file_path; //파일 저장 경로
-	private	String file_size; //파일 사이즈
-	private String org_file_name; //원본파일명
-	private String save_file_name; //저장 파일명
-	private String file_ext; //파일 확장자
-	private String reg_id; //작성자 id
-	private String reg_dt; //작성일자 (기본값은 SYSDATE)
-	private int flag;//파일 저장 성공 여부
+		private int file_id; //파일id
+		private int table_div; //소속 테이블
+		private int table_id; //소속 id
+		private int seq; //파일 순서
+		private String file_path; //파일 저장 경로
+		private	String file_size; //파일 사이즈
+		private String org_file_name; //원본파일명
+		private String save_file_name; //저장 파일명
+		private String file_ext; //파일 확장자
+		private String reg_id; //작성자 id
+		private String reg_dt; //작성일자 (기본값은 SYSDATE)
+		private int flag;//파일 저장 성공 여부
 	
 	public int getFlag() {
 		return flag;

@@ -1,5 +1,6 @@
 package project.mc.blog.portfolio.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.mc.blog.portfolio.domain.PortfolioVO;
 import project.mc.blog.portfolio.service.PortfolioSvc;
+import project.mc.blog.resume.service.ResumeSvc;
 import project.mc.blog.user.domain.UserVO;
 
 @Controller
@@ -21,6 +25,8 @@ public class Portfolio_controller {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	PortfolioSvc pfSvc;
+	@Autowired
+	ResumeSvc RsSvc;
 	
 	@RequestMapping(value="blog/portfolio_view_tmp1.do", method = RequestMethod.GET)
 	public String portfolio_view_tmp1() {
@@ -43,18 +49,11 @@ public class Portfolio_controller {
 	}
 	
 	@RequestMapping(value="blog/portfolio_save.do", method = RequestMethod.POST)
-	public String portfolio_save(HttpServletRequest req) {
-		
+	public String portfolio_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
 		log.debug("=====Portfolio_controller: portfolio_save=start==========");
-		PortfolioVO inVO = new PortfolioVO();
 		
-		String user_id = req.getParameter("user_id").toString();
-		inVO.setUser_id(user_id);
-		int tmp_no = Integer.parseInt(req.getParameter("tmp_no").toString());
-		inVO.setTmp_no(tmp_no);
-				
 		int flag = -1;
-		flag = pfSvc.do_save(inVO);
+		flag = pfSvc.do_save(mreq);
 		
 		log.debug("flag: "+flag);
 		log.debug("=====Portfolio_controller: portfolio_save=end==========");

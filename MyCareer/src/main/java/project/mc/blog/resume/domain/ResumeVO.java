@@ -20,7 +20,18 @@ public class ResumeVO extends DTO {
 	private String file_ext; //파일 확장자
 	private String reg_id; //작성자 id
 	private String reg_dt; //작성일자 (기본값은 SYSDATE)
+	private int flag;//파일 저장 성공 여부
 	
+	public int getFlag() {
+		return flag;
+	}
+
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+
+
 	//기본 생성자
 	public ResumeVO() {
 		
@@ -32,7 +43,7 @@ public class ResumeVO extends DTO {
 		return "ResumeVO [file_id=" + file_id + ", table_div=" + table_div + ", table_id=" + table_id + ", seq=" + seq
 				+ ", file_path=" + file_path + ", file_size=" + file_size + ", org_file_name=" + org_file_name
 				+ ", save_file_name=" + save_file_name + ", file_ext=" + file_ext + ", reg_id=" + reg_id + ", reg_dt="
-				+ reg_dt + "]";
+				+ reg_dt + ", flag=" + flag + "]";
 	}
 
 

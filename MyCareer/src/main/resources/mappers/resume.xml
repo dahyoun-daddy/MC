@@ -23,9 +23,9 @@
  		VALUES
  		(
  			SEQ_MC_FILE.NEXTVAL,
- 			0,
- 			0,
- 			0,
+ 			#{table_div, jdbcType=INTEGER},
+ 			#{table_id, jdbcType=INTEGER},
+ 			#{seq, jdbcType=INTEGER},
  			#{file_path},
  			#{file_size},
  			#{org_file_name},

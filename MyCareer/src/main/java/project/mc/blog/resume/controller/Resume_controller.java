@@ -53,14 +53,7 @@ public class Resume_controller {
 		
 		return "";
 	}*/
-	
-	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.GET)
-	public String upload() {
-		return "blog/resume/upload";
-	}
-	
-	
-	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.POST)
+	@RequestMapping(value="blog/resume_upload.do", method = RequestMethod.POST)
 	public ModelAndView do_saveSubmit(MultipartHttpServletRequest mReq)
 			throws IOException, DataAccessException{
 		ModelAndView modelAndView = new ModelAndView();

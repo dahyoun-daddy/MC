@@ -1,15 +1,15 @@
 package project.mc.blog.post.code;
 
-import project.mc.blog.post.common.DTO;
+import project.mc.blog.post.domain.DTO;
 
 public class CodesDTO extends DTO {
-	private String mst_cd_id	;//ë§ˆìŠ¤?„°ì½”ë“œ_ID(PK)
-	private String dtl_cd_id	;//?ƒ?„¸ì½”ë“œ_ID(PK)
-	private String mst_cd_nm	;//ë§ˆìŠ¤?„°ì½”ë“œëª?
-	private String dtl_cd_nm	;//?ƒ?„¸ì½”ë“œëª?
-	private int	   seq			;//? •? ¬?ˆœ?„œ
-	private String sup_mst_cd_id;//?ƒ?œ„ë§ˆìŠ¤?„°ì½”ë“œ_ID
-	private int	   use_yn		;//?‚¬?š©?œ ë¬?
+	private String mst_cd_id	;//ë§ˆìŠ¤?ï¿½ï¿½ì½”ë“œ_ID(PK)
+	private String dtl_cd_id	;//?ï¿½ï¿½?ï¿½ï¿½ì½”ë“œ_ID(PK)
+	private String mst_cd_nm	;//ë§ˆìŠ¤?ï¿½ï¿½ì½”ë“œï¿½?
+	private String dtl_cd_nm	;//?ï¿½ï¿½?ï¿½ï¿½ì½”ë“œï¿½?
+	private int	   seq			;//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	private String sup_mst_cd_id;//?ï¿½ï¿½?ï¿½ï¿½ë§ˆìŠ¤?ï¿½ï¿½ì½”ë“œ_ID
+	private int	   use_yn		;//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 	
 	
 	@Override

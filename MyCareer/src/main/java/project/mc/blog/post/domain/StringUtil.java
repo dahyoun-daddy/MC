@@ -1,4 +1,4 @@
-package project.mc.blog.post.common;
+package project.mc.blog.post.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class StringUtil {
 
 	/**
-	 * yyyy-MM-dd?˜•?ƒœ ?‚ ì§? ì²˜ë¦¬
+	 * yyyy-MM-dd?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ì²˜ë¦¬
 	 * @param type
 	 * @return String 2017-09-11
 	 */
@@ -26,10 +26,10 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 32bit random?•¨?ˆ˜
+	 * 32bit random?ï¿½ï¿½?ï¿½ï¿½
 	 * @return String
 	 */
-	//uuid?ƒ?„±
+	//uuid?ï¿½ï¿½?ï¿½ï¿½
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replaceAll("-","");
 		
@@ -46,9 +46,9 @@ public class StringUtil {
 	}
 	
 	/**
-	 * SQL Injectë°©ì? 
+	 * SQL Injectë°©ï¿½? 
 	 * @param str
-	 * @return "'" ? œê±?  
+	 * @return "'" ?ï¿½ï¿½ï¿½?  
 	 */
 	public static String sqlInjectPro(String str){
 		String retStr = "";
@@ -74,7 +74,7 @@ public class StringUtil {
 	
 //	/**
 //	 * <select name="page">
-//	 *      <option value="">? „ì²?</option>
+//	 *      <option value="">?ï¿½ï¿½ï¿½?</option>
 //	 * 		<option value="10">10</option>
 //	 * </select>
 //	 * @param list
@@ -87,7 +87,7 @@ public class StringUtil {
 //			boolean allYN){
 //		/*
 //		 * <select name="page">
-//		 *      <option value="">? „ì²?</option>
+//		 *      <option value="">?ï¿½ï¿½ï¿½?</option>
 //		 * 		<option value="10">10</option>
 //		 * </select>
 //		 */
@@ -95,8 +95,8 @@ public class StringUtil {
 //		StringBuilder sb=new StringBuilder();
 //		
 //		sb.append("<select class='orm-control input-sm' name='"+selectNm+"' > \n");
-//		//? „ì²? ì²˜ë¦¬: allYN=true
-//		if(allYN == true) 	sb.append("<option value=''>=? „ì²?=</option>\n");
+//		//?ï¿½ï¿½ï¿½? ì²˜ë¦¬: allYN=true
+//		if(allYN == true) 	sb.append("<option value=''>=?ï¿½ï¿½ï¿½?=</option>\n");
 //		/*
 //		 * <option value="<%=dto.getDtl_cd_id() %>"  
 //				    				<%if(page_size.equals(dto.getDtl_cd_id()))out.print("selected='selected'"); %>>
@@ -128,18 +128,18 @@ public class StringUtil {
 	   */
 	public static String renderPaging(int maxNum_i, int currPageNoIn_i, int rowsPerPage_i, int bottomCount_i,
 			String url_i, String scriptName_i) {
-			int maxNum = 0; // ì´? ê°??ˆ˜
-			int currPageNo = 1; // ?˜„?¬ ?˜?´ì§? ë²ˆí˜¸ : page_num
-			int rowPerPage = 10; // ?•œ?˜?´ì§??— ë³´ì—¬ì§? ?–‰?ˆ˜ : page_size
-			int bottomCount = 10; // ë°”ë‹¥?— ë³´ì—¬ì§? ?˜?´ì§? ?ˆ˜: 10
+			int maxNum = 0; // ï¿½? ï¿½??ï¿½ï¿½
+			int currPageNo = 1; // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë²ˆí˜¸ : page_num
+			int rowPerPage = 10; // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½??ï¿½ï¿½ ë³´ì—¬ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ : page_size
+			int bottomCount = 10; // ë°”ë‹¥?ï¿½ï¿½ ë³´ì—¬ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½: 10
 
 			maxNum = maxNum_i;
 			currPageNo = currPageNoIn_i;
 			rowPerPage = rowsPerPage_i;
 			bottomCount = bottomCount_i;
 
-			String url = url_i; // ?˜¸ì¶? URL
-			String scriptName = scriptName_i; // ?˜¸ì¶? ?ë°”ìŠ¤?¬ë¦½íŠ¸
+			String url = url_i; // ?ï¿½ï¿½ï¿½? URL
+			String scriptName = scriptName_i; // ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ë°”ìŠ¤?ï¿½ï¿½ë¦½íŠ¸
 
 			int maxPageNo = ((maxNum - 1) / rowPerPage) + 1;
 			int startPageNo = ((currPageNo - 1) / bottomCount) * bottomCount + 1;//
@@ -173,7 +173,7 @@ public class StringUtil {
 
 
 
-			// 1 2 3 ... 10	(?ˆ«?ë³´ì—¬ì£¼ê¸°)
+			// 1 2 3 ... 10	(?ï¿½ï¿½?ï¿½ï¿½ë³´ì—¬ì£¼ê¸°)
 			for (inx = startPageNo; inx <= maxPageNo && inx <= endPageNo; inx++) {
 				
 				if (inx == currPageNo) {

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import project.mc.blog.post.common.PostDTO;
-import project.mc.blog.post.common.StringUtil;
+import project.mc.blog.post.domain.PostDTO;
+import project.mc.blog.post.domain.StringUtil;
 import project.mc.blog.post.service.PostSvc;
 import project.mc.blog.post.service.PostSvcImpl;
 
@@ -73,7 +73,7 @@ public class PostController {
 	@RequestMapping(value = "blog/post/post_doSave.do")
 	public String doSave_View (HttpServletRequest req, ServletRequest request) throws IOException{
 		
-		return "blog/post_form";
+		return "blog/post/post_form";
 	}
 	
 	@RequestMapping(value = "blog/post_doSave.do",method = RequestMethod.POST)
@@ -98,7 +98,7 @@ public class PostController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", postSvc.do_save(inVO));
-		modelAndView.setViewName("blog/post_list");
+		modelAndView.setViewName("blog/post/post_list");
 		
 		return "redirect:post_list.do";
 	}
@@ -141,7 +141,7 @@ public class PostController {
 		modelAndView.addObject("list",list );
 		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
-		modelAndView.setViewName("");
+		modelAndView.setViewName("blog/post/post_list");
 		
 		return modelAndView;
 	}
@@ -155,7 +155,7 @@ public class PostController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", postSvc.do_search(inVO));
-		modelAndView.setViewName("blog/post_list");
+		modelAndView.setViewName("blog/post/post_list");
 		
 		return modelAndView;
 	}

@@ -1,4 +1,4 @@
-package project.mc.blog.post.common;
+package project.mc.blog.post.domain;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import project.mc.blog.post.code.CodesDTO;
 
 /**
  * WorkDiv.java
- * ê±°ë˜?‘œì¤? ë©”ì†Œ?“œ ? •?˜
- * do_save   : ???¥
+ * ê±°ë˜?ï¿½ï¿½ï¿½? ë©”ì†Œ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
+ * do_save   : ???ï¿½ï¿½
  * do_search : ì¡°íšŒ
- * do_delete : ?‚­? œ
- * do_update : ?ˆ˜? •
+ * do_delete : ?ï¿½ï¿½?ï¿½ï¿½
+ * do_update : ?ï¿½ï¿½?ï¿½ï¿½
  * 
  * do_excelDown
  * do_excelUp
- * do_report : rd,?¬ë¦¬ìŠ¤?ƒˆ ë¦¬í¬?Š¸
+ * do_report : rd,?ï¿½ï¿½ë¦¬ìŠ¤?ï¿½ï¿½ ë¦¬í¬?ï¿½ï¿½
  * @author sist_
  *
  */

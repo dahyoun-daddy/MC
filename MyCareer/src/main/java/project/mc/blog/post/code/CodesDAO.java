@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.mc.blog.post.common.DTO;
-import project.mc.blog.post.common.WorkDiv;
+import project.mc.blog.post.domain.DTO;
+import project.mc.blog.post.domain.WorkDiv;
 
 
 
@@ -17,7 +17,7 @@ public class CodesDAO implements WorkDiv {
 	ConnIn connIn = null;
 	
 //	/**
-//	 * DB?ó∞Í≤?
+//	 * DB?ÔøΩÔøΩÔøΩ?
 //	 */
 //	public void connect(){
 //		String dbURL 	="jdbc:oracle:thin:@localhost:1521:orcl";
@@ -27,7 +27,7 @@ public class CodesDAO implements WorkDiv {
 //			//Driver Load
 //			Class.forName("oracle.jdbc.driver.OracleDriver");
 //			conn = DriverManager.getConnection(dbURL, dbUSER, dbPASS);
-//			System.out.println("DB?ó∞Í≤?: "+conn.toString());
+//			System.out.println("DB?ÔøΩÔøΩÔøΩ?: "+conn.toString());
 //			
 //			
 //		}catch(ClassNotFoundException cnf){
@@ -42,12 +42,12 @@ public class CodesDAO implements WorkDiv {
 //	}
 //	
 //	/**
-//	 * DB?†ë?Üç ?ï¥?†ú
+//	 * DB?ÔøΩÔøΩ?ÔøΩÔøΩ ?ÔøΩÔøΩ?ÔøΩÔøΩ
 //	 */
 //	public void disconnect(){
 //		try{
 //			if(conn!=null)conn.close();
-//			System.out.println("DB?†ë?Üç ?ï¥?†ú");
+//			System.out.println("DB?ÔøΩÔøΩ?ÔøΩÔøΩ ?ÔøΩÔøΩ?ÔøΩÔøΩ");
 //		}catch(SQLException se){
 //			System.out.println("=SQLException="+se.getMessage());
 //		}catch(Exception e){
@@ -80,7 +80,7 @@ public class CodesDAO implements WorkDiv {
 		CodesDTO param = (CodesDTO)inDTO;
 		
 		try{
-			//DB?ó∞Í≤?
+			//DB?ÔøΩÔøΩÔøΩ?
 			conn = connIn.connect();
 			// searchDiv
 			

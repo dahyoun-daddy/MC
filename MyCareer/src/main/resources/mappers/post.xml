@@ -7,8 +7,8 @@
 
 
     <select id="do_searchOne" 
-      parameterType= "project.mc.blog.post.common.PostDTO"
-      resultType= "project.mc.blog.post.common.PostDTO">
+      parameterType= "project.mc.blog.post.domain.PostDTO"
+      resultType= "project.mc.blog.post.domain.PostDTO">
       SELECT POST_ID,
 		  BLOG_ID,
 		  SUP_POST_ID,
@@ -23,7 +23,7 @@
 		where POST_ID=#{POST_ID}
     </select>  
 	
-	<update id="do_update" parameterType="project.mc.blog.post.common.PostDTO">
+	<update id="do_update" parameterType="project.mc.blog.post.domain.PostDTO">
 	
 	UPDATE MC_POST
 	SET
@@ -40,13 +40,13 @@
 	</update>
 	
 	<delete id="do_delete"  
-	parameterType="project.mc.blog.post.common.PostDTO">
+	parameterType="project.mc.blog.post.domain.PostDTO">
 	   DELETE FROM MC_POST
         WHERE POST_ID = #{POST_ID}   
 	</delete>
 	
 	<update id="do_save"  
-	   parameterType="project.mc.blog.post.common.PostDTO">
+	   parameterType="project.mc.blog.post.domain.PostDTO">
 	   INSERT
 		INTO MC_POST
 		  (
@@ -77,8 +77,8 @@
     </sql>
         
 	<select id="do_search" 
-	      parameterType="project.mc.blog.post.common.PostDTO"
-	      resultType="project.mc.blog.post.common.PostDTO">
+	      parameterType="project.mc.blog.post.domain.PostDTO"
+	      resultType="project.mc.blog.post.domain.PostDTO">
 	      
 	SELECT  T1.POST_ID,
 	        T1.BLOG_ID,

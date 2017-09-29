@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import project.mc.blog.post.common.DTO;
-
 import project.mc.blog.post.dao.PostDao;
+import project.mc.blog.post.domain.DTO;
 
 @Service
 public class PostSvcImpl implements PostSvc {

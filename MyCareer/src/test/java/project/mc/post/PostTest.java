@@ -63,7 +63,8 @@ public class PostTest {
 	
 	
 	
-	//@Test
+	@Test
+	@Ignore
 	public void do_Delete() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("blog/post/post_do_Delete.do")
 				.param("post_id", "59")
@@ -77,14 +78,15 @@ public class PostTest {
 	}
 	
 	
-	//@Test
+	@Test
+	@Ignore
 	public void doSave() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/post/post_doSave.do")
 				.param("post_id", "111")
 				.param("blog_id", "3")
-				.param("post_title", "Á¦¸ñ1")
-				.param("post_content", "³»¿ë1")
-				.param("reg_id", "µî·ÏÀÚ")			
+				.param("post_title", "ï¿½ï¿½ï¿½ï¿½1")
+				.param("post_content", "ï¿½ï¿½ï¿½ï¿½1")
+				.param("reg_id", "ï¿½ï¿½ï¿½ï¿½ï¿½")			
 				;
 
 		mockMvc.perform(createMessage)
@@ -94,7 +96,8 @@ public class PostTest {
 				);
 	}
 	
-	//@Test
+	@Test
+	@Ignore
 	public void portfolio_03_update() throws Exception{
 		MockHttpServletRequestBuilder createMessage = post("/blog/portfolio_update.do")
 				.param("pf_id", "59")
@@ -127,15 +130,16 @@ public class PostTest {
 
 	
 	
-	//@Test
+	@Test
+	@Ignore
 	public void do_selectOne() throws Exception {
 		//param
 				MockHttpServletRequestBuilder createMessage = post("blog/post/post_doSelectOne.do")
 						.param("post_id", "11")
 						.param("blog_id", "333")
 						.param("sup_post_id", "22")
-						.param("post_title", "Á¦¸ñ2")
-						.param("post_content", "³»¿ë2")
+						.param("post_title", "ï¿½ï¿½ï¿½ï¿½2")
+						.param("post_content", "ï¿½ï¿½ï¿½ï¿½2")
 						.param("reg_id", "bbbb")
 						.param("reg_dt", "2017-09-29")
 						.param("mod_id", "")

@@ -13,8 +13,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import project.mc.blog.post.code.CodesDTO;
-import project.mc.blog.post.common.DTO;
-import project.mc.blog.post.common.PostDTO;
+import project.mc.blog.post.domain.DTO;
+import project.mc.blog.post.domain.PostDTO;
 
 
 

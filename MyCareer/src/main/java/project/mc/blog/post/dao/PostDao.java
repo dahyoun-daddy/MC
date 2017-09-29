@@ -2,9 +2,9 @@ package project.mc.blog.post.dao;
 
 import java.util.List;
 
-import project.mc.blog.post.common.DTO;
-import project.mc.blog.post.common.PostDTO;
-import project.mc.blog.post.common.WorkDiv;
+import project.mc.blog.post.domain.DTO;
+import project.mc.blog.post.domain.PostDTO;
+import project.mc.blog.post.domain.WorkDiv;
 
 public interface PostDao extends WorkDiv {
 

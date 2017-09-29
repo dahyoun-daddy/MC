@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import project.mc.blog.post.common.DTO;
+import project.mc.blog.post.domain.DTO;
 
 
 public interface PostSvc {
@@ -15,7 +15,7 @@ public interface PostSvc {
 	public List<?> do_search(DTO dto) ;
 	
 	/**
-	 * ?‚­? œ
+	 * ?ï¿½ï¿½?ï¿½ï¿½
 	 * @param dto
 	 * @return int
 	 */
@@ -23,7 +23,7 @@ public interface PostSvc {
 	
 	
 	/**
-	 * ?‹¤ê±´ì‚­? œ
+	 * ?ï¿½ï¿½ê±´ì‚­?ï¿½ï¿½
 	 * @param dto
 	 * @return int
 	 */

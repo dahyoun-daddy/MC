@@ -1,14 +1,14 @@
-package project.mc.blog.post.common;
+package project.mc.blog.post.domain;
 
 import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
- * DTO ìµœìƒ?œ„ class
- * ?ŒŒ?¼?´ë¦?: DTO.java
- * ?‘?„±?¼: 2017/07/13
+ * DTO ìµœìƒ?ï¿½ï¿½ class
+ * ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?: DTO.java
+ * ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: 2017/07/13
  * @author sist-003
- *	2017/07/17: ì´ê??ˆ˜, ë²ˆí˜¸ ì¶”ê?, ë²„ì „
+ *	2017/07/17: ì´ï¿½??ï¿½ï¿½, ë²ˆí˜¸ ì¶”ï¿½?, ë²„ì „
  */
 public abstract class DTO {
 	/**
@@ -17,12 +17,12 @@ public abstract class DTO {
 	private Hashtable<String, String>  param =new Hashtable<String, String>();
 	
 	/**
-	 * ì´ê??ˆ˜
+	 * ì´ï¿½??ï¿½ï¿½
 	 */
 	private int total_cnt;
 	
 	/**
-	 * ê¸?ë²ˆí˜¸
+	 * ï¿½?ë²ˆí˜¸
 	 */
 	private int no;
 

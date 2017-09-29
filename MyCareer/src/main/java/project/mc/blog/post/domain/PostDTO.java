@@ -1,17 +1,17 @@
-package project.mc.blog.post.common;
+package project.mc.blog.post.domain;
 
 
 public class PostDTO extends DTO {
-	int post_id        ; //?¬?Š¤?Š¸ id
-	int blog_id        ; //?†Œ?† ë¸”ë¡œê·? id
-	int sup_post_id    ; //?ƒ?œ„ ê²Œì‹œê¸? id
-	String post_title  ; //? œëª?
-	String post_content; //?‚´?š©
-	String reg_id      ; //?‘?„±? id
-	String reg_dt      ; //?‘?„±?¼?
-	String mod_id      ; //?ˆ˜? •? id
-	String mod_dt      ; //?ˆ˜? •?¼?
-	int del_flag       ; //?‚­? œ ?”Œ?˜ê·?
+	int post_id        ; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ id
+	int blog_id        ; //?ï¿½ï¿½?ï¿½ï¿½ ë¸”ë¡œï¿½? id
+	int sup_post_id    ; //?ï¿½ï¿½?ï¿½ï¿½ ê²Œì‹œï¿½? id
+	String post_title  ; //?ï¿½ï¿½ï¿½?
+	String post_content; //?ï¿½ï¿½?ï¿½ï¿½
+	String reg_id      ; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ id
+	String reg_dt      ; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	String mod_id      ; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ id
+	String mod_dt      ; //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	int del_flag       ; //?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 	
 	
 	

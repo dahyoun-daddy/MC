@@ -116,7 +116,7 @@
 			<button type="button" id="do_save_tmp" >포트폴리오 저장</button>
 		</div>
 		<div id=contents align="center">
-			<form name="frm" method="post" action="portfolio_save.do">
+			<form name="frm" method="post" action="portfolio_save.do" enctype="multipart/form-data">
 			<input type="hidden" name="tmp_no" id="tmp_no" value="01">
 			<input type="hidden" name="user_id" id="user_id" value="111">
 			

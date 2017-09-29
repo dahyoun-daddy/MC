@@ -5,10 +5,18 @@
 
 <mapper namespace="project.mc.user.repository.mappers.user">
 
+<!-- 로그인 -->
+<select id="do_login" parameterType="project.mc.blog.user.domain.UserVO">
+select *
+from mc_user
+where user_id = #{user_id}
+and user_password = #{user_password}
+</select>
+
 <!-- 회원  탈퇴 -->
 <delete id="do_delete" parameterType="project.mc.blog.user.domain.UserVO" >
 update mc_user
-set WITHDRAW_FLAG = #{withdraw_flag}
+set WITHDRAW_FLAG = 0
 where user_id = #{user_id}
 </delete>
 

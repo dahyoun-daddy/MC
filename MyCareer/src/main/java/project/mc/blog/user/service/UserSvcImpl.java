@@ -1,8 +1,7 @@
 package project.mc.blog.user.service;
 
 import java.io.PrintWriter;
-
-
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +67,16 @@ public class UserSvcImpl implements UserSvc {
 		log.debug("22222222222222222flag======================="+flag);	
 		log.debug("do_delete=======================");	
 		return userDao.do_delete(dto);		
+	}
+
+
+	
+	public List<?> do_login(DTO dto) throws DataAccessException {
+		log.debug("2=======================");
+		log.debug(dto.toString());
+		log.debug("2=======================");
+		
+		return userDao.do_login(dto);
 	}
 
 	

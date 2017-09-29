@@ -20,7 +20,7 @@ public class Main_controller {
 	UserSvc userSvc;
 	
 	
-	@RequestMapping(value="main/home_main.do", method=RequestMethod.GET)
+	@RequestMapping(value="main/home_main.do", method= {RequestMethod.GET , RequestMethod.POST})
 	public String main_start() {
 		log.debug("main start");
 		

@@ -102,11 +102,16 @@ public class UserVO extends DTO{
 	public void setWithdraw_flag(int withdraw_flag) {
 		this.withdraw_flag = withdraw_flag;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserVO [user_id=" + user_id + ", user_password=" + user_password
-				+ ", user_name=" + user_name + ", gender=" + gender + ", age=" + age + ", email=" + email + ", address="
-				+ address + ", phone=" + phone + ", withdraw_flag=" + withdraw_flag +"]";
+		return "UserVO [user_no=" + user_no + ", user_id=" + user_id + ", user_password=" + user_password
+				+ ", user_div=" + user_div + ", user_name=" + user_name + ", gender=" + gender + ", age=" + age
+				+ ", email=" + email + ", address=" + address + ", phone=" + phone + ", withdraw_flag=" + withdraw_flag
+				+ "]";
 	}
+
+	
+	
+	
 }

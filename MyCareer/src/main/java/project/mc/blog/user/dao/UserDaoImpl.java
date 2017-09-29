@@ -29,11 +29,13 @@ public class UserDaoImpl implements UserDao {
 	= "project.mc.user.repository.mappers.user";
 	
 	
-	
 	@Override
-	public List<?> do_search(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<?> do_login(DTO dto) throws DataAccessException {
+		
+		String statement = namespace +".do_login";
+		UserVO inUserVo = (UserVO)dto;
+			
+		return sqlSession.selectOne(statement, inUserVo);
 	}
 	
 	
@@ -120,7 +122,11 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	
-	
+	@Override
+	public List<?> do_search(DTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	@Override
@@ -134,6 +140,9 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	
 
 
 	

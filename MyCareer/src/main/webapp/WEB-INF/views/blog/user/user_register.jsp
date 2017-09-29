@@ -58,13 +58,17 @@
 			
 			//  gender값 호출하기
 			var gender = $('input[name="gender"]:checked').val();
-					
+			var user_no = $("#user_no").val();
+			var withdraw_flag = $("#withdraw_flag").val();	
+			
 			$.ajax({
 				type:"POST",
 	            url:"do_save.do",
 	            dataType:"html",// JSON
 	            async: false,
 	            data:{
+	               "user_no"       : user_no,
+	               "withdraw_flag" : withdraw_flag,
 	               "user_id"       :$("#user_id").val(),
 	               "user_password" :$("#user_password").val(),
 	               "user_name" :$("#user_name").val(),
@@ -77,7 +81,7 @@
 	            },
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	            	alert("회원가입완료");
-	            	location.href="do_login.do";
+	            	location.href="user_login.do";
 	            },
 	            complete: function(data){//무조건 수행
 	            	
@@ -118,6 +122,8 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	
 	
 	<form action="do_save.do" id="frm" name="frm" method="post" >
+	<input type="hidden" name="user_no" id="user_no" value="1">
+	<input type="hidden" name="withdraw_flag" id="withdraw_flag" value="1">
 	<div id="container" align="center">
 		<div>
 			<input type="text" id="user_id" name="user_id" maxlength="20" autocomplete="off"  placeholder="아이디" required="required" >

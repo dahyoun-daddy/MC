@@ -67,28 +67,33 @@ public class PostController {
 		return "blog/post/post_form";
 	}
 	
-	@RequestMapping(value = "blog/post_doSave.do",method = RequestMethod.POST)
+	@RequestMapping(value = "blog/post/post_doSave.do",method = RequestMethod.POST)
 	public ModelAndView doSave (HttpServletRequest req) throws IOException{
 		log.debug("do_save!start");
 		ModelAndView modelAndView =new ModelAndView();
 		PostDTO inVO = new PostDTO();
 		
-		inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
+		//inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
 		inVO.setPost_title(req.getParameter("post_title"));
 		inVO.setPost_content(req.getParameter("post_content"));
-		inVO.setReg_id(req.getParameter("reg_id"));
+		inVO.setReg_id("su");
+		
+		inVO.setMod_id("su");
+		
+		inVO.setReg_dt("1");
+		inVO.setMod_dt("1");
 		
 		String workDiv = req.getParameter("workDiv");
 		
 		log.debug("inVO:"+inVO);
 		log.debug("workDiv:"+workDiv);
 		int flag = 0;
-		if(workDiv !=null && !workDiv.trim().equals("")) {
-			log.debug("do_save!go");
-			flag =postSvc.do_save(inVO);
+		log.debug("do_save!go");
+		flag =postSvc.do_save(inVO);
+		/*if(workDiv !=null && !workDiv.trim().equals("")) {
 		}else {
 			
-		}
+		}*/
 		log.debug("flag : "+flag);
 		
 		//List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);

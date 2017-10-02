@@ -34,31 +34,19 @@ $(document).ready(function(){
     <h3>글쓰기</h3>
     <hr/>
     
-    int post_id        ; //포스트 id
-	int blog_id        ; //소속 블로그 id
-	int sup_post_id    ; //상위 게시글 id
-	String post_title  ; //제목
-	String post_content; //내용
-	String reg_id      ; //작성자 id
-	String reg_dt      ; //작성일자
-	String mod_id      ; //수정자 id
-	String mod_dt      ; //수정일자
-	int del_flag       ; //삭제 플래그
 
-    <form method="POST" action="doSave.do">
-        아이디 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>
-        이름    : <input type="text" name="gb_name"  value="${PostDTO.gb_name}"/><br/>
-        이메일 : <input type="text" name="gb_email"  value="${PostDTO.gb_email}"/><br/>
-        비밀번호 :<input type="text" name="gb_password"  value="${PostDTO.gb_password}"/><br/>
-        제목 :<input type="text" name="post_title"  value="${PostDTO.post_title}"/><br/>
-        내용 :<input type="text" name="post_content"   row="20" cols="50" value="${PostDTO.post_content}"/>
+    <form method="POST" action="post_doSave.do">
+        글번호 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>
+        제목    : <input type="text" name="post_title"  value="${PostDTO.post_title}"/><br/>
+        <%--내용 : <textarea name="ck1" value="${PostDTO.post_content}"></textarea>--%>
+        내용 :<input type="text" name="post_content"  value="${PostDTO.post_content}"/><br/>
         
         <br/>
         
-        <textarea name="ck1"></textarea>
         
         
-        <input type="submit" value="전송" />
+        
+        <input type="submit" value="등록" />
     </form>
 </body>
 </html>

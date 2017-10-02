@@ -26,6 +26,7 @@ totalCnt = Integer.parseInt(
 
 <%
   //contextPath
+  System.out.println(request.getContextPath());
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath;  
 %>
@@ -55,66 +56,26 @@ totalCnt = Integer.parseInt(
 	    
 	}
 	
-	//do_searchOne
-	$("#listTable>tbody").on("dblclick","tr",function(){
-		var tr = $(this);
-		var td = tr.children();
-		var id = td.eq(2).text()
-		
-		$.ajax({
-			type:"POST",
-			url:"post_doSelectOne.do",
-			dataType:"html",
-			data:{
-				"id":id
-			},
-			success: function(data){
-				var userVO = $.parseJSON(data);
-				$("#workDiv").val(userVO.id);
-				
-				$("#post_id").val(userVO.post_id);
-				$("#gb_name").val(userVO.gb_name);
-				$("#gb_email").val(userVO.gb_email);
-				$("#gb_date").val(userVO.gb_date);
-				$("#gb_password").val(userVO.gb_password);
-				$("#gb_title").val(userVO.gb_title);
-				$("#gb_contents").val(userVO.gb_contents);
-				
-			},
-			complete:function(data){
-				
-			},
-			error:function(xhr, status, error){
-				console.log("error: "+error);
-				
-			}
-			
-		});
-		
-	});//do_searchOne
+	
 	
 	//paiging 이동
-		function do_search_page(url, page_num){
-		    console.log(url +"\t"+ page_num);
-		    var frm = document.frm;
-		    frm.page_num.value = page_num;
-		    frm.action = url;
-		    frm.submit();
-		}
+	function do_search_page(url, page_num){
+	    console.log(url +"\t"+ page_num);
+	    var frm = document.frm;
+	    frm.page_num.value = page_num;
+	    frm.action = url;
+	    frm.submit();
+	}
 		
-		function doSearch(){
-		    var frm = document.frm;
-		    frm.page_num.value = "1";
-		    frm.action = "post_doSearch.do";
-		    frm.submit();
-		}
-		
-		//do_delete
-		function do_delete(){
-			
-		}
-
-		
+	function doSearch(){
+	    var frm = document.frm;
+	    frm.page_num.value = "1";
+	    frm.action = "post_doSearch.do";
+	    frm.submit();
+	}
+	
+//jquery document
+	$(document).ready(function(){
 		
 		//do_save
 		$("#do_save").on("click",function(){
@@ -126,17 +87,18 @@ totalCnt = Integer.parseInt(
 		   console.log("insertYN: "+insertYN);
 	       $.ajax({
                type:"POST",
-               url:"doSave.do",
+               url:"do_save.do",
                dataType:"html",// JSON
                async: false,
                data:{
                   "workDiv"  : insertYN,
-                  "id"       :$("#gb_id").val(),
-                  "name"     :$("#gb_name").val(),
-                  "email"    :$("#gb_email").val(),
-                  "date"     :$("#gb_date").val(),
-                  "title"    :$("#gb_title").val(),
-                  "contents" :$("#gb_contents").val()
+                  "id"       :$("#u_id").val(),
+                  "name"     :$("#u_name").val(),
+                  "password" :$("#u_password").val(),
+                  "level"    :$("#u_level").val(),
+                  "login"    :$("#u_login").val(),
+                  "recommend":$("#u_recommend").val(),
+                  "mail"     :$("#u_mail").val()
                },
                success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
                    //console.log("success data: "+data);
@@ -152,7 +114,96 @@ totalCnt = Integer.parseInt(
 			
 		});//--do_save
 		
+		//do_searchOne
+		$("#listTable>tbody").on("dblclick","tr",function(){
+						
+			var tr = $(this);
+			var td = tr.children();
+			var id = td.eq(2).text()
+			//console.log("row_index: "+row_index);
+			//console.log("td.eq(2): "+td.eq(2).text());
+			
+			$.ajax({
+	               type:"POST",
+	               url:"userForm.do",
+	               dataType:"html",// JSON
+	               data:{
+	                  "id" :id
+	               },
+	               success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	                   //console.log("success data: "+data);
+	                   var userVO = $.parseJSON(data);
+	                   $("#workDiv").val(userVO.id);
+	                   
+	                   $("#u_id").val(userVO.id);
+	                   $("#u_name").val(userVO.name);
+	                   $("#u_password").val(userVO.password);
+	                   $("#u_level").val(userVO.levelIntValue);
+	                   $("#u_login").val(userVO.login);
+                       $("#u_recommend").val(userVO.recommend);
+                       $("#u_mail").val(userVO.mail);
+                       $("#u_reg_dt").val(userVO.reg_dt);	
+	               },
+	               complete: function(data){//무조건 수행
+	            	   
+	               },
+	               error: function(xhr,status,error){
+	                   console.log("error: "+error);
+	               }
+	           });			
+			
+		});
+		//--do_searchOne
 		
+		//do_delete
+		$("#do_delete").on("click",function(){
+			 //console.log("do_delete");//check
+			 
+			 
+			 //checked
+			 var idArray = new Array();
+			 
+			 $("#check:checked").each( function(idx,row){
+				 var record = $(row).parents("tr");
+				 var id = $(record).find('td').eq(2).text();
+				 
+				 idArray.push(id);
+			 });//--checked
+			 
+			 if(idArray.length<=0){
+				 alert("삭제할 데이터를 선택 하세요.");
+				 return false;
+			 }
+			 
+			 
+			 
+			 var jsonIdList = JSON.stringify(idArray);
+			 //console.log("jsonIdList:"+jsonIdList);
+			 if(false==confirm("삭제하시겠습니까?\n"+jsonIdList))return;
+		     $.ajax({
+		    	 type:"POST",
+                 url:"do_checkedDelete.do",   
+                 dataType:"JSON",// JSON
+                 async: false,
+                 data:{
+                    "idList" :jsonIdList
+                 },
+                 success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+                	 alert($.trim(data)+"건 삭제되었습니다.");
+                	 doSearch();
+                 },
+                 complete: function(data){//무조건 수행
+                     
+                 },
+                 error: function(xhr,status,error){
+                     console.log("do_checkedDelete error: "+error);
+                 }
+             }); 
+			 
+		});
+		//--do_delete
+		             
+	});//--jquery document
 
 </script>
 </head>

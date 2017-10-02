@@ -27,7 +27,7 @@ public class PostDaoImpl implements PostDao {
 	private SqlSessionTemplate sqlSession;
 	
 	private final String namespace
-	  ="com.sist.repository.mappers.post";
+	  ="project.mc.user.repository.mappers.post";
 	
 	
 	

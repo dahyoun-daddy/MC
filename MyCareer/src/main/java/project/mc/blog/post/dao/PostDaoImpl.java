@@ -111,8 +111,16 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public int do_delete(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		try {
+			String statement = namespace +".do_delete";
+			PostDTO inVo = (PostDTO)dto;
+			flag = sqlSession.delete(statement, inVo);
+		}catch(DataAccessException e) {
+			throw e;
+		}	
+		
+		return flag;
 	}
 
 	@Override

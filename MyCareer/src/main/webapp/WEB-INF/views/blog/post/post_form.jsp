@@ -23,10 +23,51 @@
 <title>:::::사용자관리:::::</title>
 <script language="javaScript">
  
+		
 $(document).ready(function(){
 	CKEDITOR.replace('ck1');
-});
 	
+	//do_save
+	$("#do_save").on("click",function(){
+		if(CKEDITOR.instances.ck1.getData().length < 1){
+			alert("내용을 입력해 주세요.");
+			return;
+		}
+		
+	   if(false==confirm("등록하시겠습니까?"))return;
+	   
+       $.ajax({
+           type:"POST",
+           url:"post_doSave.do",
+           dataType:"html",// JSON
+           async: false,
+           data:{
+              "post_title"       :$("#post_title").val(),
+              "post_content"     :CKEDITOR.instances.ck1.getData(),
+              "reg_id" :$("#reg_id").val()
+              
+           },
+           success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+               console.log("success data: "+data);
+           		alert("등록되었습니다.");
+               doSearch();
+           },
+           complete: function(data){//무조건 수행
+               
+           },
+           error: function(xhr,status,error){
+        	   console.log("error: "+error);
+           }
+       });			
+		
+	});//--do_save
+});
+
+function doSearch(){
+    var frm = document.frm;
+    frm.action = "post_doSearch.do";
+    frm.submit();
+}
 
 </script>
 </head>
@@ -34,19 +75,15 @@ $(document).ready(function(){
     <h3>글쓰기</h3>
     <hr/>
     
-
-    <form method="POST" action="post_doSave.do">
-        글번호 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>
-        제목    : <input type="text" name="post_title"  value="${PostDTO.post_title}"/><br/>
-        <%--내용 : <textarea name="ck1" value="${PostDTO.post_content}"></textarea>--%>
-        내용 :<input type="text" name="post_content"  value="${PostDTO.post_content}"/><br/>
-        
-        <br/>
-        
-        
-        
-        
-        <input type="submit" value="등록" />
-    </form>
+	<form name="frm" method="POST" action="post_doSave.do">
+		<input type="hidden"  name="page_num" id="page_num" value="1"  >
+        	제목    : <input type="text" id="post_title" name="post_title" /><br/>
+       <textarea id="ck1" name="ck1"></textarea>
+        <%-- 글번호 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>--%>
+        <%--내용 :<input type="text" name="post_content"  value="${PostDTO.post_content}"/><br/>--%>
+		<input type="hidden" id="reg_id" value="su"/>
+	</form>
+    <button class="btn btn-success"  id="do_save">등록</button>
+    <button class="btn btn-success"  onclick="doSearch()">취소(목록으로)</button>
 </body>
 </html>

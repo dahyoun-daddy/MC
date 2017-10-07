@@ -74,11 +74,18 @@ totalCnt = Integer.parseInt(
 	    frm.submit();
 	}
 	
+	function doWrite(){
+		var frm = document.frm;
+		frm.method = "GET";
+	    frm.action = "post_doSave.do";
+	    frm.submit();
+	}
+	
 //jquery document
 	$(document).ready(function(){
 		
 		//do_save
-		$("#do_save").on("click",function(){
+		/* $("#do_save").on("click",function(){
 		   
 		   if(false==confirm("등록하시겠습니까?"))return;
 		   
@@ -112,7 +119,7 @@ totalCnt = Integer.parseInt(
                }
            });			
 			
-		});//--do_save
+		});//--do_save */
 		
 		//do_searchOne
 		$("#listTable>tbody").on("dblclick","tr",function(){
@@ -223,7 +230,7 @@ totalCnt = Integer.parseInt(
       </select>	
 	  <button class="btn btn-success" 
 	  onclick="javascript:doSearch()">조회</button>
-	  <button class="btn btn-success"  id="do_save">등록</button>
+	  <button class="btn btn-success"  id="do_save" onclick="doWrite()">등록</button>
 	  <button class="btn btn-success" id="do_delete">삭제</button>
 	 </div>
 <!--// Button Area -->
@@ -248,7 +255,6 @@ totalCnt = Integer.parseInt(
                 <input type="checkbox" id="checkAll" 
                 name="checkAll" onclick="checkAll();" />
             </th>
-            <th class="text-center"> </th>
             <th class="text-center">글 번호</th>
             <th class="text-center">아이디</th>
             <th class="text-center">제목</th>
@@ -262,7 +268,6 @@ totalCnt = Integer.parseInt(
             <c:when test="${list.size()>0}" >
                 <c:forEach var="PostDTO" items="${list}">
 		                <tr><td class="text-center"><input type="checkbox" id="check" name="check" /> </td>
-		               		<td class="text-left"></td>
 		                    <td class="text-left"><c:out value="${PostDTO.post_id}"/></td>
 		                    <td class="text-left"><c:out value="${PostDTO.reg_id}"/></td>
 		                    <td class="text-center"><c:out value="${PostDTO.post_title}"/></td>

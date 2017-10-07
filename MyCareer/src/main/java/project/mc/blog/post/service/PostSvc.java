@@ -31,4 +31,6 @@ public interface PostSvc {
 	 */
 	//public int do_delete(List<UserVO> list);
 	
+	public int do_checkedDelete(List<String> list);
+	
 }

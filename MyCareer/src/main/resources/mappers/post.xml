@@ -42,7 +42,7 @@
 	<delete id="do_delete"  
 	parameterType="project.mc.blog.post.domain.PostDTO">
 	   DELETE FROM MC_POST
-        WHERE POST_ID = #{POST_ID}   
+        WHERE POST_ID = #{post_id}   
 	</delete>
 	
 	<update id="do_save"  
@@ -62,14 +62,9 @@
 		    DEL_FLAG
 		  )
 	  VALUES
-	  (#{post_id}, (SELECT BLOG_ID
+	  (MC_POST_SEQ.NEXTVAL, (SELECT BLOG_ID
 FROM MC_BLOG_SETTING
-WHERE USER_NO = (
-SELECT USER_NO
-FROM MC_USER
-WHERE USER_ID = #{reg_id}
-AND ROWNUM = 1
-)), #{sup_post_id}, #{post_title}, #{post_content}, #{reg_id}, SYSDATE, #{mod_id}, SYSDATE ,#{del_flag} )
+WHERE USER_ID = #{reg_id}), #{sup_post_id}, #{post_title}, #{post_content}, #{reg_id}, SYSDATE, #{mod_id}, SYSDATE ,#{del_flag} )
 	   				
 	</update>     
     

@@ -2,7 +2,6 @@ package project.mc.blog.post.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -15,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import project.mc.blog.post.domain.PostDTO;
 import project.mc.blog.post.domain.StringUtil;
 import project.mc.blog.post.service.PostSvc;
-import project.mc.blog.post.service.PostSvcImpl;
 
 @Controller
 public class PostController {
@@ -41,7 +42,7 @@ public class PostController {
 //	int del_flag       ; //삭제 플래그
 	
 	
-	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = RequestMethod.GET)
 	public ModelAndView doSelectoOne (HttpServletRequest req, ServletRequest request) {
 		PostDTO inVO = new PostDTO();
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
@@ -76,17 +77,15 @@ public class PostController {
 		//inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
 		inVO.setPost_title(req.getParameter("post_title"));
 		inVO.setPost_content(req.getParameter("post_content"));
-		inVO.setReg_id("su");
+		inVO.setReg_id(req.getParameter("reg_id"));
 		
-		inVO.setMod_id("su");
+		inVO.setMod_id(req.getParameter("reg_id"));
 		
 		inVO.setReg_dt("1");
 		inVO.setMod_dt("1");
 		
-		String workDiv = req.getParameter("workDiv");
 		
 		log.debug("inVO:"+inVO);
-		log.debug("workDiv:"+workDiv);
 		int flag = 0;
 		log.debug("do_save!go");
 		flag =postSvc.do_save(inVO);
@@ -106,10 +105,10 @@ public class PostController {
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.setViewName("blog/post/post_list");
 		
-		return null;
+		return modelAndView; //"redirect:post_doSearch.do"
 	}
 
-	@RequestMapping(value="blog/post/post_doSearch.do", method = RequestMethod.GET)
+	@RequestMapping(value="blog/post/post_doSearch.do")
 	public ModelAndView do_search(HttpServletRequest req) {
 		
 		PostDTO inVO = new PostDTO();
@@ -152,16 +151,38 @@ public class PostController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="blog/post/do_checkedDelete.do",produces="application/json;charset=utf8", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String do_checkedDelete(HttpServletRequest req) throws IOException {
+		//in
+		String   ret = req.getParameter("idList");//JSON
+		log.debug("ret :"+ret);
+		
+		Gson gson=new Gson();
+		List<String> idList = gson.fromJson(ret, List.class);
+		log.debug("idList :"+idList);
+		
+		int flag = postSvc.do_checkedDelete(idList);
+		log.debug("flag:"+flag);
+		//--in
+		
+		return flag+"";
+	}
+	
 	@RequestMapping(value="blog/post/post_do_Delete.do", method = RequestMethod.POST)
 	public ModelAndView do_Delete(HttpServletRequest request) {
+		System.out.println(request.getParameter("idList"));
+		
 		PostDTO inVO = new PostDTO();
+		/*
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
 		postSvc.do_delete(inVO);
+		*/
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", postSvc.do_search(inVO));
+//		modelAndView.addObject("list", postSvc.do_search(inVO));
 		modelAndView.setViewName("blog/post/post_list");
-		
+		modelAndView.addObject("1");
 		return modelAndView;
 	}
 	

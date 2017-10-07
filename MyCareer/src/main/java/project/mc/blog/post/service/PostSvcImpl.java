@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import project.mc.blog.post.dao.PostDao;
 import project.mc.blog.post.domain.DTO;
+import project.mc.blog.post.domain.PostDTO;
 
 @Service
 public class PostSvcImpl implements PostSvc {
@@ -57,6 +58,25 @@ public class PostSvcImpl implements PostSvc {
 		log.debug(dto.toString());
 		log.debug("2=======================");
 		return postDao.do_update(dto);
+	}
+	
+	/**
+	 * 체크딜리트
+	 * @param dto
+	 * @return int (1:�꽦怨�,1�씠 �븘�땲硫� �떎�뙣)
+	 */
+	public int do_checkedDelete(List<String> list) {
+		log.debug("2=======================");
+		log.debug(list.toString());
+		log.debug("2=======================");	
+		int flag = 0;
+		for(String id:list) {
+			PostDTO vo=new PostDTO();
+			vo.setPost_id(Integer.parseInt(id));
+			int one = postDao.do_delete(vo);
+			flag+=one;
+		}
+		return flag;		
 	}
 
 }

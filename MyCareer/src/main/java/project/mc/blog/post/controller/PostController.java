@@ -1,12 +1,17 @@
 package project.mc.blog.post.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -43,16 +50,16 @@ public class PostController {
 	
 	
 	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = RequestMethod.GET)
-	public ModelAndView doSelectoOne (HttpServletRequest req, ServletRequest request) {
+	public ModelAndView doSelectoOne (HttpServletRequest req) {
 		PostDTO inVO = new PostDTO();
-		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
+		inVO.setPost_id(Integer.parseInt(req.getParameter("post_id")));
 		
 		log.debug("1=========================");
 		log.debug(inVO.toString());
 		log.debug("1=========================");
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("blog/post_form");
+		modelAndView.setViewName("blog/post/post_edit_form");
 		
 		PostDTO  vo = (PostDTO)postSvc.do_searchOne(inVO);
 		log.debug("vo"+vo.toString());
@@ -95,12 +102,12 @@ public class PostController {
 		}*/
 		log.debug("flag : "+flag);
 		
-		//List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
+		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
-   	   // if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
+   	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
    	    
 		//TO_DO: pageing
-		//modelAndView.addObject("list",list );
+		modelAndView.addObject("list",list );
 		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.setViewName("blog/post/post_list");
@@ -139,11 +146,11 @@ public class PostController {
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
-   	    
+   	    log.debug("!!!!!!!!!!!!!" + totalCnt);
 		//TO_DO: pageing
 		ModelAndView modelAndView =new ModelAndView();
 		
-		modelAndView.addObject("list",list );
+		modelAndView.addObject("list",list);
 		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.setViewName("blog/post/post_list");
@@ -191,21 +198,25 @@ public class PostController {
 		PostDTO inVO = new PostDTO();
 		
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
-		inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
+		//inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
 		inVO.setPost_title(request.getParameter("post_title"));
 		inVO.setPost_content(request.getParameter("post_content"));
 		inVO.setMod_id(request.getParameter("mod_id"));
 		
 		postSvc.do_update(inVO);
 		
+		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
+		int totalCnt   = 0;
+   	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", postSvc.do_search(inVO));
+		modelAndView.addObject("totalCnt",totalCnt);
+		modelAndView.addObject("list", list);
 		modelAndView.setViewName("blog/post/post_list");
 		
 		return modelAndView;
 	}
-	
 
-	
+
+
 	
 }

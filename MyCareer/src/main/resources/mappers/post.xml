@@ -20,23 +20,18 @@
 		  to_char(REG_DT,'YYYY-MM-DD') as MOD_DT,
 		  DEL_FLAG
 		FROM MC_POST
-		where POST_ID=#{POST_ID}
+		where POST_ID=#{post_id}
     </select>  
 	
 	<update id="do_update" parameterType="project.mc.blog.post.domain.PostDTO">
 	
 	UPDATE MC_POST
 	SET
-	      BLOG_ID      = #{BLOG_ID , jdbcType=INTEGER},
-	      SUP_POST_ID  = #{SUP_POST_ID , jdbcType=INTEGER},
-	      POST_TITLE   = #{POST_TITLE , jdbcType=VARCHAR},
-	      POST_CONTENT = #{POST_CONTENT , jdbcType=CLOB},
-	      REG_ID       = #{REG_ID , jdbcType=VARCHAR},
-	      REG_DT       = SYSDATE,
-	      MOD_ID       = #{MOD_ID , jdbcType=VARCHAR},
-	      MOD_DT       = SYSDATE,
-	      DEL_FLAG     = #{DEL_FLAG , jdbcType=INTEGER}
-	WHERE POST_ID      = #{POST_ID , jdbcType=INTEGER}
+	      POST_TITLE   = #{post_title , jdbcType=VARCHAR},
+	      POST_CONTENT = #{post_content , jdbcType=CLOB},
+	      MOD_ID       = #{mod_id , jdbcType=VARCHAR},
+	      MOD_DT       = SYSDATE
+	WHERE POST_ID      = #{post_id , jdbcType=INTEGER}
 	</update>
 	
 	<delete id="do_delete"  
@@ -96,7 +91,8 @@ WHERE USER_ID = #{reg_id}), #{sup_post_id}, #{post_title}, #{post_content}, #{re
 	        TO_CHAR(T1.REG_DT, 'YYYY-MM-DD') AS REG_DT,
 	        T1.MOD_ID,
 	        TO_CHAR(T1.MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
-	        T1.DEL_FLAG
+	        T1.DEL_FLAG,
+	        T1.TOTAL_CNT
 	FROM (select A.*                                               
 		           ,ROW_NUMBER() OVER(ORDER BY A.REG_DT DESC) as RNUM
 		           ,COUNT(*) OVER () AS TOTAL_CNT                     

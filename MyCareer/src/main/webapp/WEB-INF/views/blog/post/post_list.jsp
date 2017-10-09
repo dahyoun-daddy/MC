@@ -42,7 +42,7 @@ totalCnt = Integer.parseInt(
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>    
-<title>:::::사용자관리:::::</title>
+<title>:::::블로그 포스팅:::::</title>
 <script language="javaScript">
 
 	/* 체크박스 전체선택, 전체해제 */
@@ -78,6 +78,14 @@ totalCnt = Integer.parseInt(
 		var frm = document.frm;
 		frm.method = "GET";
 	    frm.action = "post_doSave.do";
+	    frm.submit();
+	}
+	
+	function readPost(post_id){
+		var frm = document.frm;
+		frm.method = "GET";
+	    frm.action = "post_doSelectOne.do";
+	    frm.post_id.value = post_id;
 	    frm.submit();
 	}
 	
@@ -214,14 +222,12 @@ totalCnt = Integer.parseInt(
 
 </script>
 </head>
-<body>  
-	<h3>UserList</h3>
-    <hr/>
+<body>
     
      <form name="frm" action="doSearch.do" method="post" class="form-inline">
          <input type="hidden"  name="page_num" id="page_num" value="<%=page_num %>"  >
-         <input type="hidden"  name="file_nm"  id="file_nm"  >
-<!-- Button Area -->    
+         <input type="hidden"  name="post_id"  id="post_id"  >
+	<!-- Button Area -->    
 	<div class="form-inline pull-right ">
       <select name="page_size" id="page_size" class="form-control input-sm">
               <option value="10"  <%if(page_size.equals("10"))out.print("selected='selected'"); %>>10</option>
@@ -233,7 +239,7 @@ totalCnt = Integer.parseInt(
 	  <button class="btn btn-success"  id="do_save" onclick="doWrite()">등록</button>
 	  <button class="btn btn-success" id="do_delete">삭제</button>
 	 </div>
-<!--// Button Area -->
+	<!--// Button Area -->
 		<table  class="table">
 	         <tr>
 	             <td class="text-center">구분
@@ -258,7 +264,6 @@ totalCnt = Integer.parseInt(
             <th class="text-center">글 번호</th>
             <th class="text-center">아이디</th>
             <th class="text-center">제목</th>
-            <th class="text-center">내용</th>
             <th class="text-center">작성일자</th>
 
             
@@ -270,8 +275,7 @@ totalCnt = Integer.parseInt(
 		                <tr><td class="text-center"><input type="checkbox" id="check" name="check" /> </td>
 		                    <td class="text-left"><c:out value="${PostDTO.post_id}"/></td>
 		                    <td class="text-left"><c:out value="${PostDTO.reg_id}"/></td>
-		                    <td class="text-center"><c:out value="${PostDTO.post_title}"/></td>
-		                    <td class="text-left"><c:out value="${PostDTO.post_content}"/></td>
+		                    <td class="text-left" style="cursor:pointer" onclick="readPost('${PostDTO.post_id}');"><c:out value="${PostDTO.post_title}"/></td>
 		                    <td class="text-center"><c:out value="${PostDTO.reg_dt}"/></td>
 		                </tr>       
                 </c:forEach>
@@ -286,7 +290,7 @@ totalCnt = Integer.parseInt(
      </table>
             <!-- Paging << < 1 2 ... > >> -->
             <div class="form-inline text-center ">
-                <%=StringUtil.renderPaging(totalCnt, oPage_num, oPage_size, bottomCount, "doSearch.do", "do_search_page") %>
+                <%=StringUtil.renderPaging(totalCnt, oPage_num, oPage_size, bottomCount, "post_doSearch.do", "do_search_page") %>
             </div>
             <!--// Paging << < 1 2 ... > >> -->
 

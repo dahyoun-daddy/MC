@@ -1,3 +1,8 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="project.mc.blog.resume.domain.ResumeVO"%>
+<%@page import="java.util.List"%>
+<%@page import="project.mc.blog.portfolio.domain.PortfolioVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -5,6 +10,34 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080"+contextPath;  
 %>
+<%
+	
+	
+	PortfolioVO pfVO = null;
+	List<ResumeVO> imgList = null;
+	Map<String, String> srcMap = null;
+	String pf_id = request.getParameter("pf_id");
+	
+	if(request.getAttribute("pfVO") != null){
+		pfVO = (PortfolioVO)request.getAttribute("pfVO");
+		imgList = pfVO.getImgList();
+		srcMap = new HashMap<String, String>();
+		
+		for(ResumeVO rsVO : imgList){
+			int seq = rsVO.getSeq();
+			String path = "";
+			path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name();
+			srcMap.put(String.valueOf(seq), path);
+		}
+		
+		pageContext.setAttribute("srcMap", srcMap);  
+	}
+	
+	
+	
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,9 +89,14 @@
 		
 		$("#do_save_tmp").click(function(){
 			var frm = document.frm;
-			alert("do_save")
 			
-			
+			if(<%=pf_id%> != null){
+				frm.workDiv.value = "do_update";
+				alert("do_update")
+			}else{
+				frm.workDiv = "do_save";
+				alert("do_save")
+			}
 			
 			frm.submit();
 		});
@@ -116,24 +154,25 @@
 			<button type="button" id="do_save_tmp" >포트폴리오 저장</button>
 		</div>
 		<div id=contents align="center">
-			<form name="frm" method="post" action="portfolio_save.do" enctype="multipart/form-data">
+			<form name="frm" method="post" action="portfolio_upsert.do" enctype="multipart/form-data">
+			<input type="hidden" name="pf_id" id="pf_id" value="<%=pf_id%>">
 			<input type="hidden" name="tmp_no" id="tmp_no" value="01">
 			<input type="hidden" name="user_id" id="user_id" value="111">
-			<input type="hidden" name="workDiv" id="workDiv" value="pf_save">
+			<input type="hidden" name="workDiv" id="workDiv" value="">
 			<input type="hidden" name="table_div" id="table_div" value="31">
 			<input type="hidden" name="table_id" id="table_id" value="63">
 			
-			<img class="pf_img" src="" alt="tmp1_02" id="tmp1_02">
-			<img class="pf_img" src="" alt="tmp1_03" id="tmp1_03">
-			<img class="pf_img" src="" alt="tmp1_04" id="tmp1_04">
-			<img class="pf_img clearfix" src="" alt="tmp1_05" id="tmp1_05">
+			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">
+			<img class="pf_img" src="${srcMap['3']}" alt="tmp1_03" id="tmp1_03">
+			<img class="pf_img" src="${srcMap['4']}" alt="tmp1_04" id="tmp1_04">
+			<img class="pf_img clearfix" src="${srcMap['5']}" alt="tmp1_05" id="tmp1_05">
 			
-			<img class="pf_img clearfix" src="" alt="tmp1_01" id="tmp1_01">
+			<img class="pf_img clearfix" src="${srcMap['1']}" alt="tmp1_01" id="tmp1_01">
 			
-			<img class="pf_img" src="" alt="tmp1_06" id="tmp1_06">
-			<img class="pf_img" src="" alt="tmp1_07" id="tmp1_07">
-			<img class="pf_img" src="" alt="tmp1_08" id="tmp1_08">
-			<img class="pf_img clearfix" src="" alt="tmp1_09" id="tmp1_09">
+			<img class="pf_img" src="${srcMap['6']}" alt="tmp1_06" id="tmp1_06">
+			<img class="pf_img" src="${srcMap['7']}" alt="tmp1_07" id="tmp1_07">
+			<img class="pf_img" src="${srcMap['8']}" alt="tmp1_08" id="tmp1_08">
+			<img class="pf_img clearfix" src="${srcMap['9']}" alt="tmp1_09" id="tmp1_09">
 			
 			<input type=file name="getfile_01" id="getfile_01" style='display: none;' accept="image/*">
 			<input type=file name="getfile_02" id="getfile_02" style='display: none;' accept="image/*">

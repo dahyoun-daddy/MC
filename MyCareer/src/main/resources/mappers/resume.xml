@@ -64,4 +64,82 @@
  		WHERE
  			reg_id = #{reg_id} AND table_div=0 
  	</select>
+ 	
+ 	
+ 	<!-- Img 검색(portfolio_svc) -->
+ 	<select id="do_search_img" parameterType="ResumeVO" resultType="ResumeVO">
+ 		SELECT 
+		    file_id,
+		    table_div,
+		    table_id,
+		    seq,
+		    file_path,
+		    file_size,
+		    org_file_name,
+		    save_file_name,
+		    file_ext,
+		    reg_id,
+		    reg_dt
+		FROM
+		    mc_file
+		WHERE
+		    table_div = #{table_div}
+		  AND
+		    table_id = #{table_id} 
+ 	</select>
+ 	
+ 	<!-- img upsert --> 	
+ 	<update id="do_upsert" parameterType="ResumeVO">
+ 	<![CDATA[
+ 		MERGE INTO mc_file A
+		USING dual
+		ON (A.table_div = #{table_div, jdbcType=INTEGER}
+		AND A.table_id = #{table_id, jdbcType=INTEGER}
+		AND A.seq = #{seq, jdbcType=INTEGER}
+		    )
+		WHEN MATCHED THEN
+		    UPDATE SET  file_path = #{file_path},
+		                file_size = #{file_size},
+		                org_file_name = #{org_file_name},
+		                save_file_name = #{save_file_name},
+		                file_ext = #{file_ext}
+		WHEN NOT MATCHED THEN
+		     INSERT (   file_id,
+		                table_div,
+		                table_id,
+		                seq,
+		                file_path,
+		                file_size,
+		                org_file_name,
+		                save_file_name,
+		                file_ext,
+		                reg_id,
+		                reg_dt
+		            )
+		    VALUES(
+		                SEQ_MC_FILE.NEXTVAL,
+		                #{table_div, jdbcType=INTEGER},
+		                #{table_id, jdbcType=INTEGER},
+		                #{seq, jdbcType=INTEGER},
+		                #{file_path},
+		                #{file_size},
+		                #{org_file_name},
+		                #{save_file_name},
+		                #{file_ext},
+		                #{reg_id},
+		                SYSDATE
+		    )
+ 		]]>
+ 	</update>
+ 	
+ 	<!-- 포트폴리오 이미지 삭제 -->
+ 	<delete id="do_delete_img" parameterType="ResumeVO">
+ 		DELETE FROM mc_file 
+		WHERE table_div = #{table_div}
+		  AND
+		    table_id = #{table_id}
+ 	</delete>
+ 	
+ 	
+ 	
  </mapper>

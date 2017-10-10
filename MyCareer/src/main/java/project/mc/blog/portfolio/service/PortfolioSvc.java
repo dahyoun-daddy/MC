@@ -25,14 +25,13 @@ public interface PortfolioSvc {
 
 	List<?> do_search(DTO dto);
 
-	int do_update(DTO dto);
-
 	int do_deleteAll(DTO dto);
 
 	int do_delete(DTO dto);
 
+	int do_update(MultipartHttpServletRequest mReq) throws DataAccessException, IOException;
 
-	List<DTO> do_saveImages(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
+	List<DTO> do_upsertImages(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
 
 
 }

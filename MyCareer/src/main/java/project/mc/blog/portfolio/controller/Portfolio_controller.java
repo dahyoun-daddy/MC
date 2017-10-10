@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.portfolio.domain.PortfolioVO;
 import project.mc.blog.portfolio.service.PortfolioSvc;
@@ -29,18 +30,68 @@ public class Portfolio_controller {
 	ResumeSvc RsSvc;
 	
 	@RequestMapping(value="blog/portfolio_view_tmp1.do", method = RequestMethod.GET)
-	public String portfolio_view_tmp1() {
-		return "blog/portfolio/portfolio_view_tmp1";
+	public ModelAndView portfolio_view_tmp1(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/portfolio/portfolio_view_tmp1");
+		
+		//int pf_id = 0;
+		int pf_id = 63;//디버그용
+		
+		if(req.getParameter("pf_id") != null)
+			pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
+		else {
+			//TODO null 처리
+			log.debug("pf_id를 찾지 못하였습니다.");
+		}
+		
+		PortfolioVO inVO = new PortfolioVO();
+		inVO.setPf_id(pf_id);
+		
+		PortfolioVO pfVO = null;
+		pfVO = (PortfolioVO) pfSvc.do_searchByPf_id(inVO);
+		
+		log.debug("pfVO: "+pfVO.toString());
+		
+		mav.addObject("pfVO", pfVO);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="blog/portfolio_view_tmp2.do", method = RequestMethod.GET)
-	public String portfolio_view_tmp2() {
-		return "blog/portfolio/portfolio_view_tmp2";
+	public ModelAndView portfolio_view_tmp2() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/portfolio/portfolio_view_tmp2");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="blog/portfolio_edit_tmp1.do", method = RequestMethod.GET)
-	public String portfolio_edit_tmp1() {
-		return "blog/portfolio/portfolio_edit_tmp1";
+	public ModelAndView portfolio_edit_tmp1(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/portfolio/portfolio_edit_tmp1");
+		
+		int pf_id = 0;
+		
+		if(req.getParameter("pf_id") != null) {
+			pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
+			
+		} else {
+			//TODO 템플릿 첫 화면
+			log.debug("새 템플릿 등록.");
+			return mav;
+		}
+		
+		PortfolioVO inVO = new PortfolioVO();
+		inVO.setPf_id(pf_id);
+		
+		PortfolioVO pfVO = null;
+		pfVO = (PortfolioVO) pfSvc.do_searchByPf_id(inVO);
+		
+		log.debug("pfVO: "+pfVO.toString());
+		
+		mav.addObject("pfVO", pfVO);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="blog/portfolio_edit_tmp2.do", method = RequestMethod.GET)
@@ -61,7 +112,7 @@ public class Portfolio_controller {
 		return "";
 	}
 	
-	@RequestMapping(value="blog/portfolio_delete.do", method = RequestMethod.POST)
+	@RequestMapping(value="blog/portfolio_delete.do", method = RequestMethod.GET)
 	public String portfolio_delete(HttpServletRequest req) {
 		
 		log.debug("=====Portfolio_controller: portfolio_delete=start==========");
@@ -69,7 +120,7 @@ public class Portfolio_controller {
 		
 		int pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
 		inVO.setPf_id(pf_id);
-				
+		
 		int flag = -1;
 		flag = pfSvc.do_delete(inVO);
 		
@@ -94,9 +145,36 @@ public class Portfolio_controller {
 		return "";
 	}
 	
+	@RequestMapping(value="blog/portfolio_upsert.do", method = RequestMethod.POST)
+	public String portfolio_upsert(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
+		
+		log.debug("=====Portfolio_controller: portfolio_upsert=start==========");
+		PortfolioVO inVO = new PortfolioVO();
+		int flag = -1;
+		
+		String workDiv = mreq.getParameter("workDiv").toString();
+		log.debug("workDiv: "+workDiv);
+		
+		if(workDiv != null && workDiv.equals("do_save")) {
+			log.debug("do_save start");
+			flag = pfSvc.do_save(mreq);
+			log.debug("flag: "+flag);
+			
+		}else if(workDiv != null && workDiv.equals("do_update")){
+			//TODO 사진들 업데이트, 서비스에서 실행
+			log.debug("do_update start");
+			flag = pfSvc.do_update(mreq);
+			log.debug("flag: "+flag);
+			
+		}
+		
+		log.debug("=====Portfolio_controller: portfolio_upsert=end==========");
+		
+		return "";
+	}
+	
 	@RequestMapping(value="blog/portfolio_update.do", method = RequestMethod.POST)
 	public String portfolio_update(HttpServletRequest req) {
-		
 		log.debug("=====Portfolio_controller: portfolio_update=start==========");
 		PortfolioVO inVO = new PortfolioVO();
 		
@@ -106,9 +184,9 @@ public class Portfolio_controller {
 		inVO.setUser_id(user_id);
 		int tmp_no = Integer.parseInt(req.getParameter("tmp_no").toString());
 		inVO.setTmp_no(tmp_no);
-				
+		
 		int flag = -1;
-		flag = pfSvc.do_update(inVO);
+		//flag = pfSvc.do_update(inVO);
 		
 		log.debug("flag: "+flag);
 		log.debug("=====Portfolio_controller: portfolio_update=end==========");

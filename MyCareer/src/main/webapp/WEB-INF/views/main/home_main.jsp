@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
   //contextPath
   String contextPath = request.getContextPath();
@@ -78,7 +79,12 @@
 	
 	<div id="wrapper">
 		<div id="user_menu">
-			<a href="<%=contextPath%>/user/login_page.do">로그인/로그아웃</a>//<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
+			<c:if test="${msg == 'success' }">
+			${sessionScope.user_name}(${sessionScope.user_id})님 <a href="<%=contextPath%>/user/login_page.do">로그인</a>
+			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
+			 <a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
+			</c:if>
+			<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="blog_search.do">

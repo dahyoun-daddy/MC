@@ -3,20 +3,27 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project.mc.user.repository.mappers.user">
+<mapper namespace="project.mc.blog.user.repository.mappers.user">
 
-<!-- 로그인 -->
-<select id="do_login" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
-select count(*) as do_login
+
+<!-- 로그인 정보 -->
+<select id="do_viewMember" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
+select
+USER_ID, 
+USER_PASSWORD,
+USER_NAME,
+AGE,
+EMAIL,
+ADDRESS,
+PHONE
 from mc_user
-where user_id = #{user_id}
-and user_password = #{user_password}
+where USER_ID = #{user_id}
 </select>
 
 <!-- 회원  탈퇴 -->
 <delete id="do_delete" parameterType="project.mc.blog.user.domain.UserVO" >
 update mc_user
-set WITHDRAW_FLAG = 0
+set WITHDRAW_FLAG = #{withdraw_flag}
 where user_id = #{user_id}
 </delete>
 
@@ -33,9 +40,17 @@ PHONE         = #{phone}
 WHERE USER_ID     = #{user_id}
 </update>
 
+<!-- 로그인 아이디 체크  -->
+<select id="do_loginCheck" parameterType="project.mc.blog.user.domain.UserVO" resultType="String">
+SELECT USER_NAME
+ FROM MC_USER
+ WHERE USER_ID = #{user_id}
+ AND USER_PASSWORD = #{user_password}
+</select>
+
 <!-- 중복 아이디 체크  -->
-<select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
-SELECT COUNT(USER_ID) AS do_idCheck
+<select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO">
+SELECT COUNT(USER_ID) AS CNT
   FROM MC_USER
  WHERE USER_ID = #{user_id}
 </select>

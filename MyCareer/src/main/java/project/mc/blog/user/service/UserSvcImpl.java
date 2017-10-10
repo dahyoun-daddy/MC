@@ -1,7 +1,8 @@
 package project.mc.blog.user.service;
 
 import java.io.PrintWriter;
-import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +32,12 @@ public class UserSvcImpl implements UserSvc {
 //	private Validator validator;
 
 	
-	public int do_save(DTO dto){ 
+	public int do_save(DTO dto){
 		log.debug("2=======================");
 		log.debug(dto.toString());
 		log.debug("2=======================");
-		int flag = userDao.do_save(dto);
 		
-		return flag;
+		return userDao.do_save(dto);
 	}
 
 	
@@ -51,14 +51,14 @@ public class UserSvcImpl implements UserSvc {
 	}
 
 	
-	public int do_update(DTO dto){
-		log.debug("do_update=======================");
-		log.debug(dto.toString());
-		int flag = userDao.do_update(dto);
-		log.debug("flag do_update:::::::::::"+flag);
-		log.debug("do_update=======================");
-		
-		return flag;
+	public int do_update(UserVO inVO, HttpSession session){
+		int result = userDao.do_update(inVO);
+		if(result == 1) {
+			UserVO inVO2 = viewMember(inVO, session);
+			// 세션변수 등록
+			session.setAttribute("user_id", inVO2.getUser_id());
+		}
+		return result;
 	}
 
 	
@@ -68,18 +68,42 @@ public class UserSvcImpl implements UserSvc {
 		int flag = userDao.do_delete(dto);
 		log.debug("22222222222222222flag======================="+flag);	
 		log.debug("do_delete=======================");	
-		return flag;
+		return userDao.do_delete(dto);		
 	}
 
 
-	
-	public int do_login(DTO dto) throws DataAccessException {
-		log.debug("2=======================");
-		log.debug(dto.toString());
-		log.debug("2=======================");
-		int flag = userDao.do_login(dto);
+
+	@Override
+	public void logout(HttpSession session) {
+		// 세션 정보를 초기화 시킴
+		session.invalidate();
+	}
+
+
+	@Override
+	public boolean do_loginCheck(UserVO inVO, HttpSession session) {
+		boolean result = userDao.do_loginCheck(inVO);
+		if(result) {
+			UserVO inVO2 = viewMember(inVO, session);
+			// 세션변수 등록
+			session.setAttribute("user_id", inVO2.getUser_id());
+			session.setAttribute("user_name", inVO2.getUser_name());
+		}
+		return result;
+	}
+
+
+	@Override
+	public UserVO viewMember(UserVO inVO, HttpSession session) {
 		
-		return flag;
+		return userDao.viewMember(inVO);
+	}
+
+
+	@Override
+	public UserVO Member(String user_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

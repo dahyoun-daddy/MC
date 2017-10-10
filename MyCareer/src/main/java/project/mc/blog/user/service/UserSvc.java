@@ -1,10 +1,11 @@
 package project.mc.blog.user.service;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
+import project.mc.blog.user.domain.UserVO;
 import project.mc.commons.DTO;
 /**
  * UserSvc.java
@@ -14,25 +15,26 @@ import project.mc.commons.DTO;
 @Transactional
 public interface UserSvc {
 	
-	public int do_login(DTO dto) throws DataAccessException;
-	
 	public int do_delete(DTO dto) throws DataAccessException;
 	
-	public int do_update(DTO dto) throws DataAccessException;
+	public int do_update(UserVO inVO, HttpSession session) throws DataAccessException;
 	
-	/**
-	 * 1이면 성공 그렇치 않으면 실패
-	 * @param dto
-	 * @return 1 
-	 * @throws DataAccessException
-	 */
+	
 	public int do_save(DTO dto) throws DataAccessException;
 	
-	/**
-	 * 1성공 그외 실패
-	 * @param dto
-	 * @return
-	 * @throws DataAccessException
-	 */
+	
 	public int do_idCheck(DTO dto) throws DataAccessException;
+	
+	
+	public void logout(HttpSession session);
+
+	public boolean do_loginCheck(UserVO inVO, HttpSession session);
+	
+	// 로그인 정보
+	public UserVO viewMember(UserVO inVO, HttpSession session);
+	
+	// 회원 정보
+	public UserVO Member(String user_id);
+
+	
 }

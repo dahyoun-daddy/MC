@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import project.mc.blog.resume.domain.ResumeVO;
+import project.mc.blog.user.domain.UserVO;
 import project.mc.commons.DTO;
 
 
@@ -152,5 +153,7 @@ public class ResumeDaoImpl implements ResumeDao {
 		flag = sqlSession.delete(statement, inVO);
 		return flag;
 	}
+
+
 
 }

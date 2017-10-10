@@ -32,7 +32,7 @@ public class ResumeDaoImpl implements ResumeDao {
 	 * 이력서 저장
 	 */
 	@Override
-	public int do_save(DTO dto) {
+	public int do_save(DTO dto) throws DataAccessException{
 		int flag = 0;
 		try {
 			String statement = namespace + ".do_save";
@@ -40,6 +40,8 @@ public class ResumeDaoImpl implements ResumeDao {
 			log.debug("statement 값은 : " + statement);
 			log.debug("dto.toString()의 값은 : " + dto.toString());
 			log.debug("ResumeDaoImpl의 do_save 입니다");
+			ResumeVO vo = (ResumeVO)dto;
+			flag = sqlSession.insert(statement, vo);
 		}catch(DataAccessException e) {
 			throw e;
 		}

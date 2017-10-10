@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import project.mc.blog.user.domain.UserVO;
+
 /**
  * WorkDiv.java
  * 거래표준 메소드 정의
@@ -27,5 +29,6 @@ public interface WorkDiv {
 	
 	public List<?> do_excelDown();
 	public int do_excelUp(List<?> list);
+	
 	
 }

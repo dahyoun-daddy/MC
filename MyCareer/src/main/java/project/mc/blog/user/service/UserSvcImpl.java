@@ -53,18 +53,16 @@ public class UserSvcImpl implements UserSvc {
 	}
 
 	@Override
-	public int do_update(UserVO vo ){
+	public int do_update(DTO dto){
 		
-		return userDao.update(vo);
+		return userDao.do_update(dto);
 	}
 
 	
 	public int do_delete(DTO dto){
-		log.debug("do_delete=======================");
-		log.debug(dto.toString());
+		
 		int flag = userDao.do_delete(dto);
-		log.debug("22222222222222222flag======================="+flag);	
-		log.debug("do_delete=======================");	
+	
 		return userDao.do_delete(dto);		
 	}
 

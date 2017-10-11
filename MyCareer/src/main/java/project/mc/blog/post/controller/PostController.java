@@ -115,6 +115,49 @@ public class PostController {
 		return modelAndView; //"redirect:post_doSearch.do"
 	}
 
+	@RequestMapping(value="blog/post/post_doSearchAll.do")
+	public ModelAndView do_searchALL(HttpServletRequest req) {
+		
+		PostDTO inVO = new PostDTO();
+		Hashtable<String, String> 
+		searchParam = new Hashtable<String, String>();//
+		String p_pageSize = StringUtil.nvl(req.getParameter("page_size"),"10");
+		String p_pageNo  = StringUtil.nvl(req.getParameter("page_num"),"1");
+		String p_searchDiv = StringUtil.nvl(req.getParameter("searchDiv"),"");
+		String p_searchWord = StringUtil.nvl(req.getParameter("searchWord"),"");
+		
+		searchParam.put("pageSize", p_pageSize);
+		searchParam.put("pageNo", p_pageNo);
+		searchParam.put("searchDiv", p_searchDiv);
+		searchParam.put("searchWord", p_searchWord);
+		
+		//request 
+		Enumeration<String> params = req.getParameterNames();
+		Hashtable<String, String> 
+		sParam = new Hashtable<String, String>();	
+		while(params.hasMoreElements()){
+		  String name = (String)params.nextElement();
+		  req.getParameter(name);
+		  sParam.put(name, StringUtil.nvl(req.getParameter(name),""));
+		}
+        log.debug("sParam:"+sParam.toString());
+		
+		inVO.setParam(searchParam);
+		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
+   	    int totalCnt   = 0;
+   	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
+   	    log.debug("!!!!!!!!!!!!!" + totalCnt);
+		//TO_DO: pageing
+		ModelAndView modelAndView =new ModelAndView();
+		
+		modelAndView.addObject("list",list);
+		//total count
+		modelAndView.addObject("totalCnt",totalCnt);
+		modelAndView.setViewName("blog/post/post_list");
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping(value="blog/post/post_doSearch.do")
 	public ModelAndView do_search(HttpServletRequest req) {
 		

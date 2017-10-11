@@ -19,7 +19,7 @@ public interface UserSvc {
 	
 	public int do_delete(DTO dto) throws DataAccessException;
 	
-	public int do_update(UserVO vo) throws DataAccessException;
+	public int do_update(DTO dto) throws DataAccessException;
 	
 	
 	public int do_save(DTO dto) throws DataAccessException;

@@ -41,7 +41,8 @@ public class UserController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	public static final String SESSION_USER_ID = "user_id";
+
+	
 	
 	@Autowired 
 	UserSvc userSvc;
@@ -108,27 +109,47 @@ public class UserController {
 	
 	// 회원 수정
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView do_updateForm(@ModelAttribute HttpSession session ,HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public ModelAndView do_updateForm(HttpServletRequest req) throws IOException {
 		
-		UserVO inVO = new UserVO();
+		UserVO inVO=new UserVO();
+		
+		inVO.setUser_id(req.getParameter("user_id"));
+		inVO.setUser_password(req.getParameter("user_password"));
+		inVO.setUser_name(req.getParameter("user_name"));
+		int age = Integer.parseInt(req.getParameter("age").toString());
+		inVO.setAge(age);
+		inVO.setEmail(req.getParameter("email"));
+		inVO.setAddress(req.getParameter("address"));
+		inVO.setPhone(req.getParameter("phone"));
+		
+		int flag = userSvc.do_update(inVO);
+		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("main/home_main");//List
+		modelAndView.addObject("inVO", inVO);
 		
 		return modelAndView;
 	}
 	
 	// 회원수정 페이지로 이동
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public String do_update(@ModelAttribute HttpSession session, HttpServletRequest req) {
+	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
+		
 		UserVO inVO = new UserVO();
 		UserVO inVO2 = new UserVO();
-		String user_id = "난";
-		//(String)session.getAttribute("user_id");
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
 		inVO.setUser_id(user_id);
 		
 		inVO2=userSvc.viewMember(inVO);
-		log.debug("inVO2::::::"+inVO2.toString());
-		return "blog/user/user_modify";
+		
+		
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("blog/user/user_modify");//List
+		modelAndView.addObject("inVO", inVO2);
+		
+		return modelAndView;
 		
 	}
 	
@@ -140,13 +161,10 @@ public class UserController {
 		inVO.setUser_id(req.getParameter("user_id"));
 		int withdraw_flag = 0;
 		inVO.setWithdraw_flag(withdraw_flag);
-		log.debug("inVO : "+inVO.getUser_id()); 
-		
 		
 		int flag = userSvc.do_delete(inVO);
-		log.debug("flag : "+flag);
 		
-		return "redirect:do_look.do";
+		return "redirect:do_logout.do";
 	}
 	
 	// 로그인 화면으로 감
@@ -166,24 +184,25 @@ public class UserController {
 	// 로그인 처리
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
-	public ModelAndView do_loginCheck(@ModelAttribute UserVO inVO, HttpSession session, HttpServletRequest req) throws IOException {
+	public ModelAndView do_loginCheck(HttpSession session, HttpServletRequest req) throws IOException {
 		
+		UserVO inVO = new UserVO();
 		
-		String user_id = req.getParameter(SESSION_USER_ID);
+		String user_id = req.getParameter("user_id");
 		String user_password = req.getParameter("user_password");
-		session.setAttribute(SESSION_USER_ID, user_id);
-		session.setAttribute("user_password", user_password);
+		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("main/home_main");
-		mav.addObject("msg", "success");
 		inVO.setUser_id(user_id);
+		inVO.setUser_password(user_password);
+		
 		boolean result = userSvc.do_loginCheck(inVO);
-		session.getAttribute("user_id");
-		session.getAttribute("user_password");
+		
 		if(result == true) {
 			mav.setViewName("main/home_main");
+			session.setAttribute("user_id", user_id);
 			mav.addObject("msg", "success");
+			
 		}else {
 			mav.setViewName("blog/user/user_login");
 			mav.addObject("msg", "failure");

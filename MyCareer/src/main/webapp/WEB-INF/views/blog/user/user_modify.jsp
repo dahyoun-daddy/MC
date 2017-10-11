@@ -54,8 +54,6 @@
 	            },
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	            	alert("수정하시겠습니까?");
-
-	            	console.log("success data: "+data);
 	            	$("#do_update").submit();
 	            	alert("수정완료");
 	            	location.href="/mc/main/home_main.do";
@@ -86,19 +84,20 @@
 	            dataType:"html",
 	            async: false,
 	            data:{
-	            	   	
-		               "withdraw_flag" :withdraw_flag			
+	            	"user_id" :$("#user_id").val(),
+		            "withdraw_flag" :withdraw_flag			
 	            },
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	            	alert("탈퇴하시겠습니까?");
 	                $("#do_delete").submit();
-	                
+	                alert("회원탈퇴 되었습니다");
+	                location.href="/mc/user/login_page.do";
 	            },
 	            complete: function(data){//무조건 수행
 	            	
 	            },
 	            error: function(xhr,status,error){
-	            	alert("탈퇴에러"+error);
+	            	alert("탈퇴에러");
 	            	
 	            }
 			});
@@ -138,39 +137,39 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	<input type="hidden" id="withdraw_flag" name="withdraw_flag">
 	<div id="container" align="center">
 		<div>
-			<input type="text" id="user_id" name="user_id" maxlength="20" autocomplete="off"  placeholder="아이디" value="${user_id }" disabled="disabled"></br>
+			<input type="text" id="user_id" name="user_id" maxlength="20" autocomplete="off"  placeholder="아이디" value="${inVO.user_id }" disabled="disabled"></br>
 		</div>
 		<div>
-			<input type="password" id="user_password" name="user_password" maxlength="20" placeholder="비밀번호" value="${user_password }" required="required">
+			<input type="password" id="user_password" name="user_password" maxlength="20" placeholder="비밀번호" value="${inVO.user_password }" required="required">
 		</div>
 		<div>
-			<input type="text" id="user_name" name="user_name" maxlength="20" placeholder="이름" value="${user_name }" required="required">
+			<input type="text" id="user_name" name="user_name" maxlength="20" placeholder="이름" value="${inVO.user_name }" required="required">
 		</div>
 		<div>
-			<input type="radio" name="gender" value="1" id="radio1" checked="checked" disabled="disabled">남자
-			<input type="radio" name="gender" value="2" id="radio2" disabled="disabled">여자
+			<input type="radio" name="gender" value="${inVO.gender  }" id="radio1" checked="checked" disabled="disabled">남자
+			<input type="radio" name="gender" value="${inVO.gender  }" id="radio2" disabled="disabled">여자
 		</div>
 		<div>
 			<input type="text" id="user_div" name="user_div" maxlength="20" placeholder="회원구분" value="1" disabled="disabled" >
 		</div>
 		<div>
-			<input type="text" id="age" name="age" maxlength="20" placeholder="나이" value="${age  }" required="required">
+			<input type="text" id="age" name="age" maxlength="20" placeholder="나이" value="${inVO.age  }" required="required">
 		</div>
 		<div>
-			<input type="text" id="email" name="email" maxlength="20" placeholder="이메일" value="${email  }" required="required">
+			<input type="text" id="email" name="email" maxlength="20" placeholder="이메일" value="${inVO.email  }" required="required">
 		</div>
 		<div>
-			<input type="text" id="address" name="address" maxlength="20" placeholder="주소" value="${address }" required="required">
+			<input type="text" id="address" name="address" maxlength="20" placeholder="주소" value="${inVO.address }" required="required">
 		</div>
 		<div>
-			<input type="text" id="phone" name="phone" maxlength="20" placeholder="연락처" value="${phone  }" required="required">
+			<input type="text" id="phone" name="phone" maxlength="20" placeholder="연락처" value="${inVO.phone  }" required="required">
 		</div>
 	</div>
 	
 	<div id="footer" align="center">
 		<input type="button" id=do_delete name="do_delete" value="회원탈퇴" >
 		<input type="button" id=do_update name="do_update" value="수정" >
-		<a href="/main/home_main.do"><input type="button" value="취소"></a>
+		<a href="/mc/main/home_main.do"><input type="button" value="취소"></a>
 	</div>
 	</form>
 	

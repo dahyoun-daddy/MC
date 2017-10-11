@@ -17,9 +17,6 @@ public interface UserDao extends WorkDiv {
 	// 로그 아웃
 	public void logout(HttpSession session);
 	
-	// 회원 정보 업데이트
-	public int update(UserVO vo);
-
 	// 로그인 체크하기
 	public boolean do_loginCheck(UserVO vo);
 	// 로그인 정보

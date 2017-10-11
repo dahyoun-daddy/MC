@@ -71,12 +71,12 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public int update(UserVO vo) {
+	public int do_update(DTO dto) {
 		
 		int flag = 0;
 		try {
 			String statement = namespace +".do_update";
-			UserVO inUserVo = (UserVO)vo;
+			UserVO inUserVo = (UserVO)dto;
 			log.debug("들어간다@@@@@@@@@@@@@");
 			flag = sqlSession.update(statement, inUserVo);
 		}catch(DataAccessException e) {
@@ -119,9 +119,12 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserVO viewMember(UserVO vo) {
 		
-		String statement = namespace +".do_viewMember";
+		UserVO inVO = new UserVO();
 		
-		return sqlSession.selectOne(statement, vo);
+		String statement = namespace +".do_viewMember";
+		inVO = sqlSession.selectOne(statement, vo);
+		
+		return inVO;
 	}
 	
 	
@@ -142,12 +145,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
-
-	@Override
-	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 
 	

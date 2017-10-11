@@ -38,6 +38,7 @@
 			}
 			document.frm.action="do_loginCheck.do"
 			document.frm.submit();
+			
 		});
 		
 	});
@@ -45,11 +46,15 @@
 </head>
 <body>
 		<h2>로그인 </h2>
-		<form name="frm" method="post" action="do_loginCheck.do">
+		<form name="frm" method="post">
 			<table>
 				<tr height="40px">
 					<td>ID</td>
-					<td><input type="text" name="user_id" id="user_id"></td>
+					<td>
+					
+					<input type="text" name="user_id" id="user_id"/>
+					
+					</td>
 				</tr>
 				<tr height="40px">
 					<td>비밀번호</td>
@@ -58,18 +63,8 @@
 				<tr>
 				<td align="center"><a href="do_look.do">회원가입</a></td>
 					<td align="center"><button type="button" id="btnLogin" name="btnLogin">로그인</button>
-					<c:if test="${msg == 'failure' }">
-						<div style="color: red">
-							아이디 또는 비밀번호가 일치하지 않습니다.
-						</div>
-					</c:if>
-					<c:if test="${msg == 'logout' }">
-						<div style="color: red">
-							로그 아웃 되었습니다.
-						</div>
-					</c:if>
 					</td>
-					<td align="center"><a href="/mc/main/home_main.do">취소</a></td>
+					<td align="center"><a href="<%=contextPath %>/main/home_main.do">취소</a></td>
 				</tr>
 			</table>
 		</form>

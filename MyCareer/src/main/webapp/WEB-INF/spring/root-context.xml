@@ -42,14 +42,14 @@
         class="project.mc.commons.TransactionAdvice">
         <property name="transactionManager"   
         ref="transactionManager"/>
-    </bean> 
+    </bean>  
     
     <!--Tx PointCut -->
     <bean  id="transactionPointcut" 
         class="project.mc.commons.NameMatchClassMethodPointcut" >
         <property name="mappedClassName" value="*SvcImpl" />
         <property name="mappedName" value="*tx"></property>        
-    </bean>    
+    </bean>     
     
     <!--Tx Advisor -->
     <bean  id="transactionAdvisor"  
@@ -78,8 +78,6 @@
         destroy-method="clearCache">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
-        
-
     
     <!-- 어노테이션에 기반한 트랜잭션 활성화 -->
     <tx:annotation-driven 

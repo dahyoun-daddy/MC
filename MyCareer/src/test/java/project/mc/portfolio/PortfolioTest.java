@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -25,6 +27,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import project.mc.blog.portfolio.domain.PortfolioVO;
+import project.mc.blog.portfolio.service.PortFolioSvcImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
@@ -53,8 +58,27 @@ public class PortfolioTest {
 	}
 	
 	@Test
-	@Ignore
 	public void test() {
+		//접속중인 유저의 user_id
+		//String login_id = (String)session.getAttribute("login_id");
+		
+		//해당 블로그 주인의 user_id
+		System.out.print("list.size:");
+		String user_id = "111";
+		
+		PortfolioVO inVO = new PortfolioVO();
+		PortFolioSvcImpl pfSvc = new PortFolioSvcImpl();
+		
+		inVO.setUser_id(user_id);
+		System.out.print("list.size:");
+		
+		List<PortfolioVO> list = (List<PortfolioVO>)pfSvc.do_searchByUser_id(inVO);
+		
+		System.out.print("list.size:" +list.size());
+		for(PortfolioVO outVO : list){
+			System.out.print("outVO: "+outVO.getPf_id());
+		}
+		
 		
 	}
 	

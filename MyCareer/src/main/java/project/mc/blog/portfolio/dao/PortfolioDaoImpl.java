@@ -1,5 +1,6 @@
 package project.mc.blog.portfolio.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -54,9 +55,11 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	@Override
 	public List<?> do_searchByUser_id(DTO dto) {
 		String statement = namespace +".do_searchByUser_id";
-		PortfolioVO inPfVo = (PortfolioVO)dto;
-		List<PortfolioVO> list = sqlSession.selectList(statement, inPfVo);
 		log.debug("======PortfolioDaoImpl: do_searchByUser_id======");
+		log.debug("dto: "+dto.toString());
+		PortfolioVO inPfVo = (PortfolioVO)dto;
+		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
+		list = sqlSession.selectList(statement, inPfVo);
 		log.debug("list: "+list.toString());
 		log.debug("======PortfolioDaoImpl: do_searchByUser_id======");
 		

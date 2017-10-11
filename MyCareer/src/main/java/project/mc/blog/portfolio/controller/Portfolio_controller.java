@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import project.mc.blog.portfolio.domain.PortfolioVO;
 import project.mc.blog.portfolio.service.PortfolioSvc;
@@ -235,7 +239,7 @@ public class Portfolio_controller {
 		
 		String user_id = req.getParameter("user_id").toString();
 		inVO.setUser_id(user_id);
-				
+		
 		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
 		list = (List<PortfolioVO>) pfSvc.do_searchByUser_id(inVO);
 		
@@ -245,5 +249,32 @@ public class Portfolio_controller {
 		return "";
 	}
 	
+	
+	
+	@RequestMapping(value="portfolio_menu.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String portfolio_menu(HttpServletRequest req, HttpServletResponse res) {
+		log.debug("portfolio_menu*");
+		String user_id = req.getParameter("user_id").toString();
+		log.debug("user_id"+user_id);
+		String login_id = req.getParameter("login_id").toString();
+		log.debug("login_id"+login_id);
+		
+		PortfolioVO inVO = new PortfolioVO();
+		inVO.setUser_id(user_id);
+		List<PortfolioVO> list = (List<PortfolioVO>) pfSvc.do_searchByUser_id(inVO);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(user_id != null && user_id.equals(login_id)) {
+			sb.append("<button id='new_tmp'>새 템플릿</button><br>");
+		}
+		
+		
+		Gson gson = new Gson();
+        String json = gson.toJson(list);
+		
+		return json;
+	}
 	
 }

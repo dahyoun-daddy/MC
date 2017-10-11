@@ -37,8 +37,9 @@ public class ResumeSvcImpl implements ResumeSvc {
 
 	@Override
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException {
-		
-		String uploadPath = "c:\\test\\resume\\";
+		String root_path = mReq.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources\\resume\\";
+		String uploadPath = root_path + attach_path;
 		
 		File fileDir = new File(uploadPath);
 		if(fileDir.isDirectory()==false) {
@@ -162,9 +163,9 @@ public class ResumeSvcImpl implements ResumeSvc {
 		log.debug("DTO의 값은 : " + list.toString());
 		log.debug("ResumeSvcImpl do_checkdelete입니다");
 		int flag = 0;
-		for(String reg_id : list) {
+		for(String file_id : list) {
 			ResumeVO resumeVO = new ResumeVO();
-			resumeVO.setReg_id(reg_id);
+			resumeVO.setFile_id(Integer.parseInt(file_id));
 			int one = resumeDao.do_delete(resumeVO);
 			flag += one;
 		}

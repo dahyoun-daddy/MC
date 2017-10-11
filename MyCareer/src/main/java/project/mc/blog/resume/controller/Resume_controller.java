@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.google.gson.Gson;
+
 import project.mc.blog.resume.domain.ResumeVO;
 import project.mc.blog.resume.service.ResumeSvc;
 import project.mc.commons.DTO;
@@ -106,5 +108,26 @@ public class Resume_controller {
 			log.debug("Resume_controller 입니다");
 		}
 		return "redirect:resume.do";
+	}
+	
+	@RequestMapping(value="blog/resume/do_checkedDelete.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String do_checkedDelete(HttpServletRequest req) throws IOException{
+		String ret = req.getParameter("file_idList");
+		log.debug("Resume_controller의 do_checkedDelete입니다");
+		log.debug("ret :" + ret);
+		
+		Gson gson = new Gson();
+		
+		List<String> list = gson.fromJson(ret, List.class);
+		log.debug("file_idList: " + list);
+		
+		int flag = resumeSvc.do_checkDelete(list);
+		log.debug("삭제건수 :" + flag);
+		
+		Gson gsonOut = new Gson();
+		ResumeVO resumeVO = new ResumeVO();
+		resumeVO.setNo(flag);
+		return gsonOut.toJson(resumeVO);		
 	}
 }

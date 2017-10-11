@@ -46,19 +46,80 @@
 			alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.");
 			frm.location.reload();
 			return;
-		}		
+		}
+		
 	}
+	$(document).ready(function(){
+		//최상단 체크박스 클릭
+		$("#checkAll").click(function(){
+	        //클릭되었으면
+	        if($("#checkAll").prop("checked")){
+	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+	            $("input[name=check]").prop("checked",true);
+	            //클릭이 안되있으면
+	        }else{
+	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+	            $("input[name=check]").prop("checked",false);
+	        }
+	    });//--최상단 체크박스 클릭
+	    
+	    //do_delete
+	    $("#do_delete").on("click", function(){
+	    	var file_idArray = new Array();
+	    	//checked
+	    	$("#check:checked").each(function(idx,row){
+	    		var record = $(row).parents("tr");
+	    		var file_id = $(record).find('#file_id').val();
+	    		//console.log(file_id);
+	    		file_idArray.push(file_id);	    		
+	    	});//--checked
+	    	console.log(file_idArray);
+	    	if(file_idArray.length<=0){
+	    		alert("삭제할 이력서를 선택해주세요.");
+	    		return false;
+	    	}
+	    	if(false==confirm("삭제하시겠습니까?")){
+	    		return;
+	    	}
+	    	
+	    	var jsonFile_idList = JSON.stringify(file_idArray);
+	    	console.log("jsonFile_idList: " + jsonFile_idList);
+	    	
+	    	$.ajax({
+	    		url:"do_checkedDelete.do",
+	    		type:"POST",
+	    		dataType:"JSON",
+	    		asnyc:false,
+	    		data:{
+	    			"file_idList":jsonFile_idList
+	    		},
+	    		success: function(data){
+	    			console.log("success data: " + data);	    			
+	    			alert("총 "+data.no+"건이 삭제되었습니다.");
+	    			return location.reload();
+	    		},
+	    		complete: function(data){
+	    			
+	    		},
+	    		error: function(xhr, status, error){
+	    			console.log("삭제 error입니다" + error);	
+	    		}
+	    	});
+	    });//--do_delete
+	    
+	    
+	}); //--jquery document
 </script>
 </head>
 <body>
 	<h2>이력서 파일 게시판입니다.</h2>
 	<hr/>
 	<div align="right" >
-		<button>다운로드</button>
-		<button>삭제</button>
+		<button onclick="do_down()">다운로드</button>
+		<button id="do_delete">삭제</button>
 	</div>
 	<form>
-		<table border="1" width="95%">
+		<table border="1" width="99%">
 			<thead>
 				<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll"></th>				
 				<th class="text-center">파일명</th>
@@ -75,7 +136,8 @@
 							<td><c:out value="${ResumeVO.org_file_name}"/></td>
 							<td><c:out value="${ResumeVO.file_size}"/></td>
 							<td><c:out value="${ResumeVO.reg_dt}"/></td>
-							<td><c:out value="${ResumeVO.file_ext}"/></td>							
+							<td><c:out value="${ResumeVO.file_ext}"/></td>
+							<input type="hidden" name="file_id" id="file_id" value="${ResumeVO.file_id}" >							
 						</tr>						
 					</c:forEach>
 				</c:when>

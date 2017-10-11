@@ -38,7 +38,7 @@
  	
  	<!-- resume(이력서) 선택 삭제 -->
  	<delete id="do_delete">
- 		DELETE FROM mc_file WHERE reg_id=#{reg_id} AND file_id=#{file_id}
+ 		DELETE FROM mc_file WHERE file_id=#{file_id}
  	</delete>
  	<!-- resume(이력서) 전체 삭제 -->
  	<delete id="do_deleteAll">

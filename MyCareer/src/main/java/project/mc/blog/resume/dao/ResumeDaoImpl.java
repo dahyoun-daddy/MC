@@ -56,10 +56,10 @@ public class ResumeDaoImpl implements ResumeDao {
 	public List<?> do_search(DTO dto) {
 		String statement = namespace + ".do_search";
 		ResumeVO resumeVO = (ResumeVO)dto;
-		resumeVO.setReg_id("joon");
+		//resumeVO.setReg_id("joon");
 		List<ResumeVO> list = sqlSession.selectList(statement, resumeVO);
 		log.debug("ResumeDaoImpl의 do_search 입니다");
-		return sqlSession.selectList(statement);
+		return list;
 	}
 
 	@Override

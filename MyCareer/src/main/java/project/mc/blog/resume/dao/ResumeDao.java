@@ -25,8 +25,11 @@ public interface ResumeDao extends WorkDiv{
 	 */
 	public DTO do_searchOne(DTO dto);
 	
+<<<<<<< HEAD
 	public List<?> do_search(DTO dto);
 	
+=======
+>>>>>>> branch 'master' of https://github.com/dahyoun-daddy/MC
 	/**
 	 * 포트폴리오의 이미지 조회
 	 * @param dto

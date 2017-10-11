@@ -56,7 +56,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		int flag = pfDao.do_save(inVO);
 		
-		this.do_saveImages(mReq);
+		this.do_upsertImages(mReq);
 		
 		log.debug("======PortfolioSvcImpl: do_save=end================");
 		
@@ -67,7 +67,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * 파일 멀티 upload;
 	 */
 	@Override
-	public List<DTO> do_saveImages(
+	public List<DTO> do_upsertImages(
 			MultipartHttpServletRequest mReq) 
 	   throws IOException, DataAccessException {
 		String root_path = mReq.getSession().getServletContext().getRealPath("/");  
@@ -101,6 +101,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			
 			MultipartFile mFile=mReq.getFile(uploadFileName);
 			orgFileName = mFile.getOriginalFilename();
+			if(orgFileName == null || orgFileName.equals(""))
+				continue;
+			
 			ext = orgFileName.substring(orgFileName.lastIndexOf("."));
 			fileSize = mFile.getSize();
 			
@@ -133,15 +136,14 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 					resumeVO.setFile_ext(ext);
 					resumeVO.setReg_id(mReq.getParameter("user_id").toString());
 					//파일 DB 저장
-					int flag = rsDao.do_save(resumeVO);
+					int flag = rsDao.do_upsert(resumeVO);
+					log.debug("seq/flag: "+fileNo+"/"+flag);
 					resumeVO.setFlag(flag);
 					
 					list.add(resumeVO);
 					
 					//이미지 서버에 업로드
 					mFile.transferTo(new File(uploadPath+saveFileName));
-					
-					
 					
 				}catch(IllegalStateException ie) {
 					throw ie;
@@ -168,8 +170,19 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	public int do_delete(DTO dto) {
 		log.debug("======PortfolioSvcImpl: do_delete=================");
 		log.debug(dto.toString());
+		PortfolioVO pfVO = (PortfolioVO)dto;
+		ResumeVO rsVO = new ResumeVO();
+		int flag = pfDao.do_delete(dto);
+		
+		rsVO.setTable_div(31);
+		rsVO.setTable_id(pfVO.getPf_id());
+		
+		int rsFlag = rsDao.do_delete_img(rsVO);
+		
+		log.debug("flag:" + flag);
+		log.debug("rsFlag:" + rsFlag);
 		log.debug("======PortfolioSvcImpl: do_delete=================");
-		return pfDao.do_delete(dto);		
+		return flag;		
 	}
 	
 	/**
@@ -191,12 +204,25 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * @return int (1:성공,1이 아니면 실패)
 	 */
 	@Override
-	public int do_update(DTO dto) {
+	public int do_update(MultipartHttpServletRequest mReq) throws DataAccessException, IOException {
 		log.debug("======PortfolioSvcImpl: do_update=================");
-		log.debug(dto.toString());
+		PortfolioVO inVO = new PortfolioVO();
+		
+		int pf_id = Integer.parseInt(mReq.getParameter("pf_id").toString());
+		inVO.setPf_id(pf_id);
+		String user_id = mReq.getParameter("user_id").toString();
+		inVO.setUser_id(user_id);
+		int tmp_no = Integer.parseInt(mReq.getParameter("tmp_no").toString());
+		inVO.setTmp_no(tmp_no);
+		
+		int flag = pfDao.do_update(inVO);
+		
+		this.do_upsertImages(mReq);
+		
 		log.debug("======PortfolioSvcImpl: do_update=================");	
-		return pfDao.do_update(dto);		
+		return flag;		
 	}
+	
 	
 	/**
 	 * 전체조회
@@ -220,8 +246,26 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	public DTO do_searchByPf_id(DTO dto) {
 		log.debug("======PortfolioSvcImpl: do_searchByPf_id=================");
 		log.debug(dto.toString());
+		PortfolioVO inVO = (PortfolioVO)dto;
+		int pf_id = inVO.getPf_id();
+		
+		//포트폴리오 가져오는 부분
+		PortfolioVO pfVO = null;
+		pfVO = (PortfolioVO) pfDao.do_searchByPf_id(dto);
+		
+		//이미지 리스트 가져오는 부분
+		ResumeVO inRsVO = new ResumeVO();
+		inRsVO.setTable_div(31);
+		inRsVO.setTable_id(pf_id);
+		
+		List<ResumeVO> imgList = null;
+		imgList = (List<ResumeVO>) rsDao.do_search_img(inRsVO);
+		log.debug("imgList: "+imgList.toString());
+		
+		pfVO.setImgList(imgList);
+		
 		log.debug("======PortfolioSvcImpl: do_searchByPf_id=================");	
-		return pfDao.do_searchByPf_id(dto);
+		return pfVO;
 	}
 	
 	/**

@@ -1,9 +1,35 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="project.mc.blog.resume.domain.ResumeVO"%>
+<%@page import="java.util.List"%>
+<%@page import="project.mc.blog.portfolio.domain.PortfolioVO"%>
+<%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   //contextPath
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080"+contextPath;  
+%>
+<%
+	
+	PortfolioVO pfVO = (PortfolioVO)request.getAttribute("pfVO");
+	
+	List<ResumeVO> imgList = pfVO.getImgList();
+	
+	Map<String, String> srcMap = new HashMap<String, String>();
+	
+	for(ResumeVO rsVO : imgList){
+		int seq = rsVO.getSeq();
+		String path = "";
+		path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name();
+		srcMap.put(String.valueOf(seq), path);
+	}
+	
+	pageContext.setAttribute("srcMap", srcMap);  
+	
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,20 +81,21 @@
 			<h6>포트폴리오 제목</h6>
 		</div>
 		<div id="buttons">
-			<a href="<%=contextPath%>/blog/portfolio_edit_tmp1.do">편집</a>
+			<a href="<%=contextPath%>/blog/portfolio_edit_tmp1.do?pf_id=<%=pfVO.getPf_id()%>">편집</a>
+			<a href="<%=contextPath%>/blog/portfolio_delete.do?pf_id=<%=pfVO.getPf_id()%>">삭제</a>
 		</div>
 		<div id=contents align="center">
-			<img class="pf_img" src="" alt="tmp1_02" id="tmp1_02">
-			<img class="pf_img" src="" alt="tmp1_03" id="tmp1_03">
-			<img class="pf_img" src="" alt="tmp1_04" id="tmp1_04">
-			<img class="pf_img clearfix" src="" alt="tmp1_05" id="tmp1_05">
+			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">
+			<img class="pf_img" src="${srcMap['3']}" alt="tmp1_03" id="tmp1_03">
+			<img class="pf_img" src="${srcMap['4']}" alt="tmp1_04" id="tmp1_04">
+			<img class="pf_img clearfix" src="${srcMap['5']}" alt="tmp1_05" id="tmp1_05">
 			
-			<img class="pf_img clearfix" src="" alt="tmp1_01" id="tmp1_01">
+			<img class="pf_img clearfix" src="${srcMap['1']}" alt="tmp1_01" id="tmp1_01">
 			
-			<img class="pf_img" src="" alt="tmp1_06" id="tmp1_06">
-			<img class="pf_img" src="" alt="tmp1_07" id="tmp1_07">
-			<img class="pf_img" src="" alt="tmp1_08" id="tmp1_08">
-			<img class="pf_img clearfix" src="" alt="tmp1_09" id="tmp1_09">
+			<img class="pf_img" src="${srcMap['6']}" alt="tmp1_06" id="tmp1_06">
+			<img class="pf_img" src="${srcMap['7']}" alt="tmp1_07" id="tmp1_07">
+			<img class="pf_img" src="${srcMap['8']}" alt="tmp1_08" id="tmp1_08">
+			<img class="pf_img clearfix" src="${srcMap['9']}" alt="tmp1_09" id="tmp1_09">
 			
 			<div id="clearfix"></div>
 		</div>

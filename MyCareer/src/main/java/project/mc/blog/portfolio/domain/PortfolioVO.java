@@ -2,17 +2,26 @@ package project.mc.blog.portfolio.domain;
 
 import java.util.List;
 
+import project.mc.blog.resume.domain.ResumeVO;
 import project.mc.commons.DTO;
 
 public class PortfolioVO extends DTO {
 	private int pf_id   ;//포트폴리오 아이디
 	private String user_id ;//유저 id
 	private int tmp_no  ;//템플릿 종류
-	//private List<FileVO> fileList ;//포트폴리오에 딸려 있는 이미지 객체
+	private List<ResumeVO> imgList ;//포트폴리오에 딸려 있는 이미지 객체
 	
 	
 	
 	
+	public List<ResumeVO> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<ResumeVO> imgList) {
+		this.imgList = imgList;
+	}
+
 	/**
 	 * 
 	 */

@@ -21,31 +21,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	
+	a{	
+		cursor:pointer;
+	}
+	
+	.pf_menu{
+	    padding-left:25px;
+    }
+	
+</style>
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#pf_tmp").click(function(){
-			
-			
-			
-			
-			
-			
-		});
-		
 		$.ajax({
-			type:"get",
+			type:"post",
 			url : "<%=contextPath%>/portfolio_menu.do",
 			datatype : "json",
 			data : {"user_id" : <%=user_id%>,
 					"login_id" : <%=login_id%>},
 			success : function(data){
-				alert(data);
+				//디코딩하여 변수에 담는다.
+		        //var outData = decodeURIComponent(data);
 				
+				$("#pf_tmp_td").append(data);
 			}
 		});
 		
-		
+		$("#pf_tmp").click(function(){
+			
+			var submenu = $(this).next("ul");
+			
+	        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+	        if( submenu.is(":visible") ){
+	            submenu.slideUp();
+	        }else{
+	            submenu.slideDown();
+	        }
+			
+			
+		});
 		
 	});
 
@@ -55,23 +71,22 @@
 <body>
 	<table>
 		<tr>
-			<td><a href="<%=contextPath%>/post.do">포스팅</a></td>
+			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="포스팅"/></a></td>
 		</tr>
 		<tr>
-			<td><a href="#">포트폴리오 템플릿**</a>
+			<td id="pf_tmp_td">
+				<a id="pf_tmp"><img src="" alt="포트폴리오 템플릿"/></a>
+				<!-- 여기에 템플릿들이 추가 -->
 			</td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/resume.do">이력서</a></td>
+			<td><a href="<%=contextPath%>/blog/resume/resume.do"><img src="" alt="이력서"/></a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/media.do">동영상</a></td>
+			<td><a href="<%=contextPath%>/recruit.do"><img src="" alt="공채목록"/></a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/recruit.do">공채목록</a></td>
-		</tr>
-		<tr>
-			<td><a href="<%=contextPath%>/calander.do">공채달력</a></td>
+			<td><a href="<%=contextPath%>/calander.do"><img src="" alt="공채달력"/></a></td>
 		</tr>
 	</table>
 </body>

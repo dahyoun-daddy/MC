@@ -31,13 +31,12 @@
 	
 	#user_menu{
 		float:right;
-		
+		width:150px;
 	}
 	
 	.menu a{cursor:pointer;}
-    .menu .hide{display:none;}
     
-    ul{
+    .menu_ul{
 	    list-style:none;
 	    padding-left:0px;
     }
@@ -49,10 +48,13 @@
 <script type="text/javascript">
 	//html dom 이 다 로딩된 후 실행된다.
 	$(document).ready(function(){
+		$(".menu>a").next("ul").toggleClass("hide");
+		
+		
 	    // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
 	    $(".menu>a").click(function(){
 	        var submenu = $(this).next("ul");
-	
+	        
 	        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
 	        if( submenu.is(":visible") ){
 	            submenu.slideUp();
@@ -60,6 +62,16 @@
 	            submenu.slideDown();
 	        }
 	    });
+	    
+	    
+	    $("#logio").click(function(){
+	    	alert("logio");
+	    	
+	    	location.href="<%=contextPath%>/user/login_page.do";
+
+	    });
+	    
+	    
 	});
 
 
@@ -69,23 +81,23 @@
 <body>
 	<div id="wrapper">	
 		<div id="logo" align="left">
-			<a href="<%=contextPath%>/main/home_main.do">MC(thumb-nail)</a>
+			<a href="<%=contextPath%>/main/home_main.do"><img src="" alt="MC(thumb-nail)"/></a>
 		</div>
 		<div id="user_menu" align="right">
 			<ul>
-				<li class="menu">
+				<li class="menu menu_ul">
 	            <a><img src="" alt="유저 메뉴"/></a>
-		            <ul class="hide">
-		                <li><a href="<%=contextPath%>/user/user_login.do">로그인/로그아웃</a></li>
-		                <li><a href="<%=contextPath%>/user/user_modify.do">회원 정보 수정</a></li>
-		                <li><a href="<%=contextPath%>/user/user_register.do">회원 가입</a></li>
-		                <li><a href="<%=contextPath%>/user/favorite.do">즐겨찾기 메뉴</a></li>
+		            <ul class="hide menu_ul" style="display:none">
+		                <li><a href="" id="logio"><img src="" alt="로그인/로그아웃"/></a></li>
+		                <li><a href="<%=contextPath%>/#"><img src="" alt="회원 정보 수정"/></a></li>
+		                <li><a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a></li>
+		                <li><a href="<%=contextPath%>/#"><img src="" alt="즐겨찾기 메뉴"/></a></li>
 		            </ul>
 		        </li>
 			</ul>	
 		</div>
-		<div id="title" align="center">
-			<a href="<%=contextPath%>/blog/portfolio.do">XXX님의 구직 블로그</a>
+		<div id="title">
+			<a href="<%=contextPath%>/blog/portfolio.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 	</div>
 </body>

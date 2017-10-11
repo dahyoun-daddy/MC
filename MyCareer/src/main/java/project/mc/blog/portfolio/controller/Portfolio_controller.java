@@ -1,6 +1,8 @@
 package project.mc.blog.portfolio.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -251,14 +253,17 @@ public class Portfolio_controller {
 	
 	
 	
-	@RequestMapping(value="portfolio_menu.do", method = RequestMethod.GET)
+	@RequestMapping(value="portfolio_menu.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String portfolio_menu(HttpServletRequest req, HttpServletResponse res) {
+	public String portfolio_menu(HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
 		log.debug("portfolio_menu*");
 		String user_id = req.getParameter("user_id").toString();
 		log.debug("user_id"+user_id);
 		String login_id = req.getParameter("login_id").toString();
 		log.debug("login_id"+login_id);
+		String contextPath = req.getContextPath();
+		contextPath = "http://localhost:8080" + contextPath;
+		log.debug("contextPath"+contextPath);
 		
 		PortfolioVO inVO = new PortfolioVO();
 		inVO.setUser_id(user_id);
@@ -266,15 +271,28 @@ public class Portfolio_controller {
 		
 		StringBuilder sb = new StringBuilder();
 		
+		sb.append("<ul class='pf_menu' style='display:none'>");
+		
 		if(user_id != null && user_id.equals(login_id)) {
-			sb.append("<button id='new_tmp'>새 템플릿</button><br>");
+			sb.append("<li><a href='"+contextPath+"/blog/portfolio_edit_tmp1.do'><img src='' alt='새 템플릿'/></a></li>\n");
 		}
 		
+		for(PortfolioVO outVO : list) {
+			int pf_id = outVO.getPf_id();
+			int tmp_no = outVO.getTmp_no();
+			
+			sb.append("<li><a href='"+contextPath+"/blog/portfolio_view_tmp"+tmp_no+".do?pf_id="+pf_id+"'><img src='' alt='템플릿_"+pf_id+"'/></a></li>\n");
+		}
 		
-		Gson gson = new Gson();
-        String json = gson.toJson(list);
+		sb.append("</ul>");
 		
-		return json;
+//		Gson gson = new Gson();
+//        String json = gson.toJson(list);
+		
+		String outStr = sb.toString();
+		log.debug("outStr: "+outStr);
+		//URLEncoder.encode(outStr , "UTF-8");
+		return outStr;
 	}
 	
 }

@@ -3,8 +3,10 @@
 <%
 //todo - userVO 가져와서 id 표시 및 유저 메뉴 생성
 
-
-
+	String login_id = (String)session.getAttribute("login_id");
+	//login_id = "sdfsdf";
+	
+	
 %>    
 <%
   //contextPath
@@ -64,11 +66,6 @@
 	    });
 	    
 	    
-	    $("#logio").click(function(){
-	    	
-	    	location.href("<%=contextPath%>/user/login_page.do");
-
-	    });
 	    
 	    
 	});
@@ -87,7 +84,17 @@
 				<li class="menu menu_ul">
 	            <a><img src="" alt="유저 메뉴"/></a>
 		            <ul class="hide menu_ul" style="display:none">
-		                <li><a href="" id="logio"><img src="" alt="로그인/로그아웃"/></a></li>
+		            	<%
+		            		if(login_id == null){
+		            	%>
+		                	<li><a href="<%=contextPath%>/user/login_page.do" id="login"><img src="" alt="로그인"/></a></li>
+		                <%
+		            		}else{
+		                %>
+		                	<li><a href="<%=contextPath%>/user/do_logout.do" id="logout"><img src="" alt="로그아웃"/></a></li>
+		                <%
+		            		}
+		                %>
 		                <li><a href="<%=contextPath%>/#"><img src="" alt="회원 정보 수정"/></a></li>
 		                <li><a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a></li>
 		                <li><a href="<%=contextPath%>/#"><img src="" alt="즐겨찾기 메뉴"/></a></li>

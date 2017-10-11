@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import project.mc.blog.resume.domain.ResumeVO;
+import project.mc.blog.user.domain.UserVO;
 import project.mc.commons.DTO;
 
 
@@ -58,8 +59,7 @@ public class ResumeDaoImpl implements ResumeDao {
 		resumeVO.setReg_id("joon");
 		List<ResumeVO> list = sqlSession.selectList(statement, resumeVO);
 		log.debug("ResumeDaoImpl의 do_search 입니다");
-		//return sqlSession.selectList(statement, resumeVO);
-		return list;
+		return sqlSession.selectList(statement);
 	}
 
 	@Override
@@ -117,6 +117,46 @@ public class ResumeDaoImpl implements ResumeDao {
 		
 		return sqlSession.selectOne(statement, inResumeVO);
 	}
+
+	@Override
+	public List<?> do_search_img(DTO dto) {
+		String statement = namespace + ".do_search_img";
+		log.debug("ResumeDaoImpl의 do_search_img 입니다");
+		log.debug("dto.toString: "+dto.toString());
+		return sqlSession.selectList(statement, dto);
+	}
+	
+	@Override
+	public int do_upsert(DTO dto) {
+		int flag = 0;
+		try {
+			String statement = namespace + ".do_upsert";
+			log.debug("ResumeDaoImpl의 do_upsert 입니다");
+			log.debug("statement 값은 : " + statement);
+			log.debug("dto.toString()의 값은 : " + dto.toString());
+			ResumeVO vo = (ResumeVO)dto;
+			flag = sqlSession.update(statement, vo);
+			log.debug("flag:" +flag);
+			
+		}catch(DataAccessException e) {
+			throw e;
+		}
+		return flag;
+	}
+	
+	@Override
+	public int do_delete_img(DTO dto) {
+		int flag = 0;
+		String statement = this.namespace + ".do_delete_img";
+		log.debug("ResumeDaoImpl의 do_delete_img입니다");
+		log.debug("statement의 값은 : " + statement );
+		log.debug("deleteAll의 flag값은 :" + flag ); 
+		log.debug("ResumeDaoImpl의 do_delete_img입니다");
+		ResumeVO inVO = (ResumeVO)dto;
+		flag = sqlSession.delete(statement, inVO);
+		return flag;
+	}
+
 
 
 

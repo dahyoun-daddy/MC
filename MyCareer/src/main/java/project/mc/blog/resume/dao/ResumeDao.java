@@ -26,4 +26,25 @@ public interface ResumeDao extends WorkDiv{
 	public DTO do_searchOne(DTO dto);
 	
 	public List<?> do_search(DTO dto);
+	
+	/**
+	 * 포트폴리오의 이미지 조회
+	 * @param dto
+	 * @return
+	 */
+	public List<?> do_search_img(DTO dto);
+	
+	/**
+	 * 포트폴리오의 upsert
+	 * @param dto
+	 * @return
+	 */
+	int do_upsert(DTO dto);
+	
+	/**
+	 * 포트폴리오의 delete
+	 * @param dto
+	 * @return
+	 */
+	int do_delete_img(DTO dto);
 }

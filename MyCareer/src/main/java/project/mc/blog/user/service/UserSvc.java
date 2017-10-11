@@ -1,5 +1,7 @@
 package project.mc.blog.user.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.dao.DataAccessException;
@@ -17,7 +19,7 @@ public interface UserSvc {
 	
 	public int do_delete(DTO dto) throws DataAccessException;
 	
-	public int do_update(UserVO inVO, HttpSession session) throws DataAccessException;
+	public int do_update(UserVO vo) throws DataAccessException;
 	
 	
 	public int do_save(DTO dto) throws DataAccessException;
@@ -28,13 +30,20 @@ public interface UserSvc {
 	
 	public void logout(HttpSession session);
 
-	public boolean do_loginCheck(UserVO inVO, HttpSession session);
+	public boolean do_loginCheck(UserVO inVO);
 	
 	// 로그인 정보
-	public UserVO viewMember(UserVO inVO, HttpSession session);
+	public UserVO viewMember(UserVO vo);
 	
-	// 회원 정보
-	public UserVO Member(String user_id);
+	
+
+	
+
+	
+
+	
+
+	
 
 	
 }

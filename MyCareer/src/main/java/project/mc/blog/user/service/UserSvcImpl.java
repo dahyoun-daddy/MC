@@ -1,7 +1,9 @@
 package project.mc.blog.user.service;
 
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -50,15 +52,10 @@ public class UserSvcImpl implements UserSvc {
 		
 	}
 
-	
-	public int do_update(UserVO inVO, HttpSession session){
-		int result = userDao.do_update(inVO);
-		if(result == 1) {
-			UserVO inVO2 = viewMember(inVO, session);
-			// 세션변수 등록
-			session.setAttribute("user_id", inVO2.getUser_id());
-		}
-		return result;
+	@Override
+	public int do_update(UserVO vo ){
+		
+		return userDao.update(vo);
 	}
 
 	
@@ -81,32 +78,21 @@ public class UserSvcImpl implements UserSvc {
 
 
 	@Override
-	public boolean do_loginCheck(UserVO inVO, HttpSession session) {
-		boolean result = userDao.do_loginCheck(inVO);
-		if(result) {
-			UserVO inVO2 = viewMember(inVO, session);
-			// 세션변수 등록
-			session.setAttribute("user_id", inVO2.getUser_id());
-			session.setAttribute("user_name", inVO2.getUser_name());
-		}
+	public boolean do_loginCheck(UserVO vo) {
+		
+		boolean result = userDao.do_loginCheck(vo);
+		
 		return result;
 	}
 
 
 	@Override
-	public UserVO viewMember(UserVO inVO, HttpSession session) {
+	public UserVO viewMember(UserVO vo) {
 		
-		return userDao.viewMember(inVO);
+		return userDao.viewMember(vo);
 	}
 
 
-	@Override
-	public UserVO Member(String user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 	
 	

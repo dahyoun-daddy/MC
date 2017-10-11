@@ -77,13 +77,14 @@ public class UserDaoImpl implements UserDao {
 		try {
 			String statement = namespace +".do_update";
 			UserVO inUserVo = (UserVO)vo;
+			log.debug("들어간다@@@@@@@@@@@@@");
 			flag = sqlSession.update(statement, inUserVo);
-			log.debug("11111111111flag::::::::::::::::::::"+flag);
 		}catch(DataAccessException e) {
 			throw e;
 		}	
 		
 		return flag;
+		
 	}
 
 	
@@ -103,10 +104,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean do_loginCheck(UserVO vo) {
 		
-		log.debug("111로그인탐");
 	    String statement = namespace +".do_loginCheck";
 		String flag = sqlSession.selectOne(statement, vo);
-		log.debug("로그인탐222");
 		return (flag == null) ? false : true;
 	}
 	
@@ -118,19 +117,11 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	@Override
-	public UserVO viewMember(UserVO inVO) {
-	
-		String statement = namespace +".do_viewMember";
-		
-		return sqlSession.selectOne(statement, inVO);
-	}
-	
-	@Override
-	public UserVO Member(String user_id) {
+	public UserVO viewMember(UserVO vo) {
 		
 		String statement = namespace +".do_viewMember";
 		
-		return sqlSession.selectOne(statement, user_id);
+		return sqlSession.selectOne(statement, vo);
 	}
 	
 	

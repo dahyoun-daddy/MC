@@ -5,10 +5,11 @@
   //contextPath
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080"+contextPath;  
+  
+  // 로그인 로그아웃 버튼 활성화
+  
 %>
-<%
-	
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,6 +60,10 @@
 </script>
 </head>
 <body>
+<%
+	Object user_id = session.getAttribute("user_id");
+	Object user_name = session.getAttribute("user_name");
+%>
 	<h1>
 		My Career
 	</h1>
@@ -75,16 +80,22 @@
 	        </li>
 		</ul>	
 	</div>
-	
-	
 	<div id="wrapper">
 		<div id="user_menu">
-			<c:if test="${msg == 'success' }">
-			${sessionScope.user_name}(${sessionScope.user_id})님 <a href="<%=contextPath%>/user/login_page.do">로그인</a>
+		<%
+			if(user_id == null){
+		%>
+			 <a href="<%=contextPath%>/user/login_page.do">로그인</a>
+		<%
+			} else {
+		%>
+			<%=user_name%>(<%=user_id%>)님
 			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
 			 <a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
-			</c:if>
 			<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
+		<%
+			} 
+		%>	
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="blog_search.do">

@@ -9,10 +9,14 @@
 <!-- 로그인 정보 -->
 <select id="do_viewMember" parameterType="project.mc.blog.user.domain.UserVO" resultType="project.mc.blog.user.domain.UserVO">
 select
+USER_NO,
+WITHDRAW_FLAG,
+USER_DIV,
 USER_ID, 
 USER_PASSWORD,
 USER_NAME,
 AGE,
+GENDER,
 EMAIL,
 ADDRESS,
 PHONE

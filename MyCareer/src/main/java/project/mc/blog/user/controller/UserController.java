@@ -2,7 +2,10 @@ package project.mc.blog.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,6 +40,8 @@ import project.mc.commons.DTO;
 public class UserController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	public static final String SESSION_USER_ID = "user_id";
 	
 	@Autowired 
 	UserSvc userSvc;
@@ -101,21 +106,28 @@ public class UserController {
 //		//return "redirect:do_idCheck.do";
 //	}
 	
+	// 회원 수정
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView do_updateForm(@ModelAttribute UserVO inVO, HttpSession session) {
-		UserVO result = userSvc.viewMember(inVO, session);
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView do_updateForm(@ModelAttribute HttpSession session ,HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
-		mav.setViewName("user/user_modify");
-		mav.addObject("msg", "success");
+		UserVO inVO = new UserVO();
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("main/home_main");//List
 		
-		
-		return mav;
+		return modelAndView;
 	}
 	
+	// 회원수정 페이지로 이동
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public String do_update(UserVO dto,HttpSession session) {
-	
+	public String do_update(@ModelAttribute HttpSession session, HttpServletRequest req) {
+		UserVO inVO = new UserVO();
+		UserVO inVO2 = new UserVO();
+		String user_id = "난";
+		//(String)session.getAttribute("user_id");
+		inVO.setUser_id(user_id);
+		
+		inVO2=userSvc.viewMember(inVO);
+		log.debug("inVO2::::::"+inVO2.toString());
 		return "blog/user/user_modify";
 		
 	}
@@ -154,11 +166,21 @@ public class UserController {
 	// 로그인 처리
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
-	public ModelAndView do_loginCheck(@ModelAttribute UserVO inVO, HttpSession session) throws IOException {
+	public ModelAndView do_loginCheck(@ModelAttribute UserVO inVO, HttpSession session, HttpServletRequest req) throws IOException {
 		
-		boolean result = userSvc.do_loginCheck(inVO, session);
+		
+		String user_id = req.getParameter(SESSION_USER_ID);
+		String user_password = req.getParameter("user_password");
+		session.setAttribute(SESSION_USER_ID, user_id);
+		session.setAttribute("user_password", user_password);
 		ModelAndView mav = new ModelAndView();
 		
+		mav.setViewName("main/home_main");
+		mav.addObject("msg", "success");
+		inVO.setUser_id(user_id);
+		boolean result = userSvc.do_loginCheck(inVO);
+		session.getAttribute("user_id");
+		session.getAttribute("user_password");
 		if(result == true) {
 			mav.setViewName("main/home_main");
 			mav.addObject("msg", "success");

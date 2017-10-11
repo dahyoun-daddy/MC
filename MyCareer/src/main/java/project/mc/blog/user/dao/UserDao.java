@@ -1,5 +1,7 @@
 package project.mc.blog.user.dao;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.dao.DataAccessException;
@@ -21,8 +23,8 @@ public interface UserDao extends WorkDiv {
 	// 로그인 체크하기
 	public boolean do_loginCheck(UserVO vo);
 	// 로그인 정보
-	public UserVO viewMember(UserVO inVO);
+	public UserVO viewMember(UserVO vo);
 	
-	// 회원 정보
-	public UserVO Member(String user_id);
+	
+	
 }

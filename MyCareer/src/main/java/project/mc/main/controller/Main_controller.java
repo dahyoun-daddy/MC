@@ -1,13 +1,16 @@
 package project.mc.main.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.user.domain.UserVO;
 import project.mc.blog.user.service.UserSvc;
@@ -21,9 +24,8 @@ public class Main_controller {
 	
 	
 	@RequestMapping(value="main/home_main.do", method= {RequestMethod.GET , RequestMethod.POST})
-	public String main_start() {
+	public String main_start(@ModelAttribute UserVO inVO, HttpSession session, HttpServletRequest req) {
 		log.debug("main start");
-		
 		
 		
 		

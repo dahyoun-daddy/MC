@@ -65,9 +65,8 @@
 	    
 	    
 	    $("#logio").click(function(){
-	    	alert("logio");
 	    	
-	    	location.href="<%=contextPath%>/user/login_page.do";
+	    	location.href("<%=contextPath%>/user/login_page.do");
 
 	    });
 	    

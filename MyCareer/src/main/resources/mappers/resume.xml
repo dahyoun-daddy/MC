@@ -46,7 +46,7 @@
  	</delete>
  	
  	<!-- resume(이력서) 검색 -->
- 	<select id="do_search" resultType="ResumeVO">
+ 	<select id="do_search" parameterType="ResumeVO" resultType="ResumeVO">
  		SELECT 
  			file_id,
  			table_div,
@@ -62,6 +62,7 @@
  		FROM
  			mc_file
  		WHERE
- 			reg_id = #{reg_id} AND table_div=0 
+ 			reg_id = #{reg_id} AND table_div=0
+ 		ORDER BY reg_dt DESC
  	</select>
  </mapper>

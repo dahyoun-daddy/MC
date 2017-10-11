@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -31,9 +32,26 @@ public class Resume_controller {
 	@Resource(name="downloadView")
 	private View downloadView;
 	
-	@RequestMapping(value="blog/resume/resume.do", method = RequestMethod.GET)
+	/*@RequestMapping(value="blog/resume/resume.do", method = RequestMethod.GET)
 	public String resume() {
 		return "blog/resume/resume";
+	}*/
+	
+	@RequestMapping(value="blog/resume/resume.do")	
+	public ModelAndView resume_search(HttpServletRequest req) {
+		ResumeVO inVO = new ResumeVO();
+		//TODO 블로그의 주인을 파라미터에서 가져온다.
+		//String reg_id = req.getParameter("user_id or blog_id").toString();
+		String reg_id = "joon";
+		inVO.setReg_id(reg_id);
+		
+		List<ResumeVO> list = (List<ResumeVO>) resumeSvc.do_search(inVO);
+			
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", list);
+		modelAndView.setViewName("blog/resume/resume");
+		
+		return modelAndView;
 	}
 	
 	/*@RequestMapping(value="blog/resume_save.do", method = RequestMethod.POST)
@@ -54,14 +72,30 @@ public class Resume_controller {
 		return "";
 	}*/
 	
-	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.GET)
-	public String upload() {
-		return "blog/resume/upload";
-	}
+//	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.GET)
+//	public String upload() {
+//		return "blog/resume/resume";
+//	}
 	
+	
+//	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.POST)
+//	public ModelAndView do_saveSubmit(MultipartHttpServletRequest mReq)
+//			throws IOException, DataAccessException{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<DTO> list = resumeSvc.do_saveMulti(mReq);
+//		for(DTO vo : list) {
+//			ResumeVO resumeVO = (ResumeVO)vo;
+//			log.debug("Resume_controller 입니다");
+//			log.debug("resumeVO의 값은 : " + resumeVO.toString());
+//			log.debug("Resume_controller 입니다");
+//		}
+//		modelAndView.setViewName("blog/resume/resume");
+//		modelAndView.addObject("resume_list", list);
+//		return modelAndView;
+//	}
 	
 	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.POST)
-	public ModelAndView do_saveSubmit(MultipartHttpServletRequest mReq)
+	public String do_saveSub(MultipartHttpServletRequest mReq)
 			throws IOException, DataAccessException{
 		ModelAndView modelAndView = new ModelAndView();
 		List<DTO> list = resumeSvc.do_saveMulti(mReq);
@@ -71,8 +105,6 @@ public class Resume_controller {
 			log.debug("resumeVO의 값은 : " + resumeVO.toString());
 			log.debug("Resume_controller 입니다");
 		}
-		modelAndView.setViewName("blog/resume/upload");
-		modelAndView.addObject("resume_list", list);
-		return modelAndView;
+		return "redirect:resume.do";
 	}
 }

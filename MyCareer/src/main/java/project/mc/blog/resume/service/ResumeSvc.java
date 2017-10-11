@@ -18,4 +18,15 @@ public interface ResumeSvc {
 	public int do_save(DTO dto) throws DataAccessException;
 	
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException;
+	
+	public List<?> do_search(DTO dto);
+	
+	public DTO do_searchOne(DTO dto);
+	
+	public int do_update(DTO dto);
+	
+	public int do_delete(DTO dto);
+	
+	public int do_checkDelete(List<String> list);
+	
 }

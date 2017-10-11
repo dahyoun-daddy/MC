@@ -1,5 +1,7 @@
 package project.mc.blog.resume.dao;
 
+import java.util.List;
+
 import project.mc.commons.DTO;
 import project.mc.commons.WorkDiv;
 
@@ -22,4 +24,6 @@ public interface ResumeDao extends WorkDiv{
 	 * 단건 조회
 	 */
 	public DTO do_searchOne(DTO dto);
+	
+	public List<?> do_search(DTO dto);
 }

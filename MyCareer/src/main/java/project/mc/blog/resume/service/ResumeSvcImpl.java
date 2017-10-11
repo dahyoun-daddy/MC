@@ -62,7 +62,7 @@ public class ResumeSvcImpl implements ResumeSvc {
 			
 			MultipartFile mFile = mReq.getFile(uploadFileName);
 			org_file_name = mFile.getOriginalFilename();
-			ext = org_file_name.substring(org_file_name.lastIndexOf("."));
+			ext = org_file_name.substring(org_file_name.lastIndexOf(".")+1);
 			file_size = mFile.getSize();
 			
 			save_file_name = this.currDate("yyyy-MM-dd") + "_" +  org_file_name;
@@ -122,6 +122,53 @@ public class ResumeSvcImpl implements ResumeSvc {
 		log.debug("DTO의 값은 : " + dto.toString());
 		log.debug("ResumeSvcImpl do_save입니다");
 		return resumeDao.do_save(dto);
+	}
+
+	@Override
+	public List<?> do_search(DTO dto) {
+		log.debug("ResumeSvcImpl do_search입니다");
+		log.debug("DTO의 값은 : " + dto.toString());
+		log.debug("ResumeSvcImpl do_search입니다");
+		return resumeDao.do_search(dto);
+	}
+
+	@Override
+	public DTO do_searchOne(DTO dto) {
+		log.debug("ResumeSvcImpl do_searchOne입니다");
+		log.debug("DTO의 값은 : " + dto.toString());
+		log.debug("ResumeSvcImpl do_searchOne입니다");
+		return resumeDao.do_searchOne(dto);
+	}
+
+	@Override
+	public int do_update(DTO dto) {
+		log.debug("ResumeSvcImpl do_update입니다");
+		log.debug("DTO의 값은 : " + dto.toString());
+		log.debug("ResumeSvcImpl do_update입니다");
+		return resumeDao.do_update(dto);
+	}
+
+	@Override
+	public int do_delete(DTO dto) {
+		log.debug("ResumeSvcImpl do_delete입니다");
+		log.debug("DTO의 값은 : " + dto.toString());
+		log.debug("ResumeSvcImpl do_delete입니다");
+		return resumeDao.do_delete(dto);
+	}
+
+	@Override
+	public int do_checkDelete(List<String> list) {
+		log.debug("ResumeSvcImpl do_checkdelete입니다");
+		log.debug("DTO의 값은 : " + list.toString());
+		log.debug("ResumeSvcImpl do_checkdelete입니다");
+		int flag = 0;
+		for(String reg_id : list) {
+			ResumeVO resumeVO = new ResumeVO();
+			resumeVO.setReg_id(reg_id);
+			int one = resumeDao.do_delete(resumeVO);
+			flag += one;
+		}
+		return flag;
 	}
 	
 }

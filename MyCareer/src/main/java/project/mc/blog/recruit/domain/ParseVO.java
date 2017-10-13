@@ -1,6 +1,8 @@
 package project.mc.blog.recruit.domain;
 
-public class ParseVO {
+import project.mc.commons.DTO;
+
+public class ParseVO extends DTO {
 	private	String	reSubject	;	//공고 제목
 	private	String	reCompany	;	//회사명
 	private	String	reExDate	;	//공고 마감일

@@ -33,6 +33,14 @@ $(document).ready(function(){
 	    frm.action = "post_doSearch.do";
 	    frm.submit();
 	}
+	
+	function readPost(post_id){
+		var frm = document.frm;
+		frm.method = "POST";
+	    frm.action = "post_edit_form.do";
+	    frm.post_id.value = post_id;
+	    frm.submit();
+	}
 </script>
 </head>
 <body>
@@ -75,7 +83,7 @@ $(document).ready(function(){
 				<tr>
 					<tr align="center" valign="middle">
 					<td colspan="5">
-						<a href="post_edit.do"><input type = "button" class="btn btn-md  purple-bg" value="수정하기" /></a>
+						<input onclick="readPost('${PostDTO.post_id}');" type = "button" class="btn btn-md  purple-bg" value="수정하기" /></a>
     					<button class="btn btn-success"  onclick="doSearch()">목록으로</button>
 					</td>
 				</tr>

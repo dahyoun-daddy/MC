@@ -27,7 +27,7 @@ $(document).ready(function(){
 	CKEDITOR.replace('post_content');
 	
 	//do_save
-	$("#do_save").on("click",function(){
+	/* $("#do_save").on("click",function(){
 		if(CKEDITOR.instances.post_content.getData().length < 1){
 			alert("내용을 입력해 주세요.");
 			return;
@@ -59,7 +59,7 @@ $(document).ready(function(){
            }
        });			
 		
-	});//--do_save
+	});//--do_save */
 });
 	//수정
 	function doUpdate(){
@@ -111,11 +111,12 @@ $(document).ready(function(){
 					<td align="center">제목</td>
 					<td><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40"/></td>
 				</tr>
-				
 				<tr>
 					<td id="title"  align="center">내용</td>
 					<td colspan="2">
-						<textarea id="post_content" name="post_content"><c:out value="${PostDTO.post_content}"/></textarea>
+						<textarea id="post_content" name="post_content" >
+						<c:out value="${PostDTO.post_content}"/>
+						</textarea>
 					</td>
 				</tr>
 				<tr>

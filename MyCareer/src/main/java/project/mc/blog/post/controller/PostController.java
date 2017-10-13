@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,26 +57,20 @@ public class PostController {
 		PostDTO inVO = new PostDTO();
 		inVO.setPost_id(Integer.parseInt(req.getParameter("post_id")));
 		
-		log.debug("1=========================");
-		log.debug(inVO.toString());
-		log.debug("1=========================");
-		
 		ModelAndView modelAndView=new ModelAndView();
 		//modelAndView.setViewName("blog/post/post_edit_form");
 		modelAndView.setViewName("blog/post/post_view");
 		
 		PostDTO  vo = (PostDTO)postSvc.do_searchOne(inVO);
-		log.debug("vo"+vo.toString());
-		log.debug("=========================");
 		
 		modelAndView.addObject("PostDTO",vo);
 		
 		return modelAndView;
 	}
 	
-	
-	@RequestMapping(value = "blog/post/post_edit.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView doedit (HttpServletRequest req) {
+	// 글 수정 페이지로 이동
+	@RequestMapping(value = "blog/post/post_edit_form.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView doedit_form (HttpServletRequest req, HttpSession session) {
 		PostDTO inVO = new PostDTO();
 		inVO.setPost_id(Integer.parseInt(req.getParameter("post_id")));
 		
@@ -96,6 +91,7 @@ public class PostController {
 		return modelAndView;
 	}
 	
+
 	@RequestMapping(value = "blog/post/post_doSave.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String doSave_View (HttpServletRequest req) throws IOException{
 		

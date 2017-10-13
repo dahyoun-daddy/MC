@@ -3,10 +3,11 @@ package project.mc.blog.post.service;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.mc.blog.post.domain.DTO;
 
-
+@Transactional
 public interface PostSvc {
 	public DTO do_searchOne(DTO dto);
 	

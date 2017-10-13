@@ -11,6 +11,7 @@
 %>
 <%
 	String user_id = (String)session.getAttribute("user_id");
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -85,6 +86,7 @@
 	            async: false,
 	            data:{
 	            	"user_id" :$("#user_id").val(),
+	            	"user_password" :$("#user_password").val(),
 		            "withdraw_flag" :withdraw_flag			
 	            },
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수

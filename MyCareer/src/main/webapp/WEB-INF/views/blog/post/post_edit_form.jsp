@@ -121,7 +121,7 @@ $(document).ready(function(){
 				<tr>
 					<tr align="center" valign="middle">
 					<td colspan="5">
-						<input type = "button" class="btn btn-md  purple-bg" onclick="javascript:doUpdate();" value="수정"/>
+						<input type = "button" class="btn btn-md  purple-bg" onclick="javascript:doUpdate();" value="확인"/>
     					<button class="btn btn-success"  onclick="doSearch()">목록으로</button>
 					</td>
 				</tr>

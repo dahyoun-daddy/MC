@@ -2,16 +2,16 @@ package project.mc.blog.post.domain;
 
 
 public class PostDTO extends DTO {
-	int post_id        ; //?��?��?�� id
-	int blog_id        ; //?��?�� 블로�? id
-	int sup_post_id    ; //?��?�� 게시�? id
-	String post_title  ; //?���?
-	String post_content; //?��?��
-	String reg_id      ; //?��?��?�� id
-	String reg_dt      ; //?��?��?��?��
-	String mod_id      ; //?��?��?�� id
-	String mod_dt      ; //?��?��?��?��
-	int del_flag       ; //?��?�� ?��?���?
+	int post_id        ; //포스트 id   
+	int blog_id        ; //소속 블로그 id
+	int sup_post_id    ; //상위 게시글 id
+	String post_title  ; //제목       
+	String post_content; //내용       
+	String reg_id      ; //작성자 id   
+	String reg_dt      ; //작성일자     
+	String mod_id      ; //수정자 id   
+	String mod_dt      ; //수정일자     
+	int del_flag       ; //삭제 플래그   
 	
 	
 	

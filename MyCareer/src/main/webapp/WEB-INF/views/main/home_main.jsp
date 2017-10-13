@@ -91,7 +91,7 @@
 			(<%=user_id%>)님
 			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
 			 <a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
-			<a href="<%=contextPath%>/blog/post.do">블로그로(로그인 되어 있을 경우에만)</a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do">블로그로(로그인 되어 있을 경우에만)</a>
 		<%
 			} 
 		%>	

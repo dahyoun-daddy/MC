@@ -78,7 +78,7 @@
 	            </ul>
 	        </li>
 		</ul>	
-	</div>
+	</div> 
 	<div id="wrapper">
 		<div id="user_menu">
 		<%

@@ -172,11 +172,15 @@ public class Portfolio_controller {
 			flag = pfSvc.do_update(mreq);
 			log.debug("flag: "+flag);
 			
+		}else {
+			log.debug("wordDiv error");
+			
 		}
+		
 		
 		log.debug("=====Portfolio_controller: portfolio_upsert=end==========");
 		
-		return "";
+		return "redirect:portfolio_view_tmp1.do";
 	}
 	
 	@RequestMapping(value="blog/portfolio_update.do", method = RequestMethod.POST)

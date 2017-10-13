@@ -94,7 +94,7 @@
 				frm.workDiv.value = "do_update";
 				alert("do_update")
 			}else{
-				frm.workDiv = "do_save";
+				frm.workDiv.value = "do_save";
 				alert("do_save")
 			}
 			
@@ -160,7 +160,7 @@
 			<input type="hidden" name="user_id" id="user_id" value="111">
 			<input type="hidden" name="workDiv" id="workDiv" value="">
 			<input type="hidden" name="table_div" id="table_div" value="31">
-			<input type="hidden" name="table_id" id="table_id" value="63">
+			<input type="hidden" name="table_id" id="table_id" value="<%=pf_id%>">
 			
 			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">
 			<img class="pf_img" src="${srcMap['3']}" alt="tmp1_03" id="tmp1_03">

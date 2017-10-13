@@ -80,6 +80,7 @@ public class PortfolioDaoImpl implements PortfolioDao {
 			flag = sqlSession.update(statement, inPfVo);
 			log.debug("======PortfolioDaoImpl: do_save======");
 			log.debug("flag: "+flag);
+			log.debug("pf_id: "+inPfVo.getPf_id());
 			log.debug("======PortfolioDaoImpl: do_save======");
 			
 		}catch(DataAccessException e) {

@@ -59,7 +59,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		this.do_upsertImages(mReq);
 		
 		log.debug("======PortfolioSvcImpl: do_save=end================");
-		
 		return flag;
 	}
 	
@@ -74,7 +73,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		String attach_path = "resources\\uploadimages\\";
 		String uploadPath = root_path+attach_path;
 		String workDiv    = mReq.getParameter("workDiv");
-		if(workDiv != null && workDiv.equals("pf_save")) {
+		if(workDiv != null && workDiv.equals("do_save")) {
 			log.debug("pf_multisave ongoing");
 		}
 		
@@ -146,6 +145,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 					mFile.transferTo(new File(uploadPath+saveFileName));
 					
 				}catch(IllegalStateException ie) {
+					log.debug("IllegalStateException");
 					throw ie;
 				}catch(Exception e) {
 					e.getCause();

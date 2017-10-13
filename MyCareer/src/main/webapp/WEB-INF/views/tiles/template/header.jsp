@@ -101,7 +101,7 @@
 			</ul>	
 		</div>
 		<div id="title">
-			<a href="<%=contextPath%>/blog/portfolio.do"><img src="" alt="XXX님의 구직 블로그"/></a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 	</div>
 </body>

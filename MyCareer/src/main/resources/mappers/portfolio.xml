@@ -7,7 +7,8 @@
 
 
 <!-- 포트폴리오 저장   -->
-<insert id="do_save" parameterType="project.mc.blog.portfolio.domain.PortfolioVO" >
+<insert id="do_save" parameterType="project.mc.blog.portfolio.domain.PortfolioVO" 
+		useGeneratedKeys="true" keyProperty="pf_id" keyColumn="pf_id">
 	INSERT INTO mc_portfolio 
 	( 
 	    pf_id

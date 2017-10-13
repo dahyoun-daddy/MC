@@ -55,7 +55,7 @@
                                 custom view 클래스인 UtilFile을 view로 사용해야 하기 때문에 mapping함 -->
                                       
     <beans:bean 
-class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	class="org.springframework.web.servlet.view.BeanNameViewResolver">
         <beans:property name="order" value="1" />
     </beans:bean>
     

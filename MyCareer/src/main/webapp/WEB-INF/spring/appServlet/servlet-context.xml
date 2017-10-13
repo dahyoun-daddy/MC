@@ -60,6 +60,8 @@ class="org.springframework.web.servlet.view.BeanNameViewResolver">
     </beans:bean>
     
 	<context:component-scan base-package="project.mc.*" />
-
+	
+	<!-- file download -->
+	<beans:bean id="downloadView" class="project.mc.commons.DownloadView"/>
 
 </beans:beans>

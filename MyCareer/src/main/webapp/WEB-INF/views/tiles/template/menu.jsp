@@ -85,9 +85,6 @@
 		<tr>
 			<td><a href="<%=contextPath%>/recruit.do"><img src="" alt="공채목록"/></a></td>
 		</tr>
-		<tr>
-			<td><a href="<%=contextPath%>/calander.do"><img src="" alt="공채달력"/></a></td>
-		</tr>
 	</table>
 </body>
 </html>

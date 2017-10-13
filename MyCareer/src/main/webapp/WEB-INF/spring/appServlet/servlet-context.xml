@@ -60,6 +60,9 @@
     </beans:bean>
     
 	<context:component-scan base-package="project.mc.*" />
-
+	
+	<!-- file download -->
+	<!-- <beans:bean id="downloadView" class="project.mc.commons.DownloadView">		
+	</beans:bean> -->
 
 </beans:beans>

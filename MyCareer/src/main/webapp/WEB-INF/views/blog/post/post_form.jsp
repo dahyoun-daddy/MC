@@ -38,7 +38,7 @@ $(document).ready(function(){
 	   
        $.ajax({
            type:"POST",
-           url:"post_doSave.do",
+           url:"post_doSave_form.do",
            dataType:"html",// JSON
            async: false,
            data:{

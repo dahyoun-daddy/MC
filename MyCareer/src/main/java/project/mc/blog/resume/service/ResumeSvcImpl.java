@@ -38,9 +38,10 @@ public class ResumeSvcImpl implements ResumeSvc {
 	@Override
 	public List<DTO> do_saveMulti(MultipartHttpServletRequest mReq) throws IOException, DataAccessException {
 		String root_path = mReq.getSession().getServletContext().getRealPath("/");
+		
 		String attach_path = "resources\\resume\\";
 		String uploadPath = root_path + attach_path;
-		
+		log.debug("씨발!!!"+uploadPath);
 		File fileDir = new File(uploadPath);
 		if(fileDir.isDirectory()==false) {
 			fileDir.mkdirs();
@@ -66,7 +67,7 @@ public class ResumeSvcImpl implements ResumeSvc {
 			ext = org_file_name.substring(org_file_name.lastIndexOf(".")+1);
 			file_size = mFile.getSize();
 			
-			save_file_name = this.currDate("yyyy-MM-dd") + "_" +  org_file_name;
+			save_file_name = this.currDate("yyyy-MM-dd") + "_" +  getUUid() + "." +ext;
 			
 			if(org_file_name != null && !org_file_name.equals("")) {
 					try {

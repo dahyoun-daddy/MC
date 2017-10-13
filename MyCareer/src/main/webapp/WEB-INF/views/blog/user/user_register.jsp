@@ -32,7 +32,7 @@
 	// JQuery
 	$(document).ready(function(){
 	
-		//  validate: 유효성 검사
+		/* //  validate: 유효성 검사
 		
 					$("#frm").validate({
 						 rules: {
@@ -49,7 +49,7 @@
 						 	  onsubmit: false,
 					    	  errorClass : "validation-error",
 					    	  validClass : "validation-valid"
-					});//--validate 끝	
+					});//--validate 끝	 */
 						    	
 						
 			
@@ -126,7 +126,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	<input type="hidden" name="withdraw_flag" id="withdraw_flag" value="1">
 	<div id="container" align="center">
 		<div>
-			<input type="text" id="user_id" name="user_id" maxlength="20" autocomplete="off"  placeholder="아이디" required="required" >
+			<input type="text" id="user_id" name="user_id" maxlength="20" autocomplete="off"  placeholder="아이디" >
 		</div>
 		<div>
 			<input type="password" id="user_password" name="user_password" maxlength="20" placeholder="비밀번호" >
@@ -139,7 +139,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 			<input type="radio" name="gender" value="2" id="radio2">여자
 		</div>
 		<div>
-			<input type="text" id="user_div" name="user_div" maxlength="20" placeholder="회원구분"  >
+			<input type="text" id="user_div" name="user_div" maxlength="20" placeholder="회원구분" value="1" >
 		</div>
 		<div>
 			<input type="text" id="age" name="age" maxlength="20" placeholder="나이"  >

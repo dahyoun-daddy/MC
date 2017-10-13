@@ -26,7 +26,6 @@ totalCnt = Integer.parseInt(
 
 <%
   //contextPath
-  System.out.println(request.getContextPath());
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath;  
 %>
@@ -92,84 +91,6 @@ totalCnt = Integer.parseInt(
 //jquery document
 	$(document).ready(function(){
 		
-		//do_save
-		/* $("#do_save").on("click",function(){
-		   
-		   if(false==confirm("등록하시겠습니까?"))return;
-		   
-		   var workDiv = $("#workDiv").val();
-		   var insertYN = (workDiv == "")?"":"update";
-		   console.log("insertYN: "+insertYN);
-	       $.ajax({
-               type:"POST",
-               url:"do_save.do",
-               dataType:"html",// JSON
-               async: false,
-               data:{
-                  "workDiv"  : insertYN,
-                  "id"       :$("#u_id").val(),
-                  "name"     :$("#u_name").val(),
-                  "password" :$("#u_password").val(),
-                  "level"    :$("#u_level").val(),
-                  "login"    :$("#u_login").val(),
-                  "recommend":$("#u_recommend").val(),
-                  "mail"     :$("#u_mail").val()
-               },
-               success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-                   //console.log("success data: "+data);
-                   doSearch();
-               },
-               complete: function(data){//무조건 수행
-                   
-               },
-               error: function(xhr,status,error){
-            	   console.log("error: "+error);
-               }
-           });			
-			
-		});//--do_save */
-		
-		//do_searchOne
-		$("#listTable>tbody").on("dblclick","tr",function(){
-						
-			var tr = $(this);
-			var td = tr.children();
-			var id = td.eq(2).text()
-			//console.log("row_index: "+row_index);
-			//console.log("td.eq(2): "+td.eq(2).text());
-			
-			$.ajax({
-	               type:"POST",
-	               url:"userForm.do",
-	               dataType:"html",// JSON
-	               data:{
-	                  "id" :id
-	               },
-	               success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	                   //console.log("success data: "+data);
-	                   var userVO = $.parseJSON(data);
-	                   $("#workDiv").val(userVO.id);
-	                   
-	                   $("#u_id").val(userVO.id);
-	                   $("#u_name").val(userVO.name);
-	                   $("#u_password").val(userVO.password);
-	                   $("#u_level").val(userVO.levelIntValue);
-	                   $("#u_login").val(userVO.login);
-                       $("#u_recommend").val(userVO.recommend);
-                       $("#u_mail").val(userVO.mail);
-                       $("#u_reg_dt").val(userVO.reg_dt);	
-	               },
-	               complete: function(data){//무조건 수행
-	            	   
-	               },
-	               error: function(xhr,status,error){
-	                   console.log("error: "+error);
-	               }
-	           });			
-			
-		});
-		//--do_searchOne
-		
 		//do_delete
 		$("#do_delete").on("click",function(){
 			 //console.log("do_delete");//check
@@ -180,7 +101,7 @@ totalCnt = Integer.parseInt(
 			 
 			 $("#check:checked").each( function(idx,row){
 				 var record = $(row).parents("tr");
-				 var id = $(record).find('td').eq(2).text();
+				 var id = $(record).find('td').eq(1).text();
 				 
 				 idArray.push(id);
 			 });//--checked
@@ -193,7 +114,7 @@ totalCnt = Integer.parseInt(
 			 
 			 
 			 var jsonIdList = JSON.stringify(idArray);
-			 //console.log("jsonIdList:"+jsonIdList);
+			 
 			 if(false==confirm("삭제하시겠습니까?\n"+jsonIdList))return;
 		     $.ajax({
 		    	 type:"POST",
@@ -211,7 +132,7 @@ totalCnt = Integer.parseInt(
                      
                  },
                  error: function(xhr,status,error){
-                     console.log("do_checkedDelete error: "+error);
+                	 alert("삭제에러");
                  }
              }); 
 			 
@@ -245,8 +166,7 @@ totalCnt = Integer.parseInt(
 	             <td class="text-center">구분
 	                 <select name="searchDiv" class="form-control input-sm">
                         <option value="">전체</option>
-                        <option value="10" <%if(searchDiv.equals("10"))out.print("selected='selected'"); %>>제목</option>
-                        <option value="20" <%if(searchDiv.equals("20"))out.print("selected='selected'"); %>>내용</option>
+                        <option value="10" <%if(searchDiv.equals("10"))out.print("selected='selected'"); %>>제목+내용</option>
 	                 </select>
 	                 <input type="text" class="form-control input-sm" name="searchWord"  size="10"  value="<%=searchWord %>">
 	                 <c:out value="${list.size()}"/>/<c:out value="${totalCnt}"/>
@@ -257,14 +177,13 @@ totalCnt = Integer.parseInt(
     
      <table id="listTable"  class="table table-bordered table-hover table-striped" >
         <thead>
-            <th class="text-center">
+            <th class="text-center" style="width: 5%" >
                 <input type="checkbox" id="checkAll" 
                 name="checkAll" onclick="checkAll();" />
             </th>
-            <th class="text-center">글 번호</th>
-            <th class="text-center">아이디</th>
-            <th class="text-center">제목</th>
-            <th class="text-center">작성일자</th>
+            <th class="text-center" style="width: 5%">글 번호</th>
+            <th class="text-center" style="width: 60%">제목</th>
+            <th class="text-center" style="width: 20%">작성일자</th>
 
             
         </thead>
@@ -274,7 +193,6 @@ totalCnt = Integer.parseInt(
                 <c:forEach var="PostDTO" items="${list}">
 		                <tr><td class="text-center"><input type="checkbox" id="check" name="check" /> </td>
 		                    <td class="text-left"><c:out value="${PostDTO.post_id}"/></td>
-		                    <td class="text-left"><c:out value="${PostDTO.reg_id}"/></td>
 		                    <td class="text-left" style="cursor:pointer" onclick="readPost('${PostDTO.post_id}');"><c:out value="${PostDTO.post_title}"/></td>
 		                    <td class="text-center"><c:out value="${PostDTO.reg_dt}"/></td>
 		                </tr>       

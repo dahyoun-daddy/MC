@@ -53,17 +53,17 @@
  			table_id,
  			seq,
  			file_path,
- 			file_size,
+ 			TO_CHAR(TO_NUMBER(file_size), '999,999,999,999,999') as file_size,
  			org_file_name,
  			save_file_name,
  			file_ext,
  			reg_id,
- 			reg_dt
+ 			TO_CHAR(reg_dt, 'yyyy-mm-dd') as reg_dt
  		FROM
  			mc_file
  		WHERE
  			reg_id = #{reg_id} AND table_div=0
- 		ORDER BY reg_dt DESC
+ 		ORDER BY file_id DESC
  	</select>
  	
  	

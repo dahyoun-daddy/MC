@@ -26,57 +26,19 @@
 $(document).ready(function(){
 	CKEDITOR.replace('post_content');
 	
-	//do_save
-	/* $("#do_save").on("click",function(){
-		if(CKEDITOR.instances.post_content.getData().length < 1){
-			alert("내용을 입력해 주세요.");
-			return;
-		}
-		
-	   if(false==confirm("등록하시겠습니까?"))return;
-	   
-       $.ajax({
-           type:"POST",
-           url:"post_doSave.do",
-           dataType:"html",// JSON
-           async: false,
-           data:{
-              "post_title"       :$("#post_title").val(),
-              "post_content"     :CKEDITOR.instances.post_content.getData(),
-              "reg_id" :$("#reg_id").val()
-              
-           },
-           success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-               console.log("success data: "+data);
-           		alert("등록되었습니다.");
-               doSearch();
-           },
-           complete: function(data){//무조건 수행
-               
-           },
-           error: function(xhr,status,error){
-        	   console.log("error: "+error);
-           }
-       });			
-		
-	});//--do_save */
 });
-	//수정
-	function doUpdate(){
-		var frm = document.frm;
-		
-		if(CKEDITOR.instances.post_content.getData().length < 1){
-			alert("내용을 입력해 주세요.");
-			return;
-		}
-		frm.action = "post_do_Update.do";
-	    frm.submit();
-	}
-	
 	
 	function doSearch(){
 	    var frm = document.frm;
 	    frm.action = "post_doSearch.do";
+	    frm.submit();
+	}
+	
+	function readPost(post_id){
+		var frm = document.frm;
+		frm.method = "POST";
+	    frm.action = "post_edit_form.do";
+	    frm.post_id.value = post_id;
 	    frm.submit();
 	}
 </script>
@@ -109,20 +71,19 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td align="center">제목</td>
-					<td><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40"/></td>
+					<td><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40" disabled="disabled"/></td>
 				</tr>
+				
 				<tr>
 					<td id="title"  align="center">내용</td>
 					<td colspan="2">
-						<textarea id="post_content" name="post_content" >
-						<c:out value="${PostDTO.post_content}"/>
-						</textarea>
+						<textarea id="post_content" name="post_content" disabled="disabled"><c:out value="${PostDTO.post_content}"/></textarea>
 					</td>
 				</tr>
 				<tr>
 					<tr align="center" valign="middle">
 					<td colspan="5">
-						<input type = "button" class="btn btn-md  purple-bg" onclick="javascript:doUpdate();" value="확인"/>
+						<input onclick="readPost('${PostDTO.post_id}');" type = "button" class="btn btn-md  purple-bg" value="수정하기" /></a>
     					<button class="btn btn-success"  onclick="doSearch()">목록으로</button>
 					</td>
 				</tr>

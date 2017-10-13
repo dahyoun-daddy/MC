@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.mc.blog.post.dao.PostDao;
 import project.mc.blog.post.domain.DTO;
@@ -65,7 +66,8 @@ public class PostSvcImpl implements PostSvc {
 	 * @param dto
 	 * @return int (1:�꽦怨�,1�씠 �븘�땲硫� �떎�뙣)
 	 */
-	public int do_checkedDelete(List<String> list) {
+	@Transactional
+	public int do_checkedDelete(List<String> list)throws DataAccessException {
 		log.debug("2=======================");
 		log.debug(list.toString());
 		log.debug("2=======================");	

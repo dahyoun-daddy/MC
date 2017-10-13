@@ -25,6 +25,14 @@
   src="<%=contextPath%>/resources/js/bootstrap.min.js"></script> 
 <title>Insert title here</title>
 <script type="text/javascript">
+	//다운로드 버튼 눌렀을때 파일 다운로드
+/* 	 function do_down(){
+		var frm = document.orgfrm;
+		alert(frm);
+		var 
+	} */
+	
+	//이력서 파일 저장
 	function do_fileSave(){
 		var frm = document.frm;		
 		var file = document.frm.file.value;
@@ -89,7 +97,7 @@
 	    		url:"do_checkedDelete.do",
 	    		type:"POST",
 	    		dataType:"JSON",
-	    		asnyc:false,
+	    		async:false,
 	    		data:{
 	    			"file_idList":jsonFile_idList
 	    		},
@@ -107,6 +115,48 @@
 	    	});
 	    });//--do_delete
 	    
+	    //do_down
+	    
+	    $(".do_down").on("click", function(){
+	    	alert("파일을 다운로드 하시겠습니까?");
+	    	//var record = $(row).parents("tr");
+	    	
+		    var thisplus = $(this);
+		    //alert(thisplus.text());
+		    var record = $(thisplus).parents("tr");
+		    //alert(record.text());
+		    var org_file_name = $(record).find('td').eq(1).text();
+		    //alert(org_file_name);
+		  	var file_path = $(record).find(".file_path").val();
+		    //alert(file_path);		    		
+		    var save_file_name = $(record).find(".save_file_name").val();
+	    	//alert(save_file_name);
+	    	var frm = $("documnet").orgfrm();
+	    	$.ajax({	    		
+	    		url:"download.do",
+	    		type:"GET",	    		
+	    		dataType:"html",
+	    		async:false,
+	    		data:{
+	    			"file_path":file_path,
+	    			"org_file_name":org_file_name,
+	    			"save_file_name":save_file_name
+	    		},
+	    		success: function(data){	    			
+	    			alert("success data: " + data);
+					frm.submit();    			
+	    			//alert("선택한 이력서 파일이 다운로드 되었습니다.");
+	    			//return location.reload();
+	    		},
+	    		complete: function(data){
+	    			//alert("complete탐");
+	    		},
+	    		error: function(xhr, status, error){
+	    			console.log("error입니다" + error);	
+	    		}
+	    	});
+	    });//--do_down
+	    
 	    
 	}); //--jquery document
 </script>
@@ -114,11 +164,13 @@
 <body>
 	<h2>이력서 파일 게시판입니다.</h2>
 	<hr/>
-	<div align="right" >
-		<button onclick="do_down()">다운로드</button>
-		<button id="do_delete">삭제</button>
+	<!-- TODO 블로그 주인과 로그인한 회원이 다를 경우 div 안보이게 -->
+	<!-- 블로그 주인과  -->
+	<div align="right" >		
+		<button id="do_delete" >삭제</button>&emsp;
 	</div>
-	<form>
+	<br/>
+	<form name="orgfrm">
 		<table border="1" width="99%">
 			<thead>
 				<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll"></th>				
@@ -126,6 +178,7 @@
 				<th class="text-center">파일용량(kb)</th>
 				<th class="text-center">작성일</th>
 				<th class="text-center">확장자명</th>
+				<th class="text-center">다운로드</th>
 			</thead>
 			<tbody>
 			<c:choose>
@@ -133,11 +186,17 @@
 					<c:forEach var="ResumeVO" items="${list}">
 						<tr>
 							<td class="text-center"><input type="checkbox" id="check" name="check" ></td>
-							<td><c:out value="${ResumeVO.org_file_name}"/></td>
-							<td><c:out value="${ResumeVO.file_size}"/></td>
-							<td><c:out value="${ResumeVO.reg_dt}"/></td>
-							<td><c:out value="${ResumeVO.file_ext}"/></td>
-							<input type="hidden" name="file_id" id="file_id" value="${ResumeVO.file_id}" >							
+							<td class="text-left org_file_name"><c:out value="${ResumeVO.org_file_name}"/></td>
+							<td class="text-right"><c:out value="${ResumeVO.file_size}"/></td>
+							<td class="text-center"><c:out value="${ResumeVO.reg_dt}"/></td>
+							<td class="text-center"><c:out value="${ResumeVO.file_ext}"/></td>
+							<!-- TODO -->
+							<!-- 블로그 주인과 로그인한 회원이 다를 경우 클릭이 되지 않도록 한다. -->
+							<td class="text-center"><button type="button" class="do_down">다운로드</button></td>
+							<!-- <td class="text-center"><input type="button" value="다운로드" onclick="javascript:do_down();" ></td> -->
+							<input type="hidden" name="file_id" id="file_id" value="${ResumeVO.file_id}" >
+							<input type="hidden" name="file_path" class="file_path" value="${ResumeVO.file_path}" >
+							<input type="hidden" name="save_file_name" class="save_file_name" value="${ResumeVO.save_file_name}" >						
 						</tr>						
 					</c:forEach>
 				</c:when>

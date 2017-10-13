@@ -53,7 +53,9 @@ public class DownloadView extends AbstractView {
         }
 
         response.setHeader("Content-Disposition"
-        		, "attachment; filename=\"" + fileName + "\";");
+        		, "	; filename=\"" + fileName + "\";");
+//        response.setHeader("Content-Disposition"
+//        		, "attachment; filename=");
         response.setHeader("Content-Transfer-Encoding"
         		, "binary");
           
@@ -109,14 +111,12 @@ public class DownloadView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 		try {
             setResponseContentType(request, response);
-            File downloadFile = (File) model.get("downloadFile");
-
+            File downloadFile = (File) model.get("downloadFile");            
             log.debug("=renderMergedOutputModel==============================");
             log.debug("downloadFile: " + downloadFile);
             log.debug("=renderMergedOutputModel==============================");
                 
-            setDownloadFileName(downloadFile.getName(), 
-            		               request, response);
+            setDownloadFileName(downloadFile.getName(),request, response);
 
             response.setContentLength((int) downloadFile.length());
             downloadFile(downloadFile, request, response);

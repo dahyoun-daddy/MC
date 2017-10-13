@@ -27,7 +27,8 @@ where USER_ID = #{user_id}
 <!-- 회원  탈퇴 -->
 <delete id="do_delete" parameterType="project.mc.blog.user.domain.UserVO" >
 update mc_user
-set WITHDRAW_FLAG = #{withdraw_flag}
+set WITHDRAW_FLAG = #{withdraw_flag},
+USER_PASSWORD = #{user_password}
 where user_id = #{user_id}
 </delete>
 
@@ -50,6 +51,7 @@ SELECT USER_NAME
  FROM MC_USER
  WHERE USER_ID = #{user_id}
  AND USER_PASSWORD = #{user_password}
+
 </select>
 
 <!-- 중복 아이디 체크  -->

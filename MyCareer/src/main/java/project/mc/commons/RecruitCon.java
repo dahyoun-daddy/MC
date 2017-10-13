@@ -10,13 +10,14 @@ import java.net.URLConnection;
 public class RecruitCon {
 
 
-	public InputStream getXmlFromUrl() {
+	public InputStream getXmlFromUrl(String pageNo) {
 		URL url = null;
+		String modUrl = "http://api.saramin.co.kr/job-search?ind_cd=301&start="+pageNo+"&count=10";
 		
 		HttpURLConnection httpUrl = null;
 		InputStream ips = null;
 		try {
-			url = new URL("http://api.saramin.co.kr/job-search?ind_cd=301&count=10");
+			url = new URL(modUrl);
 			URLConnection urlConnection = url.openConnection();
 			httpUrl = (HttpURLConnection) urlConnection;
 			

@@ -22,12 +22,12 @@ import project.mc.blog.recruit.domain.ParseVO;
 public class RecruitParse {
 
 	
-	public List<ParseVO> SaramParse() throws Exception {
+	public List<ParseVO> SaramParse(String pageNo) throws Exception {
 		//DocFactory 선언
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		//HttpConnection을 통한 InputStream을 가져오는 객체 선언
 		RecruitCon pj = new RecruitCon();
-		InputStream is = pj.getXmlFromUrl();
+		InputStream is = pj.getXmlFromUrl(pageNo);
 		
 		//DocFactory에 빌드를 올릴 빌더 선언
 		DocumentBuilder builder = factory.newDocumentBuilder();

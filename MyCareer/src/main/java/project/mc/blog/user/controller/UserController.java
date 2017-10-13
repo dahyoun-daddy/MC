@@ -75,13 +75,7 @@ public class UserController {
 		int flag = 0;
 		flag = userSvc.do_save(inVO);
 		
-		log.debug("22===================");
-		log.debug("//do_save==========");
-		log.debug("22===================");
-		
-		log.debug("@@@@@@@@@@@do_save: "+flag);
-		
-		return "redirect:do_login.do";
+		return "redirect:login_page.do";
 	}
 	
 
@@ -159,8 +153,11 @@ public class UserController {
 		UserVO inVO=new UserVO();
 		
 		inVO.setUser_id(req.getParameter("user_id"));
+		String user_password = "$#%&(*&$uy@#5s";
+		inVO.setUser_password(user_password);
 		int withdraw_flag = 0;
 		inVO.setWithdraw_flag(withdraw_flag);
+		
 		
 		int flag = userSvc.do_delete(inVO);
 		
@@ -197,15 +194,13 @@ public class UserController {
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);
-		
+
 		if(result == true) {
 			mav.setViewName("main/home_main");
 			session.setAttribute("user_id", user_id);
-			mav.addObject("msg", "success");
 			
 		}else {
 			mav.setViewName("blog/user/user_login");
-			mav.addObject("msg", "failure");
 		}
 		
 		return mav;

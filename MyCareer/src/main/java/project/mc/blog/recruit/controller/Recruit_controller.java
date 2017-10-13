@@ -19,6 +19,8 @@ public class Recruit_controller {
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNo = StringUtil.nvl(req.getParameter("page_num"), "1");
 		
+		param.put("pageSize", pageSize);
+		param.put("pageNo", pageNo);
 		
 		return mav;
 		

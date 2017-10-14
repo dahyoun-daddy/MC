@@ -26,11 +26,23 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	//다운로드 버튼 눌렀을때 파일 다운로드
-/* 	 function do_down(){
+ 	 function do_down(){
 		var frm = document.orgfrm;
 		alert(frm);
-		var 
-	} */
+		//var thisplus = $(this);
+	    //alert(thisplus.text());
+	    //var record = $(thisplus).parents("tr");
+	    //alert(record.text());
+	    //var org_file_name = $(record).find('td').eq(1).text();
+	    //alert(org_file_name);
+	  	//var file_path = $(record).find(".file_path").val();
+	    //alert(file_path);		    		
+	    //var save_file_name = $(record).find(".save_file_name").val();
+    	//alert(save_file_name);
+    	frm.action = "download.do";
+    	frm.method = "GET";
+    	frm.submit();
+	}
 	
 	//이력서 파일 저장
 	function do_fileSave(){
@@ -192,8 +204,8 @@
 							<td class="text-center"><c:out value="${ResumeVO.file_ext}"/></td>
 							<!-- TODO -->
 							<!-- 블로그 주인과 로그인한 회원이 다를 경우 클릭이 되지 않도록 한다. -->
-							<td class="text-center"><button type="button" class="do_down">다운로드</button></td>
-							<!-- <td class="text-center"><input type="button" value="다운로드" onclick="javascript:do_down();" ></td> -->
+							<!-- <td class="text-center"><button type="button" class="do_down">다운로드</button></td> -->
+							<td class="text-center"><input type="button" value="다운로드" onclick="javascript:do_down();" ></td>
 							<input type="hidden" name="file_id" id="file_id" value="${ResumeVO.file_id}" >
 							<input type="hidden" name="file_path" class="file_path" value="${ResumeVO.file_path}" >
 							<input type="hidden" name="save_file_name" class="save_file_name" value="${ResumeVO.save_file_name}" >						

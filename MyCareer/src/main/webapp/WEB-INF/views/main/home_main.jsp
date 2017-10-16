@@ -6,8 +6,6 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080"+contextPath;  
   
-  // 로그인 로그아웃 버튼 활성화
-  
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

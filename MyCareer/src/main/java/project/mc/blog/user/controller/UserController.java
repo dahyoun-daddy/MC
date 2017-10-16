@@ -78,28 +78,28 @@ public class UserController {
 		return "redirect:login_page.do";
 	}
 	
-
-//	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET} , produces="application/json;charset=utf8")
-//	@ResponseBody
-//	public boolean do_idcheck(DTO dto, HttpServletResponse res) throws DataAccessException, IOException{
-//		
-//		int selectUserIdCheck = userSvc.do_idCheck(dto);
-//		
-//		log.debug("===========================================");
-//		log.debug("updatePersonData : " + selectUserIdCheck);
-//		log.debug("===========================================");
-//		
-//		PrintWriter out = res.getWriter();
-//		if (selectUserIdCheck == 0) {
-//			return false;
-//			//out.println("true");
-//		} else {
-//			return true;
-//			//out.println("false");
-//		}
-//		
-//		//return "redirect:do_idCheck.do";
-//	}
+	
+	// 중복 id 조회
+	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
+	
+		UserVO inVO = new UserVO();
+		inVO.setUser_id(req.getParameter("user_id"));
+		
+		int selectUseridCheck = userSvc.do_idCheck(inVO);
+		
+//		ModelAndView mav =new ModelAndView();
+//		mav.setViewName("blog/user/user_register");
+		
+		if(selectUseridCheck == 0) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+		
+	}
 	
 	// 회원 수정
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
@@ -220,14 +220,7 @@ public class UserController {
 		return mav;
 		
 	}
-	
-//	// 회원 상세 정보 조회
-//	@RequestMapping(value="user/do_memberView.do" ,method= {RequestMethod.POST,RequestMethod.GET})
-//	
-//	public ModelAndView do_memberView(HttpSession session) throws IOException {
-//		
-//		ModelAndView mav = null;
-//	}	
+
 		
 	
 		

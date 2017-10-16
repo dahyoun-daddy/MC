@@ -34,6 +34,10 @@
 		float:right;
 		width:150px;
 	}
+	#hrHeader{
+	   size: 5px;
+	   color: red;
+	}
 	
 	.menu a{cursor:pointer;}
     
@@ -64,12 +68,7 @@
 	        }
 	    });
 	    
-	    
-	    
-	    
 	});
-
-
 
 </script>
 </head>
@@ -105,5 +104,7 @@
 			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 	</div>
+	<br/>
+	<hr id="hrHeader"/>
 </body>
 </html>

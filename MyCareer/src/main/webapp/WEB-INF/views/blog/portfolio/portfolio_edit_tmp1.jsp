@@ -79,16 +79,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		/* $(".pf_img").onchange(function(){
-			var src = $(this).attr("src");
-			alert("src:"+src);
-			var hidden = $(this).next("input");
-			alert(hidden.val);
-			hidden.val(src);
-			alert(hidden.val);
-			
-		}); */
-		
 		//적용 버튼 누를 시 다른 템플릿으로 이동
 	    $("#tmp_apply").click(function(){
 	    	var selected = $("#pf_tmp option:selected").val();
@@ -115,9 +105,11 @@
 			var img = $(this).attr("id");
 			var i = img.substring(img.length-2);
 			var getfile = "getfile_"+i;
+			var input = "tmp_img1_"+i;
+			
+			document.getElementById(img).src = "";
 			
 			$("#"+getfile).click();
-			
 			
 			$('#'+getfile).change(function(e){
 			    var file = document.querySelector('input[id='+getfile+']').files[0];
@@ -130,17 +122,19 @@
 		            {
 		                //이미지 뷰
 		                document.getElementById(img).src = e.target.result;
-		                
 		            };
-		 
+		 			
 		        })(file);
-		            
+			  	
 		        reader.readAsDataURL(file);
+		        document.getElementById(input).value = document.getElementById(img).src;
 			});
+			
 		});
 		
 
 	});
+	
 	
 	
 </script>
@@ -170,7 +164,6 @@
 			<input type="hidden" name="table_div" id="table_div" value="31">
 			
 			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" name="tmp1_02" id="tmp1_02">
-			<input type="hidden" name="tmp_img1_02" value="${srcMap['2']">
 			<img class="pf_img" src="${srcMap['3']}" alt="tmp1_03" name="tmp1_03" id="tmp1_03">
 			<img class="pf_img" src="${srcMap['4']}" alt="tmp1_04" name="tmp1_04" id="tmp1_04">
 			<img class="pf_img clearfix" src="${srcMap['5']}" alt="tmp1_05" name="tmp1_05" id="tmp1_05">
@@ -182,6 +175,15 @@
 			<img class="pf_img" src="${srcMap['8']}" alt="tmp1_08" name="tmp1_08" id="tmp1_08">
 			<img class="pf_img clearfix" src="${srcMap['9']}" alt="tmp1_09" name="tmp1_09" id="tmp1_09">
 			
+			<input type="hidden" name="tmp_img1_01" id="tmp_img1_01" value="${srcMap['1']}">
+			<input type="hidden" name="tmp_img1_02" id="tmp_img1_02" value="${srcMap['2']}">
+			<input type="hidden" name="tmp_img1_03" id="tmp_img1_03" value="${srcMap['3']}">
+			<input type="hidden" name="tmp_img1_04" id="tmp_img1_04" value="${srcMap['4']}">
+			<input type="hidden" name="tmp_img1_05" id="tmp_img1_05" value="${srcMap['5']}">
+			<input type="hidden" name="tmp_img1_06" id="tmp_img1_06" value="${srcMap['6']}">
+			<input type="hidden" name="tmp_img1_07" id="tmp_img1_07" value="${srcMap['7']}">
+			<input type="hidden" name="tmp_img1_08" id="tmp_img1_08" value="${srcMap['8']}">
+			<input type="hidden" name="tmp_img1_09" id="tmp_img1_09" value="${srcMap['9']}">
 			<input type=file name="getfile_01" id="getfile_01" style='display: none;' accept="image/*">
 			<input type=file name="getfile_02" id="getfile_02" style='display: none;' accept="image/*">
 			<input type=file name="getfile_03" id="getfile_03" style='display: none;' accept="image/*">

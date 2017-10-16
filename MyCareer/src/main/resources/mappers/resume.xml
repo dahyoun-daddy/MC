@@ -133,12 +133,15 @@
  		]]>
  	</update>
  	
+ 	
  	<!-- 포트폴리오 이미지 삭제 -->
  	<delete id="do_delete_img" parameterType="ResumeVO">
  		DELETE FROM mc_file 
 		WHERE table_div = #{table_div}
 		  AND
 		    table_id = #{table_id}
+		  AND 
+		  	seq = #{seq, jdbcType=INTEGER}
  	</delete>
  	
  	

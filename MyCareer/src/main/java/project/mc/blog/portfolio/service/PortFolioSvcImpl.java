@@ -94,11 +94,24 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			
 			//log.debug("uploadFileName:"+uploadFileName);
 			
-			fileNo = Integer.parseInt(uploadFileName.substring(uploadFileName.length()-2, uploadFileName.length()));
+			String fileNoStr = uploadFileName.substring(uploadFileName.length()-2, uploadFileName.length());
+			fileNo = Integer.parseInt(fileNoStr);
 			MultipartFile mFile=mReq.getFile(uploadFileName);
 			orgFileName = mFile.getOriginalFilename();
-			if(orgFileName == null || orgFileName.equals(""))
+			if(orgFileName == null || orgFileName.equals("")) {
+				String tmp_img = "tmp_img1_"+fileNoStr;
+				String img_src = mReq.getParameter(tmp_img);
+				log.debug("tmp_img: "+img_src);
+				if(img_src == null || img_src.equals("")) {
+					resumeVO.setTable_div(Integer.parseInt(mReq.getParameter("table_div").toString()));
+					resumeVO.setTable_id(Integer.parseInt(mReq.getAttribute("table_id").toString()));
+					resumeVO.setSeq(fileNo);
+					int delFlag = rsDao.do_delete_img(resumeVO);
+					log.debug("delFlag/fileNo: "+delFlag+"/"+fileNo);
+				}
 				continue;
+			}
+				
 			
 			saveFileName = StringUtil.currDate("yyyy-MM-dd")+"_"+StringUtil.getUUid();
 			ext = orgFileName.substring(orgFileName.lastIndexOf("."));

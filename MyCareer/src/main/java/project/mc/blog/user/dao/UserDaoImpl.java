@@ -88,15 +88,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	
-	public int do_idCheck(DTO dto) {
+	public int do_idCheck(UserVO vo) {
 		int flag = 0;
-		try {
 			String statement = namespace +".do_idCheck";
-			UserVO inUserVo = (UserVO)dto;
+			String inUserVo = vo.getUser_id();
 			flag = sqlSession.selectOne(statement, inUserVo);
-		}catch(DataAccessException e) {
-			throw e;			
-		}	
 		
 		return flag;
 	}

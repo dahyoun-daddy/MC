@@ -55,7 +55,7 @@ SELECT USER_NAME
 </select>
 
 <!-- 중복 아이디 체크  -->
-<select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO">
+<select id="do_idCheck" parameterType="project.mc.blog.user.domain.UserVO" resultType="Integer">
 SELECT COUNT(USER_ID) AS CNT
   FROM MC_USER
  WHERE USER_ID = #{user_id}

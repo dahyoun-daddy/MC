@@ -43,11 +43,10 @@ public class UserSvcImpl implements UserSvc {
 	}
 
 	
-	public int do_idCheck(DTO dto) {
-		log.debug("UserSvcImpl - id_check");
-		int flag = userDao.do_idCheck(dto);
-		log.debug("UserSvcImpl - id_check: flag: "+flag);
+	public int do_idCheck(UserVO vo) {
 		
+		log.debug("UserSvcImpl - id_check"+userDao.do_idCheck(vo));
+		int flag = userDao.do_idCheck(vo);
 		return flag;
 		
 	}

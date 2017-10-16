@@ -29,7 +29,6 @@
 	#title{
 		
 	}
-	
 	#user_menu{
 		float:right;
 		width:150px;
@@ -42,7 +41,6 @@
 	    padding-left:0px;
     }
 
-    
 
 </style>
 <title>header</title>
@@ -64,20 +62,16 @@
 	        }
 	    });
 	    
-	    
-	    
-	    
 	});
-
-
 
 </script>
 </head>
 <body>
 	<div id="wrapper">	
 		<div id="logo" align="left">
-			<a href="<%=contextPath%>/main/home_main.do"><img src="" alt="MC(thumb-nail)"/></a>
+			<a href="<%=contextPath%>/main/home_main.do"><img src="<%=contextPath%>/resources/images/logo.png" width="90" height="50" alt="MC(thumb-nail)"/></a>
 		</div>
+		
 		<div id="user_menu" align="right">
 			<ul>
 				<li class="menu menu_ul">
@@ -103,6 +97,9 @@
 		<div id="title">
 			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
+		<br/>
+        <hr id="hrHeader" style="border-top-width: 4px;border-top-color: black"/>
 	</div>
+
 </body>
 </html>

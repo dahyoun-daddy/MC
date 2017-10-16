@@ -42,11 +42,6 @@
 	    padding-left:0px;
     }
 
-
-    hr { border-top:13px solid #9C9C9C; border-bottom:13px solid #F6F6F6; }
-
-
-
     
 
 </style>
@@ -110,7 +105,5 @@
 			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 	</div>
-	<br/>
-	<hr/>
 </body>
 </html>

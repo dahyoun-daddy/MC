@@ -17,7 +17,7 @@ public interface PortfolioSvc {
 	 * @throws DataAccessException
 	 * @throws IOException 
 	 */
-	int do_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException;
+	DTO do_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException;
 
 	List<?> do_searchByUser_id(DTO dto);
 

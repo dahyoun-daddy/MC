@@ -2,12 +2,9 @@ package project.mc.blog.portfolio.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +19,6 @@ import project.mc.blog.portfolio.dao.PortfolioDao;
 import project.mc.blog.portfolio.domain.PortfolioVO;
 import project.mc.blog.resume.dao.ResumeDao;
 import project.mc.blog.resume.domain.ResumeVO;
-import project.mc.blog.user.dao.UserDao;
 import project.mc.commons.DTO;
 import project.mc.commons.StringUtil;
 
@@ -45,7 +41,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * @throws IOException 
 	 */
 	@Override
-	public int do_save(MultipartHttpServletRequest mReq) throws DataAccessException, IOException {
+	public DTO do_save(MultipartHttpServletRequest mReq) throws DataAccessException, IOException {
 		log.debug("======PortfolioSvcImpl: do_save=start================");
 		PortfolioVO inVO = new PortfolioVO();
 		
@@ -54,21 +50,23 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		int tmp_no = Integer.parseInt(mReq.getParameter("tmp_no").toString());
 		inVO.setTmp_no(tmp_no);
 		
-		int flag = pfDao.do_save(inVO);
+		PortfolioVO outVO = (PortfolioVO) pfDao.do_save(inVO);
+		
+		if(outVO.getFlag() == 1) {
+			mReq.setAttribute("table_id", outVO.getPf_id());
+		}
 		
 		this.do_upsertImages(mReq);
 		
 		log.debug("======PortfolioSvcImpl: do_save=end================");
-		return flag;
+		return outVO;
 	}
 	
 	/**
 	 * 파일 멀티 upload;
 	 */
 	@Override
-	public List<DTO> do_upsertImages(
-			MultipartHttpServletRequest mReq) 
-	   throws IOException, DataAccessException {
+	public List<DTO> do_upsertImages(MultipartHttpServletRequest mReq) throws IOException, DataAccessException {
 		String root_path = mReq.getSession().getServletContext().getRealPath("/");  
 		String attach_path = "resources\\uploadimages\\";
 		String uploadPath = root_path+attach_path;
@@ -84,7 +82,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		Iterator<String> iter =mReq.getFileNames();
 		List<DTO> list =new ArrayList<DTO>();
-		int fileNo = 1;
 		while(iter.hasNext()) {
 			ResumeVO resumeVO=new ResumeVO();
 			String uploadFileName = iter.next();
@@ -92,41 +89,35 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			String saveFileName= "";//저장파일명
 			String ext         = "";//확장자
 			long   fileSize    = 0 ;//파일사이즈
+			int fileNo = 0;
 			
 			
-			log.debug("1==================");
-			log.debug("uploadFileName:"+uploadFileName);
-			log.debug("1==================");
+			//log.debug("uploadFileName:"+uploadFileName);
 			
+			fileNo = Integer.parseInt(uploadFileName.substring(uploadFileName.length()-2, uploadFileName.length()));
 			MultipartFile mFile=mReq.getFile(uploadFileName);
 			orgFileName = mFile.getOriginalFilename();
 			if(orgFileName == null || orgFileName.equals(""))
 				continue;
 			
+			saveFileName = StringUtil.currDate("yyyy-MM-dd")+"_"+StringUtil.getUUid();
 			ext = orgFileName.substring(orgFileName.lastIndexOf("."));
 			fileSize = mFile.getSize();
 			
-			saveFileName = StringUtil.currDate("yyyy-MM-dd")+"_"+StringUtil.getUUid()+ext;
 			
-			log.debug("2==================");
+			log.debug("pfsvcimpl debug==================");
+			log.debug("uploadFileName:"+uploadFileName);
 			log.debug("saveFileName:"+saveFileName);
-			log.debug("2==================");
-			
-			
-			log.debug("3==================");
 			log.debug("orgFileName:"+orgFileName);
-			log.debug("3==================");	
-			
-			log.debug("4==================");
 			log.debug("fileSize:"+fileSize);
-			log.debug("4==================");	
+			log.debug("fileNO: "+ fileNo);
+			log.debug("pfsvcimpl debug==================");
 			
 			if(null != orgFileName && !orgFileName.equals(""))
 			{
 				try {
-					
 					resumeVO.setTable_div(Integer.parseInt(mReq.getParameter("table_div").toString()));
-					resumeVO.setTable_id(Integer.parseInt(mReq.getParameter("table_id").toString()));
+					resumeVO.setTable_id(Integer.parseInt(mReq.getAttribute("table_id").toString()));
 					resumeVO.setSeq(fileNo);
 					resumeVO.setFile_path(uploadPath);
 					resumeVO.setFile_size(fileSize+"");
@@ -142,7 +133,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 					list.add(resumeVO);
 					
 					//이미지 서버에 업로드
-					mFile.transferTo(new File(uploadPath+saveFileName));
+					mFile.transferTo(new File(uploadPath+saveFileName+ext));
 					
 				}catch(IllegalStateException ie) {
 					log.debug("IllegalStateException");
@@ -176,10 +167,37 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		rsVO.setTable_div(31);
 		rsVO.setTable_id(pfVO.getPf_id());
+		int rsFlag = 0;
+		int delFlag = 0;
 		
-		int rsFlag = rsDao.do_delete_img(rsVO);
+		List<ResumeVO> list = (List<ResumeVO>) rsDao.do_search_img(rsVO);
+		for(ResumeVO outVO : list) {
+			String fileStr = outVO.getFile_path()+outVO.getSave_file_name()+outVO.getFile_ext();
+			log.debug("fileStr: "+fileStr);
+			File deleteFile = new File(fileStr);
+			if( deleteFile.exists() ){
+	            if(deleteFile.delete()){
+	            	log.debug("파일삭제 성공");
+	            	delFlag++;
+	            }else{
+	            	log.debug("파일삭제 실패");
+	            }
+	        }else{
+	        	log.debug("파일이 존재하지 않습니다.");
+	        }
+
+		}
+		if(delFlag == list.size())
+			rsFlag = rsDao.do_delete_img(rsVO);
+		else {
+			log.debug("이미지 삭제 실패!");
+		}
 		
-		log.debug("flag:" + flag);
+		if(rsFlag != 1)
+			flag = 0;
+		
+		log.debug("pfFlag:" + flag);
+		log.debug("delFlag: "+ delFlag);
 		log.debug("rsFlag:" + rsFlag);
 		log.debug("======PortfolioSvcImpl: do_delete=================");
 		return flag;		
@@ -210,6 +228,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		int pf_id = Integer.parseInt(mReq.getParameter("pf_id").toString());
 		inVO.setPf_id(pf_id);
+		mReq.setAttribute("table_id", pf_id);
 		String user_id = mReq.getParameter("user_id").toString();
 		inVO.setUser_id(user_id);
 		int tmp_no = Integer.parseInt(mReq.getParameter("tmp_no").toString());
@@ -242,6 +261,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	 * @param dto(pf_id=?)
 	 * @return PortfolioVO
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public DTO do_searchByPf_id(DTO dto) {
 		log.debug("======PortfolioSvcImpl: do_searchByPf_id=================");

@@ -23,7 +23,7 @@
 	for(ResumeVO rsVO : imgList){
 		int seq = rsVO.getSeq();
 		String path = "";
-		path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name();
+		path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name()+rsVO.getFile_ext();
 		srcMap.put(String.valueOf(seq), path);
 	}
 	

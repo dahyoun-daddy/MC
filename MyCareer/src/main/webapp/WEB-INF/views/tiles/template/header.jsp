@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%
 //todo - userVO 가져와서 id 표시 및 유저 메뉴 생성
+	
 	String user_id = (String)session.getAttribute("user_id");
-	String user_name = (String)session.getAttribute("user_name");
+	
+	
 %>    
 <%
   //contextPath
@@ -74,8 +76,9 @@
 <body>
 	<div id="wrapper">	
 		<div id="logo" align="left">
-			<a href="<%=contextPath%>/main/home_main.do"><img src="" alt="MC(thumb-nail)"/></a>
+			<a href="<%=contextPath%>/main/home_main.do"><img src="<%=contextPath%>/resources/images/logo.png" width="90" height="50" alt="MC(thumb-nail)"/></a>
 		</div>
+		
 		<div id="user_menu" align="right">
 			<ul>
 				<li class="menu menu_ul">
@@ -99,7 +102,7 @@
 			</ul>	
 		</div>
 		<div id="title">
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="(<%=user_id%>)님의 구직 블로그"/></a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 	</div>
 </body>

@@ -82,7 +82,7 @@
 			<td><a href="<%=contextPath%>/blog/resume/resume.do"><img src="" alt="이력서"/></a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/recruit.do"><img src="" alt="공채목록"/></a></td>
+			<td><a href="<%=contextPath%>/blog/recruit/recruit.do"><img src="" alt="공채목록"/></a></td>
 		</tr>
 	</table>
 </body>

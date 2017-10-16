@@ -94,8 +94,8 @@
  	<![CDATA[
  		MERGE INTO mc_file A
 		USING dual
-		ON (A.table_div = #{table_div, jdbcType=INTEGER}
-		AND A.table_id = #{table_id, jdbcType=INTEGER}
+		ON (A.table_div = #{table_div}
+		AND A.table_id = #{table_id}
 		AND A.seq = #{seq, jdbcType=INTEGER}
 		    )
 		WHEN MATCHED THEN
@@ -119,8 +119,8 @@
 		            )
 		    VALUES(
 		                SEQ_MC_FILE.NEXTVAL,
-		                #{table_div, jdbcType=INTEGER},
-		                #{table_id, jdbcType=INTEGER},
+		                #{table_div},
+		                #{table_id},
 		                #{seq, jdbcType=INTEGER},
 		                #{file_path},
 		                #{file_size},

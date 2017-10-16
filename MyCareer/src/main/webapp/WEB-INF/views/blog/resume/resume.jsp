@@ -236,11 +236,11 @@
         <div>이력서 업로드</div>
         
         <form method="post" name="frm" enctype="multipart/form-data">            
-            <div>               
+            <div style="border:1px dotted green; width:99%">               
                 <div>
                    <input type="file" name="file" id="file"/>   
                 </div>                                                               
-                <button onclick="do_fileSave()">업로드
+                <button class="btn btn-success btn-sm" onclick="do_fileSave()">업로드
                 </button>
             </div>        
         </form>

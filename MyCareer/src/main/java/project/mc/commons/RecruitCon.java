@@ -10,9 +10,9 @@ import java.net.URLConnection;
 public class RecruitCon {
 
 
-	public InputStream getXmlFromUrl(String pageNo) {
+	public InputStream getXmlFromUrl() {
 		URL url = null;
-		String modUrl = "http://api.saramin.co.kr/job-search?ind_cd=301&start="+pageNo+"&count=10";
+		String modUrl = "http://api.saramin.co.kr/job-search?ind_cd=301&count=100";
 		
 		HttpURLConnection httpUrl = null;
 		InputStream ips = null;

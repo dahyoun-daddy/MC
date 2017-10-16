@@ -1,7 +1,6 @@
 package project.mc.blog.recruit.controller;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,50 +8,64 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.recruit.domain.ParseVO;
 
 import project.mc.commons.RecruitParse;
-import project.mc.commons.StringUtil;
 
 public class Recruit_controller {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="recruit_page.do")
-	public ModelAndView recruitPaging(HttpServletRequest req) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
+	@RequestMapping(value="user/saram.do",method=RequestMethod.GET)
+	public ModelAndView do_saram() throws Exception {
+		RecruitParse doc = new RecruitParse();
 		ParseVO vo = new ParseVO();
 		List<ParseVO> list = new ArrayList<ParseVO>();
+		List<ParseVO> outList = new ArrayList<ParseVO>();
+		list = doc.SaramParse();
+		log.debug("parse=" + list.size());
+		for(int i=0;i<10;i++) {
+			outList.add(list.get(i));
+		}
+
 		
-		Hashtable<String,String> param = new Hashtable<String, String>();
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
-		String pageNo = StringUtil.nvl(req.getParameter("page_num"), "1");
-		vo.setTotalNo(100);
-		RecruitParse rp = new RecruitParse();
-		list = rp.SaramParse(pageNo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/parseSaram");
+		mav.addObject("list", outList);
 		
+		return mav;
+	}
+	
+	@RequestMapping(value="user/parse.do",method=RequestMethod.GET)
+	public ModelAndView parse(HttpServletRequest req) throws Exception {
+		//(#{page_size} * (#{page_num}-1)+1) AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		RecruitParse doc = new RecruitParse();
+		ParseVO vo = new ParseVO();
+		List<ParseVO> list = new ArrayList<ParseVO>();
+		List<ParseVO> outList = new ArrayList<ParseVO>();
+		list = doc.SaramParse();
+		int cnt = 0;
+		int page_size = 10;
+		int page_num = Integer.parseInt(req.getParameter("page_num"));
+		int startIdx = (page_num-1)+1;
+		int endIdx = ((page_num-1)+page_size);
 		
+
+		log.debug("startIdx=" + startIdx);
+		log.debug("endIdx=" + endIdx);
 		
-		log.debug("list=" + list.size());
-		
-		
-		
-		
-		
-		
-		
-		param.put("pageSize", pageSize);
-		param.put("pageNo", pageNo);
-		
-		vo.setParam(param);
-		
-		
-		
-		mav.setViewName("recruit");
-		
-		
+		log.debug("parse=" + list.size());
+		for(int i=0;i<list.size();i++) {
+			if((startIdx<=i)&&(endIdx>=i)) {
+				outList.add(list.get(i));
+			}
+		}
+	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/parseSaram");
+		mav.addObject("list", outList);
 		
 		return mav;
 		

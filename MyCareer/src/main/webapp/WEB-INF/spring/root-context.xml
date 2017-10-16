@@ -83,6 +83,13 @@
     <tx:annotation-driven 
     transaction-manager="transactionManager" />
       
+    <!-- mapper -->
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.saltlux.rms.rest" />
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+    </bean>  
+      
     <!-- Root Context: defines shared resources visible to all other web components -->
     <!-- File Upload:CommonMultipartResolver -->    
     <bean  id="multipartResolver"

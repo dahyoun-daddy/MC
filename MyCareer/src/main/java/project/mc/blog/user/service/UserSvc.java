@@ -25,7 +25,7 @@ public interface UserSvc {
 	public int do_save(DTO dto) throws DataAccessException;
 	
 	
-	public int do_idCheck(DTO dto) throws DataAccessException;
+	public int do_idCheck(UserVO vo) throws DataAccessException;
 	
 	
 	public void logout(HttpSession session);

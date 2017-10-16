@@ -68,21 +68,21 @@
 </script>
 </head>
 <body>
-	<table>
+	<table style="margin-left: 50px">
 		<tr>
-			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="포스팅"/></a></td>
+			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do" style="text-decoration: none"><h3>포스팅</h3></a></td>
 		</tr>
 		<tr>
 			<td id="pf_tmp_td">
-				<a id="pf_tmp"><img src="" alt="포트폴리오 템플릿"/></a>
+				<a id="pf_tmp" style="text-decoration: none"><h3>포트폴리오</h3></a>
 				<!-- 여기에 템플릿들이 추가 -->
 			</td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/blog/resume/resume.do"><img src="" alt="이력서"/></a></td>
+			<td><a href="<%=contextPath%>/blog/resume/resume.do" style="text-decoration: none"><h3>이력서</h3></a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/blog/recruit/recruit.do"><img src="" alt="공채목록"/></a></td>
+			<td><a href="<%=contextPath%>/blog/recruit/recruit.do" style="text-decoration: none"><h3>공채목록</h3></a></td>
 		</tr>
 	</table>
 </body>

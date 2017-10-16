@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,11 +16,13 @@ import project.mc.blog.recruit.domain.ParseVO;
 
 import project.mc.commons.RecruitParse;
 
+@Controller
 public class Recruit_controller {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="user/saram.do",method=RequestMethod.GET)
+	@RequestMapping(value="blog/recruit/recruit.do",method=RequestMethod.GET)
 	public ModelAndView do_saram() throws Exception {
+		log.debug("recruit Cont");
 		RecruitParse doc = new RecruitParse();
 		ParseVO vo = new ParseVO();
 		List<ParseVO> list = new ArrayList<ParseVO>();
@@ -32,13 +35,13 @@ public class Recruit_controller {
 
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("user/parseSaram");
+		mav.setViewName("blog/recruit/recruit");
 		mav.addObject("list", outList);
 		
 		return mav;
 	}
 	
-	@RequestMapping(value="user/parse.do",method=RequestMethod.GET)
+	@RequestMapping(value="blog/recruit/parse.do",method=RequestMethod.GET)
 	public ModelAndView parse(HttpServletRequest req) throws Exception {
 		//(#{page_size} * (#{page_num}-1)+1) AND (#{page_size} * (#{page_num}-1)+#{page_size})
 		RecruitParse doc = new RecruitParse();
@@ -64,7 +67,7 @@ public class Recruit_controller {
 		}
 	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("user/parseSaram");
+		mav.setViewName("blog/recruit/recruit");
 		mav.addObject("list", outList);
 		
 		return mav;

@@ -29,14 +29,9 @@
 	#title{
 		
 	}
-	
 	#user_menu{
 		float:right;
 		width:150px;
-	}
-	#hrHeader{
-	   size: 5px;
-	   color: red;
 	}
 	
 	.menu a{cursor:pointer;}
@@ -46,7 +41,6 @@
 	    padding-left:0px;
     }
 
-    
 
 </style>
 <title>header</title>
@@ -103,8 +97,9 @@
 		<div id="title">
 			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
+		<br/>
+        <hr id="hrHeader" style="border-top-width: 4px;border-top-color: black"/>
 	</div>
-	<br/>
-	<hr id="hrHeader"/>
+
 </body>
 </html>

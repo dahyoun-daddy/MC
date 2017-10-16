@@ -26,7 +26,7 @@
 		for(ResumeVO rsVO : imgList){
 			int seq = rsVO.getSeq();
 			String path = "";
-			path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name();
+			path = contextPath+"\\resources\\uploadImages\\"+rsVO.getSave_file_name()+rsVO.getFile_ext();
 			srcMap.put(String.valueOf(seq), path);
 		}
 		
@@ -92,10 +92,8 @@
 			
 			if(<%=pf_id%> != null){
 				frm.workDiv.value = "do_update";
-				alert("do_update")
 			}else{
 				frm.workDiv.value = "do_save";
-				alert("do_save")
 			}
 			
 			frm.submit();
@@ -160,19 +158,18 @@
 			<input type="hidden" name="user_id" id="user_id" value="111">
 			<input type="hidden" name="workDiv" id="workDiv" value="">
 			<input type="hidden" name="table_div" id="table_div" value="31">
-			<input type="hidden" name="table_id" id="table_id" value="<%=pf_id%>">
 			
-			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">
-			<img class="pf_img" src="${srcMap['3']}" alt="tmp1_03" id="tmp1_03">
-			<img class="pf_img" src="${srcMap['4']}" alt="tmp1_04" id="tmp1_04">
-			<img class="pf_img clearfix" src="${srcMap['5']}" alt="tmp1_05" id="tmp1_05">
+			<input type="image" class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">
+			<input type="image" class="pf_img" src="${srcMap['3']}" alt="tmp1_03" id="tmp1_03">
+			<input type="image" class="pf_img" src="${srcMap['4']}" alt="tmp1_04" id="tmp1_04">
+			<input type="image" class="pf_img clearfix" src="${srcMap['5']}" alt="tmp1_05" id="tmp1_05">
 			
-			<img class="pf_img clearfix" src="${srcMap['1']}" alt="tmp1_01" id="tmp1_01">
+			<input type="image" class="pf_img clearfix" src="${srcMap['1']}" alt="tmp1_01" id="tmp1_01">
 			
-			<img class="pf_img" src="${srcMap['6']}" alt="tmp1_06" id="tmp1_06">
-			<img class="pf_img" src="${srcMap['7']}" alt="tmp1_07" id="tmp1_07">
-			<img class="pf_img" src="${srcMap['8']}" alt="tmp1_08" id="tmp1_08">
-			<img class="pf_img clearfix" src="${srcMap['9']}" alt="tmp1_09" id="tmp1_09">
+			<input type="image" class="pf_img" src="${srcMap['6']}" alt="tmp1_06" id="tmp1_06">
+			<input type="image" class="pf_img" src="${srcMap['7']}" alt="tmp1_07" id="tmp1_07">
+			<input type="image" class="pf_img" src="${srcMap['8']}" alt="tmp1_08" id="tmp1_08">
+			<input type="image" class="pf_img clearfix" src="${srcMap['9']}" alt="tmp1_09" id="tmp1_09">
 			
 			<input type=file name="getfile_01" id="getfile_01" style='display: none;' accept="image/*">
 			<input type=file name="getfile_02" id="getfile_02" style='display: none;' accept="image/*">

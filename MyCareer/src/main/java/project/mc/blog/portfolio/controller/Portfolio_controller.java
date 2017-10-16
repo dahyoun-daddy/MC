@@ -1,6 +1,7 @@
 package project.mc.blog.portfolio.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -105,35 +106,58 @@ public class Portfolio_controller {
 		return "blog/portfolio/portfolio_edit_tmp2";
 	}
 	
-	@RequestMapping(value="blog/portfolio_save.do", method = RequestMethod.POST)
-	public String portfolio_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
-		log.debug("=====Portfolio_controller: portfolio_save=start==========");
-		
-		int flag = -1;
-		flag = pfSvc.do_save(mreq);
-		
-		log.debug("flag: "+flag);
-		log.debug("=====Portfolio_controller: portfolio_save=end==========");
-		
-		return "";
-	}
+//	@RequestMapping(value="blog/portfolio_save.do", method = RequestMethod.POST)
+//	public String portfolio_save(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
+//		log.debug("=====Portfolio_controller: portfolio_save=start==========");
+//		
+//		int flag = -1;
+//		flag = pfSvc.do_save(mreq);
+//		
+//		log.debug("flag: "+flag);
+//		log.debug("=====Portfolio_controller: portfolio_save=end==========");
+//		
+//		return "";
+//	}
 	
 	@RequestMapping(value="blog/portfolio_delete.do", method = RequestMethod.GET)
-	public String portfolio_delete(HttpServletRequest req) {
+	public void portfolio_delete(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		log.debug("=====Portfolio_controller: portfolio_delete=start==========");
 		PortfolioVO inVO = new PortfolioVO();
+		String contextPath = req.getContextPath();
+		contextPath = "http://localhost:8080" + contextPath;
 		
 		int pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
 		inVO.setPf_id(pf_id);
 		
 		int flag = -1;
 		flag = pfSvc.do_delete(inVO);
-		
 		log.debug("flag: "+flag);
+		
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		
+		if(flag == 1) {
+			String msg = "삭제되었습니다.";
+			String str="";
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "location.href = '"+contextPath+"/blog/portfolio_edit_tmp1.do';";
+			str += "</script>";
+			out.print(str);
+		}else {
+			String msg = "에러 발생.";
+			String str="";
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "history.go(-1);";
+			str += "</script>";
+			out.print(str);
+		}
+		
 		log.debug("=====Portfolio_controller: portfolio_delete=end==========");
 		
-		return "";
+		//return "redirect:portfolio_edit_tmp1.do";
 	}
 	
 	@RequestMapping(value="blog/portfolio_deleteAll.do", method = RequestMethod.POST)
@@ -152,35 +176,69 @@ public class Portfolio_controller {
 	}
 	
 	@RequestMapping(value="blog/portfolio_upsert.do", method = RequestMethod.POST)
-	public String portfolio_upsert(MultipartHttpServletRequest mreq) throws DataAccessException, IOException {
+	public void portfolio_upsert(MultipartHttpServletRequest mreq, HttpServletResponse res) throws DataAccessException, IOException {
 		
 		log.debug("=====Portfolio_controller: portfolio_upsert=start==========");
-		PortfolioVO inVO = new PortfolioVO();
 		int flag = -1;
+		int pf_id = 0;
+		String contextPath = mreq.getContextPath();
+		contextPath = "http://localhost:8080" + contextPath;
 		
 		String workDiv = mreq.getParameter("workDiv").toString();
 		log.debug("workDiv: "+workDiv);
 		
+		
 		if(workDiv != null && workDiv.equals("do_save")) {
 			log.debug("do_save start");
-			flag = pfSvc.do_save(mreq);
-			log.debug("flag: "+flag);
+			PortfolioVO outVO = (PortfolioVO) pfSvc.do_save(mreq);
+			flag = outVO.getFlag();
+			pf_id = outVO.getPf_id();
 			
 		}else if(workDiv != null && workDiv.equals("do_update")){
 			//TODO 사진들 업데이트, 서비스에서 실행
 			log.debug("do_update start");
 			flag = pfSvc.do_update(mreq);
-			log.debug("flag: "+flag);
-			
+			pf_id = Integer.parseInt(mreq.getParameter("pf_id").toString());
+						
 		}else {
 			log.debug("wordDiv error");
 			
 		}
 		
+		log.debug("flag: "+flag);
+		log.debug("pf_id: "+pf_id);
+		
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		if(flag == 1) {
+			log.debug("upsert 실행 완료");
+			String msg = "";
+			
+			if(workDiv != null && workDiv.equals("do_save")) {
+				msg = "새 포트폴리오 저장 완료.";
+			}else if(workDiv != null && workDiv.equals("do_update")){
+				msg = "포트폴리오 수정 완료.";
+			}
+			
+			String str="";
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "location.href = '"+contextPath+"/blog/portfolio_view_tmp1.do?pf_id="+pf_id+"';";
+			str += "</script>";
+			out.print(str);
+		}else {
+			String msg = "에러 발생.";
+			String str="";
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "history.go(-1);";
+			str += "</script>";
+			out.print(str);
+		}
 		
 		log.debug("=====Portfolio_controller: portfolio_upsert=end==========");
 		
-		return "redirect:portfolio_view_tmp1.do";
+		//return "redirect:portfolio_view_tmp1.do?pf_id="+pf_id;
 	}
 	
 	@RequestMapping(value="blog/portfolio_update.do", method = RequestMethod.POST)

@@ -71,13 +71,15 @@ public class PortfolioDaoImpl implements PortfolioDao {
 	 * (0:실패, 1:성공)
 	 */
 	@Override
-	public int do_save(DTO dto) throws DataAccessException{
+	public DTO do_save(DTO dto) throws DataAccessException{
 
+		PortfolioVO inPfVo = (PortfolioVO)dto;
 		int flag = 0;
 		try {
 			String statement = namespace +".do_save";
-			PortfolioVO inPfVo = (PortfolioVO)dto;
+			inPfVo = (PortfolioVO)dto;
 			flag = sqlSession.update(statement, inPfVo);
+			inPfVo.setFlag(flag);
 			log.debug("======PortfolioDaoImpl: do_save======");
 			log.debug("flag: "+flag);
 			log.debug("pf_id: "+inPfVo.getPf_id());
@@ -87,7 +89,7 @@ public class PortfolioDaoImpl implements PortfolioDao {
 			throw e;
 		}	
 		
-		return flag;
+		return inPfVo;
 	}
 
 	/**

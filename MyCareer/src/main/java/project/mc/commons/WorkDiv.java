@@ -2,10 +2,6 @@ package project.mc.commons;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
-import project.mc.blog.user.domain.UserVO;
-
 /**
  * WorkDiv.java
  * 거래표준 메소드 정의

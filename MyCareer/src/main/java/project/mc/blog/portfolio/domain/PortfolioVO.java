@@ -10,10 +10,20 @@ public class PortfolioVO extends DTO {
 	private String user_id ;//유저 id
 	private int tmp_no  ;//템플릿 종류
 	private List<ResumeVO> imgList ;//포트폴리오에 딸려 있는 이미지 객체
+	private int flag ;//flag
 	
 	
 	
 	
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+
 	public List<ResumeVO> getImgList() {
 		return imgList;
 	}

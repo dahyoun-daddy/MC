@@ -73,6 +73,7 @@
 	FROM
 	    mc_portfolio
 	WHERE user_id=#{user_id}
+	ORDER BY pf_id
 	
 </select>
 

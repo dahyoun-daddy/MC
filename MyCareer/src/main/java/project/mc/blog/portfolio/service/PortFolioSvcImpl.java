@@ -94,6 +94,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			
 			//log.debug("uploadFileName:"+uploadFileName);
 			
+			fileNo = Integer.parseInt(uploadFileName.substring(uploadFileName.length()-2, uploadFileName.length()));
 			MultipartFile mFile=mReq.getFile(uploadFileName);
 			orgFileName = mFile.getOriginalFilename();
 			if(orgFileName == null || orgFileName.equals(""))
@@ -102,7 +103,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			saveFileName = StringUtil.currDate("yyyy-MM-dd")+"_"+StringUtil.getUUid();
 			ext = orgFileName.substring(orgFileName.lastIndexOf("."));
 			fileSize = mFile.getSize();
-			fileNo = Integer.parseInt(uploadFileName.substring(uploadFileName.length()-2, uploadFileName.length()));
+			
 			
 			log.debug("pfsvcimpl debug==================");
 			log.debug("uploadFileName:"+uploadFileName);

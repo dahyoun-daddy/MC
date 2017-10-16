@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 //todo - userVO 가져와서 id 표시 및 유저 메뉴 생성
-
+	
 	String user_id = (String)session.getAttribute("user_id");
 	
 	

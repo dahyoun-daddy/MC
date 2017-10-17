@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.recruit.domain.ParseVO;
-
+import project.mc.blog.user.domain.UserVO;
 import project.mc.commons.RecruitParse;
 
 @Controller
@@ -22,6 +22,7 @@ public class Recruit_controller {
 	
 	@RequestMapping(value="blog/recruit/recruit.do",method=RequestMethod.GET)
 	public ModelAndView do_saram() throws Exception {
+		
 		log.debug("recruit Cont");
 		RecruitParse doc = new RecruitParse();
 		ParseVO vo = new ParseVO();
@@ -46,6 +47,9 @@ public class Recruit_controller {
 		//(#{page_size} * (#{page_num}-1)+1) AND (#{page_size} * (#{page_num}-1)+#{page_size})
 		RecruitParse doc = new RecruitParse();
 		ParseVO vo = new ParseVO();
+		UserVO usVO = new UserVO();
+		usVO.setUser_id(req.getAttribute("user_id").toString());
+		
 		List<ParseVO> list = new ArrayList<ParseVO>();
 		List<ParseVO> outList = new ArrayList<ParseVO>();
 		list = doc.SaramParse();
@@ -69,6 +73,7 @@ public class Recruit_controller {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/recruit/recruit");
 		mav.addObject("list", outList);
+		mav.addObject("usVO", usVO);
 		
 		return mav;
 		

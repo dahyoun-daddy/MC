@@ -5,6 +5,15 @@
 <% 
 	String contextPath = request.getContextPath();
 	contextPath = "http://localhost:8080/" + contextPath;
+	//로그인된 회원의 아이디
+	String logined_Id = ""; 
+	if(session.getAttribute("user_id").toString() !=null ){
+		logined_Id = session.getAttribute("user_id").toString();
+	}else{
+		logined_Id = "";
+	}
+	//블로그 주인의 아이디
+	String blogOwner_Id = request.getAttribute("user_id").toString();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,7 +31,8 @@
   src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- 부트스트랩 플러그인 -->  
 <script type="text/javascript" 
-  src="<%=contextPath%>/resources/js/bootstrap.min.js"></script> 
+  src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">   
 <title>Insert title here</title>
 <script type="text/javascript">
 	//다운로드 버튼 눌렀을때 파일 다운로드
@@ -174,23 +184,32 @@
 </script>
 </head>
 <body>
-	<h2>이력서 파일 게시판입니다.</h2>
-	<hr/>
+	<h3>이력서 파일 게시판입니다.</h3>	
 	<!-- TODO 블로그 주인과 로그인한 회원이 다를 경우 div 안보이게 -->
 	<!-- 블로그 주인과  -->
-	<div align="right" >		
+<%
+	String str = "";
+	if(logined_Id.equals(blogOwner_Id)){
+		str = "style=\"display:block\""; //보이게
+	}else{
+		str = "style=\"display:none\""; //안보이게
+	}
+%>	
+	<div align="right" <%=str%> >		
 		<button id="do_delete" >삭제</button>&emsp;
 	</div>
 	<br/>
 	<form name="orgfrm">
-		<table border="1" width="99%">
-			<thead>
-				<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll"></th>				
-				<th class="text-center">파일명</th>
-				<th class="text-center">파일용량(kb)</th>
-				<th class="text-center">작성일</th>
-				<th class="text-center">확장자명</th>
-				<th class="text-center">다운로드</th>
+		<table border="1" width="99%" class="w3-table-all w3-card-4">
+			<thead align="center">
+				<tr class="w3-blue w3-centered" align="center">
+					<th align="center" class="text-center"><input type="checkbox" id="checkAll" name="checkAll"></th>				
+					<th align="center" class="text-center">파일명</th>
+					<th align="center" class="text-center">파일용량(kb)</th>
+					<th align="center" class="text-center">작성일</th>
+					<th align="center" class="text-center">확장자명</th>
+					<th <%=str%> align="center" class="text-center">다운로드</th>
+				</tr>
 			</thead>
 			<tbody>
 			<c:choose>
@@ -205,7 +224,7 @@
 							<!-- TODO -->
 							<!-- 블로그 주인과 로그인한 회원이 다를 경우 클릭이 되지 않도록 한다. -->
 							<!-- <td class="text-center"><button type="button" class="do_down">다운로드</button></td> -->
-							<td class="text-center"><input type="button" value="다운로드" onclick="javascript:do_down();" ></td>
+							<td <%=str%> class="text-center"><input type="button" value="다운로드" onclick="javascript:do_down();" ></td>
 							<input type="hidden" name="file_id" id="file_id" value="${ResumeVO.file_id}" >
 							<input type="hidden" name="file_path" class="file_path" value="${ResumeVO.file_path}" >
 							<input type="hidden" name="save_file_name" class="save_file_name" value="${ResumeVO.save_file_name}" >						
@@ -214,7 +233,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="99">올린 이력서 파일이 없습니다.</td>
+						<td colspan="99" class="text-center">올린 이력서 파일이 없습니다.</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
@@ -222,17 +241,7 @@
 		</table>		
 	</form>
 	<hr/>
-<%
-	//TODO
-	//블로그 주인과 로그인된 회원의 아이디가 같으면 보이게 하고 다르면 안 보이게 하기
-	//String str = "";
-	//if(blog_owner.equals(request.getParameter("loginedId"))){
-  	//	str = "style=\"display:block\""; 
-	//}else{
-	//	str = "style=\"display:none\"";
-	//}
-%>	
-	<div <%-- TODO<%=str%> --%> >
+	<div <%=str%> >
         <div>이력서 업로드</div>
         
         <form method="post" name="frm" enctype="multipart/form-data">            

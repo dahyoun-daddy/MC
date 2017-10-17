@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 
 import project.mc.blog.resume.domain.ResumeVO;
 import project.mc.blog.resume.service.ResumeSvc;
+import project.mc.blog.user.service.UserSvc;
 import project.mc.commons.DTO;
 
 @Controller
@@ -38,6 +39,9 @@ public class Resume_controller {
 	@Autowired
 	ResumeSvc resumeSvc;
 	
+	@Autowired
+	UserSvc userSvc;
+	
 	@Resource(name="downloadView")
 	private View downloadView;
 	
@@ -46,17 +50,31 @@ public class Resume_controller {
 		return "blog/resume/resume";
 	}*/
 	
-	@RequestMapping(value="blog/resume/resume.do")	
+	@RequestMapping(value="blog/resume/resume.do", method=RequestMethod.GET)	
 	public ModelAndView resume_search(HttpServletRequest req) {
 		ResumeVO inVO = new ResumeVO();
-		//TODO 블로그의 주인을 파라미터에서 가져온다.
-		//String reg_id = req.getParameter("user_id or blog_id").toString();
-		String reg_id = "joon";
+		//블로그 주인의 user_id
+		String user_id = "";
+		
+		if(req.getParameter("user_id") != null) {
+			user_id = req.getParameter("user_id").toString();
+		}else {
+			//TODO null 처리
+			log.debug("블로그 주인의 user_id를 찾지 못했습니다");
+		}
+		String reg_id = user_id;
+		//String reg_id = "joon";
 		inVO.setReg_id(reg_id);
 		
+		log.debug("Resume_controller의 resume.do 부분입니다.");
+		
+		log.debug("Resume_controller의 resume.do 부분입니다.");		
 		List<ResumeVO> list = (List<ResumeVO>) resumeSvc.do_search(inVO);		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", list);
+		modelAndView.addObject("user_id", user_id);
+		
+		
 		modelAndView.setViewName("blog/resume/resume");
 		
 		return modelAndView;

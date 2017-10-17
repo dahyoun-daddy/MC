@@ -83,7 +83,7 @@ public class ResumeSvcImpl implements ResumeSvc {
 //						private String file_ext; //파일 확장자**
 //						private String reg_id; //작성자 id**
 //						private String reg_dt; //작성일자 (기본값은 SYSDATE)
-					
+						resumeVO.setReg_id(mReq.getParameter("user_id").toString());
 						resumeVO.setFile_path(uploadPath);
 						resumeVO.setFile_size(file_size+"");
 						resumeVO.setOrg_file_name(org_file_name);
@@ -93,7 +93,7 @@ public class ResumeSvcImpl implements ResumeSvc {
 						//resumeVO.setReg_id(reg_id);
 						//resumeVO.setReg_dt(reg_dt);
 						//나중에 지우자
-						resumeVO.setReg_id("joon");
+						//resumeVO.setReg_id("joon");
 						//나중에 지우자
 						list.add(resumeVO);						
 						resumeDao.do_save(resumeVO);

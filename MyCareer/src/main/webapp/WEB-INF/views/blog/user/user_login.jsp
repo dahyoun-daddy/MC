@@ -42,7 +42,7 @@
 				return;
 			}
 			
-			document.frm.action="do_blog_idCheck.do";
+			document.frm.action="blog_do_loginCheck.do";
 
 			document.frm.submit();
 			

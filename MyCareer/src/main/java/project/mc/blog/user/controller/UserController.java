@@ -88,7 +88,7 @@ public class UserController {
 	public String do_blog_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
 	
 		UserVO inVO = new UserVO();
-		inVO.setUser_id(req.getParameter("user_id"));
+		inVO.setUser_id(req.getParameter("login_id"));
 		
 		int selectUseridCheck = userSvc.do_idCheck(inVO);
 		
@@ -183,24 +183,20 @@ public class UserController {
 	@RequestMapping(value="blog/blog_do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_blog_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
-            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
+            , @RequestParam(value="user_password",required=true) String user_password, @RequestParam(value="login_id",required=true) String login_id, HttpServletResponse response) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
-		user_id = req.getParameter("user_id");
-		user_password = req.getParameter("user_password");
-		
 		String url = "";
 		
-		inVO.setUser_id(user_id);
+		inVO.setUser_id(login_id);
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);
 
 		if(result == true) {
-			url = "redirect:/blog/post/post_doSearch.do";
-			//mav.setViewName("main/home_main");
-			session.setAttribute("user_id", user_id);
+			url = "redirect:/blog/post/post_doSearch.do?user_id="+user_id;
+			session.setAttribute("user_id", login_id);
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter out = response.getWriter();
@@ -339,18 +335,13 @@ public class UserController {
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
-            , @RequestParam(value="user_password",required=true) String user_password, @RequestParam(value="login_id",required=true) String login_id, HttpServletResponse response) throws IOException {
+            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
 		String url = "";
-<<<<<<< HEAD
-		//ModelAndView mav = new ModelAndView();
-		inVO.setUser_id(login_id);
-=======
 		
 		inVO.setUser_id(user_id);
->>>>>>> branch 'master' of https://github.com/dahyoun-daddy/MC
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);

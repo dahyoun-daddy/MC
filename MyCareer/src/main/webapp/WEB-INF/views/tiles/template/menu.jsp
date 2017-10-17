@@ -14,19 +14,17 @@
 <%	
 
 	String user_id = request.getParameter("user_id");
+	String login_id = "";
+	
 	if(user_id == null){
 		user_id="";
 	}
 	
-	String login_id = "";
 	if(session.getAttribute("user_id") != null){
 		login_id = session.getAttribute("user_id").toString();
 	}else{
-		login_id = "111";//debug
+		//login_id = "";//debug
 	}
-	
-	
-	System.out.print("login_id"+login_id);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -77,12 +75,13 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$.ajax({
 			type:"post",
 			url : "<%=contextPath%>/portfolio_menu.do",
 			datatype : "json",
-			data : {"user_id" : <%=user_id%>,
-					"login_id" : <%=login_id%>},
+			data : {"user_id" : '<%=user_id%>',
+					"login_id" : '<%=login_id%>'},
 			success : function(data){
 				//디코딩하여 변수에 담는다.
 		        //var outData = decodeURIComponent(data);

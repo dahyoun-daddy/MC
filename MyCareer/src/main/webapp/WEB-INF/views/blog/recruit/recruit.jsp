@@ -61,9 +61,9 @@ function readPop(url){
             <c:choose>
                <c:when test="${list.size()>0}" >
                    <c:forEach var="ParseVO" items="${list}">
-                           <tr><td class="text-left"><c:out value="${ParseVO.reSubject}"/></td>
+                           <tr><td class="text-left" style="cursor:pointer" onclick="readPop('${ParseVO.reUrl}');"><c:out value="${ParseVO.reSubject}"/></td>
                                <td class="text-left" style="cursor:pointer" onclick="readPop('${ParseVO.reUrl}');"><c:out value="${ParseVO.reCompany}"/></td>
-                               <td class="text-left"><c:out value="${ParseVO.reExDate}"/></td>
+                               <td class="text-center"><c:out value="${ParseVO.reExDate}"/></td>
                                <td class="text-center"><c:out value="${ParseVO.reSalary}"/></td>
                             </tr>       
                    </c:forEach>

@@ -41,7 +41,7 @@
 	    margin-left: 50px;
 	    padding: 0;
 	    width: 200px;
-	    background-color: #f1f1f1;
+	    background-color: white;
 	    font-size: 20px;
 	    border: 1px solid #555;
 	}

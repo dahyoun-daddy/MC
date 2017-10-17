@@ -20,6 +20,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 부트스트랩 -->
+<link href="<%=contextPath%>/resources/css/bootstrap.css" rel="stylesheet">
+<link href="<%=contextPath%>/resources/css/bootstrap-theme.min.css" rel="stylesheet">
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
 	
 	a{	
@@ -29,6 +36,29 @@
 	.pf_menu{
 	    padding-left:25px;
     }
+	#snb{
+	    list-style-type: none;
+	    margin-left: 50px;
+	    padding: 0;
+	    width: 200px;
+	    background-color: #f1f1f1;
+	    font-size: 20px;
+	    border: 1px solid #555;
+	}
+	
+	li a {
+	    display: block;
+	    color: #000;
+	    padding: 8px 16px;
+	    text-decoration: none;
+	    border: 1px solid #555;
+	}
+	
+	/* Change the link color on hover */
+	li a:hover {
+	    background-color: coral;
+	    color: white;
+	}
 	
 </style>
 <title>Insert title here</title>
@@ -63,8 +93,6 @@
 		});
 		
 	});
-
-
 </script>
 </head>		
 <body>
@@ -72,22 +100,16 @@
 	<br/>
 	<br/>
 	<br/>
-	<table style="margin-left:50px; bor" border="" bordercolor="black" rules="none">
-		<tr>
-			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do" style="text-decoration: none"><h3>포스팅</h3></a></td>
-		</tr>
-		<tr>
-			<td id="pf_tmp_td">
-				<a id="pf_tmp" style="text-decoration: none"><h3>포트폴리오</h3></a>
+	<div class="snb">
+		<ul id="snb">
+			<li class="s1"><a href="<%=contextPath%>/blog/post/post_doSearch.do" style="text-decoration: none">포스팅</a></li>	
+			<li id="pf_tmp_td" class="s2">
+				<a id="pf_tmp" style="text-decoration: none">포트폴리오</a>
 				<!-- 여기에 템플릿들이 추가 -->
-			</td>
-		</tr>
-		<tr>
-			<td><a href="<%=contextPath%>/blog/resume/resume.do" style="text-decoration: none"><h3>이력서</h3></a></td>
-		</tr>
-		<tr>
-			<td><a href="<%=contextPath%>/blog/recruit/recruit.do" style="text-decoration: none"><h3>공채목록</h3></a></td>
-		</tr>
-	</table>
+			</li>
+			<li class="s3"><a href="<%=contextPath%>/blog/resume/resume.do" style="text-decoration: none">이력서</a></li>
+			<li class="s4"><a href="<%=contextPath%>/blog/recruit/recruit.do" style="text-decoration: none">공채목록</a></li>
+		</ul>
+	</div>
 </body>
 </html>

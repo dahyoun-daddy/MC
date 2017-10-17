@@ -287,7 +287,7 @@ public class UserController {
 	// 회원수정 페이지로 이동(블로그)
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
-		
+		 
 		UserVO inVO = new UserVO();
 		UserVO inVO2 = new UserVO();
 		

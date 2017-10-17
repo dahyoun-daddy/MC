@@ -68,7 +68,8 @@ public class ResumeSvcImpl implements ResumeSvc {
 			file_size = mFile.getSize();
 			
 			save_file_name = this.currDate("yyyy-MM-dd") + "_" +  getUUid() + "." +ext;
-			
+			String user_id = mReq.getParameter("user_id").toString();
+			log.debug("ResumeSvc 입니다 : " + user_id);
 			if(org_file_name != null && !org_file_name.equals("")) {
 					try {
 //TO-DO 나중에 지울것
@@ -84,17 +85,13 @@ public class ResumeSvcImpl implements ResumeSvc {
 //						private String reg_id; //작성자 id**
 //						private String reg_dt; //작성일자 (기본값은 SYSDATE)
 						resumeVO.setReg_id(mReq.getParameter("user_id").toString());
+						//resumeVO.setReg_dt(user_id);
+						log.debug("유저 아이디 씨발놈아: " + mReq.getParameter("user_id").toString() );
 						resumeVO.setFile_path(uploadPath);
 						resumeVO.setFile_size(file_size+"");
 						resumeVO.setOrg_file_name(org_file_name);
 						resumeVO.setSave_file_name(save_file_name);
 						resumeVO.setFile_ext(ext);
-						//TO-DO: 세션에서 가져올 것
-						//resumeVO.setReg_id(reg_id);
-						//resumeVO.setReg_dt(reg_dt);
-						//나중에 지우자
-						//resumeVO.setReg_id("joon");
-						//나중에 지우자
 						list.add(resumeVO);						
 						resumeDao.do_save(resumeVO);
 						mFile.transferTo(new File(uploadPath+save_file_name));

@@ -58,6 +58,9 @@ public class Resume_controller {
 		
 		if(req.getParameter("user_id") != null) {
 			user_id = req.getParameter("user_id").toString();
+			log.debug("resume_controll입니다");
+			log.debug("블로그 주인의 user_id 값은 : " + user_id);
+			log.debug("resume_controll입니다");
 		}else {
 			//TODO null 처리
 			log.debug("블로그 주인의 user_id를 찾지 못했습니다");
@@ -122,8 +125,7 @@ public class Resume_controller {
 	
 	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.POST)
 	public String do_saveSub(MultipartHttpServletRequest mReq)
-			throws IOException, DataAccessException{
-		ModelAndView modelAndView = new ModelAndView();
+			throws IOException, DataAccessException{		
 		List<DTO> list = resumeSvc.do_saveMulti(mReq);
 		for(DTO vo : list) {
 			ResumeVO resumeVO = (ResumeVO)vo;
@@ -131,7 +133,9 @@ public class Resume_controller {
 			log.debug("resumeVO의 값은 : " + resumeVO.toString());			
 			log.debug("Resume_controller 입니다");
 		}
-		return "redirect:resume.do";
+		
+		String user_id = mReq.getParameter("user_id").toString();
+		return "redirect:resume.do?user_id="+user_id;
 	}
 	
 	@RequestMapping(value="blog/resume/do_checkedDelete.do", method=RequestMethod.POST)

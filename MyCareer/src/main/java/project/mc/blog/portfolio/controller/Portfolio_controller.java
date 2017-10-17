@@ -73,7 +73,6 @@ public class Portfolio_controller {
 		
 		log.debug("pfVO: "+pfVO.toString());
 		
-		
 		mav.addObject("pfVO", pfVO);
 		mav.addObject("usVO", outUserVO);
 		
@@ -357,6 +356,7 @@ public class Portfolio_controller {
 	@RequestMapping(value="portfolio_menu.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String portfolio_menu(HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
+		System.out.println("portfolio_menu");
 		log.debug("portfolio_menu*");
 		String user_id = req.getParameter("user_id").toString();
 		log.debug("user_id"+user_id);

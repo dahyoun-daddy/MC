@@ -12,10 +12,8 @@
 	if(session.getAttribute("user_id") != null){
 		login_id = session.getAttribute("user_id").toString();
 	}else{
-		login_id = "111";//debug
+		login_id = "";//debug
 	}
-	
-	System.out.print("login_id"+login_id);
 	
 %>    
 <%
@@ -89,7 +87,7 @@
 	            <a><img src="" alt="유저 메뉴"/></a>
 		            <ul class="hide menu_ul" style="display:none">
 		            	<%
-		            		if(user_id == null){
+		            		if(login_id == null || login_id.equals("")){
 		            	%>
 		                	<li><a href="<%=contextPath%>/blog/blog_login_page.do?user_id=<%=login_id%>" id="login"><img src="" alt="로그인"/></a></li>
 		                <%

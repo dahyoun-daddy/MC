@@ -83,9 +83,9 @@ public class UserController {
 	
 	
 	// �ߺ� id ��ȸ
-	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="user/do_blog_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
+	public String do_blog_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
 	
 		UserVO inVO = new UserVO();
 		inVO.setUser_id(req.getParameter("user_id"));
@@ -385,6 +385,26 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
+	
+		UserVO inVO = new UserVO();
+		inVO.setUser_id(req.getParameter("user_id"));
+		
+		int selectUseridCheck = userSvc.do_idCheck(inVO);
+		
+//		ModelAndView mav =new ModelAndView();
+//		mav.setViewName("blog/user/user_register");
+		
+		if(selectUseridCheck == 0) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+		
+	}
 	
 	
 	

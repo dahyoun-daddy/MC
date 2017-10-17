@@ -89,16 +89,16 @@
 		            	<%
 		            		if(login_id == null || login_id.equals("")){
 		            	%>
-		                	<li><a href="<%=contextPath%>/blog/login_page.do?user_id=<%=user_id%>" id="login"><img src="" alt="로그인"/></a></li>
+		                	<li><a href="<%=contextPath%>/blog/blog_login_page.do?user_id=<%=login_id%>" id="login"><img src="" alt="로그인"/></a></li>
 		                <%
 		            		}else{
-		                %>
-		                	<li><a href="<%=contextPath%>/user/do_logout.do?user_id=<%=user_id%>" id="logout"><img src="" alt="로그아웃"/></a></li>
-		                	<li><a href="<%=contextPath%>/user/do_updateForm.do?user_id=<%=user_id%>"><img src="" alt="회원 정보 수정"/></a></li>
+		                %> 
+		                	<li><a href="<%=contextPath%>/blog/do_blog_logout.do?user_id=<%=user_id%>" id="logout"><img src="" alt="로그아웃"/></a></li>
+		                	<li><a href="<%=contextPath%>/blog/do_blog_update.do?user_id=<%=user_id%>"><img src="" alt="회원 정보 수정"/></a></li>
 		                <%
 		            		}
 		                %>
-		                <li><a href="<%=contextPath%>/user/do_look.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
+		                <li><a href="<%=contextPath%>/blog/do_blog_save.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
 		            </ul>
 		        </li>
 			</ul>	

@@ -75,14 +75,14 @@ totalCnt = Integer.parseInt(
 	
 	function doWrite(){
 		var frm = document.frm;
-		frm.method = "GET";
+		frm.method = "POST";
 	    frm.action = "post_doSave.do";
 	    frm.submit();
 	}
 	
 	function readPost(post_id){
 		var frm = document.frm;
-		frm.method = "GET";
+		frm.method = "POST";
 	    frm.action = "post_doSelectOne.do";
 	    frm.post_id.value = post_id;
 	    frm.submit();

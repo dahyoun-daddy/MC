@@ -57,24 +57,21 @@
 	//이력서 파일 저장
 	function do_fileSave(){
 		var frm = document.frm;		
-		var file = document.frm.file.value;
-		alert(file);
+		var file = document.frm.file.value;		
 		if(frm.file.value<1){
 			alert("선택한 파일이 없습니다.");
-			frm.location.reload();
 			return;
 		}
 //		var file = frm.file.value;
 //		console.log(file);
-		var fileExt = file.substring(file.lastIndexOf(".")+1).toLowerCase();
-		alert(fileExt);
+		var fileExt = file.substring(file.lastIndexOf(".")+1).toLowerCase();		
 		if(file!= "" && (fileExt == 'doc' || fileExt == 'docx' || fileExt == 'hwp') ){
 			alert("이력서 파일이 업로드 되었습니다.");
 			frm.action = "upload.do";
 			frm.submit();
 		}else{
 			alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.");
-			frm.location.reload();
+			alert("올바른 파일을 선택해주세요.");
 			return;
 		}
 		
@@ -251,7 +248,7 @@
                 <div>
                    <input type="file" name="file" id="file"/>   
                 </div>                                                               
-                <button class="btn btn-success btn-sm" onclick="do_fileSave()">업로드
+                <button type="button" class="btn btn-success btn-sm" onclick="do_fileSave()">업로드
                 </button>
             </div>        
         </form>

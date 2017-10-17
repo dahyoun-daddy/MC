@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="project.mc.commons.StringUtil" %>
+<%@ page import="project.mc.blog.user.domain.UserVO" %>
 <%  //contextPath
 String contextPath = request.getContextPath();
 contextPath = "http://localhost:8080/"+contextPath;
@@ -17,6 +18,9 @@ page_num  = StringUtil.nvl(request.getParameter("page_num"),"1");
 
 int oPage_size = Integer.parseInt(page_size);
 int oPage_num  = Integer.parseInt(page_num);
+
+UserVO usVO = (UserVO)request.getAttribute("usVO");
+String user_id = usVO.getUser_id();
 %>  
 <!DOCTYPE html PUBLIC "-//W3C//Dth HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dth">
 <html>
@@ -33,6 +37,7 @@ int oPage_num  = Integer.parseInt(page_num);
 function do_search_page(url, page_num){
     var frm = document.frm;
     frm.page_num.value = page_num;
+    var user_id = frm.user_id.value;
     frm.action = url;
     frm.submit();
 }
@@ -50,6 +55,7 @@ function readPop(url){
     <h3>공채 목록</h3>
     <form name="frm" id="frm" method="GET" action="recruit.do">
         <input type="hidden" name="page_num" value="1"/>
+        <input type="hidden" name="user_id" value="<%=user_id%>"/>
         <table id="listTable"  class="table table-bordered table-hover table-striped" >
            <thead>
                <th class="text-center">공고 제목</th>

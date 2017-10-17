@@ -371,11 +371,13 @@ public class Portfolio_controller {
 		List<PortfolioVO> list = (List<PortfolioVO>) pfSvc.do_searchByUser_id(inVO);
 		
 		StringBuilder sb = new StringBuilder();
+		int no_dis = 0;
 		
 		sb.append("<ul class='pf_menu' style='display:none'>");
 		
 		if(user_id != null && user_id.equals(login_id)) {
 			sb.append("<li><a href='"+contextPath+"/blog/portfolio_edit_tmp1.do?user_id="+user_id+"'><img src='' alt='새 템플릿'/></a></li>\n");
+			no_dis++;
 		}
 		
 		for(PortfolioVO outVO : list) {
@@ -383,6 +385,11 @@ public class Portfolio_controller {
 			int tmp_no = outVO.getTmp_no();
 			
 			sb.append("<li><a href='"+contextPath+"/blog/portfolio_view_tmp"+tmp_no+".do?user_id="+user_id+"&pf_id="+pf_id+"'><img src='' alt='템플릿_"+pf_id+"'/></a></li>\n");
+			no_dis++;
+		}
+		
+		if(no_dis == 0) {
+			sb.append("<li><a href='#'><img src='' alt='No Portfolio'/></a></li>\n");
 		}
 		
 		sb.append("</ul>");
@@ -391,6 +398,8 @@ public class Portfolio_controller {
 //        String json = gson.toJson(list);
 		
 		String outStr = sb.toString();
+		
+		
 		log.debug("outStr: "+outStr);
 		//URLEncoder.encode(outStr , "UTF-8");
 		return outStr;

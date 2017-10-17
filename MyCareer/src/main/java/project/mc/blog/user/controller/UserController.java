@@ -77,7 +77,7 @@ public class UserController {
 		
 		int flag = 0;
 		flag = userSvc.do_save(inVO);
-		//TODO
+		
 		return "redirect:blog_login_page.do";
 	}
 	
@@ -91,9 +91,6 @@ public class UserController {
 		inVO.setUser_id(req.getParameter("user_id"));
 		
 		int selectUseridCheck = userSvc.do_idCheck(inVO);
-		
-//		ModelAndView mav =new ModelAndView();
-//		mav.setViewName("blog/user/user_register");
 		
 		if(selectUseridCheck == 0) {
 			return "true";
@@ -141,7 +138,6 @@ public class UserController {
 		
 		inVO2=userSvc.viewMember(inVO);
 		
-		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("blog/user/user_modify");//List
 		modelAndView.addObject("inVO", inVO2);
@@ -162,15 +158,16 @@ public class UserController {
 		int withdraw_flag = 0;
 		inVO.setWithdraw_flag(withdraw_flag);
 		
-		
 		int flag = userSvc.do_delete(inVO);
-		//TODO
+		
 		return "redirect:do_blog_logout.do";
 	}
 	
 	// �α��� ȭ������ ��(��α�)
 	@RequestMapping(value="blog/blog_login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
-	public String do_blog_login() throws IOException {
+	public String do_blog_login(HttpServletRequest req) throws IOException {
+		
+		
 		
 		return "blog/user/user_login";
 	}
@@ -194,7 +191,7 @@ public class UserController {
 		user_password = req.getParameter("user_password");
 		
 		String url = "";
-		//ModelAndView mav = new ModelAndView();
+		
 		inVO.setUser_id(user_id);
 		inVO.setUser_password(user_password);
 		
@@ -207,9 +204,9 @@ public class UserController {
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter out = response.getWriter();
-	            out.println("<script>alert('�α��� ������ Ȯ�����ּ���.'); history.go(-1);</script>");
+	            out.println("<script>alert('로그인 정보가 일치하지 않습니다.'); history.go(-1);</script>");
 	            out.flush();
-			//mav.setViewName("blog/user/user_login");
+			
 		}
 		
 		return url;
@@ -251,7 +248,7 @@ public class UserController {
 		inVO.setEmail(req.getParameter("email"));
 		inVO.setAddress(req.getParameter("address"));
 		inVO.setPhone(req.getParameter("phone"));
-		int withdraw_flag = 1;//Integer.parseInt(req.getParameter("withdraw_flag").toString());
+		int withdraw_flag = 1;
 		inVO.setWithdraw_flag(withdraw_flag);
 		
 		int flag = 0;
@@ -342,16 +339,13 @@ public class UserController {
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
-            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
+            , @RequestParam(value="user_password",required=true) String user_password, @RequestParam(value="login_id",required=true) String login_id, HttpServletResponse response) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
-		user_id = req.getParameter("user_id");
-		user_password = req.getParameter("user_password");
-		
 		String url = "";
 		//ModelAndView mav = new ModelAndView();
-		inVO.setUser_id(user_id);
+		inVO.setUser_id(login_id);
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);
@@ -363,9 +357,9 @@ public class UserController {
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter out = response.getWriter();
-	            out.println("<script>alert('�α��� ������ Ȯ�����ּ���.'); history.go(-1);</script>");
+	            out.println("<script>alert('로그인 정보가 일치하지 않습니다.'); history.go(-1);</script>");
 	            out.flush();
-			//mav.setViewName("blog/user/user_login");
+			
 		}
 		
 		return url;
@@ -393,9 +387,6 @@ public class UserController {
 		inVO.setUser_id(req.getParameter("user_id"));
 		
 		int selectUseridCheck = userSvc.do_idCheck(inVO);
-		
-//		ModelAndView mav =new ModelAndView();
-//		mav.setViewName("blog/user/user_register");
 		
 		if(selectUseridCheck == 0) {
 			return "true";

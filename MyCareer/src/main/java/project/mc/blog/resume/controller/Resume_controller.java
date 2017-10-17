@@ -123,7 +123,7 @@ public class Resume_controller {
 //		return modelAndView;
 //	}
 	
-	@RequestMapping(value="blog/resume/upload.do", method = RequestMethod.POST)
+	@RequestMapping(value="blog/resume/upload.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String do_saveSub(MultipartHttpServletRequest mReq)
 			throws IOException, DataAccessException{		
 		List<DTO> list = resumeSvc.do_saveMulti(mReq);

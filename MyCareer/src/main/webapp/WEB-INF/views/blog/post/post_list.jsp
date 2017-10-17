@@ -22,6 +22,11 @@ totalCnt = Integer.parseInt(
 		    StringUtil.nvl(
 			request.getAttribute("totalCnt").toString(),"0"));
 
+String user_id = request.getParameter("user_id");
+String login_id = "";
+if(session.getAttribute("user_id") != null){
+	login_id = session.getAttribute("user_id").toString();
+}
 %>
 
 <%
@@ -69,6 +74,7 @@ totalCnt = Integer.parseInt(
 	function doSearch(){
 	    var frm = document.frm;
 	    frm.page_num.value = "1";
+	    frm.method = "GET";
 	    frm.action = "post_doSearch.do";
 	    frm.submit();
 	}
@@ -148,6 +154,7 @@ totalCnt = Integer.parseInt(
      <form name="frm" action="doSearch.do" method="post" class="form-inline">
          <input type="hidden"  name="page_num" id="page_num" value="<%=page_num %>"  >
          <input type="hidden"  name="post_id"  id="post_id"  >
+         <input type="hidden" name="user_id" value="<%=user_id%>">
 	<!-- Button Area -->    
 	<div class="form-inline pull-right ">
       <select name="page_size" id="page_size" class="form-control input-sm">

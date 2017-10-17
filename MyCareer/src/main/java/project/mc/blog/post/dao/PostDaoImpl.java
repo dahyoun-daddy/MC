@@ -98,6 +98,16 @@ public class PostDaoImpl implements PostDao {
 		searchParam.put("SEARCH_DIV", searchDiv);
 		searchParam.put("SEARCH_WORD", searchWord);
 		
+		String reg_id = param.getReg_id();
+		
+		if(reg_id == null || reg_id.equals("")) {
+			searchParam.put("reg_id", "");
+		}else {
+			searchParam.put("reg_id", reg_id);
+		}
+			
+			
+		
 		log.debug("===================pageSize : "+page_size);
 		
 		log.debug("searchDiv:"+searchDiv);

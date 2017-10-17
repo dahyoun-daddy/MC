@@ -201,6 +201,7 @@
 	<br/>
 	<form name="orgfrm">
 		<table border="1" width="99%" class="w3-table-all w3-card-4">
+			<input type="hidden" name="user_id" value="<%=blogOwner_Id%>">
 			<thead align="center">
 				<tr class="w3-blue w3-centered" align="center">
 					<th align="center" class="text-center"><input type="checkbox" id="checkAll" name="checkAll"></th>				
@@ -244,7 +245,8 @@
 	<div <%=str%> >
         <div>이력서 업로드</div>
         
-        <form method="post" name="frm" enctype="multipart/form-data">            
+        <form method="post" name="frm" enctype="multipart/form-data">
+        	<input type="hidden" name="user_id" value="<%=blogOwner_Id%>">           
             <div style="border:1px dotted green; width:99%">               
                 <div>
                    <input type="file" name="file" id="file"/>   

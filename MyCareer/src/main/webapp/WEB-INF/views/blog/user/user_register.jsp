@@ -42,7 +42,7 @@
 		// 회원가입 취소
 			$("#cancel").on("click",function(){
 				
-				document.cancel.action="login_page.do"
+				document.cancel.action="blog_login_page.do"
 				
 			});
 		
@@ -174,7 +174,7 @@
 						
 							$.ajax({
 								type:"POST",
-					            url:"do_save.do",
+					            url:"do_blog_save.do",
 					            dataType:"html",// JSON
 					            async: false,
 					            data:{
@@ -193,7 +193,7 @@
 							
 					            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 					            	alert("회원가입완료");
-					            	location.href="login_page.do";
+					            	location.href="blog_login_page.do";
 					            },
 					            complete: function(data){//무조건 수행
 					            	
@@ -295,7 +295,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	</div>
 	<div id="footer" align="center">
 		<input type="submit" value="회원가입" id="do_save" name="do_save" class="btn btn-primary btn-block btn-flat">
-		<button class="btn btn-success"><a href="login_page.do">취소</a></button><!-- <a href="login_page.do">취소</a> -->
+		<button class="btn btn-success"><a href="blog_login_page.do">취소</a></button><!-- <a href="login_page.do">취소</a> -->
 	</div>
 	</form>
 	</div>

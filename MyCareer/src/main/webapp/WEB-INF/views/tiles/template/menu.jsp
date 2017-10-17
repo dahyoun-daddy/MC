@@ -43,7 +43,7 @@
 	    width: 200px;
 	    background-color: white;
 	    font-size: 20px;
-	    border: 1px solid #555;
+	    border: 1px solid #555; 
 	}
 	
 	li a {

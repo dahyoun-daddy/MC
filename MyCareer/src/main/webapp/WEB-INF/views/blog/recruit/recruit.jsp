@@ -55,7 +55,7 @@ function readPop(url){
                <th class="text-center">공고 제목</th>
                <th class="text-center">회사명</th>
                <th class="text-center">공고 마감일</th>
-               <th class="text-center">연봉</th>
+               <th class="text-center">연봉</th> 
             </thead>
             <tbody >
             <c:choose>

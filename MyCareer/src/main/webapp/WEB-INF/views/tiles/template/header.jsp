@@ -91,7 +91,7 @@
 		            	<%
 		            		if(user_id == null){
 		            	%>
-		                	<li><a href="<%=contextPath%>/user/login_page.do?user_id=<%=user_id%>" id="login"><img src="" alt="로그인"/></a></li>
+		                	<li><a href="<%=contextPath%>/blog/login_page.do?user_id=<%=user_id%>" id="login"><img src="" alt="로그인"/></a></li>
 		                <%
 		            		}else{
 		                %>

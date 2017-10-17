@@ -94,11 +94,11 @@
 		            		}else{
 		                %> 
 		                	<li><a href="<%=contextPath%>/blog/do_blog_logout.do?user_id=<%=user_id%>" id="logout"><img src="" alt="로그아웃"/></a></li>
-		                	<li><a href="<%=contextPath%>/blog/do_blog_update.do?user_id=<%=user_id%>"><img src="" alt="회원 정보 수정"/></a></li>
+		                	<li><a href="<%=contextPath%>/blog/do_blog_updateForm.do?user_id=<%=user_id%>"><img src="" alt="회원 정보 수정"/></a></li>
 		                <%
 		            		}
 		                %>
-		                <li><a href="<%=contextPath%>/blog/do_blog_save.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
+		                <li><a href="<%=contextPath%>/blog/blog_do_look.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
 		            </ul>
 		        </li>
 			</ul>	

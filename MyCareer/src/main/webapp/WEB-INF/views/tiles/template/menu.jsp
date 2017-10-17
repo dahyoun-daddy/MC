@@ -66,9 +66,13 @@
 
 
 </script>
-</head>
+</head>		
 <body>
-	<table style="margin-left: 50px">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<table style="margin-left:50px; bor" border="" bordercolor="black" rules="none">
 		<tr>
 			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do" style="text-decoration: none"><h3>포스팅</h3></a></td>
 		</tr>

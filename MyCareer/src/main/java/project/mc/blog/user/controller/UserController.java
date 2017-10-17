@@ -299,7 +299,7 @@ public class UserController {
 		
 		
 		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("blog/user/user_modify");//List
+		modelAndView.setViewName("main/user/user_modify");//List
 		modelAndView.addObject("inVO", inVO2);
 		
 		return modelAndView;
@@ -328,14 +328,14 @@ public class UserController {
 	@RequestMapping(value="user/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_login() throws IOException {
 		
-		return "blog/user/user_login";
+		return "main/user/user_login";
 	}
 	
 	// 회원가입 화면으로 감(블로그)
 	@RequestMapping(value="user/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_look(HttpServletRequest req) throws IOException {
 		
-		return "blog/user/user_register";
+		return "main/user/user_register";
 	}
 	
 	// 로그인 처리(메인홈)
@@ -378,7 +378,7 @@ public class UserController {
 		
 		userSvc.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/user/user_login");
+		mav.setViewName("main/user/user_login");
 		mav.addObject("msg", "logout");
 		
 		return mav;

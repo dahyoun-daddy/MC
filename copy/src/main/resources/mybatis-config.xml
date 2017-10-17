@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- VO Name 간략정의 -->
+   <typeAliases>
+        <typeAlias type="project.mc.blog.user.domain.UserVO" 
+        alias="UserVO"/>
+        <typeAlias type="project.mc.blog.resume.domain.ResumeVO" alias="ResumeVO"/>
+    </typeAliases>
+</configuration>

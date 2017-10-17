@@ -22,7 +22,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.user.dao.UserDao;
@@ -41,15 +43,195 @@ public class UserController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-
-	
-	
 	@Autowired 
 	UserSvc userSvc;
 	
 //	@Autowired
 //	private Validator validator;
 	
+	// ====================================================================================================	
+	// ∫Ì∑Œ±◊ 
+	// ====================================================================================================
+	// »∏ø¯ ∞°¿‘ (∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_save.do", method={RequestMethod.POST,RequestMethod.GET})
+	public String do_blog_save(HttpServletRequest req) throws IOException{
+		
+		UserVO inVO = new UserVO();
+		
+		int user_no = 1;
+		inVO.setNo(user_no);
+		inVO.setUser_id(req.getParameter("user_id"));
+		inVO.setUser_password(req.getParameter("user_password"));
+		int user_div = Integer.parseInt(req.getParameter("user_div").toString());
+		inVO.setUser_div(user_div);
+		inVO.setUser_name(req.getParameter("user_name"));
+		int gender = Integer.parseInt(req.getParameter("gender").toString());
+		inVO.setGender(gender);
+		int age = Integer.parseInt(req.getParameter("age").toString());
+		inVO.setAge(age);
+		inVO.setEmail(req.getParameter("email"));
+		inVO.setAddress(req.getParameter("address"));
+		inVO.setPhone(req.getParameter("phone"));
+		int withdraw_flag = 1;//Integer.parseInt(req.getParameter("withdraw_flag").toString());
+		inVO.setWithdraw_flag(withdraw_flag);
+		
+		int flag = 0;
+		flag = userSvc.do_save(inVO);
+		//TODO
+		return "redirect:login_page.do";
+	}
+	
+	
+	// ¡ﬂ∫π id ¡∂»∏
+	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
+	
+		UserVO inVO = new UserVO();
+		inVO.setUser_id(req.getParameter("user_id"));
+		
+		int selectUseridCheck = userSvc.do_idCheck(inVO);
+		
+//		ModelAndView mav =new ModelAndView();
+//		mav.setViewName("blog/user/user_register");
+		
+		if(selectUseridCheck == 0) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+		
+	}
+	
+	// »∏ø¯ ºˆ¡§(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView do_blog_updateForm(HttpServletRequest req) throws IOException {
+		
+		UserVO inVO=new UserVO();
+		
+		inVO.setUser_id(req.getParameter("user_id"));
+		inVO.setUser_password(req.getParameter("user_password"));
+		inVO.setUser_name(req.getParameter("user_name"));
+		int age = Integer.parseInt(req.getParameter("age").toString());
+		inVO.setAge(age);
+		inVO.setEmail(req.getParameter("email"));
+		inVO.setAddress(req.getParameter("address"));
+		inVO.setPhone(req.getParameter("phone"));
+		
+		int flag = userSvc.do_update(inVO);
+		
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("blog/post/post_list");//List
+		modelAndView.addObject("inVO", inVO);
+		
+		return modelAndView;
+	}
+	
+	// »∏ø¯ºˆ¡§ ∆‰¿Ã¡ˆ∑Œ ¿Ãµø(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView do_blog_update(HttpSession session, HttpServletRequest req) {
+		
+		UserVO inVO = new UserVO();
+		UserVO inVO2 = new UserVO();
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
+		inVO.setUser_id(user_id);
+		
+		inVO2=userSvc.viewMember(inVO);
+		
+		
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("blog/user/user_modify");//List
+		modelAndView.addObject("inVO", inVO2);
+		
+		return modelAndView;
+		
+	}
+	
+	// »∏ø¯ªË¡¶(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	public String do_blog_delete(HttpServletRequest req) throws IOException {
+		
+		UserVO inVO=new UserVO();
+		
+		inVO.setUser_id(req.getParameter("user_id"));
+		String user_password = "$#%&(*&$uy@#5s";
+		inVO.setUser_password(user_password);
+		int withdraw_flag = 0;
+		inVO.setWithdraw_flag(withdraw_flag);
+		
+		
+		int flag = userSvc.do_delete(inVO);
+		//TODO
+		return "redirect:do_logout.do";
+	}
+	
+	// ∑Œ±◊¿Œ »≠∏È¿∏∑Œ ∞®(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	public String do_blog_login() throws IOException {
+		
+		return "blog/user/user_login";
+	}
+	
+	// »∏ø¯∞°¿‘ »≠∏È¿∏∑Œ ∞®(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	public String do_blog_look(HttpServletRequest req) throws IOException {
+		
+		return "blog/user/user_register";
+	}
+	
+	// ∑Œ±◊¿Œ √≥∏Æ(∏ﬁ¿Œ»®)
+	@RequestMapping(value="blog/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	
+	public String do_blog_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
+            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
+		
+		UserVO inVO = new UserVO();
+		
+		user_id = req.getParameter("user_id");
+		user_password = req.getParameter("user_password");
+		
+		String url = "";
+		//ModelAndView mav = new ModelAndView();
+		inVO.setUser_id(user_id);
+		inVO.setUser_password(user_password);
+		
+		boolean result = userSvc.do_loginCheck(inVO);
+
+		if(result == true) {
+			url = "redirect:/blog/post/post_doSearch.do";
+			//mav.setViewName("main/home_main");
+			session.setAttribute("user_id", user_id);
+		}else {
+			 response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('∑Œ±◊¿Œ ¡§∫∏∏¶ »Æ¿Œ«ÿ¡÷ººø‰.'); history.go(-1);</script>");
+	            out.flush();
+			//mav.setViewName("blog/user/user_login");
+		}
+		
+		return url;
+	}
+	
+	// ∑Œ±◊ æ∆øÙ(∫Ì∑Œ±◊)
+	@RequestMapping(value="blog/do_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	
+	public ModelAndView do_blog_logout(HttpSession session) throws IOException {
+		
+		userSvc.logout(session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/user/user_login");
+		mav.addObject("msg", "logout");
+		
+		return mav;
+		
+	}
+
+	// ====================================================================================================	
+	// ∏ﬁ¿Œ 
+	// ====================================================================================================
 	@RequestMapping(value="user/do_save.do", method={RequestMethod.POST,RequestMethod.GET})
 	public String do_save(HttpServletRequest req) throws IOException{
 		
@@ -78,30 +260,7 @@ public class UserController {
 		return "redirect:login_page.do";
 	}
 	
-	
-	// Ï§ëÎ≥µ id Ï°∞Ìöå
-	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
-	@ResponseBody
-	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
-	
-		UserVO inVO = new UserVO();
-		inVO.setUser_id(req.getParameter("user_id"));
-		
-		int selectUseridCheck = userSvc.do_idCheck(inVO);
-		
-//		ModelAndView mav =new ModelAndView();
-//		mav.setViewName("blog/user/user_register");
-		
-		if(selectUseridCheck == 0) {
-			return "true";
-		}
-		else {
-			return "false";
-		}
-		
-	}
-	
-	// ÌöåÏõê ÏàòÏ†ï
+	// »∏ø¯ ºˆ¡§(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_updateForm(HttpServletRequest req) throws IOException {
 		
@@ -125,7 +284,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	// ÌöåÏõêÏàòÏ†ï ÌéòÏù¥ÏßÄÎ°ú Ïù¥Îèô
+	// »∏ø¯ºˆ¡§ ∆‰¿Ã¡ˆ∑Œ ¿Ãµø(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
 		
@@ -147,6 +306,7 @@ public class UserController {
 		
 	}
 	
+	// »∏ø¯ªË¡¶(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_delete(HttpServletRequest req) throws IOException {
 		
@@ -164,50 +324,54 @@ public class UserController {
 		return "redirect:do_logout.do";
 	}
 	
-	// Î°úÍ∑∏Ïù∏ ÌôîÎ©¥ÏúºÎ°ú Í∞ê
+	// ∑Œ±◊¿Œ »≠∏È¿∏∑Œ ∞®(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_login() throws IOException {
 		
 		return "blog/user/user_login";
 	}
 	
-	// ÌöåÏõêÍ∞ÄÏûÖ ÌôîÎ©¥ÏúºÎ°ú Í∞ê
+	// »∏ø¯∞°¿‘ »≠∏È¿∏∑Œ ∞®(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_look(HttpServletRequest req) throws IOException {
 		
 		return "blog/user/user_register";
 	}
 	
-	// Î°úÍ∑∏Ïù∏ Ï≤òÎ¶¨
+	// ∑Œ±◊¿Œ √≥∏Æ(∏ﬁ¿Œ»®)
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
-	public ModelAndView do_loginCheck(HttpSession session, HttpServletRequest req) throws IOException {
+	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
+            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
-		String user_id = req.getParameter("user_id");
-		String user_password = req.getParameter("user_password");
+		user_id = req.getParameter("user_id");
+		user_password = req.getParameter("user_password");
 		
-		ModelAndView mav = new ModelAndView();
-		
+		String url = "";
+		//ModelAndView mav = new ModelAndView();
 		inVO.setUser_id(user_id);
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);
 
 		if(result == true) {
-			mav.setViewName("main/home_main");
+			url = "redirect:/main/home_main.do";
+			//mav.setViewName("main/home_main");
 			session.setAttribute("user_id", user_id);
-			
 		}else {
-			mav.setViewName("blog/user/user_login");
+			 response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('∑Œ±◊¿Œ ¡§∫∏∏¶ »Æ¿Œ«ÿ¡÷ººø‰.'); history.go(-1);</script>");
+	            out.flush();
+			//mav.setViewName("blog/user/user_login");
 		}
 		
-		return mav;
+		return url;
 	}
 	
-	// Î°úÍ∑∏ ÏïÑÏõÉ
-	
+	// ∑Œ±◊ æ∆øÙ(∫Ì∑Œ±◊)
 	@RequestMapping(value="user/do_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public ModelAndView do_logout(HttpSession session) throws IOException {
@@ -220,10 +384,6 @@ public class UserController {
 		return mav;
 		
 	}
-
-		
-	
-		
 	
 	
 	

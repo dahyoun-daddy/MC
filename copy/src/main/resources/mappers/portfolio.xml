@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.mc.user.repository.mappers.portfolio">
+
+
+<!-- 포트폴리오 저장   -->
+<insert id="do_save" parameterType="project.mc.blog.portfolio.domain.PortfolioVO" 
+		useGeneratedKeys="true" keyProperty="pf_id" keyColumn="pf_id">
+	INSERT INTO mc_portfolio 
+	( 
+	    pf_id
+	    ,user_id
+	    ,tmp_no 
+	) 
+	VALUES 
+	(
+	    seq_pf_id.NEXTVAL
+	    ,#{user_id}
+	    ,#{tmp_no}
+	)
+</insert>
+
+<!-- 포트폴리오 지정 삭제 -->
+<delete id="do_delete"  
+	parameterType="project.mc.blog.portfolio.domain.PortfolioVO">
+	
+	DELETE FROM mc_portfolio 
+	WHERE pf_id =#{pf_id}  
+
+</delete>
+
+<!-- 포트폴리오 모두 삭제 -->
+<delete id="do_deleteAll">
+	
+	DELETE FROM mc_portfolio 
+
+</delete>
+
+<!-- 포트폴리오 수정 -->
+<update id="do_update" parameterType="project.mc.blog.portfolio.domain.PortfolioVO"  >
+	UPDATE mc_portfolio
+    SET user_id =#{user_id, jdbcType=VARCHAR}
+        ,tmp_no =#{tmp_no, jdbcType=INTEGER}
+	WHERE pf_id =#{pf_id, jdbcType=INTEGER}
+	
+</update>
+
+<!-- 포트폴리오 select by pf_id -->
+<select id="do_searchByPf_id" 
+      parameterType="project.mc.blog.portfolio.domain.PortfolioVO"
+      resultType="project.mc.blog.portfolio.domain.PortfolioVO">
+	SELECT
+	    pf_id,
+	    user_id,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	WHERE pf_id=#{pf_id}
+	
+</select>
+
+<!-- 포트폴리오 select by user_id -->
+<select id="do_searchByUser_id" 
+	      parameterType="project.mc.blog.portfolio.domain.PortfolioVO"
+	      resultType="project.mc.blog.portfolio.domain.PortfolioVO">
+	SELECT
+	    pf_id,
+	    user_id,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	WHERE user_id=#{user_id}
+	ORDER BY pf_id
+	
+</select>
+
+<!-- 포트폴리오 전부 검색 -->
+<select id="do_search" resultType="project.mc.blog.portfolio.domain.PortfolioVO">
+	SELECT
+	    pf_id,
+	    user_id,
+	    tmp_no
+	FROM
+	    mc_portfolio
+	
+</select>
+
+
+
+</mapper>

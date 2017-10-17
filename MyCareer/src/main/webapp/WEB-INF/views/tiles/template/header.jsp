@@ -3,8 +3,19 @@
 <%
 //todo - userVO 가져와서 id 표시 및 유저 메뉴 생성
 	
-	String user_id = (String)session.getAttribute("user_id");
+	String user_id = request.getParameter("user_id").toString();
+	if(user_id == null){
+		user_id="";
+	}
 	
+	String login_id = "";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}else{
+		login_id = "111";//debug
+	}
+	
+	System.out.print("login_id"+login_id);
 	
 %>    
 <%
@@ -80,22 +91,22 @@
 		            	<%
 		            		if(user_id == null){
 		            	%>
-		                	<li><a href="<%=contextPath%>/user/login_page.do" id="login"><img src="" alt="로그인"/></a></li>
+		                	<li><a href="<%=contextPath%>/user/login_page.do?user_id=<%=user_id%>" id="login"><img src="" alt="로그인"/></a></li>
 		                <%
 		            		}else{
 		                %>
-		                	<li><a href="<%=contextPath%>/user/do_logout.do" id="logout"><img src="" alt="로그아웃"/></a></li>
-		                	<li><a href="<%=contextPath%>/user/do_updateForm.do"><img src="" alt="회원 정보 수정"/></a></li>
+		                	<li><a href="<%=contextPath%>/user/do_logout.do?user_id=<%=user_id%>" id="logout"><img src="" alt="로그아웃"/></a></li>
+		                	<li><a href="<%=contextPath%>/user/do_updateForm.do?user_id=<%=user_id%>"><img src="" alt="회원 정보 수정"/></a></li>
 		                <%
 		            		}
 		                %>
-		                <li><a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a></li>
+		                <li><a href="<%=contextPath%>/user/do_look.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
 		            </ul>
 		        </li>
 			</ul>	
 		</div>
 		<div id="title">
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do"><img src="" alt="XXX님의 구직 블로그"/></a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=user_id%>"><img src="" alt="XXX님의 구직 블로그"/></a>
 		</div>
 		<br/>
         <hr id="hrHeader" style="border-top-width: 4px;border-top-color: black"/>

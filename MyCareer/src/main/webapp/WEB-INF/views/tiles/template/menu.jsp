@@ -11,10 +11,23 @@
 	String contextPath = request.getContextPath();
 	contextPath = "http://localhost:8080"+contextPath;
 %>
-<%
-	String user_id = "111";
-	String login_id = "111";
+<%	
 
+	String user_id = request.getParameter("user_id");
+	if(user_id == null){
+		user_id="";
+	}
+	
+	String login_id = "";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}else{
+		login_id = "111";//debug
+	}
+	
+	
+	System.out.print("login_id"+login_id);
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,7 +87,7 @@
 	<br/>
 	<table style="margin-left:50px; bor" border="" bordercolor="black" rules="none">
 		<tr>
-			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do" style="text-decoration: none"><h3>포스팅</h3></a></td>
+			<td><a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=user_id%>" style="text-decoration: none"><h3>포스팅</h3></a></td>
 		</tr>
 		<tr>
 			<td id="pf_tmp_td">
@@ -83,10 +96,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/blog/resume/resume.do" style="text-decoration: none"><h3>이력서</h3></a></td>
+			<td><a href="<%=contextPath%>/blog/resume/resume.do?user_id=<%=user_id%>" style="text-decoration: none"><h3>이력서</h3></a></td>
 		</tr>
 		<tr>
-			<td><a href="<%=contextPath%>/blog/recruit/recruit.do" style="text-decoration: none"><h3>공채목록</h3></a></td>
+			<td><a href="<%=contextPath%>/blog/recruit/recruit.do?user_id=<%=user_id%>" style="text-decoration: none"><h3>공채목록</h3></a></td>
 		</tr>
 	</table>
 </body>

@@ -44,8 +44,8 @@ public class Portfolio_controller {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/portfolio/portfolio_view_tmp1");
 		
-		String user_id = "";//블로그 주인의 user_id
 		int pf_id = 0;
+		String user_id = "";//블로그 주인의 user_id
 		
 		if(req.getParameter("user_id") != null)
 			user_id = req.getParameter("user_id").toString();
@@ -94,6 +94,19 @@ public class Portfolio_controller {
 		mav.setViewName("blog/portfolio/portfolio_edit_tmp1");
 		
 		int pf_id = 0;
+		String user_id = "";//블로그 주인의 user_id
+		
+		if(req.getParameter("user_id") != null)
+			user_id = req.getParameter("user_id").toString();
+		else {
+			//TODO null 처리
+			log.debug("user_id를 찾지 못하였습니다.");
+		}
+		
+		UserVO inUserVO = new UserVO();
+		inUserVO.setUser_id(user_id);
+		UserVO outUserVO = usSvc.viewMember(inUserVO);
+		mav.addObject("usVO", outUserVO);
 		
 		if(req.getParameter("pf_id") != null) {
 			pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
@@ -143,6 +156,15 @@ public class Portfolio_controller {
 		String contextPath = req.getContextPath();
 		contextPath = "http://localhost:8080" + contextPath;
 		
+		String user_id = "";//블로그 주인의 user_id
+		
+		if(req.getParameter("user_id") != null)
+			user_id = req.getParameter("user_id").toString();
+		else {
+			//TODO null 처리
+			log.debug("user_id를 찾지 못하였습니다.");
+		}
+		
 		int pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
 		inVO.setPf_id(pf_id);
 		
@@ -158,7 +180,7 @@ public class Portfolio_controller {
 			String str="";
 			str = "<script language='javascript'>"; 
 			str += "alert('"+ msg + "');";   //얼럿창 띄우기
-			str += "location.href = '"+contextPath+"/blog/portfolio_edit_tmp1.do';";
+			str += "location.href = '"+contextPath+"/blog/portfolio_edit_tmp1.do?user_id="+user_id+"';";
 			str += "</script>";
 			out.print(str);
 		}else {
@@ -202,7 +224,7 @@ public class Portfolio_controller {
 		
 		String workDiv = mreq.getParameter("workDiv").toString();
 		log.debug("workDiv: "+workDiv);
-		
+		String user_id = mreq.getParameter("user_id");
 		
 		if(workDiv != null && workDiv.equals("do_save")) {
 			log.debug("do_save start");
@@ -239,7 +261,7 @@ public class Portfolio_controller {
 			String str="";
 			str = "<script language='javascript'>"; 
 			str += "alert('"+ msg + "');";   //얼럿창 띄우기
-			str += "location.href = '"+contextPath+"/blog/portfolio_view_tmp1.do?pf_id="+pf_id+"';";
+			str += "location.href = '"+contextPath+"/blog/portfolio_view_tmp1.do?user_id="+user_id+"&pf_id="+pf_id+"';";
 			str += "</script>";
 			out.print(str);
 		}else {
@@ -352,14 +374,14 @@ public class Portfolio_controller {
 		sb.append("<ul class='pf_menu' style='display:none'>");
 		
 		if(user_id != null && user_id.equals(login_id)) {
-			sb.append("<li><a href='"+contextPath+"/blog/portfolio_edit_tmp1.do'><img src='' alt='새 템플릿'/></a></li>\n");
+			sb.append("<li><a href='"+contextPath+"/blog/portfolio_edit_tmp1.do?user_id="+user_id+"'><img src='' alt='새 템플릿'/></a></li>\n");
 		}
 		
 		for(PortfolioVO outVO : list) {
 			int pf_id = outVO.getPf_id();
 			int tmp_no = outVO.getTmp_no();
 			
-			sb.append("<li><a href='"+contextPath+"/blog/portfolio_view_tmp"+tmp_no+".do?pf_id="+pf_id+"'><img src='' alt='템플릿_"+pf_id+"'/></a></li>\n");
+			sb.append("<li><a href='"+contextPath+"/blog/portfolio_view_tmp"+tmp_no+".do?user_id="+user_id+"&pf_id="+pf_id+"'><img src='' alt='템플릿_"+pf_id+"'/></a></li>\n");
 		}
 		
 		sb.append("</ul>");

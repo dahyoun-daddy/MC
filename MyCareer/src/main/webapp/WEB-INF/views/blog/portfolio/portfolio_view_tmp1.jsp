@@ -1,3 +1,4 @@
+<%@page import="project.mc.blog.user.domain.UserVO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="project.mc.blog.resume.domain.ResumeVO"%>
@@ -29,6 +30,8 @@
 	
 	pageContext.setAttribute("srcMap", srcMap);  
 	
+	UserVO usVO = (UserVO)request.getAttribute("usVO");
+	String user_id = usVO.getUser_id();
 	
 %>
 
@@ -81,8 +84,8 @@
 			<h6>포트폴리오 제목</h6>
 		</div>
 		<div id="buttons">
-			<a href="<%=contextPath%>/blog/portfolio_edit_tmp1.do?pf_id=<%=pfVO.getPf_id()%>">편집</a>
-			<a href="<%=contextPath%>/blog/portfolio_delete.do?pf_id=<%=pfVO.getPf_id()%>">삭제</a>
+			<a href="<%=contextPath%>/blog/portfolio_edit_tmp1.do?user_id=<%=user_id%>&pf_id=<%=pfVO.getPf_id()%>">편집</a>
+			<a href="<%=contextPath%>/blog/portfolio_delete.do?user_id=<%=user_id%>&pf_id=<%=pfVO.getPf_id()%>">삭제</a>
 		</div>
 		<div id=contents align="center">
 			<img class="pf_img" src="${srcMap['2']}" alt="tmp1_02" id="tmp1_02">

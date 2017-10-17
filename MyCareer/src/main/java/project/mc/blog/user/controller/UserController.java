@@ -50,10 +50,10 @@ public class UserController {
 //	private Validator validator;
 	
 	// ====================================================================================================	
-	// ºí·Î±× 
+	// ï¿½ï¿½Î±ï¿½ 
 	// ====================================================================================================
-	// È¸¿ø °¡ÀÔ (ºí·Î±×)
-	@RequestMapping(value="blog/do_save.do", method={RequestMethod.POST,RequestMethod.GET})
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/do_blog_save.do", method={RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_save(HttpServletRequest req) throws IOException{
 		
 		UserVO inVO = new UserVO();
@@ -78,11 +78,11 @@ public class UserController {
 		int flag = 0;
 		flag = userSvc.do_save(inVO);
 		//TODO
-		return "redirect:login_page.do";
+		return "redirect:blog_login_page.do";
 	}
 	
 	
-	// Áßº¹ id Á¶È¸
+	// ï¿½ßºï¿½ id ï¿½ï¿½È¸
 	@RequestMapping(value="user/do_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String do_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
@@ -104,8 +104,8 @@ public class UserController {
 		
 	}
 	
-	// È¸¿ø ¼öÁ¤(ºí·Î±×)
-	@RequestMapping(value="blog/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/do_blog_update.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_blog_updateForm(HttpServletRequest req) throws IOException {
 		
 		UserVO inVO=new UserVO();
@@ -128,8 +128,8 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	// È¸¿ø¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿(ºí·Î±×)
-	@RequestMapping(value="blog/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/do_blog_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_blog_update(HttpSession session, HttpServletRequest req) {
 		
 		UserVO inVO = new UserVO();
@@ -150,8 +150,8 @@ public class UserController {
 		
 	}
 	
-	// È¸¿ø»èÁ¦(ºí·Î±×)
-	@RequestMapping(value="blog/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/do_blog_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_delete(HttpServletRequest req) throws IOException {
 		
 		UserVO inVO=new UserVO();
@@ -165,25 +165,25 @@ public class UserController {
 		
 		int flag = userSvc.do_delete(inVO);
 		//TODO
-		return "redirect:do_logout.do";
+		return "redirect:do_blog_logout.do";
 	}
 	
-	// ·Î±×ÀÎ È­¸éÀ¸·Î °¨(ºí·Î±×)
-	@RequestMapping(value="blog/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	// ï¿½Î±ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/blog_login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_login() throws IOException {
 		
 		return "blog/user/user_login";
 	}
 	
-	// È¸¿ø°¡ÀÔ È­¸éÀ¸·Î °¨(ºí·Î±×)
-	@RequestMapping(value="blog/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/blog_do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_look(HttpServletRequest req) throws IOException {
 		
 		return "blog/user/user_register";
 	}
 	
-	// ·Î±×ÀÎ Ã³¸®(¸ÞÀÎÈ¨)
-	@RequestMapping(value="blog/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	// ï¿½Î±ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½È¨)
+	@RequestMapping(value="blog/blog_do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_blog_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
             , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
@@ -207,7 +207,7 @@ public class UserController {
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter out = response.getWriter();
-	            out.println("<script>alert('·Î±×ÀÎ Á¤º¸¸¦ È®ÀÎÇØÁÖ¼¼¿ä.'); history.go(-1);</script>");
+	            out.println("<script>alert('ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.'); history.go(-1);</script>");
 	            out.flush();
 			//mav.setViewName("blog/user/user_login");
 		}
@@ -215,8 +215,8 @@ public class UserController {
 		return url;
 	}
 	
-	// ·Î±× ¾Æ¿ô(ºí·Î±×)
-	@RequestMapping(value="blog/do_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	// ï¿½Î±ï¿½ ï¿½Æ¿ï¿½(ï¿½ï¿½Î±ï¿½)
+	@RequestMapping(value="blog/do_blog_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public ModelAndView do_blog_logout(HttpSession session) throws IOException {
 		
@@ -230,7 +230,7 @@ public class UserController {
 	}
 
 	// ====================================================================================================	
-	// ¸ÞÀÎ 
+	// ï¿½ï¿½ï¿½ï¿½ 
 	// ====================================================================================================
 	@RequestMapping(value="user/do_save.do", method={RequestMethod.POST,RequestMethod.GET})
 	public String do_save(HttpServletRequest req) throws IOException{
@@ -260,7 +260,7 @@ public class UserController {
 		return "redirect:login_page.do";
 	}
 	
-	// È¸¿ø ¼öÁ¤(ºí·Î±×)
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_updateForm(HttpServletRequest req) throws IOException {
 		
@@ -284,7 +284,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	// È¸¿ø¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿(ºí·Î±×)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
 		 
@@ -306,7 +306,7 @@ public class UserController {
 		
 	}
 	
-	// È¸¿ø»èÁ¦(ºí·Î±×)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_delete(HttpServletRequest req) throws IOException {
 		
@@ -324,21 +324,21 @@ public class UserController {
 		return "redirect:do_logout.do";
 	}
 	
-	// ·Î±×ÀÎ È­¸éÀ¸·Î °¨(ºí·Î±×)
+	// ï¿½Î±ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_login() throws IOException {
 		
 		return "main/user/user_login";
 	}
 	
-	// È¸¿ø°¡ÀÔ È­¸éÀ¸·Î °¨(ºí·Î±×)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_look(HttpServletRequest req) throws IOException {
 		
 		return "main/user/user_register";
 	}
 	
-	// ·Î±×ÀÎ Ã³¸®(¸ÞÀÎÈ¨)
+	// ï¿½Î±ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½È¨)
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
@@ -363,7 +363,7 @@ public class UserController {
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter out = response.getWriter();
-	            out.println("<script>alert('·Î±×ÀÎ Á¤º¸¸¦ È®ÀÎÇØÁÖ¼¼¿ä.'); history.go(-1);</script>");
+	            out.println("<script>alert('ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.'); history.go(-1);</script>");
 	            out.flush();
 			//mav.setViewName("blog/user/user_login");
 		}
@@ -371,7 +371,7 @@ public class UserController {
 		return url;
 	}
 	
-	// ·Î±× ¾Æ¿ô(ºí·Î±×)
+	// ï¿½Î±ï¿½ ï¿½Æ¿ï¿½(ï¿½ï¿½Î±ï¿½)
 	@RequestMapping(value="user/do_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public ModelAndView do_logout(HttpSession session) throws IOException {

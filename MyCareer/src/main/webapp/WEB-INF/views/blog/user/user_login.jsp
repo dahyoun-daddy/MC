@@ -65,10 +65,10 @@
 					<td><input type="password" name="user_password" id="user_password"></td>
 				</tr>
 				<tr>
-				<td align="center"><a href="do_look.do">회원가입</a></td>
+				<td align="center"><a href="blog_do_look.do">회원가입</a></td>
 					<td align="center"><button type="button" id="btnLogin" name="btnLogin">로그인</button>
 					</td>
-					<td align="center"><a href="<%=contextPath %>/main/home_main.do">취소</a></td>
+					<td align="center"><a href="<%=contextPath %>/blog/post/post_doSearch.do">취소</a></td>
 				</tr>
 			</table>
 		</form>

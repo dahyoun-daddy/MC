@@ -38,6 +38,7 @@ function do_search_page(url, page_num){
     var frm = document.frm;
     frm.page_num.value = page_num;
     var user_id = frm.user_id.value;
+    url = url + "?user_id=" + user_id;
     frm.action = url;
     frm.submit();
 }

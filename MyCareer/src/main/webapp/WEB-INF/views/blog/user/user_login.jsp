@@ -7,6 +7,8 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath; 
   
+  String user_id = request.getParameter("user_id");
+  
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,12 +28,12 @@
 	$(function(){
 		$("#btnLogin").click(function(){
 			
-			var user_id = $("#user_id").val();
+			var user_id = $("#login_id").val();
 			var user_password = $("#user_password").val();
 			var withdraw_flag = $("#withdraw_flag").val();
 			if(user_id == ""){
 				alert("아이디를 입력해주세요");
-				$("#user_id").focus();
+				$("#login_id").focus();
 				return;
 			}
 			if(user_password == ""){
@@ -53,11 +55,12 @@
 
 		<h2>로그인 </h2>
 		<form name="frm" method="post" id="frm">
+		<input type="hidden" name="user_id" value="<%=user_id%>">
 			<table>
 				<tr height="40px">
 					<td>ID</td>
 					<td>
-					<input type="text" name="user_id" id="user_id"/>
+					<input type="text" name="login_id" id="login_id"/>
 					</td>
 				</tr>
 				<tr height="40px">

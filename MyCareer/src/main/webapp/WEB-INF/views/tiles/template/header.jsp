@@ -89,7 +89,7 @@
 		            	<%
 		            		if(login_id == null || login_id.equals("")){
 		            	%>
-		                	<li><a href="<%=contextPath%>/blog/blog_login_page.do?user_id=<%=login_id%>" id="login"><img src="" alt="로그인"/></a></li>
+		                	<li><a href="<%=contextPath%>/blog/blog_login_page.do?user_id=<%=user_id%>" id="login"><img src="" alt="로그인"/></a></li>
 		                <%
 		            		}else{
 		                %> 

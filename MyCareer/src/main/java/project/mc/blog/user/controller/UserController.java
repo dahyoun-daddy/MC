@@ -165,7 +165,9 @@ public class UserController {
 	
 	// �α��� ȭ������ ��(��α�)
 	@RequestMapping(value="blog/blog_login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
-	public String do_blog_login() throws IOException {
+	public String do_blog_login(HttpServletRequest req) throws IOException {
+		
+		
 		
 		return "blog/user/user_login";
 	}
@@ -337,16 +339,18 @@ public class UserController {
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
-            , @RequestParam(value="user_password",required=true) String user_password, HttpServletResponse response) throws IOException {
+            , @RequestParam(value="user_password",required=true) String user_password, @RequestParam(value="login_id",required=true) String login_id, HttpServletResponse response) throws IOException {
 		
 		UserVO inVO = new UserVO();
 		
-		user_id = req.getParameter("user_id");
-		user_password = req.getParameter("user_password");
-		
 		String url = "";
+<<<<<<< HEAD
+		//ModelAndView mav = new ModelAndView();
+		inVO.setUser_id(login_id);
+=======
 		
 		inVO.setUser_id(user_id);
+>>>>>>> branch 'master' of https://github.com/dahyoun-daddy/MC
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);

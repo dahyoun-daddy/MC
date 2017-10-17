@@ -344,8 +344,13 @@ public class UserController {
 		UserVO inVO = new UserVO();
 		
 		String url = "";
+<<<<<<< HEAD
 		//ModelAndView mav = new ModelAndView();
 		inVO.setUser_id(login_id);
+=======
+		
+		inVO.setUser_id(user_id);
+>>>>>>> branch 'master' of https://github.com/dahyoun-daddy/MC
 		inVO.setUser_password(user_password);
 		
 		boolean result = userSvc.do_loginCheck(inVO);

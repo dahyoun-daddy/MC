@@ -13,9 +13,9 @@
 	</definition>
 	
 	<!-- 메인 쪽 템플릿 설정 -->
-	<definition name="main/blog_list" extends="base-definition" template="/WEB-INF/views/tiles/layouts/mainLayout.jsp">
+	<definition name="main/*/*" extends="base-definition" template="/WEB-INF/views/tiles/layouts/mainLayout.jsp">
 		<put-attribute name="header_main" value="/WEB-INF/views/tiles/template/header_main.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/blog_list.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}/{2}.jsp"/>
 	</definition>
 	
 </tiles-definitions>

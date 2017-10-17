@@ -7,6 +7,16 @@
   contextPath = "http://localhost:8080"+contextPath;  
   
 %>
+<%
+	
+	String login_id ="";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}
+	
+	
+
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -58,37 +68,21 @@
 </script>
 </head>
 <body>
-<%
-	Object user_id = session.getAttribute("user_id");
-%>
 	<h1>
 		My Career
 	</h1>
-	<div id="function_menu" align="right">
-		<ul>
-			<li class="menu">
-            <a><img src="" alt="PortfolioMenu"/></a>
-	            <ul class="hide">
-	                <li><form action="portfolio.do" method="get">포트폴리오 화면</form></li>
-	                <li><a href="<%=contextPath%>/blog/portfolio_edit.do">포트폴리오 편집</a></li>
-	                <li><a href="<%=contextPath%>/blog/portfolio_save.do">포트폴리오 저장</a></li>
-	                <li><a href="<%=contextPath%>/blog/portfolio_delete.do">포트폴리오 삭제</a></li>
-	            </ul>
-	        </li>
-		</ul>	
-	</div> 
 	<div id="wrapper">
 		<div id="user_menu">
 		<%
-			if(user_id == null){
+			if(login_id == null || login_id.equals("")){
 		%>
 			 <a href="<%=contextPath%>/user/login_page.do">로그인</a>
 		<%
 			} else {
 		%>
-			(<%=user_id%>)님
+			(<%=login_id%>)님
 			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
-			 <a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
+			<a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
 			<a href="<%=contextPath%>/blog/post/post_doSearch.do">블로그로(로그인 되어 있을 경우에만)</a>
 		<%
 			} 

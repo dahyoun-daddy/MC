@@ -267,6 +267,7 @@ public class Portfolio_controller {
 		}else {
 			String msg = "에러 발생.";
 			String str="";
+			
 			str = "<script language='javascript'>"; 
 			str += "alert('"+ msg + "');";   //얼럿창 띄우기
 			str += "history.go(-1);";

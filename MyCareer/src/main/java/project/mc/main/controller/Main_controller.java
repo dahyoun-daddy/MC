@@ -25,7 +25,7 @@ public class Main_controller {
 	
 	@RequestMapping(value="main/home_main.do", method= {RequestMethod.GET , RequestMethod.POST})
 	public String main_start() {
-	
+		
 		return "main/home_main";
 	}
 	

@@ -226,13 +226,13 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 			log.debug("이미지 삭제 실패!");
 		}
 		
-		if(rsFlag != 1)
+		if(rsFlag != delFlag)
 			flag = 0;
 		
 		log.debug("delFlag: "+ delFlag);
 		log.debug("rsFlag:" + rsFlag);
 		log.debug("======PortfolioSvcImpl: do_delete=================");
-		return flag;		
+		return flag;
 	}
 	
 	/**

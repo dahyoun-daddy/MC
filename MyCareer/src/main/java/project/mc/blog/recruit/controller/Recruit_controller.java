@@ -47,8 +47,7 @@ public class Recruit_controller {
 		//(#{page_size} * (#{page_num}-1)+1) AND (#{page_size} * (#{page_num}-1)+#{page_size})
 		RecruitParse doc = new RecruitParse();
 		ParseVO vo = new ParseVO();
-		UserVO usVO = new UserVO();
-		usVO.setUser_id(req.getAttribute("user_id").toString());
+		String user_id = req.getParameter("user_id");
 		
 		List<ParseVO> list = new ArrayList<ParseVO>();
 		List<ParseVO> outList = new ArrayList<ParseVO>();
@@ -73,7 +72,7 @@ public class Recruit_controller {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/recruit/recruit");
 		mav.addObject("list", outList);
-		mav.addObject("usVO", usVO);
+		mav.addObject("user_id", user_id);
 		
 		return mav;
 		

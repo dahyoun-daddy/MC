@@ -19,8 +19,7 @@ page_num  = StringUtil.nvl(request.getParameter("page_num"),"1");
 int oPage_size = Integer.parseInt(page_size);
 int oPage_num  = Integer.parseInt(page_num);
 
-UserVO usVO = (UserVO)request.getAttribute("usVO");
-String user_id = usVO.getUser_id();
+String user_id = request.getParameter("user_id");
 %>  
 <!DOCTYPE html PUBLIC "-//W3C//Dth HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dth">
 <html>

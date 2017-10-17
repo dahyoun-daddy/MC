@@ -27,6 +27,7 @@ import project.mc.blog.portfolio.domain.PortfolioVO;
 import project.mc.blog.portfolio.service.PortfolioSvc;
 import project.mc.blog.resume.service.ResumeSvc;
 import project.mc.blog.user.domain.UserVO;
+import project.mc.blog.user.service.UserSvc;
 
 @Controller
 public class Portfolio_controller {
@@ -35,14 +36,27 @@ public class Portfolio_controller {
 	PortfolioSvc pfSvc;
 	@Autowired
 	ResumeSvc RsSvc;
+	@Autowired
+	UserSvc usSvc;
 	
 	@RequestMapping(value="blog/portfolio_view_tmp1.do", method = RequestMethod.GET)
 	public ModelAndView portfolio_view_tmp1(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/portfolio/portfolio_view_tmp1");
 		
-		//int pf_id = 0;
-		int pf_id = 63;//디버그용
+		String user_id = "";//블로그 주인의 user_id
+		int pf_id = 0;
+		
+		if(req.getParameter("user_id") != null)
+			user_id = req.getParameter("user_id").toString();
+		else {
+			//TODO null 처리
+			log.debug("user_id를 찾지 못하였습니다.");
+		}
+		
+		UserVO inUserVO = new UserVO();
+		inUserVO.setUser_id(user_id);
+		UserVO outUserVO = usSvc.viewMember(inUserVO);
 		
 		if(req.getParameter("pf_id") != null)
 			pf_id = Integer.parseInt(req.getParameter("pf_id").toString());
@@ -59,7 +73,9 @@ public class Portfolio_controller {
 		
 		log.debug("pfVO: "+pfVO.toString());
 		
+		
 		mav.addObject("pfVO", pfVO);
+		mav.addObject("usVO", outUserVO);
 		
 		return mav;
 	}

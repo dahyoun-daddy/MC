@@ -9,8 +9,7 @@
     <select id="do_searchOne" 
       parameterType= "project.mc.blog.post.domain.PostDTO"
       resultType= "project.mc.blog.post.domain.PostDTO">
-      SELECT POST_ID,
-		  BLOG_ID,
+      SELECT POST_ID,		  
 		  SUP_POST_ID,
 		  POST_TITLE,
 		  POST_CONTENT,
@@ -45,8 +44,7 @@
 	   INSERT
 		INTO MC_POST
 		  (
-		    POST_ID,
-		    BLOG_ID,
+		    POST_ID,		    
 		    SUP_POST_ID,
 		    POST_TITLE,
 		    POST_CONTENT,
@@ -57,9 +55,7 @@
 		    DEL_FLAG
 		  )
 	  VALUES
-	  (MC_POST_SEQ.NEXTVAL, (SELECT BLOG_ID
-FROM MC_BLOG_SETTING
-WHERE USER_ID = #{reg_id}), #{sup_post_id}, #{post_title}, #{post_content}, #{reg_id}, SYSDATE, #{mod_id}, SYSDATE ,#{del_flag} )
+	  (MC_POST_SEQ.NEXTVAL, #{sup_post_id}, #{post_title}, #{post_content}, #{reg_id}, SYSDATE, #{mod_id}, SYSDATE ,#{del_flag} )
 	   				
 	</update>     
     

@@ -106,8 +106,27 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 					resumeVO.setTable_div(Integer.parseInt(mReq.getParameter("table_div").toString()));
 					resumeVO.setTable_id(Integer.parseInt(mReq.getAttribute("table_id").toString()));
 					resumeVO.setSeq(fileNo);
-					int delFlag = rsDao.do_delete_img(resumeVO);
-					log.debug("delFlag/fileNo: "+delFlag+"/"+fileNo);
+					List<ResumeVO> outList = (List<ResumeVO>) rsDao.do_search_img(resumeVO);
+					
+					if(outList.size() == 1) {
+						ResumeVO outVO = outList.get(0);
+						String fileStr = outVO.getFile_path()+outVO.getSave_file_name()+outVO.getFile_ext();
+						log.debug("fileStr: "+fileStr);
+						File deleteFile = new File(fileStr);
+						if( deleteFile.exists() ){
+				            if(deleteFile.delete()){
+				            	log.debug("파일삭제 성공");
+				            	int delFlag = rsDao.do_delete_img(resumeVO);
+								log.debug("delFlag/fileNo: "+delFlag+"/"+fileNo);
+				            }else{
+				            	log.debug("파일삭제 실패");
+				            }
+				        }else{
+				        	log.debug("파일이 존재하지 않습니다.");
+				        }
+					} else {
+						log.debug("삭제 불필요");
+					}
 				}
 				continue;
 			}
@@ -177,6 +196,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		PortfolioVO pfVO = (PortfolioVO)dto;
 		ResumeVO rsVO = new ResumeVO();
 		int flag = pfDao.do_delete(dto);
+		log.debug("pfFlag:" + flag);
 		
 		rsVO.setTable_div(31);
 		rsVO.setTable_id(pfVO.getPf_id());
@@ -209,7 +229,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		if(rsFlag != 1)
 			flag = 0;
 		
-		log.debug("pfFlag:" + flag);
 		log.debug("delFlag: "+ delFlag);
 		log.debug("rsFlag:" + rsFlag);
 		log.debug("======PortfolioSvcImpl: do_delete=================");

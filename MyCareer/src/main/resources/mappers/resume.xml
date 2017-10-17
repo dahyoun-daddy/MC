@@ -86,7 +86,11 @@
 		WHERE
 		    table_div = #{table_div}
 		  AND
-		    table_id = #{table_id} 
+		    table_id = #{table_id}
+		<if test="seq != 0">
+		  AND 
+		  	seq = #{seq, jdbcType=INTEGER}
+		</if> 
  	</select>
  	
  	<!-- img upsert --> 	
@@ -140,8 +144,10 @@
 		WHERE table_div = #{table_div}
 		  AND
 		    table_id = #{table_id}
+		<if test="seq != 0">
 		  AND 
 		  	seq = #{seq, jdbcType=INTEGER}
+		</if>
  	</delete>
  	
  	

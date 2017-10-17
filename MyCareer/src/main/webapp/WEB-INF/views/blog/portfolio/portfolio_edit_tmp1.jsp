@@ -108,6 +108,7 @@
 			var input = "tmp_img1_"+i;
 			
 			document.getElementById(img).src = "";
+			document.getElementById(input).value = "";
 			
 			$("#"+getfile).click();
 			

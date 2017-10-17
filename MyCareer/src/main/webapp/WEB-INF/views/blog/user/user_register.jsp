@@ -57,7 +57,7 @@
 							  	 , minlength : 3
 							 	 , maxlength: 12
 							 	 , remote : {
-							 	 url: "do_idCheck.do",
+							 	 url: "do_blog_idCheck.do",
 							  	 type : "post",
 							 	 data : { user_id : function(){ return $('#user_id').val();} }
 							 	 }

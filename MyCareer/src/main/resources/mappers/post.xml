@@ -72,7 +72,9 @@ WHERE USER_ID = #{reg_id}), #{sup_post_id}, #{post_title}, #{post_content}, #{re
             <when test="SEARCH_DIV == '20'">
                 AND A.POST_CONTENT LIKE  #{SEARCH_WORD} || '%'     
             </when>
-                        
+            <when test="reg_id !='' ">
+		  		AND A.reg_id = #{reg_id, jdbcType=VARCHAR}
+			</when>            
             <otherwise></otherwise>
         </choose>
         </where>       

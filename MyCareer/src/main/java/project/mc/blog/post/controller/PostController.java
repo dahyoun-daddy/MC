@@ -40,16 +40,16 @@ public class PostController {
 	@Autowired 
 	PostSvc postSvc;
 	
-//	int post_id        ; //포스트 id
-//	int blog_id        ; //소속 블로그 id
-//	int sup_post_id    ; //상위 게시글 id
-//	String post_title  ; //제목
-//	String post_content; //내용
-//	String reg_id      ; //작성자 id
-//	String reg_dt      ; //작성일자
-//	String mod_id      ; //수정자 id
-//	String mod_dt      ; //수정일자
-//	int del_flag       ; //삭제 플래그
+//	int post_id        ; //�룷�뒪�듃 id
+//	int blog_id        ; //�냼�냽 釉붾줈洹� id
+//	int sup_post_id    ; //�긽�쐞 寃뚯떆湲� id
+//	String post_title  ; //�젣紐�
+//	String post_content; //�궡�슜
+//	String reg_id      ; //�옉�꽦�옄 id
+//	String reg_dt      ; //�옉�꽦�씪�옄
+//	String mod_id      ; //�닔�젙�옄 id
+//	String mod_dt      ; //�닔�젙�씪�옄
+//	int del_flag       ; //�궘�젣 �뵆�옒洹�
 	
 	
 	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -68,7 +68,7 @@ public class PostController {
 		return modelAndView;
 	}
 	
-	// 글 수정 페이지로 이동
+	// 湲� �닔�젙 �럹�씠吏�濡� �씠�룞
 	@RequestMapping(value = "blog/post/post_edit_form.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView doedit_form (HttpServletRequest req, HttpSession session) {
 		PostDTO inVO = new PostDTO();
@@ -184,13 +184,16 @@ public class PostController {
 	@RequestMapping(value="blog/post/post_doSearch.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView do_search(HttpServletRequest req) {
 		
+		log.debug("blog/post/post_doSearch.do됨");
 		PostDTO inVO = new PostDTO();
+		
 		Hashtable<String, String> 
-		searchParam = new Hashtable<String, String>();//검색조건
+		searchParam = new Hashtable<String, String>();//寃��깋議곌굔
 		String p_pageSize = StringUtil.nvl(req.getParameter("page_size"),"10");
 		String p_pageNo  = StringUtil.nvl(req.getParameter("page_num"),"1");
 		String p_searchDiv = StringUtil.nvl(req.getParameter("searchDiv"),"");
 		String p_searchWord = StringUtil.nvl(req.getParameter("searchWord"),"");
+		String user_id = req.getParameter("user_id");
 		
 		searchParam.put("pageSize", p_pageSize);
 		searchParam.put("pageNo", p_pageNo);
@@ -209,6 +212,8 @@ public class PostController {
 //        log.debug("sParam:"+sParam.toString());
 		
 		inVO.setParam(searchParam);
+		inVO.setReg_id(user_id);
+		log.debug("user_id::::::::::::::::::"+user_id);
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();

@@ -1,3 +1,4 @@
+<%@page import="project.mc.blog.user.domain.UserVO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="project.mc.blog.resume.domain.ResumeVO"%>
@@ -33,6 +34,8 @@
 		pageContext.setAttribute("srcMap", srcMap);  
 	}
 	
+	UserVO usVO = (UserVO)request.getAttribute("usVO");
+	String user_id = usVO.getUser_id();
 	
 	
 %>
@@ -160,7 +163,7 @@
 			<form name="frm" method="post" action="portfolio_upsert.do" enctype="multipart/form-data">
 			<input type="hidden" name="pf_id" id="pf_id" value="<%=pf_id%>">
 			<input type="hidden" name="tmp_no" id="tmp_no" value="01">
-			<input type="hidden" name="user_id" id="user_id" value="111">
+			<input type="hidden" name="user_id" id="user_id" value="<%=user_id%>">
 			<input type="hidden" name="workDiv" id="workDiv" value="">
 			<input type="hidden" name="table_div" id="table_div" value="31">
 			

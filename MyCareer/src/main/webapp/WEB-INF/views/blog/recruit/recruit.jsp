@@ -28,6 +28,7 @@ String user_id = request.getParameter("user_id");
 <!-- 부트스트랩 -->
 <link href="<%=contextPath%>/resources/css/bootstrap.css" rel="stylesheet">
 <link href="<%=contextPath%>/resources/css/bootstrap-theme.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">   
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
@@ -56,12 +57,14 @@ function readPop(url){
     <form name="frm" id="frm" method="GET" action="recruit.do">
         <input type="hidden" name="page_num" value="1"/>
         <input type="hidden" name="user_id" value="<%=user_id%>"/>
-        <table id="listTable"  class="table table-bordered table-hover table-striped" >
+        <table id="listTable"  class="table table-bordered table-hover table-striped w3-table-all w3-card-4" >
            <thead>
+            <tr class="w3-blue w3-centered" align="center">
                <th class="text-center">공고 제목</th>
                <th class="text-center">회사명</th>
                <th class="text-center">공고 마감일</th>
-               <th class="text-center">연봉</th> 
+               <th class="text-center">연봉</th>
+             </tr>
             </thead>
             <tbody >
             <c:choose>

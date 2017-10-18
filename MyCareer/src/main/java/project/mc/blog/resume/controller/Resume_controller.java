@@ -65,9 +65,9 @@ public class Resume_controller {
 			//TODO null 처리
 			log.debug("블로그 주인의 user_id를 찾지 못했습니다");
 		}
-		String reg_id = user_id;
+		//String reg_id = user_id;
 		//String reg_id = "joon";
-		inVO.setReg_id(reg_id);
+		inVO.setReg_id(user_id);
 		
 		log.debug("Resume_controller의 resume.do 부분입니다.");
 		
@@ -75,7 +75,7 @@ public class Resume_controller {
 		List<ResumeVO> list = (List<ResumeVO>) resumeSvc.do_search(inVO);		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", list);
-		modelAndView.addObject("user_id", user_id);
+		//modelAndView.addObject("user_id", user_id);
 		
 		
 		modelAndView.setViewName("blog/resume/resume");

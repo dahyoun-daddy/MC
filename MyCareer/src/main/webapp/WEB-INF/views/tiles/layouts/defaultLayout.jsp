@@ -22,6 +22,7 @@
 	
 	#body{
 		margin:3%;
+		margin-left:20%;
 		width:70%;
 		border-width: 1px;
 		border-color: #7f7f7f;

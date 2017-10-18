@@ -110,6 +110,8 @@ public class PostController {
 		//inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
 		inVO.setPost_title(req.getParameter("post_title"));
 		inVO.setPost_content(req.getParameter("post_content"));
+		String post_content = req.getParameter("post_content").toString();
+		
 		inVO.setReg_id(req.getParameter("reg_id"));
 		
 		inVO.setMod_id(req.getParameter("reg_id"));

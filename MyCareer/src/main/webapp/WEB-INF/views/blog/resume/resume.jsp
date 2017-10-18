@@ -7,13 +7,15 @@
 	contextPath = "http://localhost:8080/" + contextPath;
 	//로그인된 회원의 아이디
 	String logined_Id = ""; 
-	if(session.getAttribute("user_id").toString() !=null ){
+	if(session.getAttribute("user_id") !=null ){
 		logined_Id = session.getAttribute("user_id").toString();
 	}else{
 		logined_Id = "";
 	}
 	//블로그 주인의 아이디
-	String blogOwner_Id = request.getAttribute("user_id").toString();
+	//String blogOwner_Id = request.getAttribute("user_id").toString();
+	String blogOwner_Id = request.getParameter("user_id").toString();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -180,7 +182,7 @@
 	}); //--jquery document
 </script>
 </head>
-<body>
+<body>	
 	<h3>이력서 파일 게시판입니다.</h3>	
 	<!-- TODO 블로그 주인과 로그인한 회원이 다를 경우 div 안보이게 -->
 	<!-- 블로그 주인과  -->

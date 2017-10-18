@@ -46,12 +46,13 @@
 	
 	.pf_menu{
 	    padding-left:25px;
+	    width: 30%;
     }
 	#snb{
 	    list-style-type: none;
 	    margin-left: 50px;
 	    padding: 0;
-	    width: 200px;
+	    width: 150px;
 	    background-color: white;
 	    font-size: 20px;
 	    border: 1px solid #555; 
@@ -69,6 +70,10 @@
 	li a:hover {
 	    background-color: coral;
 	    color: white;
+	}
+	ul.pf_menu a{
+	   width: 122px;
+	   font-size: 16px;
 	}
 	
 </style>

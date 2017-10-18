@@ -97,12 +97,15 @@ $(document).ready(function(){
 				</tr>				
 				<tr align="center" valign="middle">
 					<td colspan="2">
+<<<<<<< HEAD
 						${PostDTO.post_content}
 					</td>
 				</tr>
 				<tr>
 					<tr align="center" valign="middle">
 					<td colspan="5">
+=======
+>>>>>>> branch 'master' of https://github.com/dahyoun-daddy/MC
 						<%
 							if(user_id != null && user_id.equals(login_id)){
 						%>

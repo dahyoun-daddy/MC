@@ -71,6 +71,10 @@
 	    background-color: coral;
 	    color: white;
 	}
+	ul.pf_menu a{
+	   width: 122px;
+	   font-size: 16px;
+	}
 	
 </style>
 <title>Insert title here</title>

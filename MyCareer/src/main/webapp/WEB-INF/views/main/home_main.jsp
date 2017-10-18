@@ -83,10 +83,11 @@
 			(<%=login_id%>)님
 			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
 			<a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>">블로그로(로그인 되어 있을 경우에만)</a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>">블로그로</a>
 		<%
 			} 
 		%>	
+		<a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a>
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="blog_search.do">

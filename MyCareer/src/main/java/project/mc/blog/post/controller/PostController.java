@@ -214,6 +214,7 @@ public class PostController {
 		inVO.setParam(searchParam);
 		inVO.setReg_id(user_id);
 		log.debug("user_id::::::::::::::::::"+user_id);
+		log.debug("searchDiv:"+p_searchDiv);
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
@@ -224,7 +225,12 @@ public class PostController {
 		modelAndView.addObject("list",list);
 		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
-		modelAndView.setViewName("blog/post/post_list");
+		if(user_id != null) {
+			modelAndView.setViewName("blog/post/post_list");
+		}else {
+			modelAndView.setViewName("main/blog_list/blog_list");
+		}
+		
 		
 		return modelAndView;
 	}

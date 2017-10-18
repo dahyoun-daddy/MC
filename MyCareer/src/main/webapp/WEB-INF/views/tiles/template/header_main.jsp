@@ -1,3 +1,4 @@
+<%@page import="project.mc.commons.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -9,6 +10,9 @@
 	}else{
 		login_id = "";//debug
 	}
+	
+	String searchWord = "";
+	searchWord= StringUtil.nvl(request.getParameter("searchWord"),"");
 	
 %>    
 <%
@@ -101,8 +105,9 @@
 			</ul>
 		</div>
 		<div id="searchText" align="center">
-			<form name="search_frm" method="get" action="blog_search.do">
-			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value=""/>
+			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
+			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value="<%=searchWord %>">
+			<input type="hidden" name="searchDiv" value="10">
 			<input type="submit" value="검색">
 		</form>
 		<br/>

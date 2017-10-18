@@ -4,13 +4,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
 int bottomCount   = 10;
-String searchDiv  = "";
+String searchDiv  = "10";
 String searchWord = "";
 String page_size  = "10";
 String page_num   = "1";
 int totalCnt      = 0; //총글수
 
-searchDiv = StringUtil.nvl(request.getParameter("searchDiv"),"");
 searchWord= StringUtil.nvl(request.getParameter("searchWord"),"");
 page_size = StringUtil.nvl(request.getParameter("page_size"),"10");
 page_num  = StringUtil.nvl(request.getParameter("page_num"),"1");
@@ -48,19 +47,6 @@ if(session.getAttribute("user_id") != null){
 <title>:::::블로그 포스팅:::::</title>
 <script language="javaScript">
 
-	/* 체크박스 전체선택, 전체해제 */
-	function checkAll() {
-		
-	    if( $("#checkAll").is(':checked') ){
-	        $("input[name=check]").prop("checked", true);
-	    }else{
-	        $("input[name=check]").prop("checked", false);
-	    }
-	    
-	}
-	
-	
-	
 	//paiging 이동
 	function do_search_page(url, page_num){
 	    console.log(url +"\t"+ page_num);
@@ -69,7 +55,7 @@ if(session.getAttribute("user_id") != null){
 	    frm.action = url;
 	    frm.submit();
 	}
-		
+	
 	function doSearch(){
 	    var frm = document.frm;
 	    frm.page_num.value = "1";
@@ -96,53 +82,7 @@ if(session.getAttribute("user_id") != null){
 //jquery document
 	$(document).ready(function(){
 		
-		//do_delete
-		$("#do_delete").on("click",function(){
-			 //console.log("do_delete");//check
-			 
-			 
-			 //checked
-			 var idArray = new Array();
-			 
-			 $("#check:checked").each( function(idx,row){
-				 var record = $(row).parents("tr");
-				 var id = $(record).find('td').eq(1).text();
-				 
-				 idArray.push(id);
-			 });//--checked
-			 
-			 if(idArray.length<=0){
-				 alert("삭제할 데이터를 선택 하세요.");
-				 return false;
-			 }
-			 
-			 
-			 
-			 var jsonIdList = JSON.stringify(idArray);
-			 
-			 if(false==confirm("삭제하시겠습니까?\n"+jsonIdList))return;
-		     $.ajax({
-		    	 type:"POST",
-                 url:"do_checkedDelete.do",   
-                 dataType:"JSON",// JSON
-                 async: false,
-                 data:{
-                    "idList" :jsonIdList
-                 },
-                 success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-                	 alert($.trim(data)+"건 삭제되었습니다.");
-                	 doSearch();
-                 },
-                 complete: function(data){//무조건 수행
-                     
-                 },
-                 error: function(xhr,status,error){
-                	 alert("삭제에러");
-                 }
-             }); 
-			 
-		});
-		//--do_delete
+		
 		             
 	});//--jquery document
 

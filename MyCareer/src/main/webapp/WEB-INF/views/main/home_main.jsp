@@ -90,8 +90,9 @@
 		<a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a>
 		</div>
 		<div id="searchText" align="center">
-			<form name="search_frm" method="get" action="blog_search.do">
+			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
 			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value=""/>
+			<input type="hidden" name="searchDiv" value="10">
 			<input type="submit" value="검색">
 			</form>
 		</div>

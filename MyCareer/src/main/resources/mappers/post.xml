@@ -63,16 +63,17 @@
        <where>   
         <choose>
             <when test="SEARCH_DIV == '10'">
-                 A.POST_TITLE LIKE  #{SEARCH_WORD} || '%'         
+                AND (A.POST_TITLE LIKE  #{SEARCH_WORD} || '%' OR A.POST_CONTENT LIKE  #{SEARCH_WORD} || '%')
             </when>
             <when test="SEARCH_DIV == '20'">
                 AND A.POST_CONTENT LIKE  #{SEARCH_WORD} || '%'     
             </when>
-            <when test="reg_id !='' ">
-		  		AND A.reg_id = #{reg_id, jdbcType=VARCHAR}
-			</when>            
+            
             <otherwise></otherwise>
         </choose>
+        <if test="reg_id !='' ">
+		  	AND A.reg_id = #{reg_id, jdbcType=VARCHAR}
+		</if>            
         </where>       
     </sql>
         

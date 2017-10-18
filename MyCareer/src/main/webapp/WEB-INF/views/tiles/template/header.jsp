@@ -3,7 +3,7 @@
 <%
 //todo - userVO 가져와서 id 표시 및 유저 메뉴 생성
 	
-	String user_id = request.getParameter("user_id").toString();
+	String user_id = request.getParameter("user_id");
 	if(user_id == null){
 		user_id="";
 	}

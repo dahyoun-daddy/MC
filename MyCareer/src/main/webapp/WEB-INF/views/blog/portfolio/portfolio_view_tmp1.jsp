@@ -50,8 +50,8 @@
 	}
 	
 	.pf_img{
-		width: 300px;
-	 	height: 500px;
+		width: 230px;
+	 	height: 300px;
 	 	text-align: left;
 	 	float: left;
 	 	border: 3px solid gold;
@@ -67,7 +67,7 @@
 	}
 	
 	#tmp1_01{
-		width: 1248px;
+		width: 950px;
 	}
 	
 </style>

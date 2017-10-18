@@ -52,7 +52,7 @@ if(session.getAttribute("user_id") != null){
 	    console.log(url +"\t"+ page_num);
 	    var frm = document.frm;
 	    frm.page_num.value = page_num;
-	    frm.action = url;
+	    frm.action = url+"?page_num="+page_num;;
 	    frm.submit();
 	}
 	
@@ -64,27 +64,14 @@ if(session.getAttribute("user_id") != null){
 	    frm.submit();
 	}
 	
-	function doWrite(){
+	function readPost(post_id, reg_id){
 		var frm = document.frm;
 		frm.method = "POST";
-	    frm.action = "post_doSave.do";
+		frm.post_id.value = post_id;
+	    frm.action = "post_doSelectOne.do?user_id="+reg_id+"&post_id="+post_id;
 	    frm.submit();
 	}
 	
-	function readPost(post_id){
-		var frm = document.frm;
-		frm.method = "POST";
-	    frm.action = "post_doSelectOne.do";
-	    frm.post_id.value = post_id;
-	    frm.submit();
-	}
-	
-//jquery document
-	$(document).ready(function(){
-		
-		
-		             
-	});//--jquery document
 
 </script>
 </head>
@@ -92,6 +79,7 @@ if(session.getAttribute("user_id") != null){
     
      <form name="frm" action="doSearch.do" method="post" class="form-inline">
          <input type="hidden"  name="page_num" id="page_num" value="<%=page_num %>"  >
+         <input type="hidden"  name="post_id" id="post_id" value=""  >
 	<!-- Button Area -->    
 	<div class="form-inline pull-right ">
       <select name="page_size" id="page_size" class="form-control input-sm">
@@ -114,9 +102,9 @@ if(session.getAttribute("user_id") != null){
                 <c:forEach var="PostDTO" items="${list}">
 		                <tr>
 		                    <td class="text-left"><c:out value="${PostDTO.post_id}"/></td>
-		                    <td class="text-left" style="cursor:pointer" onclick="readPost('${PostDTO.post_id}');"><c:out value="${PostDTO.post_title}"/></td>
+		                    <td class="text-left" style="cursor:pointer" onclick="javascript:readPost('${PostDTO.post_id}','${PostDTO.reg_id}');"><c:out value="${PostDTO.post_title}"/></td>
 		                    <td class="text-center"><c:out value="${PostDTO.reg_dt}"/></td>
-		                </tr>       
+		                </tr>  
                 </c:forEach>
             </c:when>
             <c:otherwise>

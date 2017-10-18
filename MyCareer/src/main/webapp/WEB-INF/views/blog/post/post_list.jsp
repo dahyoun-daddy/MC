@@ -67,30 +67,30 @@ if(session.getAttribute("user_id") != null){
 	    console.log(url +"\t"+ page_num);
 	    var frm = document.frm;
 	    frm.page_num.value = page_num;
-	    frm.action = url;
+	    frm.action = url+"?user_id=<%=user_id%>&page_num="+page_num;
 	    frm.submit();
 	}
 		
 	function doSearch(){
 	    var frm = document.frm;
 	    frm.page_num.value = "1";
-	    frm.method = "GET";
-	    frm.action = "post_doSearch.do";
+	    frm.method = "POST";
+	    frm.action = "post_doSearch.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
 	
 	function doWrite(){
 		var frm = document.frm;
 		frm.method = "POST";
-	    frm.action = "post_doSave.do";
+	    frm.action = "post_doSave.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
 	
 	function readPost(post_id){
 		var frm = document.frm;
 		frm.method = "POST";
-	    frm.action = "post_doSelectOne.do";
-	    frm.post_id.value = post_id;
+		frm.post_id.value = post_id;
+	    frm.action = "post_doSelectOne.do?user_id=<%=user_id%>&post_id="+post_id;
 	    frm.submit();
 	}
 	
@@ -175,7 +175,7 @@ if(session.getAttribute("user_id") != null){
                         <option value="">전체</option>
                         <option value="10" <%if(searchDiv.equals("10"))out.print("selected='selected'"); %>>제목+내용</option>
 	                 </select>
-	                 <input type="text" class="form-control input-sm" name="searchWord"  size="10"  value="<%=searchWord %>">
+	                 <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" size="10"  value="<%=searchWord %>">
 	                 <c:out value="${list.size()}"/>/<c:out value="${totalCnt}"/>
 	             </td>
 	             </tr>

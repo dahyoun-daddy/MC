@@ -28,11 +28,11 @@
 	}
 	
 	#searchText{
-		margin-top: 15%;
+		margin-top: 20%;
 		
 	}
 	
-	#function_menu{
+	#function_menu, #logo{
 		float:left;
 		
 	}
@@ -68,9 +68,9 @@
 </script>
 </head>
 <body>
-	<h1>
-		My Career
-	</h1>
+	<div id="logo" align="left">
+		<a href="<%=contextPath%>/main/home_main.do"><img src="<%=contextPath%>/resources/images/logo.png" width="90" height="50" alt="MC(thumb-nail)"/></a>
+	</div>
 	<div id="wrapper">
 		<div id="user_menu">
 		<%

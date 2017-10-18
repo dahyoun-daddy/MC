@@ -20,7 +20,7 @@
 		  DEL_FLAG
 		FROM MC_POST
 		where POST_ID= #{post_id}
-    </select>  
+    </select>
 	
 	<update id="do_update" parameterType="project.mc.blog.post.domain.PostDTO">
 	

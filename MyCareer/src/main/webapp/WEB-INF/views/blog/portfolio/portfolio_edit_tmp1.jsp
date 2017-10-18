@@ -56,8 +56,8 @@
 	}
 	
 	.pf_img{
-		width: 300px;
-	 	height: 500px;
+		width: 230px;
+	 	height: 300px;
 	 	text-align: left;
 	 	float: left;
 	 	border: 3px solid gold;
@@ -73,7 +73,7 @@
 	}
 	
 	#tmp1_01{
-		width: 1248px;
+		width: 950px;
 	}
 	
 	
@@ -150,13 +150,6 @@
 			<h6>포트폴리오 제목</h6>
 		</div>
 		<div id="buttons">
-			<select name="pf_tmp" id="pf_tmp">
-			    <option value="" selected="">포트폴리오 템플릿</option>
-			    <option value="tmp1" selected="selected">템플릿 1</option>
-			    <option value="tmp2">템플릿 2</option>
-			</select>
-			<button type="button" id="tmp_apply">적용</button>
-			<br> 
 			<button type="button" id="do_save_tmp" >포트폴리오 저장</button>
 		</div>
 		<div id=contents align="center">

@@ -46,12 +46,13 @@
 	
 	.pf_menu{
 	    padding-left:25px;
+	    width: 30%;
     }
 	#snb{
 	    list-style-type: none;
 	    margin-left: 50px;
 	    padding: 0;
-	    width: 200px;
+	    width: 150px;
 	    background-color: white;
 	    font-size: 20px;
 	    border: 1px solid #555; 

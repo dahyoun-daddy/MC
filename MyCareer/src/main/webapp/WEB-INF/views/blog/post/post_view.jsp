@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <%
   //contextPath
   String contextPath = request.getContextPath();
@@ -80,20 +81,23 @@ $(document).ready(function(){
 				</div>
 			
 			<!-- table -->
-			<table width="700" border="3" align="center" id="post_form">
+			<table width="100%" border="3" align="center" id="post_form">
 				<tr>
-					<td align="center">작성자</td>
-					<td><input type = "text" name = "reg_id" size = "40" value="${PostDTO.reg_id}" disabled="disabled"/></td>
+					<td width="10%" align="center">작성자</td>
+					<td width="90%"><input type = "text" name = "reg_id" size = "40" value="${PostDTO.reg_id}" disabled="disabled"/></td>
 				</tr>
 				<tr>
-					<td align="center">제목</td>
-					<td><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40" disabled="disabled"/></td>
+					<td width="10%" align="center">제목</td>
+					<td width="90%"><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40" disabled="disabled"/></td>
 				</tr>
 				
 				<tr>
-					<td id="title"  align="center">내용</td>
+					<td width="10%" id="title"  align="center">내용</td>
+					<td width="90%">${PostDTO.post_content}</td>
+				</tr>				
+				<tr align="center" valign="middle">
 					<td colspan="2">
-						<textarea id="post_content" name="post_content" disabled="disabled"><c:out value="${PostDTO.post_content}"/></textarea>
+						${PostDTO.post_content}
 					</td>
 				</tr>
 				<tr>

@@ -93,6 +93,17 @@
 		$("#do_save_tmp").click(function(){
 			var frm = document.frm;
 			
+			var imgList = document.querySelectorAll("input[type='file']");
+			var file;
+			
+			for(i=0; i<imgList.length; i++){
+				file = imgList[i].files[0];
+				if(file != null && !isImage(file.name)){
+					alert("img file을 선택해주세요");
+					return;
+				}
+			}
+			
 			if(<%=pf_id%> != null){
 				frm.workDiv.value = "do_update";
 			}else{
@@ -136,10 +147,27 @@
 			
 		});
 		
+		
 
 	});
 	
-	
+	function getExtension(filename) {
+	    var parts = filename.split('.');
+	    return parts[parts.length - 1];
+	}
+
+	function isImage(filename) {
+	    var ext = getExtension(filename);
+	    switch (ext.toLowerCase()) {
+	    case 'jpg':
+	    case 'gif':
+	    case 'bmp':
+	    case 'png':
+	        //etc
+	        return true;
+	    }
+	    return false;
+	}
 	
 </script>
 </head>

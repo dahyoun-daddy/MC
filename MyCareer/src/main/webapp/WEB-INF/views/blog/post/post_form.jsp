@@ -65,8 +65,6 @@ $(document).ready(function(){
            },
            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
                console.log("success data: "+data);
-           		alert("등록되었습니다.");
-               doSearch();
            },
            complete: function(data){//무조건 수행
                

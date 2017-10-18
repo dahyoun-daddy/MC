@@ -81,24 +81,22 @@ $(document).ready(function(){
 				</div>
 			
 			<!-- table -->
-			<table width="700" border="3" align="center" id="post_form">
+			<table width="100%" border="3" align="center" id="post_form">
 				<tr>
-					<td align="center">작성자</td>
-					<td><input type = "text" name = "reg_id" size = "40" value="${PostDTO.reg_id}" disabled="disabled"/></td>
+					<td width="10%" align="center">작성자</td>
+					<td width="90%"><input type = "text" name = "reg_id" size = "40" value="${PostDTO.reg_id}" disabled="disabled"/></td>
 				</tr>
 				<tr>
-					<td align="center">제목</td>
-					<td><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40" disabled="disabled"/></td>
+					<td width="10%" align="center">제목</td>
+					<td width="90%"><input type = "text" name = "post_title" value="${PostDTO.post_title}" size = "40" disabled="disabled"/></td>
 				</tr>
 				
 				<tr>
-					<td id="title"  align="center">내용</td>
-					<td colspan="2">
-						${PostDTO.post_content}
-					</td>
-				</tr>
+					<td width="10%" id="title"  align="center">내용</td>
+					<td width="90%">${PostDTO.post_content}</td>
+				</tr>				
 				<tr align="center" valign="middle">
-					<td colspan="5">
+					<td colspan="2">
 						<%
 							if(user_id != null && user_id.equals(login_id)){
 						%>

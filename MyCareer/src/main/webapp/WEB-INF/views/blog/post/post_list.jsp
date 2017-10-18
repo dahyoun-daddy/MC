@@ -165,23 +165,16 @@ if(user_id.equals(login_id)){
          <input type="hidden"  name="post_id"  id="post_id"  >
          <input type="hidden" name="user_id" value="<%=user_id%>">
 	<!-- Button Area -->    
-	<div class="form-inline pull-right">
-	  <div class="form-group">
-      	<select name="page_size" id="page_size" class="form-control input-sm">
-        	      <option value="10"  <%if(page_size.equals("10"))out.print("selected='selected'"); %>>10</option>
-            	  <option value="20"  <%if(page_size.equals("20"))out.print("selected='selected'"); %>>20</option>
-              	<option value="50"  <%if(page_size.equals("50"))out.print("selected='selected'"); %>>50</option>
-      	</select>
-      </div>
-      <div class="form-group">
-	  	<button class="btn btn-success" onclick="javascript:doSearch()">조회</button>
-	  </div>
-	  <div class="form-group">
-	  	<button class="btn btn-success" <%=str%> id="do_save" onclick="doWrite()">등록</button>
-	  </div>
-	  <div class="form-group">
-	  	<button class="btn btn-success" <%=str%> id="do_delete">삭제</button>
-	  </div>
+	<div class="form-inline pull-right ">
+      <select name="page_size" id="page_size" class="form-control input-sm">
+              <option value="10"  <%if(page_size.equals("10"))out.print("selected='selected'"); %>>10</option>
+              <option value="20"  <%if(page_size.equals("20"))out.print("selected='selected'"); %>>20</option>
+              <option value="50"  <%if(page_size.equals("50"))out.print("selected='selected'"); %>>50</option>
+      </select>	
+	  <button class="btn btn-success" 
+	  onclick="javascript:doSearch()">조회</button>
+	  <button class="btn btn-success" <%=str%> id="do_save" onclick="doWrite()">등록</button>
+	  <button class="btn btn-success" <%=str%> id="do_delete">삭제</button>
 	 </div>
 	<!--// Button Area -->
 		<table  class="table">

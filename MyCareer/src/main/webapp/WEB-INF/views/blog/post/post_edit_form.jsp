@@ -7,6 +7,21 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath;  
 %>
+<%
+	String user_id = request.getParameter("user_id");
+	if(user_id == null){
+		user_id="";
+	}
+	
+	String login_id = "";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}else{
+		login_id = "";//debug
+	}
+
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,14 +84,14 @@ $(document).ready(function(){
 			alert("내용을 입력해 주세요.");
 			return;
 		}
-		frm.action = "post_do_Update.do";
+		frm.action = "post_do_Update.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
 	
 	
 	function doSearch(){
 	    var frm = document.frm;
-	    frm.action = "post_doSearch.do";
+	    frm.action = "post_doSearch.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
 </script>

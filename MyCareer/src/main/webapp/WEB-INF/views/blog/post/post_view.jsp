@@ -3,9 +3,27 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%
   //contextPath
-  System.out.println(request.getContextPath());
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath;  
+%>
+<%
+	String user_id = request.getParameter("user_id");
+	if(user_id == null){
+		user_id="";
+	}
+	
+	String login_id = "";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}else{
+		login_id = "";//debug
+	}
+	
+	
+	
+	
+	
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,26 +36,24 @@
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>  
-<script src="https://cdn.ckeditor.com/4.7.3/full-all/ckeditor.js"></script>  
+<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>   
 <title>:::::블로그 포스팅:::::</title>
 <script language="javaScript">
 
 $(document).ready(function(){
-	CKEDITOR.replace('post_content');
 	
 });
 	
 	function doSearch(){
 	    var frm = document.frm;
-	    frm.action = "post_doSearch.do";
+	    frm.action = "post_doSearch.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
 	
 	function readPost(post_id){
 		var frm = document.frm;
 		frm.method = "POST";
-	    frm.action = "post_edit_form.do";
+	    frm.action = "post_edit_form.do?user_id=<%=user_id%>";
 	    frm.post_id.value = post_id;
 	    frm.submit();
 	}
@@ -83,7 +99,13 @@ $(document).ready(function(){
 				<tr>
 					<tr align="center" valign="middle">
 					<td colspan="5">
-						<input onclick="readPost('${PostDTO.post_id}');" type = "button" class="btn btn-md  purple-bg" value="수정하기" /></a>
+						<%
+							if(user_id != null && user_id.equals(login_id)){
+						%>
+							<input onclick="readPost('${PostDTO.post_id}');" type = "button" class="btn btn-md  purple-bg" value="수정하기" /></a>
+    					<%
+							}
+    					%>
     					<button class="btn btn-success"  onclick="doSearch()">목록으로</button>
 					</td>
 				</tr>

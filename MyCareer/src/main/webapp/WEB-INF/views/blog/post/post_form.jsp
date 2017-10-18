@@ -7,6 +7,20 @@
   String reg_id = request.getParameter("user_id").toString();
   
 %>
+<%
+	String user_id = request.getParameter("user_id");
+	if(user_id == null){
+		user_id="";
+	}
+	
+	String login_id = "";
+	if(session.getAttribute("user_id") != null){
+		login_id = session.getAttribute("user_id").toString();
+	}else{
+		login_id = "";//debug
+	}
+
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -67,7 +81,7 @@ $(document).ready(function(){
 
 function doSearch(){
     var frm = document.frm;
-    frm.action = "post_doSearch.do";
+    frm.action = "post_doSearch.do?user_id=<%=user_id%>";
     frm.submit();
 }
 

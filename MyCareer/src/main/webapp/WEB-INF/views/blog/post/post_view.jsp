@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <%
   //contextPath
   String contextPath = request.getContextPath();
@@ -93,11 +94,10 @@ $(document).ready(function(){
 				<tr>
 					<td id="title"  align="center">내용</td>
 					<td colspan="2">
-						<textarea id="post_content" name="post_content" disabled="disabled"><c:out value="${PostDTO.post_content}"/></textarea>
+						${PostDTO.post_content}
 					</td>
 				</tr>
-				<tr>
-					<tr align="center" valign="middle">
+				<tr align="center" valign="middle">
 					<td colspan="5">
 						<%
 							if(user_id != null && user_id.equals(login_id)){

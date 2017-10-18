@@ -10,8 +10,8 @@
 %>
 <%
 	String user_id = (String)session.getAttribute("user_id");
-    //String blogOwner_id = request.getAttribute("user_id").toString();
-    String blogOwner_id = "joon";
+    String blogOwner_id = request.getParameter("user_id");
+    
 	
 %>
 

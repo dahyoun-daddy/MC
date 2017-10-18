@@ -99,10 +99,13 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "blog/post/post_doSave_form.do",method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView doSave (HttpServletRequest req) throws IOException{
+	public void doSave (HttpServletRequest req, HttpServletResponse res) throws IOException{
 		log.debug("do_save!start");
-		ModelAndView modelAndView =new ModelAndView();
 		PostDTO inVO = new PostDTO();
+		
+		String contextPath = req.getContextPath();
+		contextPath = "http://localhost:8080" + contextPath;
+		String user_id = req.getParameter("user_id");
 		
 		//inVO.setBlog_id(Integer.parseInt(req.getParameter("blog_id")));
 		inVO.setPost_title(req.getParameter("post_title"));
@@ -113,7 +116,6 @@ public class PostController {
 		
 		inVO.setReg_dt("1");
 		inVO.setMod_dt("1");
-		
 		
 		log.debug("inVO:"+inVO);
 		int flag = 0;
@@ -129,13 +131,31 @@ public class PostController {
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
    	    
-		//TO_DO: pageing
-		modelAndView.addObject("list",list );
-		//total count
-		modelAndView.addObject("totalCnt",totalCnt);
-		modelAndView.setViewName("blog/post/post_list");
-		
-		return modelAndView; //"redirect:post_doSearch.do"
+   	    
+   	    res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		if(flag == 1) {
+			log.debug("do_save 시작");
+			String msg = "";
+			msg = "포스트 저장 완료.";
+			
+			String str="";
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "location.href = '"+contextPath+"/blog/post/post_doSearch.do?user_id=<%=user_id%>";
+			str += "</script>";
+			out.print(str);
+		}else {
+			String msg = "에러 발생.";
+			String str="";
+			
+			str = "<script language='javascript'>"; 
+			str += "alert('"+ msg + "');";   //얼럿창 띄우기
+			str += "history.go(-1);";
+			str += "</script>";
+			out.print(str);
+		}
+   	    
 	}
 
 	@RequestMapping(value="blog/post/post_doSearchAll.do" ,method = {RequestMethod.GET, RequestMethod.POST})

@@ -1,4 +1,3 @@
-
 <%@page import="project.mc.blog.user.domain.UserVO"%>
 <%@page import="project.mc.blog.user.dao.UserDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,6 +10,8 @@
 %>
 <%
 	String user_id = (String)session.getAttribute("user_id");
+    String blogOwner_id = request.getParameter("user_id");
+    
 	
 %>
 
@@ -21,7 +22,7 @@
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- plugin 참조-->
-<script src="<%=contextPath%>/resources/plugins/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <!-- 부트스트랩 -->
 <link href="<%=contextPath%>/resources/css/bootstrap.css" rel="stylesheet">
 <link href="<%=contextPath%>/resources/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -187,12 +188,15 @@
 					               "email" :$("#email").val(),
 					               "address" :$("#address").val(),
 					               "phone" :$("#phone").val(),
-					               "user_id" :$("#user_id").val()
+					               "user_id" :$("#user_id").val(),
+					               "blogOwner_id" :$("#blogOwner_id").val()
 				            },
 				            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 				            	alert("수정하시겠습니까?");
 				            	alert("수정완료");
-				            	location.href="/mc/blog/post/post_doSearch.do";
+				            	console.log("data=??" + data);
+				            	var user_id = new String(data);
+				            	location.href="/mc/blog/post/post_doSearch.do?user_id="+user_id;
 				            	
 				            },
 				            complete: function(data){//무조건 수행
@@ -230,7 +234,6 @@
 	function do_cancel(){
 		
 	}//-- 취소버튼 */
-	
 </script>
 </head>
 <body>
@@ -255,6 +258,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	<div class="register-box">
 	<form name="frm" method="post" id="frm">
 	<input type="hidden" id="withdraw_flag" name="withdraw_flag">
+	<input type="hidden" id="blogOwner_id" value="<%=user_id%>">
 	<div id="container" align="center" >
 		<div align="left">
 			<label>ID</label><input  id="user_id" name="user_id" value="${inVO.user_id }"  class="form-control" disabled="disabled"  >
@@ -299,8 +303,9 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	<div id="footer" align="center">
 		<input type="button" id=do_delete name="do_delete" class="btn btn-primary btn-block btn-flat" value="회원탈퇴" >
 		<input type="submit" id=do_update name="do_update" class="btn btn-primary btn-block btn-flat" value="회원수정" >
-		<a href="/mc/blog/post/post_doSearch.do" class="btn btn-primary btn-block btn-flat">취소</a>
+		<a href="/mc/blog/post/post_doSearch.do?user_id=<%=blogOwner_id%>" class="btn btn-primary btn-block btn-flat">취소</a>
 	</div>
+
 	</form>
 	</div>
 	

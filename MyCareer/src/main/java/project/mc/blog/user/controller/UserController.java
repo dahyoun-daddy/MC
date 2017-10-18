@@ -132,11 +132,14 @@ public class UserController {
 		UserVO inVO = new UserVO();
 		UserVO inVO2 = new UserVO();
 		
+		
 		String user_id = (String)session.getAttribute("user_id");
 		
 		inVO.setUser_id(user_id);
 		
 		inVO2=userSvc.viewMember(inVO);
+		
+		
 		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("blog/user/user_modify");//List
@@ -255,6 +258,7 @@ public class UserController {
 	
 	// ȸ�� ����(��α�)
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
 	public ModelAndView do_updateForm(HttpServletRequest req) throws IOException {
 		
 		UserVO inVO=new UserVO();
@@ -285,11 +289,13 @@ public class UserController {
 		UserVO inVO2 = new UserVO();
 		
 		String user_id = (String)session.getAttribute("user_id");
+		log.debug("컨트롤러 체크" + req.getParameter("user_id"));
 		
 		inVO.setUser_id(user_id);
 		
 		inVO2=userSvc.viewMember(inVO);
 		
+		log.debug("메인 user_id" + inVO2.toString());
 		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("main/user/user_modify");//List

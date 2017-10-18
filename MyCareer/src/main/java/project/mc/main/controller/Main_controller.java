@@ -1,6 +1,7 @@
 package project.mc.main.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -8,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.user.domain.UserVO;
@@ -33,18 +36,29 @@ public class Main_controller {
 	@RequestMapping(value="main/blog_search.do", method=RequestMethod.GET)
 	public String blog_search(HttpServletRequest req) {
 		log.debug("blog_search===============");
-		UserVO userVO = new UserVO();
-		userVO.setUser_id("sist");
-		
-		int flag = userSvc.do_idCheck(userVO);
-		log.debug("flag: "+flag);
-		System.out.println("flag: "+flag);
 		
 		
 		return "main/blog_list/blog_list";
 	}
 	
-	
+	@RequestMapping(value="blog/header_title.do", method= RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String header_title(HttpServletRequest req) {
+		String user_id = req.getParameter("user_id").toString();
+		log.debug("user_id"+user_id);
+//		String contextPath = req.getContextPath();
+//		contextPath = "http://localhost:8080" + contextPath;
+//		log.debug("contextPath"+contextPath);
+		
+		UserVO inVO = new UserVO();
+		inVO.setUser_id(user_id);
+		UserVO outVO = userSvc.viewMember(inVO);
+		String user_name = outVO.getUser_name();
+		
+		String str = "<img src='' alt='"+user_name+" 님의 구직 블로그'/>";
+		
+		return str;
+	}
 	
 	
 }

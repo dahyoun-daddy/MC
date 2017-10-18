@@ -56,6 +56,20 @@
 <script type="text/javascript">
 	//html dom 이 다 로딩된 후 실행된다.
 	$(document).ready(function(){
+		
+		$.ajax({
+			type:"post",
+			url : "<%=contextPath%>/blog/header_title.do",
+			datatype : "json",
+			data : {"user_id" : '<%=user_id%>'},
+			success : function(data){
+				//디코딩하여 변수에 담는다.
+		        //var outData = decodeURIComponent(data);
+				$("#blog_title").append(data);
+			}
+		});
+		
+		
 		$(".menu>a").next("ul").toggleClass("hide");
 		
 		
@@ -105,7 +119,7 @@
 			</ul>	
 		</div>
 		<div id="title">
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=user_id%>"><img src="" alt="XXX님의 구직 블로그"/></a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=user_id%>" id="blog_title"></a>
 		</div>
 		<br/>
         <hr id="hrHeader" style="border-top-width: 4px;border-top-color: black"/>

@@ -81,9 +81,9 @@
 			} else {
 		%>
 			(<%=login_id%>)님
-			<a href="<%=contextPath%>/user/do_logout.do"> 로그아웃</a>//
-			<a href="<%=contextPath%>/user/do_updateForm.do"> 회원수정</a>
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>">블로그로</a>
+			<a href="<%=contextPath%>/user/do_logout.do"> <img src="" alt="로그아웃"/></a>
+			<a href="<%=contextPath%>/user/do_updateForm.do"> <img src="" alt="회원수정"/></a>
+			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>"> <img src="" alt="블로그로"/></a>
 		<%
 			} 
 		%>	
@@ -91,7 +91,7 @@
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
-			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value=""/>
+			블로그 검색 <input type="text" name="searchWord"  value=""/>
 			<input type="hidden" name="searchDiv" value="10">
 			<input type="submit" value="검색">
 			</form>

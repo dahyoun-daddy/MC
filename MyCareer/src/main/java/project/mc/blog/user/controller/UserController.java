@@ -103,8 +103,10 @@ public class UserController {
 	
 	// ȸ�� ����(��α�)
 	@RequestMapping(value="blog/do_blog_update.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView do_blog_updateForm(HttpServletRequest req) throws IOException {
-		
+	@ResponseBody
+	public String do_blog_updateForm(HttpServletRequest req) throws IOException {
+		log.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + req.getParameter("blogOwner_id"));
+		String blogOwner_id = null;
 		UserVO inVO=new UserVO();
 		
 		inVO.setUser_id(req.getParameter("user_id"));
@@ -118,11 +120,11 @@ public class UserController {
 		
 		int flag = userSvc.do_update(inVO);
 		
-		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("blog/post/post_list");//List
-		modelAndView.addObject("inVO", inVO);
+		if(flag>0) {
+			blogOwner_id = req.getParameter("blogOwner_id");
+		}
 		
-		return modelAndView;
+		return blogOwner_id;
 	}
 	
 	// ȸ������ �������� �̵�(��α�)

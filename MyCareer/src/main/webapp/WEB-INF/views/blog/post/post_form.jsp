@@ -3,7 +3,9 @@
 <%
   //contextPath
   String contextPath = request.getContextPath();
-  contextPath = "http://localhost:8080/"+contextPath;  
+  contextPath = "http://localhost:8080/"+contextPath;
+  String reg_id = request.getParameter("user_id").toString();
+  
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,7 +83,7 @@ function doSearch(){
        <textarea id="ck1" name="ck1"></textarea>
         <%-- 글번호 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>--%>
         <%--내용 :<input type="text" name="post_content"  value="${PostDTO.post_content}"/><br/>--%>
-		<input type="hidden" id="reg_id" value="su"/>
+		<input type="hidden" id="reg_id" value="<%=reg_id%>"/>
 	</form>
     <button class="btn btn-success"  id="do_save">등록</button>
     <button class="btn btn-success"  onclick="doSearch()">취소(목록으로)</button>

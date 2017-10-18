@@ -21,12 +21,21 @@ int oPage_num  = Integer.parseInt(page_num);
 totalCnt = Integer.parseInt(
 		    StringUtil.nvl(
 			request.getAttribute("totalCnt").toString(),"0"));
-
+//블로그 주인 아이디
 String user_id = request.getParameter("user_id");
+
+//로그인한 회원 아이디
 String login_id = "";
 if(session.getAttribute("user_id") != null){
 	login_id = session.getAttribute("user_id").toString();
 }
+String str = "";
+if(user_id.equals(login_id)){
+	str = "style=\"display:block\""; //보이게
+}else{
+	str = "style=\"display:none\""; //안보이게
+}
+
 %>
 
 <%
@@ -164,8 +173,8 @@ if(session.getAttribute("user_id") != null){
       </select>	
 	  <button class="btn btn-success" 
 	  onclick="javascript:doSearch()">조회</button>
-	  <button class="btn btn-success"  id="do_save" onclick="doWrite()">등록</button>
-	  <button class="btn btn-success" id="do_delete">삭제</button>
+	  <button class="btn btn-success" <%=str%> id="do_save" onclick="doWrite()">등록</button>
+	  <button class="btn btn-success" <%=str%> id="do_delete">삭제</button>
 	 </div>
 	<!--// Button Area -->
 		<table  class="table">

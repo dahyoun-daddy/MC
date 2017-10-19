@@ -208,7 +208,7 @@ if(user_id.equals(login_id)){
             <th class="text-center" style="width: 60%">제목</th>
             <th class="text-center" style="width: 20%">작성일자</th>
 
-            
+             
         </thead>
         <tbody >
         <c:choose>

@@ -23,6 +23,9 @@
 <head>
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <style type="text/css">
+	#wrapper{
+		
+	}
 	#user_menu{
 		text-align: right;
 	}
@@ -38,9 +41,9 @@
 	}
 	
 	.menu a{cursor:pointer;}
-    .menu .hide{display:none;}
-    
-    ul{
+    /* .menu .hide{display:none;} */
+   
+    .menu_ul{
 	    list-style:none;
 	    padding-left:0px;
     }
@@ -68,25 +71,33 @@
 </script>
 </head>
 <body>
+<div id="wrapper">
 	<div id="logo" align="left">
 		<a href="<%=contextPath%>/main/home_main.do"><img src="<%=contextPath%>/resources/images/logo.png" width="90" height="50" alt="MC(thumb-nail)"/></a>
 	</div>
-	<div id="wrapper">
-		<div id="user_menu">
+	
+		<div id="user_menu" align="right">
+		<ul>
+			<li class="menu menu_ul">
+	            <a><img src="" alt="메뉴"/></a>
+		            <ul class="hide menu_ul" style="display:none">
 		<%
 			if(login_id == null || login_id.equals("")){
 		%>
-			 <a href="<%=contextPath%>/user/login_page.do">로그인</a>
+			 <li><a href="<%=contextPath%>/user/login_page.do">로그인</a></li>
 		<%
 			} else {
 		%>
 			(<%=login_id%>)님
-			<a href="<%=contextPath%>/user/do_logout.do"> <img src="" alt="로그아웃"/></a>
-			<a href="<%=contextPath%>/user/do_updateForm.do"> <img src="" alt="회원수정"/></a>
-			<a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>"> <img src="" alt="블로그로"/></a>
+			<li><a href="<%=contextPath%>/user/do_logout.do"> <img src="" alt="로그아웃"/></a></li>
+			<li><a href="<%=contextPath%>/user/do_updateForm.do"> <img src="" alt="회원수정"/></a></li>
+			<li><a href="<%=contextPath%>/blog/post/post_doSearch.do?user_id=<%=login_id%>"> <img src="" alt="블로그"/></a><li>
 		<%
 			} 
 		%>	
+		   			 </ul>
+		        </li>
+			</ul>	
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">

@@ -7,7 +7,7 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080/"+contextPath;  
 
-%>
+%> 
 <%
 	String user_id = (String)session.getAttribute("user_id");
     String blogOwner_id = request.getParameter("user_id");

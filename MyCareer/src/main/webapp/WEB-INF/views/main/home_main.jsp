@@ -24,22 +24,22 @@
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <style type="text/css">
 	#wrapper{
-		
-	}
-	#user_menu{
-		text-align: right;
-	}
-	
-	#searchText{
-		margin-top: 20%;
-		
+		position:relative;
+		padding-left: 2%;
+		padding-right: 2%;
 	}
 	
 	#function_menu, #logo{
 		float:left;
+		margin-top: 2%;
 		
 	}
-	
+	#user_menu{
+		float:right;
+		width:150px;
+		margin-top: 1%;
+		
+	}
 	.menu a{cursor:pointer;}
     /* .menu .hide{display:none;} */
    
@@ -47,7 +47,23 @@
 	    list-style:none;
 	    padding-left:0px;
     }
+	li a {
+	    display: block;
+	    color: #000;
+	    padding: 8px 16px;
+	    text-decoration: none;
+	    border: 1px solid #555;
+	}
 	
+	/* Change the link color on hover */
+	li a:hover {
+	    background-color: coral;
+	    color: white;
+	}
+	#searchText{
+		margin-top: 10%;
+		
+	}
 </style>
 	<title>:::My Career - main:::</title>
 <script type="text/javascript">
@@ -99,6 +115,12 @@
 		        </li>
 			</ul>	
 		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<hr id="hrHeader" style="border-top-width: 4px;border-top-color: black;"/>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
 			블로그 검색 <input type="text" name="searchWord"  value=""/>

@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	#wrapper{
+		position:relative;
+	}
 	#header{
 		margin:2%;
 	}

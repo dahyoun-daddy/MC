@@ -26,29 +26,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <style type="text/css">
+	
 	#wrapper{
 		
 	}
-
 	#logo{
 		float:left;
-	}
-	
-	#searchText{
-		
 	}
 	#user_menu{
 		float:right;
 		width:150px;
 	}
-	
 	.menu a{cursor:pointer;}
-    
+    /* .menu .hide{display:none;} */
+   
     .menu_ul{
 	    list-style:none;
 	    padding-left:0px;
     }
-
+	li a {
+	    display: block;
+	    color: #000;
+	    padding: 8px 16px;
+	    text-decoration: none;
+	    border: 1px solid #555;
+	}
+	
+	/* Change the link color on hover */
+	li a:hover {
+	    background-color: coral;
+	    color: white;
+	}
+	
+	
 
 </style>
 <title>Insert title here</title>

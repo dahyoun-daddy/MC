@@ -266,7 +266,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 			<input type="radio" name="gender" value="2" id="radio2">여자
 		</div>
 		<div>
-			<input type="text" id="user_div" name="user_div" maxlength="20" placeholder="회원구분" value="1" class="form-control">
+			<input type="text" id="user_div" name="user_div" maxlength="20" placeholder="회원구분"  disabled="disabled" value="1" class="form-control">
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		</div>
 		<div>

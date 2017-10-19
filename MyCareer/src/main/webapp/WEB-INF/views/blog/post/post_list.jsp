@@ -200,7 +200,7 @@ if(user_id.equals(login_id)){
      </form>
     
      <table border="1" id="listTable" class="w3-table-all w3-card-4">
-        <thead>
+        <thead> 
         	<tr class="w3-blue w3-centered">
             <th class="text-center" style="width: 5%" >
                 <input type="checkbox" id="checkAll" 

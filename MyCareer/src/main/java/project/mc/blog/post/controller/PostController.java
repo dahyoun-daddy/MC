@@ -319,14 +319,7 @@ public class PostController {
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
 		int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
-   	  
-   	    ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("totalCnt",totalCnt);
-		modelAndView.addObject("list", list);
-		modelAndView.addObject("user_id", user_id);
-		modelAndView.setViewName("blog/post/post_list");
-		
-		
+   	  	
 		return "redirect:post_doSearch.do?user_id="+user_id;
 	}
 

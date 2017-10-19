@@ -20,7 +20,7 @@
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- plugin 참조-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script> 
 <!-- 부트스트랩 -->
 <link href="<%=contextPath%>/resources/css/bootstrap.css" rel="stylesheet">
 <link href="<%=contextPath%>/resources/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -29,8 +29,6 @@
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
-<!-- AdminLTE script src -->
-<%-- <script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script> --%>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/js/app.min.js"></script>
 

@@ -123,9 +123,9 @@
 		<hr id="hrHeader" style="border-top-width: 4px;border-top-color: black;"/>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
-			블로그 검색 <input type="text" name="searchWord"  value=""/>
-			<input type="hidden" name="searchDiv" value="10">
-			<input type="submit" value="검색">
+			<span style = " font-size:1.8em; font-weight:bold;">블로그 검색</span> <input style="width:300px; height:32px; font-size:25px " type="text" name="searchWord"  value=""/>
+			<input type="hidden" name="searchDiv" value="10">  
+			<input type="submit" value="검색" style="height:38px; width:70px; font-size:22px">
 			</form>
 		</div>
 	</div>

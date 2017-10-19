@@ -115,12 +115,12 @@
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">
-			블로그 검색: 구분(콤보박스) <input type="text" name="searchWord"  value="<%=searchWord %>">
+			<span style = " font-size:1.7em; font-weight:bold;">블로그 검색:</span><input style="width:180px; height:31px; font-size:28px " type="text" name="searchWord"  value="<%=searchWord %>">
 			<input type="hidden" name="searchDiv" value="10">
-			<input type="submit" value="검색">
+			<input type="submit" style="width:70px; height:32px; font-size:21px " value="검색">
 		</form>
 		<br/>
         <hr id="hrHeader" style="border-top-width: 4px;border-top-color: black"/>
-	</div>
+		</div>
 </body>
 </html>

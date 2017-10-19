@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	#wrapper{
+		position:relative;
+	}
 	#header{
 		margin:2%;
 	}
@@ -25,6 +28,7 @@
 		<div id="header" align="center">
 			<tiles:insertAttribute name="header_main"/>
 		</div>
+		
 		
 		<div id="container" align="center">
             <div id="body">

@@ -26,7 +26,6 @@
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
 <!-- AdminLTE script src -->
-<%-- <script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script> --%>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/js/app.min.js"></script>
 

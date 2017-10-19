@@ -54,7 +54,8 @@ if(user_id.equals(login_id)){
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script type="text/javascript" src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>    
+<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
 <title>:::::블로그 포스팅:::::</title>
 <script language="javaScript">
 
@@ -129,8 +130,8 @@ if(user_id.equals(login_id)){
 			 
 			 
 			 var jsonIdList = JSON.stringify(idArray);
-			 
-			 if(false==confirm("삭제하시겠습니까?\n"+jsonIdList))return;
+						 
+			 if(false==confirm("삭제하시겠습니까?\n"))return;
 		     $.ajax({
 		    	 type:"POST",
                  url:"do_checkedDelete.do",   
@@ -149,7 +150,7 @@ if(user_id.equals(login_id)){
                  error: function(xhr,status,error){
                 	 alert("삭제에러");
                  }
-             }); 
+             });
 			 
 		});
 		//--do_delete
@@ -198,16 +199,17 @@ if(user_id.equals(login_id)){
 	     </table>
      </form>
     
-     <table id="listTable"  class="table table-bordered table-hover table-striped" >
+     <table border="1" id="listTable" class="w3-table-all w3-card-4">
         <thead>
+        	<tr class="w3-blue w3-centered">
             <th class="text-center" style="width: 5%" >
                 <input type="checkbox" id="checkAll" 
                 name="checkAll" onclick="checkAll();" />
             </th>
-            <th class="text-center" style="width: 5%">글 번호</th>
-            <th class="text-center" style="width: 60%">제목</th>
+            <th class="text-center" style="width: 15%">글 번호</th>
+            <th class="text-center" style="width: 50%">제목</th>
             <th class="text-center" style="width: 20%">작성일자</th>
-
+			</tr>
              
         </thead>
         <tbody >

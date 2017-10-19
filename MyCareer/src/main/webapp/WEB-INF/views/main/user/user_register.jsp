@@ -26,7 +26,7 @@
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
 <!-- AdminLTE script src -->
-<script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<%-- <script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script> --%>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/js/app.min.js"></script>
 
@@ -39,15 +39,10 @@
 	// JQuery
 	$(document).ready(function(){
 	
-		// 회원가입 취소
-			$("#cancel").on("click",function(){
-				
-				document.cancel.action="login_page.do"
-				
-			});
+		
 		
 			//  validate: 유효성 검사
-		
+			
 					$("#frm").validate({
 						 rules: {
 						  	user_id : {
@@ -224,7 +219,7 @@
 						return this.optional(element) || /^[a-zA-Z]/i.test(value);
 					}, "영문으로 입력하여 주세요");	
 						
-			
+		
 	});//--JQuery
 		
 	
@@ -295,7 +290,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	</div>
 	<div id="footer" align="center">
 		<input type="submit" value="회원가입" id="do_save" name="do_save" class="btn btn-primary btn-block btn-flat">
-		<button class="btn btn-success"><a href="login_page.do">취소</a></button><!-- <a href="login_page.do">취소</a> -->
+		<a href="login_page.do" class="btn btn-primary btn-block btn-flat">취소</a>
 	</div>
 	</form>
 	</div>

@@ -113,7 +113,7 @@
 		                <%
 		            		}
 		                %>
-		                <li><a href="<%=contextPath%>/blog/blog_do_look.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li>
+		                <%-- <li><a href="<%=contextPath%>/blog/blog_do_look.do?user_id=<%=user_id%>"><img src="" alt="회원 가입"/></a></li> --%>
 		            </ul>
 		        </li>
 			</ul>	

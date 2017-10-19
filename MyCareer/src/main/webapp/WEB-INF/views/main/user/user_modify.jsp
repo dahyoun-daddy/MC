@@ -30,7 +30,7 @@
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
 <link href="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
 <!-- AdminLTE script src -->
-<script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<%-- <script	src="<%=contextPath%>resources/plugins/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script> --%>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=contextPath%>/resources/plugins/AdminLTE-2.3.11/dist/js/app.min.js"></script>
 
@@ -42,36 +42,7 @@
 	// JQuery
 	$(document).ready(function(){
 		
-	//  do_delete
-			$("#do_delete").on("click",function(){
-				
-				var withdraw_flag = $("#withdraw_flag").val();
-				
-				$.ajax({
-					type:"POST",
-		            url:"do_delete.do",
-		            dataType:"html",
-		            async: false,
-		            data:{
-		            	"user_id" :$("#user_id").val(),
-		            	"user_password" :$("#user_password").val(),
-			            "withdraw_flag" :withdraw_flag			
-		            },
-		            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		            	alert("탈퇴하시겠습니까?");
-		                $("#do_delete").submit();
-		                alert("회원탈퇴 되었습니다");
-		                location.href="/mc/user/login_page.do";
-		            },
-		            complete: function(data){//무조건 수행
-		            	
-		            },
-		            error: function(xhr,status,error){
-		            	alert("탈퇴에러");
-		            	
-		            }
-				});
-			});//--do_delete
+	
 		
 	//  validate: 유효성 검사
 		$("#do_update").on("click",function(){
@@ -223,6 +194,37 @@
 			return this.optional(element) || /^[a-zA-Z]/i.test(value);
 		}, "영문으로 입력하여 주세요");	
 		
+		
+	//  do_delete
+				$("#do_delete").on("click",function(){
+					
+					var withdraw_flag = $("#withdraw_flag").val();
+					
+					$.ajax({
+						type:"POST",
+			            url:"do_delete.do",
+			            dataType:"html",
+			            async: false,
+			            data:{
+			            	"user_id" :$("#user_id").val(),
+			            	"user_password" :$("#user_password").val(),
+				            "withdraw_flag" :withdraw_flag			
+			            },
+			            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+			            	alert("탈퇴하시겠습니까?");
+			                $("#do_delete").submit();
+			                alert("회원탈퇴 되었습니다");
+			                location.href="/mc/user/login_page.do";
+			            },
+			            complete: function(data){//무조건 수행
+			            	
+			            },
+			            error: function(xhr,status,error){
+			            	alert("탈퇴에러");
+			            	
+			            }
+					});
+				});//--do_delete
 	});//--JQuery
 		
 	/* //  취소버튼

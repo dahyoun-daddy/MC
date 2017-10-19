@@ -65,6 +65,7 @@ $(document).ready(function(){
            },
            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
                console.log("success data: "+data);
+           	   location.href="/mc/blog/post/post_doSearch.do?user_id=<%=login_id%>"
            },
            complete: function(data){//무조건 수행
                

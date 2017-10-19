@@ -8,6 +8,7 @@
   contextPath = "http://localhost:8080/"+contextPath;  
 %>
 <%
+
 	String user_id = request.getParameter("user_id");
 	if(user_id == null){
 		user_id="";
@@ -41,40 +42,6 @@
 $(document).ready(function(){
 	CKEDITOR.replace('post_content');
 	
-	//do_save
-	/* $("#do_save").on("click",function(){
-		if(CKEDITOR.instances.post_content.getData().length < 1){
-			alert("내용을 입력해 주세요.");
-			return;
-		}
-		
-	   if(false==confirm("등록하시겠습니까?"))return;
-	   
-       $.ajax({
-           type:"POST",
-           url:"post_doSave.do",
-           dataType:"html",// JSON
-           async: false,
-           data:{
-              "post_title"       :$("#post_title").val(),
-              "post_content"     :CKEDITOR.instances.post_content.getData(),
-              "reg_id" :$("#reg_id").val()
-              
-           },
-           success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-               console.log("success data: "+data);
-           		alert("등록되었습니다.");
-               doSearch();
-           },
-           complete: function(data){//무조건 수행
-               
-           },
-           error: function(xhr,status,error){
-        	   console.log("error: "+error);
-           }
-       });			
-		
-	});//--do_save */
 });
 	//수정
 	function doUpdate(){
@@ -87,7 +54,6 @@ $(document).ready(function(){
 		frm.action = "post_do_Update.do?user_id=<%=user_id%>";
 	    frm.submit();
 	}
-	
 	
 	function doSearch(){
 	    var frm = document.frm;
@@ -104,7 +70,6 @@ $(document).ready(function(){
 		<form name = "frm" method = "post" action = "post_doSave.do">
 			<input type="hidden" value="${PostDTO.post_id}" id="post_id" name="post_id"/>
 	
-			
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="card">

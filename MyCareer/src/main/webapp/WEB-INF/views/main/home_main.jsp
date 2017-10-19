@@ -87,7 +87,6 @@
 		<%
 			} 
 		%>	
-		<a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a>
 		</div>
 		<div id="searchText" align="center">
 			<form name="search_frm" method="get" action="<%=contextPath%>/blog/post/post_doSearch.do">

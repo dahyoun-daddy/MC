@@ -39,12 +39,6 @@
 	// JQuery
 	$(document).ready(function(){
 	
-		// 회원가입 취소
-			$("#cancel").on("click",function(){
-				
-				document.cancel.action="blog_login_page.do"
-				
-			});
 		
 			//  validate: 유효성 검사
 		
@@ -295,7 +289,7 @@ int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)
 	</div>
 	<div id="footer" align="center">
 		<input type="submit" value="회원가입" id="do_save" name="do_save" class="btn btn-primary btn-block btn-flat">
-		<button class="btn btn-success"><a href="blog_login_page.do">취소</a></button><!-- <a href="login_page.do">취소</a> -->
+		<a href="blog_login_page.do" class="btn btn-primary btn-block btn-flat">취소</a>
 	</div>
 	</form>
 	</div>

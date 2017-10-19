@@ -303,22 +303,23 @@ public class PostController {
 	@RequestMapping(value="blog/post/post_do_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView do_Update(HttpServletRequest request) {
 		PostDTO inVO = new PostDTO();
-		
+
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
-		//inVO.setBlog_id(Integer.parseInt(request.getParameter("blog_id")));
 		inVO.setPost_title(request.getParameter("post_title"));
 		inVO.setPost_content(request.getParameter("post_content"));
 		inVO.setMod_id(request.getParameter("mod_id"));
 		
-		postSvc.do_update(inVO);
+		int flag = postSvc.do_update(inVO);
 		
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
 		int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
-		ModelAndView modelAndView = new ModelAndView();
+   	  
+   	    ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.addObject("list", list);
 		modelAndView.setViewName("blog/post/post_list");
+		
 		
 		return modelAndView;
 	}

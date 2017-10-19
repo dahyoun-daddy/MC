@@ -75,7 +75,7 @@ public class Resume_controller {
 		List<ResumeVO> list = (List<ResumeVO>) resumeSvc.do_search(inVO);		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", list);
-		//modelAndView.addObject("user_id", user_id);
+		modelAndView.addObject("listSize", list.size());
 		
 		
 		modelAndView.setViewName("blog/resume/resume");

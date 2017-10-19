@@ -63,7 +63,7 @@
 	#searchText{
 		margin-top: 10%;
 		
-	}
+	} 
 </style>
 	<title>:::My Career - main:::</title>
 <script type="text/javascript">

@@ -26,6 +26,7 @@
 			<tiles:insertAttribute name="header_main"/>
 		</div>
 		
+		
 		<div id="container" align="center">
             <div id="body">
                 <tiles:insertAttribute name="body" />

@@ -143,7 +143,7 @@
 		    		}
 		    	});	
 	    	}else{
-	    		location.reload();
+	    		
 	    	}
 	    	
 	    });//--do_delete

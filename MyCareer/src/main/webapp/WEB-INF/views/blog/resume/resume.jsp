@@ -226,12 +226,12 @@
 			<input type="hidden" name="user_id" value="<%=blogOwner_Id%>">
 			<thead align="center">
 				<tr class="w3-blue w3-centered" align="center">
-					<th align="center" class="text-center"><div align="center"><input type="checkbox" id="checkAll" name="checkAll"></div></th>				
-					<th align="center" class="text-center"><div align="center">파일명</div></th>
-					<th align="center" class="text-center"><div align="center">파일용량(kb)</div></th>
-					<th align="center" class="text-center"><div align="center">작성일</div></th>
-					<th align="center" class="text-center"><div align="center">확장자명</div></th>
-					<th <%=str%> align="center" class="text-center"><div align="center">다운로드</div></th>
+					<th width="9%" align="center" class="text-center"><div align="center"><input type="checkbox" id="checkAll" name="checkAll"></div></th>				
+					<th width="45%" align="center" class="text-center"><div align="center">파일명</div></th>
+					<th width="15%" align="center" class="text-center"><div align="center">파일용량(kb)</div></th>
+					<th width="10%" align="center" class="text-center"><div align="center">작성일</div></th>
+					<th width="10%" align="center" class="text-center"><div align="center">확장자명</div></th>
+					<th width="10%" <%=str%> align="center" class="text-center"><div align="center">다운로드</div></th>
 				</tr>
 			</thead>
 			<tbody>

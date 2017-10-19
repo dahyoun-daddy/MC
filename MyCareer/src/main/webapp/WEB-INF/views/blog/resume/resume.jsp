@@ -18,8 +18,7 @@
 	//String blogOwner_Id = request.getAttribute("user_id").toString();
 	String blogOwner_Id = request.getParameter("user_id").toString();
 	
-	String listSize = request.getAttribute("listSize").toString();
-	//System.out.print("181818181818listSize= "+listSize);
+	String listSize = request.getAttribute("listSize").toString();	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

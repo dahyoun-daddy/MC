@@ -108,7 +108,6 @@
 		                <%
 		            		}
 		                %>
-		                <li><a href="<%=contextPath%>/user/do_look.do"><img src="" alt="회원 가입"/></a></li>
 		                
 		            </ul>
 		        </li>

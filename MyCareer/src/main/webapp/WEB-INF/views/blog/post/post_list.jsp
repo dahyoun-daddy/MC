@@ -22,7 +22,14 @@ totalCnt = Integer.parseInt(
 		    StringUtil.nvl(
 			request.getAttribute("totalCnt").toString(),"0"));
 //블로그 주인 아이디
-String user_id = request.getParameter("user_id");
+
+String user_id = "";
+
+if(request.getParameter("user_id") == null){
+	user_id = request.getAttribute("user_id").toString();	
+}else{
+	user_id = request.getParameter("user_id");
+}
 
 //로그인한 회원 아이디
 String login_id = "";

@@ -1,5 +1,7 @@
 package project.mc.blog.post.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -301,13 +303,16 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value="blog/post/post_do_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView do_Update(HttpServletRequest request) {
+	public String do_Update(HttpServletRequest request) {
 		PostDTO inVO = new PostDTO();
 
 		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
 		inVO.setPost_title(request.getParameter("post_title"));
 		inVO.setPost_content(request.getParameter("post_content"));
 		inVO.setMod_id(request.getParameter("mod_id"));
+		String user_id = null;
+		user_id = request.getParameter("user_id");
+		log.debug("user_id update!!!!" + user_id);
 		
 		int flag = postSvc.do_update(inVO);
 		
@@ -318,10 +323,11 @@ public class PostController {
    	    ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.addObject("list", list);
+		modelAndView.addObject("user_id", user_id);
 		modelAndView.setViewName("blog/post/post_list");
 		
 		
-		return modelAndView;
+		return "redirect:post_doSearch.do?user_id="+user_id;
 	}
 
 

@@ -42,39 +42,48 @@
 <script type="text/javascript">
 	//다운로드 버튼 눌렀을때 파일 다운로드
  	 function do_down(){
-		var frm = document.orgfrm;
-		//alert(frm);		
+		/* var frm = document.orgfrm;				
     	frm.action = "download.do";
     	frm.method = "GET";
-    	frm.submit();
+    	frm.submit(); */
+    	
+    	if(confirm("다운로드 하시겠습니까?") == true){
+    		var frm = document.orgfrm;
+    		frm.action = "download.do";
+    		frm.method = "GET";
+    		frm.submit();
+    	}else{
+    		
+    	}
 	}
 	
 	//이력서 파일 저장
 	function do_fileSave(data){
-		var listSize = new String(data);
-		if(listSize==5){
-			alert("파일은 최대 5개까지 올릴 수 있습니다.\n이력서를 올리시려면 기존 파일을 삭제해주세요.");
-			return;
-		}
-		var frm = document.frm;		
-		var file = document.frm.file.value;		
-		if(frm.file.value<1){
-			alert("선택한 파일이 없습니다.");
-			return;
-		}
-//		var file = frm.file.value;
-//		console.log(file);
-		var fileExt = file.substring(file.lastIndexOf(".")+1).toLowerCase();		
-		if(file!= "" && (fileExt == 'doc' || fileExt == 'docx' || fileExt == 'hwp') ){
-			alert("이력서 파일이 업로드 되었습니다.");
-			frm.action = "upload.do";
-			frm.submit();
+		if(confirm("이력서 파일을 저장하시겠습니까?") == true){
+			var listSize = new String(data);
+			if(listSize==5){
+				alert("파일은 최대 5개까지 올릴 수 있습니다.\n이력서를 올리시려면 기존 파일을 삭제해주세요.");
+				return;
+			}
+			var frm = document.frm;		
+			var file = document.frm.file.value;		
+			if(frm.file.value<1){
+				alert("선택한 파일이 없습니다.");
+				return;
+			}
+			var fileExt = file.substring(file.lastIndexOf(".")+1).toLowerCase();		
+			if(file!= "" && (fileExt == 'doc' || fileExt == 'docx' || fileExt == 'hwp') ){
+				alert("이력서 파일이 업로드 되었습니다.");
+				frm.action = "upload.do";
+				frm.submit();
+			}else{
+				alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.");
+				alert("올바른 파일을 선택해주세요.");
+				return;
+			}	
 		}else{
-			alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.");
-			alert("올바른 파일을 선택해주세요.");
-			return;
-		}
-		
+			
+		}		
 	}
 	$(document).ready(function(){
 		//최상단 체크박스 클릭
@@ -105,33 +114,38 @@
 	    		alert("삭제할 이력서를 선택해주세요.");
 	    		return false;
 	    	}
-	    	if(false==confirm("삭제하시겠습니까?")){
+	    	/* if(false==confirm("삭제하시겠습니까?")){
 	    		return;
+	    	} */
+	    	
+	    	if(confirm("삭제하시겠습니까?")==true){
+	    		var jsonFile_idList = JSON.stringify(file_idArray);
+		    	console.log("jsonFile_idList: " + jsonFile_idList);
+		    	
+		    	$.ajax({
+		    		url:"do_checkedDelete.do",
+		    		type:"POST",
+		    		dataType:"JSON",
+		    		async:false,
+		    		data:{
+		    			"file_idList":jsonFile_idList
+		    		},
+		    		success: function(data){
+		    			console.log("success data: " + data);	    			
+		    			alert("총 "+data.no+"건이 삭제되었습니다.");
+		    			return location.reload();
+		    		},
+		    		complete: function(data){
+		    			
+		    		},
+		    		error: function(xhr, status, error){
+		    			console.log("삭제 error입니다" + error);	
+		    		}
+		    	});	
+	    	}else{
+	    		location.reload();
 	    	}
 	    	
-	    	var jsonFile_idList = JSON.stringify(file_idArray);
-	    	console.log("jsonFile_idList: " + jsonFile_idList);
-	    	
-	    	$.ajax({
-	    		url:"do_checkedDelete.do",
-	    		type:"POST",
-	    		dataType:"JSON",
-	    		async:false,
-	    		data:{
-	    			"file_idList":jsonFile_idList
-	    		},
-	    		success: function(data){
-	    			console.log("success data: " + data);	    			
-	    			alert("총 "+data.no+"건이 삭제되었습니다.");
-	    			return location.reload();
-	    		},
-	    		complete: function(data){
-	    			
-	    		},
-	    		error: function(xhr, status, error){
-	    			console.log("삭제 error입니다" + error);	
-	    		}
-	    	});
 	    });//--do_delete
 	    
 	    //do_down

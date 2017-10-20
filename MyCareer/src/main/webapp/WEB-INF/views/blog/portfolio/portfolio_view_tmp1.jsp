@@ -85,7 +85,7 @@
 <body>
 	<div id=wrapper align="center">
 		<div id="pf_title">
-			<h6>포트폴리오 제목</h6>
+			<h6>포트폴리오_<%=pfVO.getPf_id()%></h6>
 		</div>
 		<div id="buttons">
 			<%

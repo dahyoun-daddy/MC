@@ -175,7 +175,7 @@
 	
 	<div id="wrapper" align="center">
 		<div id="pf_title">
-			<h6>포트폴리오 제목</h6>
+			<h6>포트폴리오_<%=pf_id%> 편집 화면</h6>
 		</div>
 		<div id="buttons">
 			<button type="button" id="do_save_tmp" >포트폴리오 저장</button>

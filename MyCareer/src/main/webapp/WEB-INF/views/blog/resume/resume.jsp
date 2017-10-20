@@ -77,8 +77,7 @@
 				frm.action = "upload.do";
 				frm.submit();
 			}else{
-				alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.");
-				alert("올바른 파일을 선택해주세요.");
+				alert("doc, docx, hwp로 된 파일만 업로드할 수 있습니다.\n올바른 파일을 선택해주세요.");				
 				return;
 			}	
 		}else{
@@ -109,18 +108,15 @@
 	    		//console.log(file_id);
 	    		file_idArray.push(file_id);	    		
 	    	});//--checked
-	    	console.log(file_idArray);
+	    	//console.log(file_idArray);
 	    	if(file_idArray.length<=0){
 	    		alert("삭제할 이력서를 선택해주세요.");
 	    		return false;
-	    	}
-	    	/* if(false==confirm("삭제하시겠습니까?")){
-	    		return;
-	    	} */
+	    	}	    	
 	    	
 	    	if(confirm("삭제하시겠습니까?")==true){
 	    		var jsonFile_idList = JSON.stringify(file_idArray);
-		    	console.log("jsonFile_idList: " + jsonFile_idList);
+		    	//console.log("jsonFile_idList: " + jsonFile_idList);
 		    	
 		    	$.ajax({
 		    		url:"do_checkedDelete.do",
@@ -131,7 +127,7 @@
 		    			"file_idList":jsonFile_idList
 		    		},
 		    		success: function(data){
-		    			console.log("success data: " + data);	    			
+		    			//console.log("success data: " + data);	    			
 		    			alert("총 "+data.no+"건이 삭제되었습니다.");
 		    			return location.reload();
 		    		},
@@ -139,7 +135,7 @@
 		    			
 		    		},
 		    		error: function(xhr, status, error){
-		    			console.log("삭제 error입니다" + error);	
+		    			//console.log("삭제 error입니다" + error);	
 		    		}
 		    	});	
 	    	}else{
@@ -150,7 +146,7 @@
 	    
 	    //do_down
 	    
-	    $(".do_down").on("click", function(){
+	    /* $(".do_down").on("click", function(){
 	    	alert("파일을 다운로드 하시겠습니까?");
 	    	//var record = $(row).parents("tr");
 	    	
@@ -185,10 +181,10 @@
 	    			//alert("complete탐");
 	    		},
 	    		error: function(xhr, status, error){
-	    			console.log("error입니다" + error);	
+	    			//console.log("error입니다" + error);	
 	    		}
 	    	});
-	    });//--do_down
+	    });//--do_down */
 	    
 	    
 	}); //--jquery document

@@ -22,21 +22,20 @@ MY CAREER 프로젝트.
 
 - 강남구
 
-- 오수빈
-
+- 오수빈(탈퇴)
 
 
 
 
 ## 프로젝트 진행 동기 및 목적
 
+커리어 관리를 위한 블로그 기반 웹사이트 제작
 
 
+## 적용 브라우저
 
-
-
-## Service
-
+- IE 10 이상
+- Chrome 브라우저
 
 
 
@@ -48,10 +47,18 @@ MY CAREER 프로젝트.
 
 ### 참고
 
-
+- 사람인(http://www.saramin.co.kr)
+- 싸이월드(http://www.cyworld.com)
+- 페이스북(https://ko-kr.facebook.com)
 
 
 ### 기능 
+
+- 블로그 검색
+- 포스팅
+- 포트폴리오
+- 이력서
+- 공채목록
 
 
 
@@ -61,7 +68,7 @@ MY CAREER 프로젝트.
 - 로그인
 - 정보 수정
 - 탈퇴
-
+- 블로그로
 
 
 
@@ -72,10 +79,10 @@ MY CAREER 프로젝트.
 발표자: 명찬호
 
 02. [2017-10-13 중간 발표]
-발표자: 오수빈
+발표자: 강남구
 
 03. [2017-10-19 최종 발표 리허설]
-발표자: 강남구
+발표자: 박제범
 
 04. [2017-10-20 최종 발표]
 발표자: 박제범
@@ -84,7 +91,7 @@ MY CAREER 프로젝트.
 
 ## Site
 
-
+- http://localhost:8080/mc/main/home_main.do
 
 
 
@@ -95,15 +102,7 @@ MY CAREER 프로젝트.
 
 
 
-
-## Conventions - 
-
-
-
-
-
-
-## Documents - 수정필요
+## Documents 
 
 [Documents]
 
@@ -155,18 +154,15 @@ MY CAREER 프로젝트.
 
 - [Oracle Database 11g Release 2](http://oracle.com)
 
-- [Eclipse Neon (4.6.x)](http://eclipse.org)
-
 - [Apache Tomcat (8.5.x)](http://tomcat.apache.org)
 
 - [Git](http://git-scm.com)
 
 - [GitHub](https://github.com)
 
-- [SilkSvn](https://silksvn.com)
+- [Spring STS](https://spring.io/tools)
 
-
-
+- [Fiddler](https://www.telerik.com/fiddler)
 
 
 ## 적용 기술 및 라이브러리 의존성
@@ -174,8 +170,6 @@ MY CAREER 프로젝트.
 - [Servlet 3.1.x](http://jcp.org/en/jsr/detail?id=340)
 
 - [JSP 2.3.x](http://jcp.org/en/jsr/detail?id=245)
-
-- [EL 3.0.x](http://jcp.org/en/jsr/detail?id=341)
 
 - [JSTL 1.2.x](http://jcp.org/en/jsr/detail?id=52)
 
@@ -189,7 +183,18 @@ MY CAREER 프로젝트.
 
 - [jQuery 3.1.x](http://jquery.com)
 
-- [jQuery UI 1.12.x](http://jqueryui.com)
-
 - [Bootstrap 3.3.x](http://bootstrapk.com)
 
+- [Tiles 3.0.x](https://tiles.apache.org)
+
+- [JUNIT 4](http://junit.org/junit4)
+
+- [Mybatis 1.2.0](http://www.mybatis.org/mybatis-3)
+
+- [Gson 2.8.0](https://github.com/google/gson)
+
+- [Ojdbc6 11.2.x](https://mvnrepository.com/artifact/oracle/ojdbc6/11.2.0.3)
+
+- [Aspectj 1.8.x](https://www.eclipse.org/aspectj)
+
+- [Spring-test 4.2.5.RELEASE](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html)

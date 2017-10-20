@@ -240,7 +240,7 @@
 			<input type="hidden" name="user_id" value="<%=blogOwner_Id%>">
 			<thead align="center">
 				<tr class="w3-blue w3-centered" align="center">
-					<th width="9%" align="center" class="text-center"><div align="center"><input type="checkbox" id="checkAll" name="checkAll"></div></th>				
+					<th width="9%" <%=str%> align="center" class="text-center"><div align="center"><input type="checkbox" id="checkAll" name="checkAll"></div></th>				
 					<th width="45%" align="center" class="text-center"><div align="center">파일명</div></th>
 					<th width="15%" align="center" class="text-center"><div align="center">파일용량(kb)</div></th>
 					<th width="10%" align="center" class="text-center"><div align="center">작성일</div></th>
@@ -253,7 +253,7 @@
 				<c:when test="${list.size()>0}">
 					<c:forEach var="ResumeVO" items="${list}">
 						<tr>
-							<td class="text-center"><div align="center"><input type="checkbox" id="check" name="check" ></div></td>
+							<td <%=str%> class="text-center"><div align="center"><input type="checkbox" id="check" name="check" ></div></td>
 							<td class="text-left org_file_name"><div align="left"><c:out value="${ResumeVO.org_file_name}"/></div></td>
 							<td class="text-right"><div align="center"><c:out value="${ResumeVO.file_size}"/></div></td>
 							<td class="text-center"><div align="center"><c:out value="${ResumeVO.reg_dt}"/></div></td>

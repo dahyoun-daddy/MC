@@ -14,42 +14,27 @@ import java.util.UUID;
  */
 public class StringUtil {
 
-	/**
-	 * yyyy-MM-dd?��?�� ?���? 처리
-	 * @param type
-	 * @return String 2017-09-11
-	 */
+	
 	public static String currDate(String type) {
 		Date date=new Date();
 		SimpleDateFormat  sdf=new SimpleDateFormat(type);
 		return sdf.format(date);
 	}
 	
-	/**
-	 * 32bit random?��?��
-	 * @return String
-	 */
-	//uuid?��?��
+	
+	
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replaceAll("-","");
 		
 	}
 	
-	/**
-	 * debug 출력
-	 * @param flag
-	 */
+	
 	public static void debugPrint(boolean flag,String msg){
 		if(flag){
-			System.out.println(msg);
+			
 		}
 	}
 	
-	/**
-	 * SQL Inject방�? 
-	 * @param str
-	 * @return "'" ?���?  
-	 */
 	public static String sqlInjectPro(String str){
 		String retStr = "";
 		retStr = str.replaceAll("'", "");//' -->""
@@ -72,49 +57,6 @@ public class StringUtil {
 		return retStr;
 	}
 	
-//	/**
-//	 * <select name="page">
-//	 *      <option value="">?���?</option>
-//	 * 		<option value="10">10</option>
-//	 * </select>
-//	 * @param list
-//	 * @param selectNm
-//	 * @param allYN
-//	 * @return
-//	 */
-//	public static String mkSelect(List<CodesDTO> list, String page_size,
-//			String selectNm,
-//			boolean allYN){
-//		/*
-//		 * <select name="page">
-//		 *      <option value="">?���?</option>
-//		 * 		<option value="10">10</option>
-//		 * </select>
-//		 */
-//		
-//		StringBuilder sb=new StringBuilder();
-//		
-//		sb.append("<select class='orm-control input-sm' name='"+selectNm+"' > \n");
-//		//?���? 처리: allYN=true
-//		if(allYN == true) 	sb.append("<option value=''>=?���?=</option>\n");
-//		/*
-//		 * <option value="<%=dto.getDtl_cd_id() %>"  
-//				    				<%if(page_size.equals(dto.getDtl_cd_id()))out.print("selected='selected'"); %>>
-//				    			<%=dto.getDtl_cd_nm() %></option>
-//		 */
-//		for(CodesDTO dto:list){
-//			sb.append("<option value='"+dto.getDtl_cd_id()+"' ");
-//			if(page_size.equals(dto.getDtl_cd_id())){
-//				sb.append("selected='selected'");	
-//			}
-//			sb.append(">");
-//			sb.append(dto.getDtl_cd_nm());
-//			sb.append("</option>\n");
-//		}
-//		sb.append("</select>  \n");
-//		System.out.println(sb.toString());
-//		return sb.toString();
-//	}
 	
 	/**
 	   * Paging처리 
@@ -128,21 +70,21 @@ public class StringUtil {
 	   */
 	public static String renderPaging(int maxNum_i, int currPageNoIn_i, int rowsPerPage_i, int bottomCount_i,
 			String url_i, String scriptName_i) {
-			int maxNum = 0; // �? �??��
-			int currPageNo = 1; // ?��?�� ?��?���? 번호 : page_num
-			int rowPerPage = 10; // ?��?��?���??�� 보여�? ?��?�� : page_size
-			int bottomCount = 10; // 바닥?�� 보여�? ?��?���? ?��: 10
+			int maxNum = 0; 
+			int currPageNo = 1; 
+			int rowPerPage = 10;
+			int bottomCount = 10; 
 
 			maxNum = maxNum_i;
 			currPageNo = currPageNoIn_i;
 			rowPerPage = rowsPerPage_i;
 			bottomCount = bottomCount_i;
 
-			String url = url_i; // ?���? URL
-			String scriptName = scriptName_i; // ?���? ?��바스?��립트
+			String url = url_i; 
+			String scriptName = scriptName_i; 
 
 			int maxPageNo = ((maxNum - 1) / rowPerPage) + 1;
-			int startPageNo = ((currPageNo - 1) / bottomCount) * bottomCount + 1;//
+			int startPageNo = ((currPageNo - 1) / bottomCount) * bottomCount + 1;
 			int endPageNo = ((currPageNo - 1) / bottomCount + 1) * bottomCount;
 			int nowBlockNo = ((currPageNo - 1) / bottomCount) + 1;
 			int maxBlockNo = ((maxNum - 1) / bottomCount) + 1;

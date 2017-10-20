@@ -94,8 +94,6 @@ function doSearch(){
 		<input type="hidden"  name="page_num" id="page_num" value="1"  >
         	제목    : <input type="text" id="post_title" name="post_title" /><br/>
        <textarea id="ck1" name="ck1"></textarea>
-        <%-- 글번호 : <input type="text" name="post_id" value = "${PostDTO.post_id}"/><br/>--%>
-        <%--내용 :<input type="text" name="post_content"  value="${PostDTO.post_content}"/><br/>--%>
 		<input type="hidden" id="reg_id" value="<%=reg_id%>"/>
 	</form>
     <button class="btn btn-success"  id="do_save">등록</button>

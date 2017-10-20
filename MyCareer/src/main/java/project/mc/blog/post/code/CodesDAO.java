@@ -16,48 +16,6 @@ public class CodesDAO implements WorkDiv {
 	private Connection conn = null;
 	ConnIn connIn = null;
 	
-//	/**
-//	 * DB?���?
-//	 */
-//	public void connect(){
-//		String dbURL 	="jdbc:oracle:thin:@localhost:1521:orcl";
-//		String dbUSER 	="ora_user";
-//		String dbPASS	="sist";
-//		try{
-//			//Driver Load
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			conn = DriverManager.getConnection(dbURL, dbUSER, dbPASS);
-//			System.out.println("DB?���?: "+conn.toString());
-//			
-//			
-//		}catch(ClassNotFoundException cnf){
-//			System.out.println("=ClassNotFoundException="+cnf.getMessage());
-//		}catch(SQLException sql){
-//			System.out.println("=SQLException="+sql.getMessage());
-//		}catch(Exception e){
-//			System.out.println("===========================");
-//			e.printStackTrace();
-//			System.out.println("===========================");
-//		}
-//	}
-//	
-//	/**
-//	 * DB?��?�� ?��?��
-//	 */
-//	public void disconnect(){
-//		try{
-//			if(conn!=null)conn.close();
-//			System.out.println("DB?��?�� ?��?��");
-//		}catch(SQLException se){
-//			System.out.println("=SQLException="+se.getMessage());
-//		}catch(Exception e){
-//			System.out.println("===========================");
-//			e.printStackTrace();
-//			System.out.println("===========================");
-//		}
-//	}
-//	
-	
 	public CodesDAO(){
 		
 	}
@@ -80,7 +38,7 @@ public class CodesDAO implements WorkDiv {
 		CodesDTO param = (CodesDTO)inDTO;
 		
 		try{
-			//DB?���?
+			
 			conn = connIn.connect();
 			// searchDiv
 			
@@ -117,24 +75,18 @@ public class CodesDAO implements WorkDiv {
 		}catch(SQLException sql){
 			sql.getMessage();
 		}catch(Exception e){
-			System.out.println("===========================");
 			e.printStackTrace();
-			System.out.println("===========================");
 		}finally{
 			try{
 				if(rs !=null) rs.close();
 			}catch(Exception e){
-				System.out.println("===========================");
 				e.printStackTrace();
-				System.out.println("===========================");
 			}
 			
 			try{
 				if(pstmt !=null) pstmt.close();
 			}catch(Exception e){
-				System.out.println("===========================");
 				e.printStackTrace();
-				System.out.println("===========================");
 			}
 			connIn.disconnect();
 		}
@@ -147,55 +99,55 @@ public class CodesDAO implements WorkDiv {
 	
 	@Override
 	public int doSave(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public int doUpdate(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public int doDelete(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public int do_save(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public List<?> do_search(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public int do_delete(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public List<?> do_excelDown() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public int do_excelUp(List<?> list) {
-		// TODO Auto-generated method stub
+	
 		return 0;
 	}
 

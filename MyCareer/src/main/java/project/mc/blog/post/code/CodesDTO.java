@@ -3,13 +3,13 @@ package project.mc.blog.post.code;
 import project.mc.blog.post.domain.DTO;
 
 public class CodesDTO extends DTO {
-	private String mst_cd_id	;//마스?��코드_ID(PK)
-	private String dtl_cd_id	;//?��?��코드_ID(PK)
-	private String mst_cd_nm	;//마스?��코드�?
-	private String dtl_cd_nm	;//?��?��코드�?
-	private int	   seq			;//?��?��?��?��
-	private String sup_mst_cd_id;//?��?��마스?��코드_ID
-	private int	   use_yn		;//?��?��?���?
+	private String mst_cd_id	;
+	private String dtl_cd_id	;
+	private String mst_cd_nm	;
+	private String dtl_cd_nm	;
+	private int	   seq			;
+	private String sup_mst_cd_id;
+	private int	   use_yn		;
 	
 	
 	@Override

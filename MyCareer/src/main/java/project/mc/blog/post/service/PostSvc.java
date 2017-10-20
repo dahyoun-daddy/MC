@@ -15,22 +15,10 @@ public interface PostSvc {
 	
 	public List<?> do_search(DTO dto) ;
 	
-	/**
-	 * ?��?��
-	 * @param dto
-	 * @return int
-	 */
+	
 	public int do_delete(DTO dto);
 
 	int do_update(DTO dto);
-	
-	
-	/**
-	 * ?��건삭?��
-	 * @param dto
-	 * @return int
-	 */
-	//public int do_delete(List<UserVO> list);
 	
 	public int do_checkedDelete(List<String> list);
 	

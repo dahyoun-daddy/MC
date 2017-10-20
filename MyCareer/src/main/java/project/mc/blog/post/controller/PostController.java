@@ -42,17 +42,6 @@ public class PostController {
 	@Autowired 
 	PostSvc postSvc;
 	
-//	int post_id        ; //�룷�뒪�듃 id
-//	int blog_id        ; //�냼�냽 釉붾줈洹� id
-//	int sup_post_id    ; //�긽�쐞 寃뚯떆湲� id
-//	String post_title  ; //�젣紐�
-//	String post_content; //�궡�슜
-//	String reg_id      ; //�옉�꽦�옄 id
-//	String reg_dt      ; //�옉�꽦�씪�옄
-//	String mod_id      ; //�닔�젙�옄 id
-//	String mod_dt      ; //�닔�젙�씪�옄
-//	int del_flag       ; //�궘�젣 �뵆�옒洹�
-	
 	
 	@RequestMapping(value = "blog/post/post_doSelectOne.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView doSelectoOne (HttpServletRequest req) {
@@ -60,7 +49,6 @@ public class PostController {
 		inVO.setPost_id(Integer.parseInt(req.getParameter("post_id")));
 		
 		ModelAndView modelAndView=new ModelAndView();
-		//modelAndView.setViewName("blog/post/post_edit_form");
 		modelAndView.setViewName("blog/post/post_view");
 		
 		PostDTO  vo = (PostDTO)postSvc.do_searchOne(inVO);
@@ -70,23 +58,18 @@ public class PostController {
 		return modelAndView;
 	}
 	
-	// 湲� �닔�젙 �럹�씠吏�濡� �씠�룞
+	
 	@RequestMapping(value = "blog/post/post_edit_form.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView doedit_form (HttpServletRequest req, HttpSession session) {
 		PostDTO inVO = new PostDTO();
 		inVO.setPost_id(Integer.parseInt(req.getParameter("post_id")));
 		
-		log.debug("1=========================");
-		log.debug(inVO.toString());
-		log.debug("1=========================");
 		
 		ModelAndView modelAndView=new ModelAndView();
 		//modelAndView.setViewName("blog/post/post_edit_form");
 		modelAndView.setViewName("blog/post/post_edit_form");
 		
 		PostDTO  vo = (PostDTO)postSvc.do_searchOne(inVO);
-		log.debug("vo"+vo.toString());
-		log.debug("=========================");
 		
 		modelAndView.addObject("PostDTO",vo);
 		
@@ -121,16 +104,10 @@ public class PostController {
 		inVO.setReg_dt("1");
 		inVO.setMod_dt("1");
 		
-		log.debug("inVO:"+inVO);
 		int flag = 0;
-		log.debug("do_save!go");
-		flag =postSvc.do_save(inVO);
-		/*if(workDiv !=null && !workDiv.trim().equals("")) {
-		}else {
-			
-		}*/
-		log.debug("flag : "+flag);
 		
+		flag =postSvc.do_save(inVO);
+	
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
@@ -139,7 +116,7 @@ public class PostController {
    	    res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
 		if(flag == 1) {
-			log.debug("do_save 시작");
+			
 			String msg = "";
 			msg = "포스트 저장 완료.";
 			
@@ -187,18 +164,16 @@ public class PostController {
 		  req.getParameter(name);
 		  sParam.put(name, StringUtil.nvl(req.getParameter(name),""));
 		}
-        log.debug("sParam:"+sParam.toString());
+        
 		
 		inVO.setParam(searchParam);
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
-   	    log.debug("!!!!!!!!!!!!!" + totalCnt);
-		//TO_DO: pageing
+   	    
 		ModelAndView modelAndView =new ModelAndView();
 		
 		modelAndView.addObject("list",list);
-		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
 		modelAndView.setViewName("blog/post/post_list");
 		
@@ -208,7 +183,7 @@ public class PostController {
 	@RequestMapping(value="blog/post/post_doSearch.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView do_search(HttpServletRequest req) {
 		
-		log.debug("blog/post/post_doSearch.do됨");
+		
 		PostDTO inVO = new PostDTO();
 		
 		Hashtable<String, String> 
@@ -224,29 +199,17 @@ public class PostController {
 		searchParam.put("searchDiv", p_searchDiv);
 		searchParam.put("searchWord", p_searchWord);
 		
-//		//request 
-//		Enumeration<String> params = req.getParameterNames();
-//		Hashtable<String, String> 
-//		sParam = new Hashtable<String, String>();	
-//		while(params.hasMoreElements()){
-//		  String name = (String)params.nextElement();
-//		  req.getParameter(name);
-//		  sParam.put(name, StringUtil.nvl(req.getParameter(name),""));
-//		}
-//        log.debug("sParam:"+sParam.toString());
-		
 		inVO.setParam(searchParam);
 		inVO.setReg_id(user_id);
-		log.debug("user_id::::::::::::::::::"+user_id);
-		log.debug("searchDiv:"+p_searchDiv);
+		
 		List<PostDTO> list = (List<PostDTO>)postSvc.do_search(inVO);
    	    int totalCnt   = 0;
    	    if(list !=null && list.size()>0)totalCnt = list.get(0).getTotal_cnt();
-   	    log.debug("!!!!!!!!!!!!!" + totalCnt);
-		//TO_DO: pageing
+   	    
 		ModelAndView modelAndView =new ModelAndView();
 		
 		modelAndView.addObject("list",list);
+		
 		//total count
 		modelAndView.addObject("totalCnt",totalCnt);
 		if(user_id != null) {
@@ -269,8 +232,6 @@ public class PostController {
 		Gson gson=new Gson();
 		List<String> idList = gson.fromJson(ret, List.class);
 		
-		log.debug("idList :"+idList);
-		
 		String firstId = "";
 		
 		for(int i=0;i<idList.size();i++) {
@@ -278,29 +239,13 @@ public class PostController {
 		}
 		
 		idList.add(firstId);
-		log.debug("flag:"+idList.add(firstId));
-		log.debug("flag:"+firstId);
 		
 		int flag = postSvc.do_checkedDelete(idList);
-		log.debug("flag:"+flag);
 		//--in
 		
 		return flag+"";
 	}
 	
-//	@RequestMapping(value="blog/post/post_do_Delete.do", method = RequestMethod.POST)
-//	public String do_Delete(HttpServletRequest request) {
-//		
-//		PostDTO inVO = new PostDTO();
-//		
-//		inVO.setPost_id(Integer.parseInt(request.getParameter("post_id")));
-//		int flag = postSvc.do_delete(inVO);
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject("list", postSvc.do_search(inVO));
-//		modelAndView.setViewName("blog/post/post_list");
-//		return "redirect:post_doSearch.do";
-//	}
 	
 	@RequestMapping(value="blog/post/post_do_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String do_Update(HttpServletRequest request) {
@@ -312,7 +257,6 @@ public class PostController {
 		inVO.setMod_id(request.getParameter("mod_id"));
 		String user_id = null;
 		user_id = request.getParameter("user_id");
-		log.debug("user_id update!!!!" + user_id);
 		
 		int flag = postSvc.do_update(inVO);
 		

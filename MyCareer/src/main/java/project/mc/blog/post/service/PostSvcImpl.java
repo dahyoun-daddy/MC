@@ -22,55 +22,39 @@ public class PostSvcImpl implements PostSvc {
 	
 	@Override
 	public DTO do_searchOne(DTO dto) {
-		log.debug("=======================");
-		log.debug(dto.toString());
-		log.debug("=======================");	
+		
 		return postDao.do_searchOne(dto);
 	}
 
 	@Override
 	public int do_save(DTO dto) throws DataAccessException {
-		log.debug("2=======================");
-		log.debug(dto.toString());
-		log.debug("2=======================");
+	
 		return postDao.do_save(dto);
 	}
 
 	@Override
 	public List<?> do_search(DTO dto) {
-		log.debug("3=======================");
-		log.debug(dto.toString());
-		log.debug("3=======================");	
+		
 		return postDao.do_search(dto);
 		
 	}
 
 	@Override
 	public int do_delete(DTO dto) {
-		log.debug("4=======================");
-		log.debug(dto.toString());
-		log.debug("4=======================");	
+		
 		return postDao.do_delete(dto);
 	}
 
 	@Override
 	public int do_update(DTO dto) {
-		log.debug("2=======================");
-		log.debug(dto.toString());
-		log.debug("2=======================");
+		
 		return postDao.do_update(dto);
 	}
 	
-	/**
-	 * 체크딜리트
-	 * @param dto
-	 * @return int (1:�꽦怨�,1�씠 �븘�땲硫� �떎�뙣)
-	 */
+	
 	@Transactional
 	public int do_checkedDelete(List<String> list)throws DataAccessException {
-		log.debug("2=======================");
-		log.debug(list.toString());
-		log.debug("2=======================");	
+	
 		int flag = 0;
 		for(String id:list) {
 			PostDTO vo=new PostDTO();

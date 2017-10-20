@@ -7,9 +7,7 @@ import java.sql.SQLException;
 public class ConnectionUtil implements ConnIn {
 	private Connection conn = null;
 	
-	/**
-	 * DB?ó∞Í≤?
-	 */
+	
 	public Connection connect(){
 		final String connectAPI = "jdbc";
 		final String db 	= "oracle"	;
@@ -24,34 +22,30 @@ public class ConnectionUtil implements ConnIn {
 			//Driver Load
 			Class.forName(db+"."+connectAPI+".driver.OracleDriver");
 			conn = DriverManager.getConnection(dbURL, dbUSER, dbPASS);
-			System.out.println("DB?ó∞Í≤?: "+conn.toString());
+			System.out.println("DB?ÔøΩÔøΩÔøΩ?: "+conn.toString());
 			
 			
 		}catch(ClassNotFoundException cnf){
-			System.out.println("=ClassNotFoundException="+cnf.getMessage());
+			
 		}catch(SQLException sql){
-			System.out.println("=SQLException="+sql.getMessage());
+			
 		}catch(Exception e){
-			System.out.println("===========================");
 			e.printStackTrace();
-			System.out.println("===========================");
+			
 		}
 		return conn;
 	}
 	
-	/**
-	 * DB?†ë?Üç ?ï¥?†ú
-	 */
+	
 	public void disconnect(){
 		try{
 			if(conn!=null)conn.close();
-			System.out.println("DB?†ë?Üç ?ï¥?†ú");
+			
 		}catch(SQLException se){
-			System.out.println("=SQLException="+se.getMessage());
+			
 		}catch(Exception e){
-			System.out.println("===========================");
+			
 			e.printStackTrace();
-			System.out.println("===========================");
 		}
 	}
 	

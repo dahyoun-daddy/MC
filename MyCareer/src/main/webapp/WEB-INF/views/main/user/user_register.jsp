@@ -226,21 +226,9 @@
 </script>
 </head>
 <body>
-<!--
-int    user_no      ;   //회원 번호                        
-String user_id      ;   //회원 id                        
-String user_password;   //회원 pw                        
-int    user_div     ;   //회원 구분(0:관리자, 1:일반, 2:기업회원)   
-String user_name    ;   //회원 이름                        
-int    gender       ;   //성별(1:남자, 2:여자)               
-int    age			;	//나이	                       
-String email        ;   //이메일                          
-String address      ;   //주소                           
-String phone        ;   //연락처                          
-int    withdraw_flag;   //탈퇴 여부(0:탈퇴, 1:존재)            
-  -->
+
 	<div id="header" align="center" class="form-group has-feedback">
-		<h1 class="login-box-msg">MC</h1>
+		<h1 class="login-box-msg">회원가입</h1>
 	</div>
 	
 	<!-- 회원가입 박스 시작 -->

@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<?> do_search(DTO dto) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
@@ -77,7 +77,6 @@ public class UserDaoImpl implements UserDao {
 		try {
 			String statement = namespace +".do_update";
 			UserVO inUserVo = (UserVO)dto;
-			log.debug("들어간다@@@@@@@@@@@@@");
 			flag = sqlSession.update(statement, inUserVo);
 		}catch(DataAccessException e) {
 			throw e;
@@ -130,13 +129,13 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<?> do_excelDown() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public int do_excelUp(List<?> list) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

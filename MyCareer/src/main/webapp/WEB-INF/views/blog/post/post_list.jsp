@@ -116,8 +116,6 @@ if(user_id.equals(login_id)){
 		
 		//do_delete
 		$("#do_delete").on("click",function(){
-			 //console.log("do_delete");//check
-			 
 			 
 			 //checked
 			 var idArray = new Array();

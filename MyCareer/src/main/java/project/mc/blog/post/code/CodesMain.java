@@ -11,7 +11,7 @@ public class CodesMain {
 		inDTO.setMst_cd_id("C001");
 		List<CodesDTO> list = doSearch(inDTO);
 		for(CodesDTO dto:list){
-			System.out.println(dto.toString());
+			
 		}
 		
 		

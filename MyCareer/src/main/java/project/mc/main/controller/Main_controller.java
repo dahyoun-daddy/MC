@@ -35,7 +35,7 @@ public class Main_controller {
 	
 	@RequestMapping(value="main/blog_search.do", method=RequestMethod.GET)
 	public String blog_search(HttpServletRequest req) {
-		log.debug("blog_search===============");
+		
 		
 		
 		return "main/blog_list/blog_list";
@@ -45,10 +45,6 @@ public class Main_controller {
 	@ResponseBody
 	public String header_title(HttpServletRequest req) {
 		String user_id = req.getParameter("user_id").toString();
-		log.debug("user_id"+user_id);
-//		String contextPath = req.getContextPath();
-//		contextPath = "http://localhost:8080" + contextPath;
-//		log.debug("contextPath"+contextPath);
 		
 		UserVO inVO = new UserVO();
 		inVO.setUser_id(user_id);

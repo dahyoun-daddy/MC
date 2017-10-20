@@ -3,27 +3,17 @@ package project.mc.blog.post.domain;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-/**
- * DTO 최상?�� class
- * ?��?��?���?: DTO.java
- * ?��?��?��: 2017/07/13
- * @author sist-003
- *	2017/07/17: 총�??��, 번호 추�?, 버전
- */
+
 public abstract class DTO {
 	/**
 	 * param
 	 */
 	private Hashtable<String, String>  param =new Hashtable<String, String>();
 	
-	/**
-	 * 총�??��
-	 */
+	
 	private int total_cnt;
 	
-	/**
-	 * �?번호
-	 */
+	
 	private int no;
 
 	/**

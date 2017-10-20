@@ -30,14 +30,9 @@ public class UserSvcImpl implements UserSvc {
 	@Autowired 
 	private UserDao userDao;
 	
-//	@Autowired
-//	private Validator validator;
-
 	
 	public int do_save(DTO dto){
-		log.debug("2=======================");
-		log.debug(dto.toString());
-		log.debug("2=======================");
+		
 		
 		return userDao.do_save(dto);
 	}
@@ -45,7 +40,6 @@ public class UserSvcImpl implements UserSvc {
 	
 	public int do_idCheck(UserVO vo) {
 		
-		log.debug("UserSvcImpl - id_check"+userDao.do_idCheck(vo));
 		int flag = userDao.do_idCheck(vo);
 		return flag;
 		

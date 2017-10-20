@@ -46,13 +46,7 @@ public class UserController {
 	@Autowired 
 	UserSvc userSvc;
 	
-//	@Autowired
-//	private Validator validator;
-	
-	// ====================================================================================================	
-	// ��α� 
-	// ====================================================================================================
-	// ȸ�� ���� (��α�)
+
 	@RequestMapping(value="blog/do_blog_save.do", method={RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_save(HttpServletRequest req) throws IOException{
 		
@@ -72,7 +66,7 @@ public class UserController {
 		inVO.setEmail(req.getParameter("email"));
 		inVO.setAddress(req.getParameter("address"));
 		inVO.setPhone(req.getParameter("phone"));
-		int withdraw_flag = 1;//Integer.parseInt(req.getParameter("withdraw_flag").toString());
+		int withdraw_flag = 1;
 		inVO.setWithdraw_flag(withdraw_flag);
 		
 		int flag = 0;
@@ -82,7 +76,7 @@ public class UserController {
 	}
 	
 	
-	// �ߺ� id ��ȸ
+	
 	@RequestMapping(value="user/do_blog_idCheck.do", method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String do_blog_idcheck(HttpServletRequest req) throws DataAccessException, IOException{
@@ -101,11 +95,11 @@ public class UserController {
 		
 	}
 	
-	// ȸ�� ����(��α�)
+	
 	@RequestMapping(value="blog/do_blog_update.do", method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String do_blog_updateForm(HttpServletRequest req) throws IOException {
-		log.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + req.getParameter("blogOwner_id"));
+		
 		String blogOwner_id = null;
 		UserVO inVO=new UserVO();
 		
@@ -127,7 +121,7 @@ public class UserController {
 		return blogOwner_id;
 	}
 	
-	// ȸ������ �������� �̵�(��α�)
+	
 	@RequestMapping(value="blog/do_blog_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_blog_update(HttpSession session, HttpServletRequest req) {
 		
@@ -151,7 +145,7 @@ public class UserController {
 		
 	}
 	
-	// ȸ������(��α�)
+	
 	@RequestMapping(value="blog/do_blog_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_delete(HttpServletRequest req) throws IOException {
 		
@@ -168,7 +162,7 @@ public class UserController {
 		return "redirect:do_blog_logout.do";
 	}
 	
-	// �α��� ȭ������ ��(��α�)
+	
 	@RequestMapping(value="blog/blog_login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_login(HttpServletRequest req) throws IOException {
 		
@@ -177,14 +171,13 @@ public class UserController {
 		return "blog/user/user_login";
 	}
 	
-	// ȸ������ ȭ������ ��(��α�)
 	@RequestMapping(value="blog/blog_do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_blog_look(HttpServletRequest req) throws IOException {
 		
 		return "blog/user/user_register";
 	}
 	
-	// �α��� ó��(����Ȩ)
+	
 	@RequestMapping(value="blog/blog_do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_blog_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
@@ -213,7 +206,7 @@ public class UserController {
 		return url;
 	}
 	
-	// �α� �ƿ�(��α�)
+	
 	@RequestMapping(value="blog/do_blog_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public ModelAndView do_blog_logout(HttpSession session) throws IOException {
@@ -227,9 +220,7 @@ public class UserController {
 		
 	}
 
-	// ====================================================================================================	
-	// ���� 
-	// ====================================================================================================
+	
 	@RequestMapping(value="user/do_save.do", method={RequestMethod.POST,RequestMethod.GET})
 	public String do_save(HttpServletRequest req) throws IOException{
 		
@@ -258,7 +249,7 @@ public class UserController {
 		return "redirect:login_page.do";
 	}
 	
-	// ȸ�� ����(��α�)
+	
 	@RequestMapping(value="user/do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView do_updateForm(HttpServletRequest req) throws IOException {
@@ -283,7 +274,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	// ȸ������ �������� �̵�(��α�)
+	
 	@RequestMapping(value="user/do_updateForm.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
 		 
@@ -291,13 +282,10 @@ public class UserController {
 		UserVO inVO2 = new UserVO();
 		
 		String user_id = (String)session.getAttribute("user_id");
-		log.debug("컨트롤러 체크" + req.getParameter("user_id"));
 		
 		inVO.setUser_id(user_id);
 		
 		inVO2=userSvc.viewMember(inVO);
-		
-		log.debug("메인 user_id" + inVO2.toString());
 		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("main/user/user_modify");//List
@@ -307,7 +295,7 @@ public class UserController {
 		
 	}
 	
-	// ȸ������(��α�)
+	
 	@RequestMapping(value="user/do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_delete(HttpServletRequest req) throws IOException {
 		
@@ -325,21 +313,21 @@ public class UserController {
 		return "redirect:do_logout.do";
 	}
 	
-	// �α��� ȭ������ ��(��α�)
+	
 	@RequestMapping(value="user/login_page.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_login() throws IOException {
 		
 		return "main/user/user_login";
 	}
 	
-	// ȸ������ ȭ������ ��(��α�)
+	
 	@RequestMapping(value="user/do_look.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	public String do_look(HttpServletRequest req) throws IOException {
 		
 		return "main/user/user_register";
 	}
 	
-	// �α��� ó��(����Ȩ)
+	
 	@RequestMapping(value="user/do_loginCheck.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public String do_loginCheck(HttpSession session, HttpServletRequest req, @RequestParam(value="user_id", required=true) String user_id
@@ -356,7 +344,6 @@ public class UserController {
 
 		if(result == true) {
 			url = "redirect:/main/home_main.do";
-			//mav.setViewName("main/home_main");
 			session.setAttribute("user_id", user_id);
 		}else {
 			 response.setContentType("text/html; charset=UTF-8");
@@ -369,7 +356,7 @@ public class UserController {
 		return url;
 	}
 	
-	// �α� �ƿ�(��α�)
+	
 	@RequestMapping(value="user/do_logout.do" ,method= {RequestMethod.POST,RequestMethod.GET})
 	
 	public ModelAndView do_logout(HttpSession session) throws IOException {

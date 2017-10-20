@@ -41,7 +41,6 @@
 		
 	}
 	.menu a{cursor:pointer;}
-    /* .menu .hide{display:none;} */
    
     .menu_ul{
 	    list-style:none;
@@ -129,8 +128,5 @@
 			</form>
 		</div>
 	</div>
-	
-	
-
 </body>
 </html>

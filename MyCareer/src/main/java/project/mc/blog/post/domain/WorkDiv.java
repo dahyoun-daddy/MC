@@ -8,20 +8,7 @@ import project.mc.blog.post.code.CodesDTO;
 
 
 
-/**
- * WorkDiv.java
- * 거래?���? 메소?�� ?��?��
- * do_save   : ???��
- * do_search : 조회
- * do_delete : ?��?��
- * do_update : ?��?��
- * 
- * do_excelDown
- * do_excelUp
- * do_report : rd,?��리스?�� 리포?��
- * @author sist_
- *
- */
+
 public interface WorkDiv {
 
 	public int do_save(DTO dto);//Upsert

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.mc.blog.post.dao.PostDao;
 import project.mc.blog.post.domain.DTO;
 import project.mc.blog.post.domain.PostDTO;
-
+ 
 @Service
 public class PostSvcImpl implements PostSvc {
 	private Logger log=LoggerFactory.getLogger(this.getClass());

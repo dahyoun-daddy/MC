@@ -19,7 +19,7 @@ import project.mc.commons.DTO;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
+ 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired

@@ -3,7 +3,7 @@ package project.mc.blog.post.code;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+ 
 public class ConnectionUtil implements ConnIn {
 	private Connection conn = null;
 	

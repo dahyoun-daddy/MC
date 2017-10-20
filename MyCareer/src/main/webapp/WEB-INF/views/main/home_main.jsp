@@ -6,7 +6,7 @@
   String contextPath = request.getContextPath();
   contextPath = "http://localhost:8080"+contextPath;  
   
-%>
+%> 
 <%
 	
 	String login_id ="";

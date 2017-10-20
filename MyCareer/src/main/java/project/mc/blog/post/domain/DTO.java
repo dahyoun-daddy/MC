@@ -3,7 +3,7 @@ package project.mc.blog.post.domain;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-
+ 
 public abstract class DTO {
 	/**
 	 * param

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import project.mc.blog.user.domain.UserVO;
 import project.mc.blog.user.service.UserSvc;
-
+ 
 @Controller
 public class Main_controller {
 	private Logger log = LoggerFactory.getLogger(this.getClass());

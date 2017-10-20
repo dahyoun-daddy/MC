@@ -1,6 +1,6 @@
 package project.mc.blog.post.domain;
 
-
+ 
 public class PostDTO extends DTO {
 	int post_id        ; //포스트 id   
 	int blog_id        ; //소속 블로그 id

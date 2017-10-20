@@ -1,7 +1,7 @@
 package project.mc.blog.post.code;
 
 import project.mc.blog.post.domain.DTO;
-
+ 
 public class CodesDTO extends DTO {
 	private String mst_cd_id	;
 	private String dtl_cd_id	;
